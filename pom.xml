@@ -30,6 +30,7 @@
    </parent>
 
    <modules>
+      <module>artemis-log-processor</module>
       <module>artemis-protocols</module>
       <module>artemis-dto</module>
       <module>artemis-cdi-client</module>

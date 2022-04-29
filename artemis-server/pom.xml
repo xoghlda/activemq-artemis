@@ -33,6 +33,12 @@
 
    <dependencies>
       <dependency>
+         <groupId>org.apache.activemq</groupId>
+         <artifactId>artemis-log-processor</artifactId>
+         <version>${project.version}</version>
+         <scope>compile</scope>
+      </dependency>
+      <dependency>
          <groupId>org.jboss.logging</groupId>
          <artifactId>jboss-logging-processor</artifactId>
          <scope>provided</scope>
