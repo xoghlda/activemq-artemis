@@ -32,21 +32,14 @@
    </properties>
 
    <dependencies>
+      <!-- logging -->
       <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-processor</artifactId>
-         <scope>provided</scope>
-         <optional>true</optional>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
       </dependency>
       <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-annotations</artifactId>
-         <scope>provided</scope>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging</artifactId>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
       </dependency>
       <dependency>
          <groupId>org.apache.activemq</groupId>

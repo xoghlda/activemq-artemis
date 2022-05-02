@@ -102,7 +102,6 @@
       <guava.version>30.1-jre</guava.version>
       <hawtio.version>2.15.0</hawtio.version>
       <jsr305.version>3.0.2</jsr305.version>
-      <jboss.logging.version>3.5.0.Final</jboss.logging.version>
       <jetty.version>9.4.45.v20220203</jetty.version>
       <tomcat.servlet-api.version>8.5.78</tomcat.servlet-api.version>
       <jgroups.version>5.2.0.Final</jgroups.version>
@@ -119,6 +118,7 @@
       <hdrhistogram.version>2.1.12</hdrhistogram.version>
       <curator.version>5.2.0</curator.version>
       <zookeeper.version>3.6.3</zookeeper.version>
+      <slf4j-version>1.7.36</slf4j-version>
 
       <!-- tracing -->
       <opentelemetry.version>1.10.0</opentelemetry.version>
@@ -133,7 +133,6 @@
       <johnzon.version>1.2.16</johnzon.version>
       <hawtbuff.version>1.11</hawtbuff.version>
       <jb.logmanager.version>2.1.18.Final</jb.logmanager.version>
-      <jb.slf4j-jboss-logmanager.version>1.0.4.GA</jb.slf4j-jboss-logmanager.version>
       <version.org.wildfly.common.wildfly-common>1.5.2.Final</version.org.wildfly.common.wildfly-common>
       <airlift.version>0.8</airlift.version>
       <jakarta.activation-api.version>1.2.2</jakarta.activation-api.version>
@@ -228,8 +227,7 @@
 
       -->
 
-      <activemq-surefire-argline>-Dorg.apache.commons.logging.Log=org.apache.activemq.artemis.logs.JBossLoggingApacheLoggerBridge -Dorg.apache.activemq.artemis.utils.RetryRule.retry=${retryTests} -Dbrokerconfig.maxDiskUsage=100 -Dorg.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants.DEFAULT_QUIET_PERIOD=0 -Dorg.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants.DEFAULT_SHUTDOWN_TIMEOUT=0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager
-         -Dlogging.configuration="file:${activemq.basedir}/tests/config/${logging.config}"
+      <activemq-surefire-argline>-Dorg.apache.commons.logging.Log=org.apache.activemq.artemis.logs.JBossLoggingApacheLoggerBridge -Dorg.apache.activemq.artemis.utils.RetryRule.retry=${retryTests} -Dbrokerconfig.maxDiskUsage=100 -Dorg.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants.DEFAULT_QUIET_PERIOD=0 -Dorg.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants.DEFAULT_SHUTDOWN_TIMEOUT=0
          -Djava.library.path="${activemq.basedir}/target/bin/lib/linux-x86_64:${activemq.basedir}/target/bin/lib/linux-i686" -Djgroups.bind_addr=localhost
          -Djava.net.preferIPv4Stack=true -Dbasedir=${basedir}
          -Djdk.attach.allowAttachSelf=true
@@ -390,27 +388,6 @@
          </dependency>
 
          <!-- ## End Test Dependencies ## -->
-
-         <!-- ### Build Time Dependencies ### -->
-         <!-- This is a build dependency of this project, but is not needed at compile or runtime by other
-         projects that depend on this project. This should be in the compiler plugin but can't because of a bug,
-         see https://issues.apache.org/jira/browse/MCOMPILER-203-->
-         <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging-processor</artifactId>
-            <version>2.2.1.Final</version>
-            <optional>true</optional>
-            <scope>provided</scope>
-            <!-- License: LGPL-->
-         </dependency>
-         <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging-annotations</artifactId>
-            <version>2.2.1.Final</version>
-            <scope>provided</scope>
-            <optional>true</optional>
-            <!-- License: Apache 2.0-->
-         </dependency>
          <dependency>
              <groupId>com.google.errorprone</groupId>
              <artifactId>error_prone_core</artifactId>
@@ -474,30 +451,6 @@
             <!-- License: Apache 2.0 -->
          </dependency>
          <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>${jboss.logging.version}</version>
-            <!-- License: Apache 2.0 -->
-         </dependency>
-         <dependency>
-            <groupId>org.jboss.logmanager</groupId>
-            <artifactId>jboss-logmanager</artifactId>
-            <version>${jb.logmanager.version}</version>
-            <!-- License: Apache 2.0 -->
-         </dependency>
-         <dependency>
-            <groupId>org.jboss.slf4j</groupId>
-            <artifactId>slf4j-jboss-logmanager</artifactId>
-            <version>${jb.slf4j-jboss-logmanager.version}</version>
-            <!-- License: Apache 2.0 -->
-         </dependency>
-         <dependency>
-             <groupId>org.wildfly.common</groupId>
-             <artifactId>wildfly-common</artifactId>
-             <version>${version.org.wildfly.common.wildfly-common}</version>
-             <!-- License: Apache 2.0 -->
-         </dependency>
-         <dependency>
             <groupId>net.java.dev.javacc</groupId>
             <artifactId>javacc</artifactId>
             <version>4.0</version>
@@ -552,19 +505,6 @@
              <!-- License: Apache 2.0 -->
          </dependency>
 
-         <!-- End JMS Injection -->
-
-         <!-- ## Examples Dependencies ## -->
-         <dependency>
-             <groupId>org.slf4j</groupId>
-             <artifactId>slf4j-simple</artifactId>
-             <version>${slf4j.version}</version>
-         </dependency>
-         <dependency>
-             <groupId>org.slf4j</groupId>
-             <artifactId>slf4j-nop</artifactId>
-             <version>${slf4j.version}</version>
-         </dependency>
          <!-- ## End Examples Dependencies ## -->
 
          <!-- ### START opentelemetry Dependencies ### -->
@@ -751,6 +691,12 @@
            <version>${slf4j.version}</version>
            <!-- License: MIT -->
          </dependency>
+         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-version}</version>
+         </dependency>
+
          <!--needed for the rest support-->
          <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -1368,8 +1314,7 @@
             <!-- Property set by Jacoco plugin -->
             <jacoco.agent />
 
-            <activemq-surefire-argline>-Djava.util.logging.manager=org.jboss.logmanager.LogManager
-               -Dlogging.configuration="file:${activemq.basedir}/tests/config/logging.properties"
+            <activemq-surefire-argline>
                -Djava.library.path="${activemq.basedir}/activemq-artemis-native/bin" -Djgroups.bind_addr=localhost -Dorg.apache.activemq.artemis.api.core.UDPBroadcastEndpointFactory.localBindAddress=localhost
                -Djava.net.preferIPv4Stack=true -Dbasedir=${basedir}
                @{jacoco.agent} -Djacoco.agent=@{jacoco.agent}

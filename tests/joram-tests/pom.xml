@@ -84,25 +84,15 @@
          <artifactId>qpid-jms-client</artifactId>
          <scope>test</scope>
       </dependency>
+      <!-- logging -->
       <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-processor</artifactId>
-         <scope>provided</scope>
-         <optional>true</optional>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
       </dependency>
       <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging</artifactId>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
       </dependency>
-      <dependency>
-         <groupId>org.jboss.logmanager</groupId>
-         <artifactId>jboss-logmanager</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.wildfly.common</groupId>
-          <artifactId>wildfly-common</artifactId>
-      </dependency>
-
       <!-- The johnzon-core and json-api contents are repackaged in -commons,
            However maven can still need them during tests, which run against
            the original -commons classes when built+run in the same reactor,
