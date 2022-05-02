@@ -27,6 +27,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.tools.Diagnostic;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -37,8 +38,11 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @SupportedAnnotationTypes({"org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle"})
 public class LogProcessor extends AbstractProcessor {
 
+
    @Override
    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+      HashMap<Integer, String> messages = new HashMap<>();
+
       try {
 
          System.out.println("*******************************************************************************************************************************");
@@ -94,9 +98,9 @@ public class LogProcessor extends AbstractProcessor {
                      }
 
                      if (messageAnnotation != null) {
-                        generateMessage(bundleAnnotation, writerOutput, executableMember, messageAnnotation);
+                        generateMessage(bundleAnnotation, writerOutput, executableMember, messageAnnotation, messages);
                      } else if (logAnnotation != null) {
-                        generateLogger(bundleAnnotation, writerOutput, executableMember, logAnnotation);
+                        generateLogger(bundleAnnotation, writerOutput, executableMember, logAnnotation, messages);
                      } else {
                         processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Annotation not found at " + el);
                         return false;
@@ -122,7 +126,17 @@ public class LogProcessor extends AbstractProcessor {
    private void generateMessage(ArtemisBundle bundleAnnotation,
                                 PrintWriter writerOutput,
                                 ExecutableElement executableMember,
-                                Message messageAnnotation) {
+                                Message messageAnnotation,
+                                HashMap<Integer, String> processedMessages) {
+
+      String previousMessage = processedMessages.get(messageAnnotation.id());
+
+      if (processedMessages.containsKey(messageAnnotation.id())) {
+         throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);
+      }
+
+      processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
+
       // This is really a debug output
       writerOutput.println("   // " + messageAnnotation.toString());
 
@@ -169,7 +183,17 @@ public class LogProcessor extends AbstractProcessor {
    private void generateLogger(ArtemisBundle bundleAnnotation,
                                PrintWriter writerOutput,
                                ExecutableElement executableMember,
-                               LogMessage messageAnnotation) {
+                               LogMessage messageAnnotation,
+                               HashMap<Integer, String> processedMessages) {
+
+      String previousMessage = processedMessages.get(messageAnnotation.id());
+
+      if (processedMessages.containsKey(messageAnnotation.id())) {
+         throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);
+      }
+
+      processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
+
       // This is really a debug output
       writerOutput.println("   // " + messageAnnotation.toString());
 
