@@ -70,11 +70,12 @@ import org.apache.activemq.artemis.utils.ExecutorFactory;
 import org.apache.activemq.artemis.utils.UUIDGenerator;
 import org.apache.activemq.artemis.utils.actors.OrderedExecutorFactory;
 import org.apache.activemq.artemis.utils.collections.ConcurrentHashSet;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClientSessionFactoryImpl implements ClientSessionFactoryInternal, ClientConnectionLifeCycleListener {
 
-   private static final Logger logger = Logger.getLogger(ClientSessionFactoryImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(ClientSessionFactoryImpl.class);
 
    private final ServerLocatorInternal serverLocator;
 

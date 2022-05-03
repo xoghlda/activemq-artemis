@@ -23,11 +23,12 @@ import java.util.Set;
 import io.netty.handler.codec.socksx.SocksVersion;
 import io.netty.util.Version;
 import org.apache.activemq.artemis.api.config.ActiveMQDefaultConfiguration;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TransportConstants {
 
-   private static final Logger logger = Logger.getLogger(TransportConstants.class);
+   private static final Logger logger = LoggerFactory.getLogger(TransportConstants.class);
 
    public static final String SSL_CONTEXT_PROP_NAME = "sslContext";
 

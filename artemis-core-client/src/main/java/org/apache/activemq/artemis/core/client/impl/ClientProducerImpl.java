@@ -33,14 +33,15 @@ import org.apache.activemq.artemis.utils.ActiveMQBufferInputStream;
 import org.apache.activemq.artemis.utils.DeflaterReader;
 import org.apache.activemq.artemis.utils.TokenBucketLimiter;
 import org.apache.activemq.artemis.utils.UUIDGenerator;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The client-side Producer.
  */
 public class ClientProducerImpl implements ClientProducerInternal {
 
-   private static final Logger logger = Logger.getLogger(ClientProducerImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(ClientProducerImpl.class);
 
    private final SimpleString address;
 

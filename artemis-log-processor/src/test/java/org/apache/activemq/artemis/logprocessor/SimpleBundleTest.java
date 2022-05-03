@@ -54,4 +54,9 @@ public class SimpleBundleTest {
          SimpleBundle.MESSAGES.printMessage(i);
       }
    }
+
+   @Test
+   public void testMultiLines() {
+      SimpleBundle.MESSAGES.multiLines();
+   }
 }

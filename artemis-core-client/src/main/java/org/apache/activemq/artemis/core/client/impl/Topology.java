@@ -31,11 +31,12 @@ import org.apache.activemq.artemis.api.core.client.ClusterTopologyListener;
 import org.apache.activemq.artemis.core.client.ActiveMQClientLogger;
 import org.apache.activemq.artemis.spi.core.protocol.RemotingConnection;
 import org.apache.activemq.artemis.spi.core.remoting.Connector;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class Topology {
 
-   private static final Logger logger = Logger.getLogger(Topology.class);
+   private static final Logger logger = LoggerFactory.getLogger(Topology.class);
 
    private final Set<ClusterTopologyListener> topologyListeners;
 

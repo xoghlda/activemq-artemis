@@ -43,4 +43,7 @@ public interface SimpleBundle {
 
    @LogMessage(id = 6, value = "This is a print!!! {0}")
    void printMessage(int nr);
+
+   @LogMessage(id = 7, value = "multi\nLine\nMessage")
+   void multiLines();
 }

@@ -33,7 +33,8 @@ public @interface LogMessage {
    Level level() default Level.WARN;
 
    enum Level {
-      FATAL, ERROR, WARN, INFO, DEBUG, TRACE;
+      FATAL, ERROR, WARN, INFO,
+        @Deprecated DEBUG, @Deprecated TRACE;
 
       private Level() {
       }
