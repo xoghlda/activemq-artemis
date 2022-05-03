@@ -18,7 +18,8 @@
 package org.apache.activemq.artemis.logs;
 
 import org.apache.commons.logging.Log;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * There is an issue on the Testsuite, as it's not possible
@@ -35,11 +36,11 @@ public class JBossLoggingApacheLoggerBridge implements Log {
    final Logger bridgeLog;
 
    public JBossLoggingApacheLoggerBridge(Class clazz) {
-      bridgeLog = Logger.getLogger(clazz);
+      bridgeLog = LoggerFactory.getLogger(clazz);
    }
 
    public JBossLoggingApacheLoggerBridge(String name) {
-      bridgeLog = Logger.getLogger(name);
+      bridgeLog = LoggerFactory.getLogger(name);
    }
 
    @Override

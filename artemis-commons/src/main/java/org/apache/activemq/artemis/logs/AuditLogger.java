@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.logs;
 
 import org.jboss.logging.BasicLogger;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.logging.annotations.Cause;
 import org.jboss.logging.annotations.LogMessage;
 import org.jboss.logging.annotations.Message;

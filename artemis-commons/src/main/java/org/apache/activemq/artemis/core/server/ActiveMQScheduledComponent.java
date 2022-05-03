@@ -28,14 +28,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.activemq.artemis.utils.ActiveMQThreadFactory;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is for components with a scheduled at a fixed rate.
  */
 public abstract class ActiveMQScheduledComponent implements ActiveMQComponent, Runnable {
 
-   private static final Logger logger = Logger.getLogger(ActiveMQScheduledComponent.class);
+   private static final Logger logger = LoggerFactory.getLogger(ActiveMQScheduledComponent.class);
    protected ScheduledExecutorService scheduledExecutorService;
    private boolean startedOwnScheduler;
 

@@ -27,13 +27,14 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SpawnedVMSupport {
 
    static ConcurrentHashMap<Process, String> startedProcesses = null;
 
-   private static final Logger log = Logger.getLogger(SpawnedVMSupport.class);
+   private static final Logger log = LoggerFactory.getLogger(SpawnedVMSupport.class);
 
    public static Process spawnVM(final String className, final String... args) throws Exception {
       return SpawnedVMSupport.spawnVM(className, new String[0], true, args);

@@ -35,7 +35,8 @@ import org.apache.activemq.artemis.logs.ActiveMQUtilLogger;
 import org.apache.activemq.artemis.utils.ActiveMQThreadFactory;
 import org.apache.activemq.artemis.utils.Env;
 import org.apache.activemq.artemis.utils.collections.ConcurrentHashSet;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This will use {@link InetAddress#isReachable(int)} to determine if the network is alive.
@@ -43,7 +44,7 @@ import org.jboss.logging.Logger;
  */
 public class NetworkHealthCheck extends ActiveMQScheduledComponent {
 
-   private static final Logger logger = Logger.getLogger(NetworkHealthCheck.class);
+   private static final Logger logger = LoggerFactory.getLogger(NetworkHealthCheck.class);
 
    private final Set<ActiveMQComponent> componentList = new ConcurrentHashSet<>();
    private final Set<String> addresses = new ConcurrentHashSet<>();
