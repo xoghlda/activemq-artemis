@@ -30,4 +30,14 @@ public @interface LogMessage {
 
    String value();
 
+   Level level() default Level.WARN;
+
+   enum Level {
+      FATAL, ERROR, WARN, INFO, DEBUG, TRACE;
+
+      private Level() {
+      }
+   }
+
+
 }

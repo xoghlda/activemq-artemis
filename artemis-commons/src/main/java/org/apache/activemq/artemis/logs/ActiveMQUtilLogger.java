@@ -19,32 +19,16 @@ package org.apache.activemq.artemis.logs;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Logger Code 20
- *
- * each message id must be 6 digits long starting with 20, the 3rd digit donates the level so
- *
- * INF0  1
- * WARN  2
- * DEBUG 3
- * ERROR 4
- * TRACE 5
- * FATAL 6
- *
- * so an INFO message would be 201000 to 201999
  */
 @ArtemisBundle(projectCode = "AMQ")
 public interface ActiveMQUtilLogger {
 
-   /**
-    * The default logger.
-    */
    ActiveMQUtilLogger LOGGER = CodeFactory.getMessageLogger(ActiveMQUtilLogger.class);
 
-   @LogMessage(id = 201000, value = "Network is healthy, starting service {0}")
+   @LogMessage(id = 201000, value = "Network is healthy, starting service {0}", level = LogMessage.Level.INFO)
    void startingService(String component);
 
    @LogMessage(id = 201001, value = "Network is unhealthy, stopping service {0}")

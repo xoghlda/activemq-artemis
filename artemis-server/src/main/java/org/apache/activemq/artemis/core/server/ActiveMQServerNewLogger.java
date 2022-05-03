@@ -23,9 +23,12 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 @ArtemisBundle(projectCode = "AMQ")
 public interface ActiveMQServerNewLogger {
 
+   /**
+    * The default logger.
+    */
    ActiveMQServerNewLogger LOGGER = CodeFactory.getMessageLogger(ActiveMQServerNewLogger.class);
 
    @LogMessage(id = 223000, value = "This is great, {0}")
-   void simpleTest(String message);
+   void simpleTest(String componentClassName);
 }
 
