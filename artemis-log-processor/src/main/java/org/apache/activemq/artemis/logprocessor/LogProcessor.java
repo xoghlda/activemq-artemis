@@ -158,7 +158,7 @@ public class LogProcessor extends AbstractProcessor {
       processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
 
       // This is really a debug output
-      writerOutput.println("   // " + messageAnnotation.toString());
+      writerOutput.println("   // " + encodeSpecialChars(messageAnnotation.toString()));
 
       writerOutput.write("   public " + executableMember.getReturnType() + " " + executableMember.getSimpleName() + "(");
 
@@ -183,7 +183,7 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println(")");
       writerOutput.println("   {");
 
-      String formattingString = bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value();
+      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
       if (!hasParameters) {
          writerOutput.println("      String returnString = \"" + formattingString + "\";");
       } else {
@@ -198,6 +198,10 @@ public class LogProcessor extends AbstractProcessor {
 
       writerOutput.println("   }");
       writerOutput.println();
+   }
+
+   private String encodeSpecialChars(String input) {
+      return input.replaceAll("\n", "\\\\n").replaceAll("\"", "\\\\\"");
    }
 
 
@@ -228,7 +232,7 @@ public class LogProcessor extends AbstractProcessor {
       processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
 
       // This is really a debug output
-      writerOutput.println("   // " + messageAnnotation.toString());
+      writerOutput.println("   // " + encodeSpecialChars(messageAnnotation.toString()));
 
       writerOutput.write("   public void " + executableMember.getSimpleName() + "(");
 
@@ -253,7 +257,7 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println(")");
       writerOutput.println("   {");
 
-      String formattingString = bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value();
+      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
       if (!hasParameters) {
          writerOutput.println("      String messageString = \"" + formattingString + "\";");
       } else {
