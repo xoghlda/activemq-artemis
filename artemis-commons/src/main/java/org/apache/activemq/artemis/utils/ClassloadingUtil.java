@@ -136,7 +136,7 @@ public final class ClassloadingUtil {
             properties.load(url.openStream());
          }
       } catch (Throwable ignored) {
-         logger.warn(ignored);
+         logger.warn(ignored.getMessage(), ignored);
       }
       return properties;
    }

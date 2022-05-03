@@ -359,7 +359,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
    public boolean check(InetAddress address) throws IOException, InterruptedException {
       if (!hasCustomPingCommand() && isReachable(address)) {
          if (logger.isTraceEnabled()) {
-            logger.tracef(address + " OK");
+            logger.trace(address + " OK");
          }
          return true;
       } else {

@@ -31,7 +31,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @ArtemisBundle(projectCode = "AMQ")
 public interface ActiveMQUtilBundle {
 
-   ActiveMQUtilBundle BUNDLE = CodeFactory.getBundle(ActiveMQUtilBundle.class);
+   ActiveMQUtilBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQUtilBundle.class);
 
    @Message(id = 209000, value = "invalid property: {0}")
    ActiveMQIllegalStateException invalidProperty(String part);

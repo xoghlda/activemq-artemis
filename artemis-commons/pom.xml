@@ -53,6 +53,11 @@
 
       <!-- logging -->
       <dependency>
+         <groupId>org.apache.activemq</groupId>
+         <artifactId>artemis-log-processor</artifactId>
+         <version>${project.version}</version>
+      </dependency>
+      <dependency>
          <groupId>org.slf4j</groupId>
          <artifactId>slf4j-api</artifactId>
          <!-- License: MIT -->

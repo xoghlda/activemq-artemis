@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 
-package org.apache.activemq.i18n.test;
+package org.apache.activemq.artemis.logprocessor;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
@@ -25,7 +24,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @ArtemisBundle(projectCode = "TST")
 public interface SimpleBundle {
 
-   SimpleBundle MESSAGES = CodeFactory.getBundle(SimpleBundle.class);
+   SimpleBundle MESSAGES = CodeFactory.getCodeClass(SimpleBundle.class);
 
    @Message(id = 1, value = "Test")
    String simpleTest();

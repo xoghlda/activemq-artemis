@@ -16,9 +16,9 @@
  */
 package org.apache.activemq.artemis.core.server;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.artlog.CodeFactory;
+import org.apache.activemq.artemis.artlog.annotation.ArtemisBundle;
+import org.apache.activemq.artemis.artlog.annotation.LogMessage;
 
 @ArtemisBundle(projectCode = "AMQ")
 public interface ActiveMQServerNewLogger {

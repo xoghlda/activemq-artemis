@@ -16,7 +16,6 @@
  */
 package org.apache.activemq.artemis.logs;
 
-import io.netty.util.internal.logging.Slf4JLoggerFactory;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;

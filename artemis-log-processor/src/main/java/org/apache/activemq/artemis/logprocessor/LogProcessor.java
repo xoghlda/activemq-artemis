@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -76,10 +77,28 @@ public class LogProcessor extends AbstractProcessor {
                writerOutput.println("package " + annotatedType.getEnclosingElement() + ";");
                writerOutput.println();
 
+               writerOutput.println("import org.slf4j.Logger;");
+               writerOutput.println("import org.slf4j.LoggerFactory;");
+               writerOutput.println();
+
                // Opening class
                writerOutput.println("// " + bundleAnnotation.toString());
                writerOutput.println("public class " + simpleClassName + " implements " + interfaceName);
                writerOutput.println("{");
+
+               writerOutput.println("   private final Logger logger;");
+               writerOutput.println();
+
+               writerOutput.println("   public " + simpleClassName + "(Logger logger ) {");
+               writerOutput.println("      this.logger = logger;");
+               writerOutput.println("   }");
+               writerOutput.println();
+
+               writerOutput.println("   public " + simpleClassName + "() {");
+               writerOutput.println("      this(LoggerFactory.getLogger(" + fullClassName + ".class));");
+               writerOutput.println("   }");
+               writerOutput.println();
+
 
                // Declaring the static field that's used by {@link I18NFactory}
                writerOutput.println("   public static " + simpleClassName + " INSTANCE = new " + simpleClassName + "();");
@@ -92,8 +111,11 @@ public class LogProcessor extends AbstractProcessor {
 
                      Message messageAnnotation = el.getAnnotation(Message.class);
                      LogMessage logAnnotation = el.getAnnotation(LogMessage.class);
-                     if (messageAnnotation != null && logAnnotation != null) {
-                        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Can't use both Message and Log at a method at " + el);
+                     GetLogger getLogger = el.getAnnotation(GetLogger.class);
+
+
+                     if (messageAnnotation != null && logAnnotation != null && getLogger != null) {
+                        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Cannot use combied annotations " + el);
                         return false;
                      }
 
@@ -101,11 +123,9 @@ public class LogProcessor extends AbstractProcessor {
                         generateMessage(bundleAnnotation, writerOutput, executableMember, messageAnnotation, messages);
                      } else if (logAnnotation != null) {
                         generateLogger(bundleAnnotation, writerOutput, executableMember, logAnnotation, messages);
-                     } else {
-                        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Annotation not found at " + el);
-                        return false;
+                     } else if (getLogger != null) {
+                        generateGetLogger(bundleAnnotation, writerOutput, executableMember, getLogger);
                      }
-
                   }
                }
 
@@ -179,6 +199,19 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println("   }");
       writerOutput.println();
    }
+
+
+   private void generateGetLogger(ArtemisBundle bundleAnnotation,
+                               PrintWriter writerOutput,
+                               ExecutableElement executableMember,
+                               GetLogger loggerAnnotation) {
+
+      // This is really a debug output
+      writerOutput.println("   // " + loggerAnnotation.toString());
+      writerOutput.println("   public Logger " + executableMember.getSimpleName() + "() { return logger; }");
+      writerOutput.println();
+   }
+
 
    private void generateLogger(ArtemisBundle bundleAnnotation,
                                PrintWriter writerOutput,
