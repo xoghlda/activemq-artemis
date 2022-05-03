@@ -16,6 +16,8 @@
  */
 package org.apache.activemq.artemis.logs;
 
+import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
 import org.jboss.logging.BasicLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,24 +35,13 @@ import java.util.Set;
 
 /**
  * Logger Code 60
- *
- * each message id must be 6 digits long starting with 60, the 3rd digit donates the level so
- *
- * INF0  1
- * WARN  2
- * DEBUG 3
- * ERROR 4
- * TRACE 5
- * FATAL 6
- *
- * so an INFO message would be 601000 to 601999
  */
-@MessageLogger(projectCode = "AMQ")
-public interface AuditLogger extends BasicLogger {
+@ArtemisBundle(projectCode = "AMQ")
+public interface AuditLogger {
 
-   AuditLogger BASE_LOGGER = Logger.getMessageLogger(AuditLogger.class, "org.apache.activemq.audit.base");
-   AuditLogger RESOURCE_LOGGER = Logger.getMessageLogger(AuditLogger.class, "org.apache.activemq.audit.resource");
-   AuditLogger MESSAGE_LOGGER = Logger.getMessageLogger(AuditLogger.class, "org.apache.activemq.audit.message");
+   AuditLogger BASE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.base");
+   AuditLogger RESOURCE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.resource");
+   AuditLogger MESSAGE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.message");
 
    ThreadLocal<String> remoteAddress = new ThreadLocal<>();
 

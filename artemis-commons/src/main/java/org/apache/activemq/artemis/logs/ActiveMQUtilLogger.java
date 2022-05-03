@@ -16,6 +16,7 @@
  */
 package org.apache.activemq.artemis.logs;
 
+import io.netty.util.internal.logging.Slf4JLoggerFactory;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
@@ -26,7 +27,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 @ArtemisBundle(projectCode = "AMQ")
 public interface ActiveMQUtilLogger {
 
-   ActiveMQUtilLogger LOGGER = CodeFactory.getMessageLogger(ActiveMQUtilLogger.class);
+   ActiveMQUtilLogger LOGGER = CodeFactory.getCodeClass(ActiveMQUtilLogger.class);
 
    @LogMessage(id = 201000, value = "Network is healthy, starting service {0}", level = LogMessage.Level.INFO)
    void startingService(String component);

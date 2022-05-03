@@ -24,7 +24,12 @@ import static java.security.AccessController.doPrivileged;
 
 public class CodeFactory {
 
-   public static <T> T getBundle(final Class<T> type) {
+
+   public static <T> T getCodeClass(final Class<T> type) {
+      return getCodeClass(type, type.getClass().getName());
+   }
+
+   public static <T> T getCodeClass(final Class<T> type, String category) {
       return doPrivileged(new PrivilegedAction<T>() {
          public T run() {
             try {
@@ -45,10 +50,6 @@ public class CodeFactory {
             }
          }
       });
-   }
-
-   public static <T> T getMessageLogger(Class<T> type) {
-      return getBundle(type);
    }
 
 }
