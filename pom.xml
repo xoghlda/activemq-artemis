@@ -118,7 +118,6 @@
       <hdrhistogram.version>2.1.12</hdrhistogram.version>
       <curator.version>5.2.0</curator.version>
       <zookeeper.version>3.6.3</zookeeper.version>
-      <slf4j-version>1.7.36</slf4j-version>
 
       <!-- tracing -->
       <opentelemetry.version>1.10.0</opentelemetry.version>
@@ -688,13 +687,17 @@
          <dependency>
            <groupId>org.slf4j</groupId>
            <artifactId>slf4j-api</artifactId>
-           <version>${slf4j-version}</version>
+           <version>${slf4j.version}</version>
            <!-- License: MIT -->
          </dependency>
+
+         <!-- TODO: Remove this, and all uses. It is the Log4J 1.2 binding and thus is
+	                ancient. It doenst actually exist anymore either, being redirected
+                    to slf4j-reload4j with a warning emitted in the build by maven -->
          <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j-version}</version>
+            <version>${slf4j.version}</version>   <!-- Change note: slf4j.version already present -->
          </dependency>
 
          <!--needed for the rest support-->

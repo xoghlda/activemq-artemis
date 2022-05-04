@@ -229,15 +229,6 @@
          <groupId>jakarta.management.j2ee</groupId>
          <artifactId>jakarta.management.j2ee-api</artifactId>
       </dependency>
-      <!-- logging -->
-      <dependency>
-         <groupId>org.slf4j</groupId>
-         <artifactId>slf4j-api</artifactId>
-      </dependency>
-      <dependency>
-         <groupId>org.slf4j</groupId>
-         <artifactId>slf4j-log4j12</artifactId>
-      </dependency>
       <dependency>
          <groupId>io.netty</groupId>
          <artifactId>netty-buffer</artifactId>
@@ -271,9 +262,14 @@
          <groupId>org.apache.qpid</groupId>
          <artifactId>proton-j</artifactId>
       </dependency>
+      <!-- logging -->
       <dependency>
          <groupId>org.slf4j</groupId>
          <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency> <!-- TODO: replace with e.g Log4J 2 -->
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
       </dependency>
       <dependency>
          <groupId>org.apache.activemq</groupId>

@@ -30,11 +30,11 @@ public @interface LogMessage {
 
    String value();
 
-   Level level() default Level.WARN;
+   Level level() default Level.WARN; // Having a default for this seems less clear than just having the level specified all the time. (If null gets passed the requirement to specify a value, cant the processor detect that was given and fail?
 
    enum Level {
       FATAL, ERROR, WARN, INFO,
-        @Deprecated DEBUG, @Deprecated TRACE;
+        @Deprecated DEBUG, @Deprecated TRACE; // Question: is the idea of this that debug stuff shouldnt have codes and so shouldnt use the annotations? Is that currently true?
 
       private Level() {
       }

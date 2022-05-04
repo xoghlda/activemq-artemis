@@ -20,6 +20,8 @@ package org.apache.activemq.artemis.logprocessor;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -37,8 +39,9 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
 @SupportedAnnotationTypes({"org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle"})
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class LogProcessor extends AbstractProcessor {
-
+   // Would be good if this was in its own module seperate from the annotations so that it isnt picked up by and thus run (to no effect) by users, which it currently would be but ideally would not be.
 
    @Override
    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -114,7 +117,7 @@ public class LogProcessor extends AbstractProcessor {
                      GetLogger getLogger = el.getAnnotation(GetLogger.class);
 
 
-                     if (messageAnnotation != null && logAnnotation != null && getLogger != null) {
+                     if (messageAnnotation != null && logAnnotation != null && getLogger != null) { //This requires all 3 are set to fail, it wont pick up other combinations as the message suggests might be wanted.
                         processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Cannot use combied annotations " + el);
                         return false;
                      }
@@ -149,7 +152,7 @@ public class LogProcessor extends AbstractProcessor {
                                 Message messageAnnotation,
                                 HashMap<Integer, String> processedMessages) {
 
-      String previousMessage = processedMessages.get(messageAnnotation.id());
+      String previousMessage = processedMessages.get(messageAnnotation.id()); // Could move inside the if?
 
       if (processedMessages.containsKey(messageAnnotation.id())) {
          throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);

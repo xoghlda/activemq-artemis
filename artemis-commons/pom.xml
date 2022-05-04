@@ -56,6 +56,7 @@
          <groupId>org.apache.activemq</groupId>
          <artifactId>artemis-log-processor</artifactId>
          <version>${project.version}</version>
+          <!-- <scope>provided</scope> so that it isnt picked up and run by users: it is currently being spread everywhere by artemis-commons -->
       </dependency>
       <dependency>
          <groupId>org.slf4j</groupId>
