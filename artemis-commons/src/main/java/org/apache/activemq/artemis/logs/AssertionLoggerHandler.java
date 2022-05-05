@@ -16,6 +16,53 @@
  */
 package org.apache.activemq.artemis.logs;
 
+import java.util.logging.Level;
+
+
 public class AssertionLoggerHandler {
 
+   public void close() throws SecurityException {
+   }
+
+   public static boolean hasLevel(Level level) {
+      return false;
+   }
+
+   public static boolean findText(long mstimeout, String... text) {
+      return false;
+   }
+
+   /**
+    * Find a line that contains the parameters passed as an argument
+    *
+    * @param text
+    * @return
+    */
+   public static boolean findText(final String... text) {
+      return false;
+   }
+
+   public static int countText(final String... text) {
+      return 0;
+   }
+
+   public static boolean matchText(final String pattern) {
+      return false;
+   }
+
+   public static final void clear() {
+   }
+
+   public static final void startCapture() {
+   }
+
+   /**
+    *
+    * @param individualMessages enables counting individual messages.
+    */
+   public static final void startCapture(boolean individualMessages) {
+   }
+
+   public static final void stopCapture() {
+   }
 }
