@@ -283,7 +283,7 @@ public class ClientProducerImpl implements ClientProducerInternal {
       // Not the continuations, but this is ok since we are only interested in limiting the amount of
       // data in *memory* and continuations go straight to the disk
 
-      logger.tracef("sendRegularMessage::%s, Blocking=%s", msgI, sendBlocking);
+      logger.trace("sendRegularMessage::%s, Blocking=%s", msgI, sendBlocking);
 
       int creditSize = sessionContext.getCreditsOnSendingFull(msgI);
 
@@ -309,7 +309,7 @@ public class ClientProducerImpl implements ClientProducerInternal {
                                  final ICoreMessage msgI,
                                  final ClientProducerCredits credits,
                                  SendAcknowledgementHandler handler) throws ActiveMQException {
-      logger.tracef("largeMessageSend::%s, Blocking=%s", msgI, sendBlocking);
+      logger.trace("largeMessageSend::%s, Blocking=%s", msgI, sendBlocking);
 
       int headerSize = msgI.getHeadersAndPropertiesEncodeSize();
 

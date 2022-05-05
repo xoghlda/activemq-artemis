@@ -375,7 +375,7 @@ public class TransportConstants {
             return Integer.parseInt(variable);
          }
       } catch (Throwable ignored) {
-         logger.debug(ignored);
+         logger.debug(ignored.getMessage(), ignored);
       }
 
       return defaultValue;

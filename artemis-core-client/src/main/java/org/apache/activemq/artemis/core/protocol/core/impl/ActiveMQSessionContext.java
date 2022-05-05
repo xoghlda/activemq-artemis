@@ -847,14 +847,14 @@ public class ActiveMQSessionContext extends SessionContext {
       ReattachSessionResponseMessage response = (ReattachSessionResponseMessage) channel1.sendBlocking(request, PacketImpl.REATTACH_SESSION_RESP);
 
       if (response.isReattached()) {
-         ActiveMQClientLogger.LOGGER.replayingCommands(sessionChannel.getID(), response.getLastConfirmedCommandID());
+         logger.debug("Replaying commands for channelID=%s with lastCommandID from the server=%s", sessionChannel.getID(), response.getLastConfirmedCommandID());
          // The session was found on the server - we reattached transparently ok
 
          sessionChannel.replayCommands(response.getLastConfirmedCommandID());
 
          return true;
       } else {
-         ActiveMQClientLogger.LOGGER.reconnectCreatingNewSession(sessionChannel.getID());
+         logger.debug("Couldn't reattach session {0}, performing as a failover operation now and recreating objects", sessionChannel.getID());
 
          sessionChannel.clearCommands();
 
@@ -1062,8 +1062,8 @@ public class ActiveMQSessionContext extends SessionContext {
             final long elapsedMillis = TimeUnit.NANOSECONDS.toMillis(elapsedFlowControl);
             ActiveMQClientLogger.LOGGER.timeoutStreamingLargeMessage();
             if (logger.isDebugEnabled()) {
-               logger.debugf("try to write %d bytes after blocked %d ms on a not writable connection: [%s]",
-                             chunkPacket.expectedEncodeSize(), elapsedMillis, connection.getID());
+               logger.debug("try to write %d bytes after blocked %d ms on a not writable connection: [%s]",
+                            chunkPacket.expectedEncodeSize(), elapsedMillis, connection.getID());
             }
          }
          if (requiresResponse) {

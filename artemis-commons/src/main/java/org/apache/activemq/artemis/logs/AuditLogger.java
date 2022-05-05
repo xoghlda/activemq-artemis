@@ -17,7 +17,7 @@
 package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ import java.util.Set;
 /**
  * Logger Code 60
  */
-@ArtemisBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ")
 public interface AuditLogger {
 
    AuditLogger BASE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.base");

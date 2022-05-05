@@ -48,7 +48,8 @@
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
          <scope>test</scope>
-         <!-- License: EPL 1.0 -->
+         <!-- License: CPL 1.0 -->
+         <!-- There are newer versions of the JUnit but they break our tests -->
       </dependency>
    </dependencies>
 

@@ -361,7 +361,7 @@ public final class DiscoveryGroup implements ActiveMQComponent {
                   if (logger.isTraceEnabled()) {
                      logger.trace("Connectors changed on Discovery:");
                      for (DiscoveryEntry connector : connectors.values()) {
-                        logger.trace(connector);
+                        logger.trace("%s", connector);
                      }
                   }
                   if (logger.isDebugEnabled()) {

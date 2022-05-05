@@ -26,11 +26,15 @@ import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSession.AddressQuery;
 import org.apache.activemq.artemis.core.client.ActiveMQClientLogger;
 import org.apache.activemq.artemis.core.protocol.core.impl.PacketImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility class to create queues 'automatically'.
  */
 public class AutoCreateUtil {
+
+   private static final Logger logger = LoggerFactory.getLogger(AutoCreateUtil.class);
 
    public static  void autoCreateQueue(ClientSession session, SimpleString destAddress, SimpleString selectorString) throws ActiveMQException {
       AddressQuery response = session.addressQuery(destAddress);
@@ -47,7 +51,7 @@ public class AutoCreateUtil {
                      .setAddress(destAddress);
                setRequiredQueueConfigurationIfNotSet(queueConfiguration,response, RoutingType.ANYCAST, selectorString, true);
                session.createQueue(queueConfiguration);
-               ActiveMQClientLogger.LOGGER.debug("The queue " + destAddress + " was created automatically");
+               logger.debug("The queue " + destAddress + " was created automatically");
             } catch (ActiveMQQueueExistsException e) {
                // The queue was created by another client/admin between the query check and send create queue packet
             }

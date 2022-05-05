@@ -17,11 +17,11 @@
 
 package org.apache.activemq.artemis.logprocessor;
 
-import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
-@ArtemisBundle(projectCode = "TST")
+@LogBundle(projectCode = "TST")
 public interface SimpleBundle {
 
    SimpleBundle MESSAGES = CodeFactory.getCodeClass(SimpleBundle.class);
@@ -38,12 +38,12 @@ public interface SimpleBundle {
    @Message(id = 4, value = "EX-{0}")
    Exception someExceptionParameter(String parameter);
 
-   @LogMessage(id = 5, value = "This is a print!!!")
+   @LogMessage(id = 5, value = "This is a print!!!", level = LogMessage.Level.WARN)
    void printMessage();
 
-   @LogMessage(id = 6, value = "This is a print!!! {0}")
+   @LogMessage(id = 6, value = "This is a print!!! {0}", level = LogMessage.Level.WARN)
    void printMessage(int nr);
 
-   @LogMessage(id = 7, value = "multi\nLine\nMessage")
+   @LogMessage(id = 7, value = "multi\nLine\nMessage", level = LogMessage.Level.WARN)
    void multiLines();
 }

@@ -697,7 +697,7 @@
          <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>   <!-- Change note: slf4j.version already present -->
+            <version>${slf4j.version}</version>
          </dependency>
 
          <!--needed for the rest support-->

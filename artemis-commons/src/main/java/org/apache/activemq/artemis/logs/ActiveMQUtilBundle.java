@@ -18,7 +18,7 @@ package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
 /**
@@ -28,7 +28,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
  *
  * so 209000 to 209999
  */
-@ArtemisBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ")
 public interface ActiveMQUtilBundle {
 
    ActiveMQUtilBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQUtilBundle.class);

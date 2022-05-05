@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
@@ -41,7 +41,6 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @SupportedAnnotationTypes({"org.apache.activemq.artemis.logprocessor.annotation.ArtemisBundle"})
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class LogProcessor extends AbstractProcessor {
-   // Would be good if this was in its own module seperate from the annotations so that it isnt picked up by and thus run (to no effect) by users, which it currently would be but ideally would not be.
 
    @Override
    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -64,7 +63,7 @@ public class LogProcessor extends AbstractProcessor {
 
                TypeElement annotatedType = (TypeElement) annotatedTypeEl;
 
-               ArtemisBundle bundleAnnotation = annotatedType.getAnnotation(ArtemisBundle.class);
+               LogBundle bundleAnnotation = annotatedType.getAnnotation(LogBundle.class);
 
                String fullClassName = annotatedType.getQualifiedName() + "_impl";
                String interfaceName = annotatedType.getSimpleName().toString();
@@ -146,7 +145,7 @@ public class LogProcessor extends AbstractProcessor {
       return true;
    }
 
-   private void generateMessage(ArtemisBundle bundleAnnotation,
+   private void generateMessage(LogBundle bundleAnnotation,
                                 PrintWriter writerOutput,
                                 ExecutableElement executableMember,
                                 Message messageAnnotation,
@@ -208,10 +207,10 @@ public class LogProcessor extends AbstractProcessor {
    }
 
 
-   private void generateGetLogger(ArtemisBundle bundleAnnotation,
-                               PrintWriter writerOutput,
-                               ExecutableElement executableMember,
-                               GetLogger loggerAnnotation) {
+   private void generateGetLogger(LogBundle bundleAnnotation,
+                                  PrintWriter writerOutput,
+                                  ExecutableElement executableMember,
+                                  GetLogger loggerAnnotation) {
 
       // This is really a debug output
       writerOutput.println("   // " + loggerAnnotation.toString());
@@ -220,7 +219,7 @@ public class LogProcessor extends AbstractProcessor {
    }
 
 
-   private void generateLogger(ArtemisBundle bundleAnnotation,
+   private void generateLogger(LogBundle bundleAnnotation,
                                PrintWriter writerOutput,
                                ExecutableElement executableMember,
                                LogMessage messageAnnotation,
