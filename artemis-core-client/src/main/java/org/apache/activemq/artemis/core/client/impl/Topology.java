@@ -205,7 +205,7 @@ public final class Topology {
       }
 
       if (manager != null && !manager.updateMember(uniqueEventID, nodeId, memberInput)) {
-         logger.debug("TopologyManager rejected the update towards %s", memberInput);
+         logger.debug("TopologyManager rejected the update towards {}", memberInput);
          return false;
       }
 
@@ -313,7 +313,7 @@ public final class Topology {
 
 
       if (manager != null && !manager.removeMember(uniqueEventID, nodeId)) {
-         logger.debug("TopologyManager rejected the update towards %s", nodeId);
+         logger.debug("TopologyManager rejected the update towards {}", nodeId);
          return false;
       }
 

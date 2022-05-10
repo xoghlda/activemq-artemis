@@ -731,7 +731,7 @@ public class NettyConnector extends AbstractConnector {
 
             if (handler != null) {
                pipeline.addLast(new ActiveMQClientChannelHandler(channelGroup, handler, new Listener(), closeExecutor));
-               logger.debug("Added ActiveMQClientChannelHandler to Channel with id = %s ", channel.id());
+               logger.debug("Added ActiveMQClientChannelHandler to Channel with id = {} ", channel.id());
             }
          }
       });
@@ -918,7 +918,7 @@ public class NettyConnector extends AbstractConnector {
                request.headers().set(SEC_ACTIVEMQ_REMOTING_KEY, key);
                ch.attr(REMOTING_KEY).set(key);
 
-               logger.debug("Sending HTTP request %s", request);
+               logger.debug("Sending HTTP request {}", request);
 
                // Send the HTTP request.
                ch.writeAndFlush(request);
@@ -1017,7 +1017,7 @@ public class NettyConnector extends AbstractConnector {
                   handshakeComplete = true;
                } else {
                   // HTTP upgrade failed
-                  logger.debug("HTTP Handshake failed, received %s", msg);
+                  logger.debug("HTTP Handshake failed, received {}", msg);
                   ctx.close();
                   latch.countDown();
                }
@@ -1031,7 +1031,7 @@ public class NettyConnector extends AbstractConnector {
             channelHandler.active = true;
          }
          if (!handshakeComplete) {
-            logger.debug("HTTP Handshake failed, received %s", msg);
+            logger.debug("HTTP Handshake failed, received {}", msg);
             ctx.close();
          }
          latch.countDown();

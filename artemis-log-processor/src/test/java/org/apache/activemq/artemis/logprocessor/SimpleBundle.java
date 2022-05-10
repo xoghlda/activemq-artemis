@@ -29,19 +29,19 @@ public interface SimpleBundle {
    @Message(id = 1, value = "Test")
    String simpleTest();
 
-   @Message(id = 2, value = "V{0}-{1}")
+   @Message(id = 2, value = "V{}-{}")
    String parameters(int value, String value2);
 
    @Message(id = 3, value = "EX")
    Exception someException();
 
-   @Message(id = 4, value = "EX-{0}")
+   @Message(id = 4, value = "EX-{}")
    Exception someExceptionParameter(String parameter);
 
    @LogMessage(id = 5, value = "This is a print!!!", level = LogMessage.Level.WARN)
    void printMessage();
 
-   @LogMessage(id = 6, value = "This is a print!!! {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 6, value = "This is a print!!! {}", level = LogMessage.Level.WARN)
    void printMessage(int nr);
 
    @LogMessage(id = 7, value = "multi\nLine\nMessage", level = LogMessage.Level.WARN)

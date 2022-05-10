@@ -84,6 +84,9 @@ public class LogProcessor extends AbstractProcessor {
 
                writerOutput.println("import org.slf4j.Logger;");
                writerOutput.println("import org.slf4j.LoggerFactory;");
+               writerOutput.println("import org.slf4j.helpers.FormattingTuple;");
+               writerOutput.println("import org.slf4j.helpers.MessageFormatter;");
+
                writerOutput.println();
 
                // Opening class
@@ -192,7 +195,8 @@ public class LogProcessor extends AbstractProcessor {
       if (!hasParameters) {
          writerOutput.println("      String returnString = \"" + formattingString + "\";");
       } else {
-         writerOutput.println("      String returnString = java.text.MessageFormat.format(\"" + formattingString + "\"," + callList + ");");
+         writerOutput.println("      FormattingTuple tuple = MessageFormatter.format(\"" + formattingString + "\"," + callList + ");");
+         writerOutput.println("      String returnString = tuple.getMessage();");
       }
 
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
@@ -262,16 +266,25 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println(")");
       writerOutput.println("   {");
 
-      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
-      if (!hasParameters) {
-         writerOutput.println("      String messageString = \"" + formattingString + "\";");
-      } else {
-         writerOutput.println("      String messageString = java.text.MessageFormat.format(\"" + formattingString + "\"," + callList + ");");
+      String methodName;
+
+      switch (messageAnnotation.level()) {
+         case WARN:
+            methodName="warn"; break;
+         case INFO:
+            methodName="info"; break;
+         case ERROR:
+            methodName="error"; break;
+         default:
+            throw new IllegalStateException("illegal method level " + messageAnnotation.level());
       }
 
-      writerOutput.println("      // TODO: We should use the logger instead of a System.out of course");
-      writerOutput.println("      System.out.println(messageString);");
-
+      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
+      if (!hasParameters) {
+         writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");
+      } else {
+         writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\", " + callList + ");");
+      }
       writerOutput.println("   }");
       writerOutput.println();
    }

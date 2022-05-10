@@ -28,46 +28,46 @@ public interface ActiveMQUtilLogger {
 
    ActiveMQUtilLogger LOGGER = CodeFactory.getCodeClass(ActiveMQUtilLogger.class);
 
-   @LogMessage(id = 201000, value = "Network is healthy, starting service {0}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 201000, value = "Network is healthy, starting service {}", level = LogMessage.Level.INFO)
    void startingService(String component);
 
-   @LogMessage(id = 201001, value = "Network is unhealthy, stopping service {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 201001, value = "Network is unhealthy, stopping service {}", level = LogMessage.Level.WARN)
    void stoppingService(String component);
 
    @LogMessage(id = 202000, value = "Missing privileges to set Thread Context Class Loader on Thread Factory. Using current Thread Context Class Loader", level = LogMessage.Level.WARN)
    void missingPrivsForClassloader();
 
-   @LogMessage(id = 202001, value = "{0} is a loopback address and will be discarded.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202001, value = "{} is a loopback address and will be discarded.", level = LogMessage.Level.WARN)
    void addressloopback(String address);
 
-   @LogMessage(id = 202002, value = "Ping Address {0} wasn't reacheable.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202002, value = "Ping Address {} wasn't reacheable.", level = LogMessage.Level.WARN)
    void addressWasntReacheable(String address);
 
-   @LogMessage(id = 202003, value = "Ping Url {0} wasn't reacheable.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202003, value = "Ping Url {} wasn't reacheable.", level = LogMessage.Level.WARN)
    void urlWasntReacheable(String url);
 
-   @LogMessage(id = 202004, value = "Error starting component {0} ", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202004, value = "Error starting component {} ", level = LogMessage.Level.WARN)
    void errorStartingComponent(Exception e, String component);
 
-   @LogMessage(id = 202005, value = "Error stopping component {0} ", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202005, value = "Error stopping component {} ", level = LogMessage.Level.WARN)
    void errorStoppingComponent(Exception e, String component);
 
-   @LogMessage(id = 202006, value = "Failed to check Url {0}.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202006, value = "Failed to check Url {}.", level = LogMessage.Level.WARN)
    void failedToCheckURL(Exception e, String url);
 
-   @LogMessage(id = 202007, value = "Failed to check Address {0}.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202007, value = "Failed to check Address {}.", level = LogMessage.Level.WARN)
    void failedToCheckAddress(Exception e, String address);
 
-   @LogMessage(id = 202008, value = "Failed to check Address list {0}.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202008, value = "Failed to check Address list {}.", level = LogMessage.Level.WARN)
    void failedToParseAddressList(Exception e, String addressList);
 
-   @LogMessage(id = 202009, value = "Failed to check Url list {0}.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202009, value = "Failed to check Url list {}.", level = LogMessage.Level.WARN)
    void failedToParseUrlList(Exception e, String urlList);
 
-   @LogMessage(id = 202010, value = "Failed to set NIC {0}.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202010, value = "Failed to set NIC {}.", level = LogMessage.Level.WARN)
    void failedToSetNIC(Exception e, String nic);
 
-   @LogMessage(id = 202011, value = "Failed to read from stream {0}.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202011, value = "Failed to read from stream {}.", level = LogMessage.Level.WARN)
    void failedToReadFromStream(String stream);
 
    @LogMessage(id = 202012, value = "Object cannot be serialized.", level = LogMessage.Level.WARN)
@@ -79,9 +79,9 @@ public interface ActiveMQUtilLogger {
    @LogMessage(id = 202014, value = "Unable to encode byte array into Base64 notation.", level = LogMessage.Level.WARN)
    void failedToEncodeByteArrayToBase64Notation(Exception e);
 
-   @LogMessage(id = 202015, value = "Failed to clean up file {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202015, value = "Failed to clean up file {}", level = LogMessage.Level.WARN)
    void failedToCleanupFile(String file);
 
-   @LogMessage(id = 202016, value = "Could not list files to clean up in {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 202016, value = "Could not list files to clean up in {}", level = LogMessage.Level.WARN)
    void failedListFilesToCleanup(String path);
 }

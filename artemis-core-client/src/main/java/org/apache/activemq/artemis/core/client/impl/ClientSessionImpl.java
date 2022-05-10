@@ -1527,7 +1527,7 @@ public final class ClientSessionImpl implements ClientSessionInternal, FailureLi
 
    @Override
    public void setAddress(final Message message, final SimpleString address) {
-      logger.trace("setAddress() Setting default address as %s", address);
+      logger.trace("setAddress() Setting default address as {}", address);
 
       message.setAddress(address);
    }

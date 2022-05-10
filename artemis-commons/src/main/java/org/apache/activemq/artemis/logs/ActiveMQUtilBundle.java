@@ -33,18 +33,18 @@ public interface ActiveMQUtilBundle {
 
    ActiveMQUtilBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQUtilBundle.class);
 
-   @Message(id = 209000, value = "invalid property: {0}")
+   @Message(id = 209000, value = "invalid property: {}")
    ActiveMQIllegalStateException invalidProperty(String part);
 
-   @Message(id = 209001, value = "Invalid type: {0}")
+   @Message(id = 209001, value = "Invalid type: {}")
    IllegalStateException invalidType(Byte type);
 
-   @Message(id = 209002, value = "the specified string is too long ({0})")
+   @Message(id = 209002, value = "the specified string is too long ({})")
    IllegalStateException stringTooLong(Integer length);
 
-   @Message(id = 209003, value = "Error instantiating codec {0}")
+   @Message(id = 209003, value = "Error instantiating codec {}")
    IllegalArgumentException errorCreatingCodec(Exception e, String codecClassName);
 
-   @Message(id = 209004, value = "Failed to parse long value from {0}")
+   @Message(id = 209004, value = "Failed to parse long value from {}")
    IllegalArgumentException failedToParseLong(String value);
 }

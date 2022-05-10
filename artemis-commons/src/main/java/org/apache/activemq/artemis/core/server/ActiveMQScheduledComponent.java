@@ -166,7 +166,7 @@ public abstract class ActiveMQScheduledComponent implements ActiveMQComponent, R
          final AtomicBoolean booked = this.bookedForRunning;
          future = scheduledExecutorService.scheduleWithFixedDelay(() -> runForScheduler(booked), initialDelay >= 0 ? initialDelay : period, period, timeUnit);
       } else {
-         logger.trace("did not start scheduled executor on %s because period was configured as %d", this, period);
+         logger.trace("did not start scheduled executor on {} because period was configured as {}", this, period);
       }
    }
 
