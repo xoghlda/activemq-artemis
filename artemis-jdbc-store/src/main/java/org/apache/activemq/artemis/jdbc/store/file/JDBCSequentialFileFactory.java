@@ -34,11 +34,12 @@ import org.apache.activemq.artemis.jdbc.store.drivers.JDBCConnectionProvider;
 import org.apache.activemq.artemis.jdbc.store.sql.SQLProvider;
 import org.apache.activemq.artemis.journal.ActiveMQJournalLogger;
 import org.apache.activemq.artemis.utils.collections.ConcurrentHashSet;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JDBCSequentialFileFactory implements SequentialFileFactory, ActiveMQComponent {
 
-   private static final Logger logger = Logger.getLogger(JDBCSequentialFile.class);
+   private static final Logger logger = LoggerFactory.getLogger(JDBCSequentialFile.class);
 
    private boolean started;
 

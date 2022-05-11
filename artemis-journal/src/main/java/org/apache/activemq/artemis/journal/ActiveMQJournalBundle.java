@@ -33,7 +33,7 @@ public interface ActiveMQJournalBundle {
 
    ActiveMQJournalBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQJournalBundle.class);
 
-   @Message(id = 149000, value = "failed to rename file {0} to {1}")
+   @Message(id = 149000, value = "failed to rename file {} to {}")
    ActiveMQIOErrorException ioRenameFileError(String name, String newFileName);
 
    @Message(id = 149001, value = "Journal data belong to a different version")
@@ -48,6 +48,6 @@ public interface ActiveMQJournalBundle {
    @Message(id = 149004, value = "unable to open file")
    String unableToOpenFile();
 
-   @Message(id = 149005, value = "Message of {0} bytes is bigger than the max record size of {1} bytes. You should try to move large application properties to the message body.")
+   @Message(id = 149005, value = "Message of {} bytes is bigger than the max record size of {} bytes. You should try to move large application properties to the message body.")
    ActiveMQIOErrorException recordLargerThanStoreMax(long recordSize, long maxRecordSize);
 }

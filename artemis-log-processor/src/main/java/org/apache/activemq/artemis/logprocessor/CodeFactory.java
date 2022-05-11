@@ -34,8 +34,8 @@ public class CodeFactory {
          public T run() {
             try {
                String className = type.getName() + "_impl";
-               System.out.println("Loading [" + className + "]");
-               Class messageClass = Class.forName(className, true, type.getClassLoader()).asSubclass(type);
+               System.out.println("Loading [" + className + "]"); //TODO: remove or make Logger
+               Class<?> messageClass = Class.forName(className, true, type.getClassLoader()).asSubclass(type);
 
                Field field = messageClass.getField("INSTANCE");
 

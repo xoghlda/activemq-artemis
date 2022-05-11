@@ -75,11 +75,11 @@ public abstract class AbstractJDBCDriver {
             }
             connection.commit();
          } catch (SQLException e) {
-            logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), e, dropTableSql));
+            logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), e, dropTableSql).toString());
             try {
                connection.rollback();
             } catch (SQLException rollbackEx) {
-               logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), rollbackEx, dropTableSql));
+               logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), rollbackEx, dropTableSql).toString());
                throw rollbackEx;
             }
             throw e;
@@ -102,7 +102,7 @@ public abstract class AbstractJDBCDriver {
                   if (rs != null) {
                      final SQLWarning sqlWarning = rs.getWarnings();
                      if (sqlWarning != null) {
-                        logger.warn(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), sqlWarning));
+                        logger.warn(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), sqlWarning).toString());
                      }
                   }
                } else {
@@ -142,7 +142,7 @@ public abstract class AbstractJDBCDriver {
                   //some DBMS just return stale information about table existence
                   //and can fail on later attempts to access them
                   if (logger.isTraceEnabled()) {
-                     logger.trace(JDBCUtils.appendSQLExceptionDetails(new StringBuilder("Can't verify the initialization of table ").append(tableName).append(" due to:"), e, sqlProvider.getCountJournalRecordsSQL()));
+                     logger.trace(JDBCUtils.appendSQLExceptionDetails(new StringBuilder("Can't verify the initialization of table ").append(tableName).append(" due to:"), e, sqlProvider.getCountJournalRecordsSQL()).toString());
                   }
                   try {
                      connection.rollback();
@@ -159,7 +159,7 @@ public abstract class AbstractJDBCDriver {
                      statement.executeUpdate(sql);
                      final SQLWarning statementSqlWarning = statement.getWarnings();
                      if (statementSqlWarning != null) {
-                        logger.warn(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), statementSqlWarning, sql));
+                        logger.warn(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), statementSqlWarning, sql).toString());
                      }
                   }
                }
@@ -168,11 +168,11 @@ public abstract class AbstractJDBCDriver {
             }
          } catch (SQLException e) {
             final String sqlStatements = String.join("\n", sqls);
-            logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), e, sqlStatements));
+            logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), e, sqlStatements).toString());
             try {
                connection.rollback();
             } catch (SQLException rollbackEx) {
-               logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), rollbackEx, sqlStatements));
+               logger.error(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), rollbackEx, sqlStatements).toString());
                throw rollbackEx;
             }
             throw e;
