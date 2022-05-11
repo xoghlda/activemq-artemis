@@ -28,7 +28,6 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.apache.activemq.artemis.jdbc.store.drivers.JDBCConnectionProvider;
-import org.apache.activemq.artemis.jdbc.store.journal.JDBCJournalImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +41,8 @@ import static java.lang.String.format;
  * Dialects specific to a database can be customized by suffixing the property keys with the name of the dialect.
  */
 public class PropertySQLProvider implements SQLProvider {
+
+   private static final Logger logger = LoggerFactory.getLogger(PropertySQLProvider.class);
 
    private enum LetterCase implements Function<String, String> {
       upper(String::toUpperCase),
@@ -309,7 +310,6 @@ public class PropertySQLProvider implements SQLProvider {
 
    public static final class Factory implements SQLProvider.Factory {
 
-      private static final Logger logger = LoggerFactory.getLogger(JDBCJournalImpl.class); //TODO: wrong logger name or deliberate?
       private static final String SQL_PROPERTIES_FILE = "journal-sql.properties";
       // can be null if no known dialect has been identified
       private SQLDialect dialect;

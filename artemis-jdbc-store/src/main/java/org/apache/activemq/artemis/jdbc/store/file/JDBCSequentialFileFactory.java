@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 
 public class JDBCSequentialFileFactory implements SequentialFileFactory, ActiveMQComponent {
 
-   private static final Logger logger = LoggerFactory.getLogger(JDBCSequentialFile.class);//TODO: wrong logger name?
+   private static final Logger logger = LoggerFactory.getLogger(JDBCSequentialFileFactory.class);
 
    private boolean started;
 
@@ -105,9 +105,7 @@ public class JDBCSequentialFileFactory implements SequentialFileFactory, ActiveM
       try {
          dbDriver.stop();
       } catch (SQLException e) {
-         // TODO: looks like this used the "ActiveMQJournalLogger.class.getPackage().getName()" logger before, not this class own named logger.
-         //       Should it still, or swap to the local one? If former should it have a code?
-         ActiveMQJournalLogger.LOGGER.error("Error stopping file factory, unable to close db connection");
+         logger.error("Error stopping file factory, unable to close db connection");
       }
       started = false;
    }
