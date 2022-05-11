@@ -137,6 +137,8 @@ class JDBCJournalRecord {
          record.read(recordBytes);
          txData.read(txDataBytes);
       } catch (IOException e) {
+          // TODO: looks like this used the "ActiveMQJournalLogger.class.getPackage().getName()" logger before, not this class own named logger.
+          //       Should it still, or swap to the local one? If former should it have a code?
          ActiveMQJournalLogger.LOGGER.error("Error occurred whilst reading Journal Record", e);
          throw e;
       }

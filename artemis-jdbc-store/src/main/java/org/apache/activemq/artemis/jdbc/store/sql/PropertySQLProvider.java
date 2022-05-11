@@ -309,7 +309,7 @@ public class PropertySQLProvider implements SQLProvider {
 
    public static final class Factory implements SQLProvider.Factory {
 
-      private static final Logger logger = LoggerFactory.getLogger(JDBCJournalImpl.class);
+      private static final Logger logger = LoggerFactory.getLogger(JDBCJournalImpl.class); //TODO: wrong logger name or deliberate?
       private static final String SQL_PROPERTIES_FILE = "journal-sql.properties";
       // can be null if no known dialect has been identified
       private SQLDialect dialect;

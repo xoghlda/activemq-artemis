@@ -80,6 +80,8 @@ public class JDBCConnectionProvider {
             } catch (SQLException e) {
                supportNetworkTimeout = false;
                logger.warn(JDBCUtils.appendSQLExceptionDetails(new StringBuilder(), e).toString());
+               // TODO: looks like this used the "ActiveMQJournalLogger.class.getPackage().getName()" logger before, not this class own named logger.
+               //       Should it still, or swap to the local one? If former should it have a code?
                ActiveMQJournalLogger.LOGGER.warn("Unable to set a network timeout on the JDBC connection: won't retry again in the future");
             } catch (Throwable throwable) {
                supportNetworkTimeout = false;
