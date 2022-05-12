@@ -59,4 +59,14 @@ public class SimpleBundleTest {
    public void testMultiLines() {
       SimpleBundle.MESSAGES.multiLines();
    }
+
+
+   @Test
+   public void testWithException() {
+      Exception myCause = new Exception("this is myCause");
+      MyException myException = SimpleBundle.MESSAGES.someExceptionWithCause("1", myCause);
+      Assert.assertEquals("TST8 EX1", myException.getMessage());
+      Assert.assertSame(myCause, myException.getCause());
+
+   }
 }

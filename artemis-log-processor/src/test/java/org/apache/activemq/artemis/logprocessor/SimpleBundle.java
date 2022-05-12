@@ -46,4 +46,7 @@ public interface SimpleBundle {
 
    @LogMessage(id = 7, value = "multi\nLine\nMessage", level = LogMessage.Level.WARN)
    void multiLines();
+
+   @Message(id = 8, value = "EX{}")
+   MyException someExceptionWithCause(String message, Exception myCause);
 }

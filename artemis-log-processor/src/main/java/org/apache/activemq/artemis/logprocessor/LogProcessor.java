@@ -27,13 +27,17 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.PrintWriter;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.sun.jdi.ClassType;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
@@ -174,6 +178,8 @@ public class LogProcessor extends AbstractProcessor {
 
       boolean hasParameters = false;
 
+
+      VariableElement exceptionParameter = null;
       // the one that will be used on the call
       StringBuffer callList = new StringBuffer();
       while (parameters.hasNext()) {
@@ -184,6 +190,13 @@ public class LogProcessor extends AbstractProcessor {
          if (parameters.hasNext()) {
             writerOutput.write(", ");
             callList.append(",");
+         }
+
+         if (isException(parameter.asType())) {
+            if (exceptionParameter != null) {
+               throw new IllegalStateException("messageAnnotation " + messageAnnotation.value() + " has two exceptions defined on the method");
+            }
+            exceptionParameter = parameter;
          }
       }
 
@@ -202,15 +215,29 @@ public class LogProcessor extends AbstractProcessor {
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
          writerOutput.println("      return returnString;");
       } else {
-         // TODO: where the return type is actually an exception type, and a given arg was originally a Cause,
-         // it used to be set as the created exception cause, but now is being used in the formatter above incorrectly.
-
-         // TODO: where the return is an exception, the stacktrace will be different than before unless adjusted (as existing bits did).
-         writerOutput.println("      return new " + executableMember.getReturnType().toString() + "(returnString);");
+         if (exceptionParameter != null) {
+            writerOutput.println("      return new " + executableMember.getReturnType().toString() + "(returnString, " + exceptionParameter.getSimpleName() + ");");
+         } else {
+            writerOutput.println("      return new " + executableMember.getReturnType().toString() + "(returnString);");
+         }
       }
 
       writerOutput.println("   }");
       writerOutput.println();
+   }
+
+   boolean isException(TypeMirror parameter) {
+      if (parameter.toString().equals("java.lang.Throwable")) {
+         return true;
+      }
+      if (parameter instanceof DeclaredType) {
+         DeclaredType declaredType = (DeclaredType) parameter;
+         if (declaredType.asElement() instanceof TypeElement) {
+            TypeElement theElement = (TypeElement) declaredType.asElement();
+            return isException(theElement.getSuperclass());
+         }
+      }
+      return false;
    }
 
    private String encodeSpecialChars(String input) {
