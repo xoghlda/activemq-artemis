@@ -1151,7 +1151,7 @@ public interface AuditLogger {
    }
 
    @LogMessage(id = 601143, value = "User {} is getting node ID on target resource: {}", level = LogMessage.Level.INFO)
-   void getNodeID(String user, Object source, Object... args);
+   void getNodeID(String user, Object source);
 
    static void getManagementNotificationAddress(Object source) {
       BASE_LOGGER.getManagementNotificationAddress(getCaller(), source);
@@ -1220,7 +1220,7 @@ public interface AuditLogger {
       BASE_LOGGER.listUser(getCaller(), source, parametersList(args));
    }
 
-   @LogMessage(id = 601153, value = "User {} is listing a user on target resource: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 601153, value = "User {} is listing a user on target resource: {} {}", level = LogMessage.Level.INFO)
    void listUser(String user, Object source, String args);
 
    static void removeUser(Object source, Object... args) {
@@ -2417,7 +2417,7 @@ public interface AuditLogger {
    }
 
    @LogMessage(id = 601735, value = "User {} is getting group rebalance pause dispatch property on target resource: {}", level = LogMessage.Level.INFO)
-   void isGroupRebalancePauseDispatch(String user, Object source, Object... args);
+   void isGroupRebalancePauseDispatch(String user, Object source);
 
    static void getAuthenticationCacheSize(Object source) {
       BASE_LOGGER.getAuthenticationCacheSize(getCaller(), source);
@@ -2431,7 +2431,7 @@ public interface AuditLogger {
    }
 
    @LogMessage(id = 601737, value = "User {} is getting authorization cache size on target resource: {}", level = LogMessage.Level.INFO)
-   void getAuthorizationCacheSize(String user, Object source, Object... args);
+   void getAuthorizationCacheSize(String user, Object source);
 
    static void listBrokerConnections() {
       BASE_LOGGER.listBrokerConnections(getCaller());
@@ -2459,7 +2459,7 @@ public interface AuditLogger {
    }
 
    @LogMessage(id = 601741, value = "User {} is getting address count on target resource: {}", level = LogMessage.Level.INFO)
-   void getAddressCount(String user, Object source, Object... args);
+   void getAddressCount(String user, Object source);
 
    static void getQueueCount(Object source) {
       BASE_LOGGER.getQueueCount(getCaller(), source);
@@ -2573,7 +2573,7 @@ public interface AuditLogger {
    }
 
    @LogMessage(id = 601757, value = "User {} is getting acceptors as json on target resource: {}", level = LogMessage.Level.INFO)
-   void getAcceptorsAsJSON(String user, Object source, Object... args);
+   void getAcceptorsAsJSON(String user, Object source);
 
    static void schedulePageCleanup(Object source) {
       BASE_LOGGER.schedulePageCleanup(getCaller(), source);
