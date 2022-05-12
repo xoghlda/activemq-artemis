@@ -215,11 +215,14 @@ public class LogProcessor extends AbstractProcessor {
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
          writerOutput.println("      return returnString;");
       } else {
+         writerOutput.println("      {");
+         writerOutput.println("         " + executableMember.getReturnType().toString() + " exceptionReturn = new " + executableMember.getReturnType().toString() + "(returnString);");
+
          if (exceptionParameter != null) {
-            writerOutput.println("      return new " + executableMember.getReturnType().toString() + "(returnString, " + exceptionParameter.getSimpleName() + ");");
-         } else {
-            writerOutput.println("      return new " + executableMember.getReturnType().toString() + "(returnString);");
+            writerOutput.println("         exceptionReturn.initCause(" + exceptionParameter.getSimpleName() + ");");
          }
+         writerOutput.println("         return exceptionReturn;");
+         writerOutput.println("      }");
       }
 
       writerOutput.println("   }");
@@ -306,6 +309,10 @@ public class LogProcessor extends AbstractProcessor {
             methodName="info"; break;
          case ERROR:
             methodName="error"; break;
+         case DEBUG: // TODO remove this
+            methodName="debug"; break;
+         case TRACE: // TODO remove this
+            methodName="trace"; break;
          default:
             throw new IllegalStateException("illegal method level " + messageAnnotation.level());
       }
