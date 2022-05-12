@@ -215,13 +215,15 @@ public class LogProcessor extends AbstractProcessor {
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
          writerOutput.println("      return returnString;");
       } else {
+         writerOutput.println();
          writerOutput.println("      {");
-         writerOutput.println("         " + executableMember.getReturnType().toString() + " exceptionReturn = new " + executableMember.getReturnType().toString() + "(returnString);");
+         String exceptionVariableName = "objReturn_" + executableMember.getSimpleName();
+         writerOutput.println("         " + executableMember.getReturnType().toString() + " " + exceptionVariableName + " = new " + executableMember.getReturnType().toString() + "(returnString);");
 
          if (exceptionParameter != null) {
-            writerOutput.println("         exceptionReturn.initCause(" + exceptionParameter.getSimpleName() + ");");
+            writerOutput.println("         " + exceptionVariableName + ".initCause(" + exceptionParameter.getSimpleName() + ");");
          }
-         writerOutput.println("         return exceptionReturn;");
+         writerOutput.println("         return " + exceptionVariableName + ";");
          writerOutput.println("      }");
       }
 
