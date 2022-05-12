@@ -17,6 +17,7 @@
 
 package org.apache.activemq.artemis.logprocessor;
 
+import java.util.Random;
 import java.util.UUID;
 
 import org.junit.Assert;
@@ -64,8 +65,9 @@ public class SimpleBundleTest {
    @Test
    public void testWithException() {
       Exception myCause = new Exception("this is myCause");
-      MyException myException = SimpleBundle.MESSAGES.someExceptionWithCause("1", myCause);
-      Assert.assertEquals("TST8 EX1", myException.getMessage());
+      String logRandomString = "" + System.currentTimeMillis();
+      MyException myException = SimpleBundle.MESSAGES.someExceptionWithCause(logRandomString, myCause);
+      Assert.assertEquals("TST8 EX" + logRandomString, myException.getMessage());
       Assert.assertSame(myCause, myException.getCause());
 
    }
