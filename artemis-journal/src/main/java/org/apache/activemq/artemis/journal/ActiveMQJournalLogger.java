@@ -18,6 +18,7 @@ package org.apache.activemq.artemis.journal;
 
 import org.apache.activemq.artemis.core.journal.impl.JournalFile;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
@@ -129,43 +130,43 @@ public interface ActiveMQJournalLogger {
    void errorOnIOCallback(String errorMessage);
 
    @LogMessage(id = 142022, value = "Timed out on AIO poller shutdown", level = LogMessage.Level.WARN)
-   void timeoutOnPollerShutdown(Exception e);
+   void timeoutOnPollerShutdown(@Cause Exception e);
 
    @LogMessage(id = 142023, value = "Executor on file {} couldn''t complete its tasks in 60 seconds.", level = LogMessage.Level.WARN)
-   void couldNotCompleteTask(Exception e, String name);
+   void couldNotCompleteTask(@Cause Exception e, String name);
 
    @LogMessage(id = 142024, value = "Error completing callback", level = LogMessage.Level.WARN)
-   void errorCompletingCallback(Throwable e);
+   void errorCompletingCallback(@Cause Throwable e);
 
    @LogMessage(id = 142025, value = "Error calling onError callback", level = LogMessage.Level.WARN)
-   void errorCallingErrorCallback(Throwable e);
+   void errorCallingErrorCallback(@Cause Throwable e);
 
    @LogMessage(id = 142026, value = "Timed out on AIO writer shutdown", level = LogMessage.Level.WARN)
-   void timeoutOnWriterShutdown(Throwable e);
+   void timeoutOnWriterShutdown(@Cause Throwable e);
 
    @LogMessage(id = 142027, value = "Error on writing data! {} code - {}", level = LogMessage.Level.WARN)
-   void errorWritingData(Throwable e, String errorMessage, Integer errorCode);
+   void errorWritingData(@Cause Throwable e, String errorMessage, Integer errorCode);
 
    @LogMessage(id = 142028, value = "Error replaying pending commands after compacting", level = LogMessage.Level.WARN)
-   void errorReplayingCommands(Throwable e);
+   void errorReplayingCommands(@Cause Throwable e);
 
    @LogMessage(id = 142029, value = "Error closing file", level = LogMessage.Level.WARN)
-   void errorClosingFile(Throwable e);
+   void errorClosingFile(@Cause Throwable e);
 
    @LogMessage(id = 142030, value = "Could not open a file in 60 Seconds", level = LogMessage.Level.WARN)
-   void errorOpeningFile(Throwable e);
+   void errorOpeningFile(@Cause Throwable e);
 
    @LogMessage(id = 142031, value = "Error retrieving ID part of the file name {}", level = LogMessage.Level.WARN)
-   void errorRetrievingID(Throwable e, String fileName);
+   void errorRetrievingID(@Cause Throwable e, String fileName);
 
    @LogMessage(id = 142032, value = "Error reading journal file", level = LogMessage.Level.WARN)
-   void errorReadingFile(Throwable e);
+   void errorReadingFile(@Cause Throwable e);
 
    @LogMessage(id = 142033, value = "Error reinitializing file {}", level = LogMessage.Level.WARN)
-   void errorReinitializingFile(Throwable e, JournalFile file);
+   void errorReinitializingFile(@Cause Throwable e, JournalFile file);
 
    @LogMessage(id = 142034, value = "Exception on submitting write", level = LogMessage.Level.WARN)
-   void errorSubmittingWrite(Throwable e);
+   void errorSubmittingWrite(@Cause Throwable e);
 
    @LogMessage(id = 142035, value = "Could not stop journal append executor after 60 seconds", level = LogMessage.Level.WARN)
    void couldNotStopJournalAppendExecutor();
@@ -174,19 +175,19 @@ public interface ActiveMQJournalLogger {
    void errorDeletingFile(Object e);
 
    @LogMessage(id = 144001, value = "Error starting poller", level = LogMessage.Level.ERROR)
-   void errorStartingPoller(Exception e);
+   void errorStartingPoller(@Cause Exception e);
 
    @LogMessage(id = 144002, value = "Error pushing opened file", level = LogMessage.Level.ERROR)
-   void errorPushingFile(Exception e);
+   void errorPushingFile(@Cause Exception e);
 
    @LogMessage(id = 144003, value = "Error compacting", level = LogMessage.Level.ERROR)
-   void errorCompacting(Throwable e);
+   void errorCompacting(@Cause Throwable e);
 
    @LogMessage(id = 144004, value = "Error scheduling compacting", level = LogMessage.Level.ERROR)
-   void errorSchedulingCompacting(Throwable e);
+   void errorSchedulingCompacting(@Cause Throwable e);
 
    @LogMessage(id = 144005, value = "Failed to performance blast", level = LogMessage.Level.ERROR)
-   void failedToPerfBlast(Throwable e);
+   void failedToPerfBlast(@Cause Throwable e);
 
    @LogMessage(id = 144006, value = "IOError code {}, {}", level = LogMessage.Level.ERROR)
    void ioError(int errorCode, String errorMessage);
@@ -201,6 +202,6 @@ public interface ActiveMQJournalLogger {
    void cantOpenFileTimeout(long timeout);
 
    @LogMessage(id = 144010, value = "Critical IO Exception happened: {}", level = LogMessage.Level.WARN)
-   void criticalIO(String message, Exception error);
+   void criticalIO(String message, @Cause Exception error);
 
 }

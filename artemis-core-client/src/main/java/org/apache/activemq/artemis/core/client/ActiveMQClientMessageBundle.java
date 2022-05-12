@@ -33,6 +33,7 @@ import org.apache.activemq.artemis.api.core.ActiveMQTransactionRolledBackExcepti
 import org.apache.activemq.artemis.api.core.ActiveMQUnBlockedException;
 import org.apache.activemq.artemis.core.cluster.DiscoveryGroup;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 import org.apache.activemq.artemis.spi.core.remoting.Connection;
@@ -54,13 +55,13 @@ public interface ActiveMQClientMessageBundle {
    ActiveMQInternalErrorException clientSessionClosed();
 
    @Message(id = 219001, value = "Failed to create session")
-   ActiveMQInternalErrorException failedToCreateSession(Throwable t);
+   ActiveMQInternalErrorException failedToCreateSession(@Cause Throwable t);
 
    @Message(id = 219003, value = "Queue can not be both durable and temporary")
    ActiveMQInternalErrorException queueMisConfigured();
 
    @Message(id = 219004, value = "Failed to initialise session factory")
-   ActiveMQInternalErrorException failedToInitialiseSessionFactory(Exception e);
+   ActiveMQInternalErrorException failedToInitialiseSessionFactory(@Cause Exception e);
 
    @Message(id = 219005, value = "Exception in Netty transport")
    ActiveMQInternalErrorException nettyError();
@@ -72,7 +73,7 @@ public interface ActiveMQClientMessageBundle {
    ActiveMQNotConnectedException cannotConnectToServers();
 
    @Message(id = 219008, value = "Failed to connect to any static connectors")
-   ActiveMQNotConnectedException cannotConnectToStaticConnectors(Exception e);
+   ActiveMQNotConnectedException cannotConnectToStaticConnectors(@Cause Exception e);
 
    @Message(id = 219009, value = "Failed to connect to any static connectors")
    ActiveMQNotConnectedException cannotConnectToStaticConnectors2();
@@ -96,7 +97,7 @@ public interface ActiveMQClientMessageBundle {
    ActiveMQDisconnectedException disconnected();
 
    @Message(id = 219016, value = "Connection failure detected. Unblocking a blocking call that will never get a response")
-   ActiveMQUnBlockedException unblockingACall(Throwable t);
+   ActiveMQUnBlockedException unblockingACall(@Cause Throwable t);
 
    @Message(id = 219017, value = "Consumer is closed")
    ActiveMQObjectClosedException consumerClosed();
@@ -123,19 +124,19 @@ public interface ActiveMQClientMessageBundle {
    ActiveMQIllegalStateException noTCForSessionFactory();
 
    @Message(id = 219025, value = "Error saving the message body")
-   ActiveMQLargeMessageException errorSavingBody(Exception e);
+   ActiveMQLargeMessageException errorSavingBody(@Cause Exception e);
 
    @Message(id = 219026, value = "Error reading the LargeMessageBody")
-   ActiveMQLargeMessageException errorReadingBody(Exception e);
+   ActiveMQLargeMessageException errorReadingBody(@Cause Exception e);
 
    @Message(id = 219027, value = "Error closing stream from LargeMessageBody")
-   ActiveMQLargeMessageException errorClosingLargeMessage(Exception e);
+   ActiveMQLargeMessageException errorClosingLargeMessage(@Cause Exception e);
 
    @Message(id = 219028, value = "Timeout waiting for LargeMessage Body")
    ActiveMQLargeMessageException timeoutOnLargeMessage();
 
    @Message(id = 219029, value = "Error writing body of message")
-   ActiveMQLargeMessageException errorWritingLargeMessage(Exception e);
+   ActiveMQLargeMessageException errorWritingLargeMessage(@Cause Exception e);
 
    @Message(id = 219030, value = "The transaction was rolled back on failover to a backup server")
    ActiveMQTransactionRolledBackException txRolledBack();
@@ -210,7 +211,7 @@ public interface ActiveMQClientMessageBundle {
    IllegalArgumentException mustBeLong(Node element, String value);
 
    @Message(id = 219057, value = "Error decoding password")
-   IllegalArgumentException errordecodingPassword(Exception e);
+   IllegalArgumentException errordecodingPassword(@Cause Exception e);
 
    @Message(id = 219058, value = "Address \"{0}\" is full. Message encode size = {1}B")
    ActiveMQAddressFullException addressIsFull(String addressName, int size);
@@ -234,7 +235,7 @@ public interface ActiveMQClientMessageBundle {
    IllegalStateException invalidPacket(byte type);
 
    @Message(id = 219065, value = "Failed to handle packet.")
-   RuntimeException failedToHandlePacket(Exception e);
+   RuntimeException failedToHandlePacket(@Cause Exception e);
 
    @Message(id = 219066, value = "The connection was redirected")
    ActiveMQRoutingException redirected();

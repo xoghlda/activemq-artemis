@@ -22,6 +22,7 @@ import org.apache.activemq.artemis.api.core.ActiveMQExceptionType;
 import org.apache.activemq.artemis.api.core.Interceptor;
 import org.apache.activemq.artemis.core.protocol.core.Packet;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.w3c.dom.Node;
@@ -38,13 +39,13 @@ public interface ActiveMQClientLogger {
    ActiveMQClientLogger LOGGER = CodeFactory.getCodeClass(ActiveMQClientLogger.class);
 
    @LogMessage(id = 212001, value = "Error on clearing messages", level = LogMessage.Level.WARN)
-   void errorClearingMessages(Throwable e);
+   void errorClearingMessages(@Cause Throwable e);
 
    @LogMessage(id = 212002, value = "Timed out waiting for handler to complete processing", level = LogMessage.Level.WARN)
    void timeOutWaitingForProcessing();
 
    @LogMessage(id = 212003, value = "Unable to close session", level = LogMessage.Level.WARN)
-   void unableToCloseSession(Exception e);
+   void unableToCloseSession(@Cause Exception e);
 
    @LogMessage(id = 212004, value = "Failed to connect to server.", level = LogMessage.Level.WARN)
    void failedToConnectToServer();
@@ -53,10 +54,10 @@ public interface ActiveMQClientLogger {
    void failedToConnectToServer(Integer reconnectAttempts);
 
    @LogMessage(id = 212007, value = "connector.create or connectorFactory.createConnector should never throw an exception, implementation is badly behaved, but we will deal with it anyway.", level = LogMessage.Level.WARN)
-   void createConnectorException(Exception e);
+   void createConnectorException(@Cause Exception e);
 
    @LogMessage(id = 212008, value = "I am closing a core ClientSessionFactory you left open. Please make sure you close all ClientSessionFactories explicitly " + "before letting them go out of scope! {0}", level = LogMessage.Level.WARN)
-   void factoryLeftOpen(Exception e, int i);
+   void factoryLeftOpen(@Cause Exception e, int i);
 
    @LogMessage(id = 212009, value = "resetting session after failure", level = LogMessage.Level.WARN)
    void resettingSessionAfterFailure();
@@ -74,37 +75,37 @@ public interface ActiveMQClientLogger {
    void failoverDuringPrepareRollingBack();
 
    @LogMessage(id = 212015, value = "failover occurred during prepare rolling back", level = LogMessage.Level.WARN)
-   void errorDuringPrepare(Throwable e);
+   void errorDuringPrepare(@Cause Throwable e);
 
    @LogMessage(id = 212016, value = "I am closing a core ClientSession you left open. Please make sure you close all ClientSessions explicitly before letting them go out of scope! {0}", level = LogMessage.Level.WARN)
-   void clientSessionNotClosed(Exception e, int identity);
+   void clientSessionNotClosed(@Cause Exception e, int identity);
 
    @LogMessage(id = 212017, value = "error adding packet", level = LogMessage.Level.WARN)
-   void errorAddingPacket(Exception e);
+   void errorAddingPacket(@Cause Exception e);
 
    @LogMessage(id = 212018, value = "error calling cancel", level = LogMessage.Level.WARN)
-   void errorCallingCancel(Exception e);
+   void errorCallingCancel(@Cause Exception e);
 
    @LogMessage(id = 212019, value = "error reading index", level = LogMessage.Level.WARN)
-   void errorReadingIndex(Exception e);
+   void errorReadingIndex(@Cause Exception e);
 
    @LogMessage(id = 212020, value = "error setting index", level = LogMessage.Level.WARN)
-   void errorSettingIndex(Exception e);
+   void errorSettingIndex(@Cause Exception e);
 
    @LogMessage(id = 212021, value = "error resetting index", level = LogMessage.Level.WARN)
-   void errorReSettingIndex(Exception e);
+   void errorReSettingIndex(@Cause Exception e);
 
    @LogMessage(id = 212022, value = "error reading LargeMessage file cache", level = LogMessage.Level.WARN)
-   void errorReadingCache(Exception e);
+   void errorReadingCache(@Cause Exception e);
 
    @LogMessage(id = 212023, value = "error closing LargeMessage file cache", level = LogMessage.Level.WARN)
-   void errorClosingCache(Exception e);
+   void errorClosingCache(@Cause Exception e);
 
    @LogMessage(id = 212024, value = "Exception during finalization for LargeMessage file cache", level = LogMessage.Level.WARN)
-   void errorFinalisingCache(Exception e);
+   void errorFinalisingCache(@Cause Exception e);
 
    @LogMessage(id = 212025, value = "did not connect the cluster connection to other nodes", level = LogMessage.Level.WARN)
-   void errorConnectingToNodes(Exception e);
+   void errorConnectingToNodes(@Cause Exception e);
 
    @LogMessage(id = 212026, value = "Timed out waiting for pool to terminate", level = LogMessage.Level.WARN)
    void timedOutWaitingForTermination();
@@ -113,26 +114,26 @@ public interface ActiveMQClientLogger {
    void timedOutWaitingForScheduledPoolTermination();
 
    @LogMessage(id = 212028, value = "error starting server locator", level = LogMessage.Level.WARN)
-   void errorStartingLocator(Exception e);
+   void errorStartingLocator(@Cause Exception e);
 
 
    @LogMessage(id = 212030, value = "error sending topology", level = LogMessage.Level.WARN)
-   void errorSendingTopology(Throwable e);
+   void errorSendingTopology(@Cause Throwable e);
 
    @LogMessage(id = 212031, value = "error sending topology", level = LogMessage.Level.WARN)
-   void errorSendingTopologyNodedown(Throwable e);
+   void errorSendingTopologyNodedown(@Cause Throwable e);
 
    @LogMessage(id = 212032, value = "Timed out waiting to stop discovery thread", level = LogMessage.Level.WARN)
    void timedOutStoppingDiscovery();
 
    @LogMessage(id = 212033, value = "unable to send notification when discovery group is stopped", level = LogMessage.Level.WARN)
-   void errorSendingNotifOnDiscoveryStop(Throwable e);
+   void errorSendingNotifOnDiscoveryStop(@Cause Throwable e);
 
    @LogMessage(id = 212034, value = "There are more than one servers on the network broadcasting the same node id. " + "You will see this message exactly once (per node) if a node is restarted, in which case it can be safely " + "ignored. But if it is logged continuously it means you really do have more than one node on the same network " + "active concurrently with the same node id. This could occur if you have a backup node active at the same time as " + "its live node. nodeID={0}", level = LogMessage.Level.WARN)
    void multipleServersBroadcastingSameNode(String nodeId);
 
    @LogMessage(id = 212035, value = "error receiving packet in discovery", level = LogMessage.Level.WARN)
-   void errorReceivingPacketInDiscovery(Throwable e);
+   void errorReceivingPacketInDiscovery(@Cause Throwable e);
 
    @LogMessage(id = 212036, value = "Can not find packet to clear: {0} last received command id first stored command id {1}", level = LogMessage.Level.WARN)
    void cannotFindPacketToClear(Integer lastReceivedCommandID, Integer firstStoredCommandID);
@@ -141,7 +142,7 @@ public interface ActiveMQClientLogger {
    void connectionFailureDetected(String remoteAddress, String message, ActiveMQExceptionType type);
 
    @LogMessage(id = 212038, value = "Failure in calling interceptor: {0}", level = LogMessage.Level.WARN)
-   void errorCallingInterceptor(Throwable e, Interceptor interceptor);
+   void errorCallingInterceptor(@Cause Throwable e, Interceptor interceptor);
 
    @LogMessage(id = 212040, value = "Timed out waiting for netty ssl close future to complete", level = LogMessage.Level.WARN)
    void timeoutClosingSSL();
@@ -168,7 +169,7 @@ public interface ActiveMQClientLogger {
    void jvmAllocatedMoreMemory(Long totalMemory1, Long totalMemory2);
 
    @LogMessage(id = 212048, value = "Random address ({0}) was already in use, trying another time", level = LogMessage.Level.WARN)
-   void broadcastGroupBindErrorRetry(String hostAndPort, Throwable t);
+   void broadcastGroupBindErrorRetry(String hostAndPort, @Cause Throwable t);
 
    @LogMessage(id = 212049, value = "Could not bind to {0} ({1} address); " + "make sure your discovery group-address is of the same type as the IP stack (IPv4 or IPv6)." + "\nIgnoring discovery group-address, but this may lead to cross talking.", level = LogMessage.Level.WARN)
    void ioDiscoveryError(String hostAddress, String s);
@@ -177,10 +178,10 @@ public interface ActiveMQClientLogger {
    void compressedLargeMessageError(int length, int nReadBytes);
 
    @LogMessage(id = 212051, value = "Invalid concurrent session usage. Sessions are not supposed to be used by more than one thread concurrently.", level = LogMessage.Level.WARN)
-   void invalidConcurrentSessionUsage(Throwable t);
+   void invalidConcurrentSessionUsage(@Cause Throwable t);
 
    @LogMessage(id = 212052, value = "Packet {0} was answered out of sequence due to a previous server timeout and it''s being ignored", level = LogMessage.Level.WARN)
-   void packetOutOfOrder(Object obj, Throwable t);
+   void packetOutOfOrder(Object obj, @Cause Throwable t);
 
    /**
     * Warns about usage of {@link org.apache.activemq.artemis.api.core.client.SendAcknowledgementHandler} or JMS's {@code CompletionWindow} with
@@ -194,7 +195,7 @@ public interface ActiveMQClientLogger {
    void outOfCreditOnFlowControl(String address);
 
    @LogMessage(id = 212055, value = "Unable to close consumer", level = LogMessage.Level.WARN)
-   void unableToCloseConsumer(Exception e);
+   void unableToCloseConsumer(@Cause Exception e);
 
    @LogMessage(id = 212056, value = "local-bind-address specified for broadcast group but no local-bind-port. Using random port for UDP Broadcast ({0})", level = LogMessage.Level.WARN)
    void broadcastGroupBindError(String hostAndPort);
@@ -203,7 +204,7 @@ public interface ActiveMQClientLogger {
    void timeoutStreamingLargeMessage();
 
    @LogMessage(id = 212058, value = "Unable to get a message.", level = LogMessage.Level.WARN)
-   void unableToGetMessage(Exception e);
+   void unableToGetMessage(@Cause Exception e);
 
    @LogMessage(id = 212059, value = "Failed to clean up: {0} ", level = LogMessage.Level.WARN)
    void failedCleaningUp(String target);
@@ -212,25 +213,25 @@ public interface ActiveMQClientLogger {
    void unexpectedNullDataReceived();
 
    @LogMessage(id = 212061, value = "Failed to perform force close ", level = LogMessage.Level.WARN)
-   void failedForceClose(Throwable e);
+   void failedForceClose(@Cause Throwable e);
 
    @LogMessage(id = 212062, value = "Failed to perform post actions on message processing ", level = LogMessage.Level.WARN)
-   void failedPerformPostActionsOnMessage(Exception e);
+   void failedPerformPostActionsOnMessage(@Cause Exception e);
 
    @LogMessage(id = 212063, value = "Unable to handle connection failure ", level = LogMessage.Level.WARN)
-   void unableToHandleConnectionFailure(Throwable e);
+   void unableToHandleConnectionFailure(@Cause Throwable e);
 
    @LogMessage(id = 212064, value = "Unable to receive cluster topology ", level = LogMessage.Level.WARN)
-   void unableToReceiveClusterTopology(Throwable e);
+   void unableToReceiveClusterTopology(@Cause Throwable e);
 
    @LogMessage(id = 212065, value = "{0} getting exception when receiving broadcasting ", level = LogMessage.Level.WARN)
-   void unableToReceiveBroadcast(Exception e, String target);
+   void unableToReceiveBroadcast(@Cause Exception e, String target);
 
    @LogMessage(id = 212066, value = "failed to parse int property ", level = LogMessage.Level.WARN)
-   void unableToParseValue(Throwable e);
+   void unableToParseValue(@Cause Throwable e);
 
    @LogMessage(id = 212067, value = "failed to get system property ", level = LogMessage.Level.WARN)
-   void unableToGetProperty(Throwable e);
+   void unableToGetProperty(@Cause Throwable e);
 
    @LogMessage(id = 212068, value = "Couldn't finish the client globalThreadPool in less than 10 seconds, interrupting it now ", level = LogMessage.Level.WARN)
    void unableToProcessGlobalThreadPoolIn10Sec();
@@ -239,16 +240,16 @@ public interface ActiveMQClientLogger {
    void unableToProcessScheduledlIn10Sec();
 
    @LogMessage(id = 212070, value = "Unable to initialize VersionLoader ", level = LogMessage.Level.WARN)
-   void unableToInitVersionLoader(Throwable e);
+   void unableToInitVersionLoader(@Cause Throwable e);
 
    @LogMessage(id = 212071, value = "Unable to check Epoll availability ", level = LogMessage.Level.WARN)
-   void unableToCheckEpollAvailability(Throwable e);
+   void unableToCheckEpollAvailability(@Cause Throwable e);
 
    @LogMessage(id = 212072, value = "Failed to change channel state to ReadyForWriting ", level = LogMessage.Level.WARN)
-   void failedToSetChannelReadyForWriting(Throwable e);
+   void failedToSetChannelReadyForWriting(@Cause Throwable e);
 
    @LogMessage(id = 212073, value = "Unable to check KQueue availability ", level = LogMessage.Level.WARN)
-   void unableToCheckKQueueAvailability(Throwable e);
+   void unableToCheckKQueueAvailability(@Cause Throwable e);
 
    @LogMessage(id = 212075, value = "KQueue is not available, please add to the classpath or configure useKQueue=false to remove this warning", level = LogMessage.Level.WARN)
    void unableToCheckKQueueAvailabilityNoClass();
@@ -266,19 +267,19 @@ public interface ActiveMQClientLogger {
    void oldStoreProvider(String value);
 
    @LogMessage(id = 214000, value = "Failed to call onMessage", level = LogMessage.Level.ERROR)
-   void onMessageError(Throwable e);
+   void onMessageError(@Cause Throwable e);
 
    @LogMessage(id = 214001, value = "failed to cleanup session", level = LogMessage.Level.ERROR)
-   void failedToCleanupSession(Exception e);
+   void failedToCleanupSession(@Cause Exception e);
 
    @LogMessage(id = 214002, value = "Failed to execute failure listener", level = LogMessage.Level.ERROR)
-   void failedToExecuteListener(Throwable t);
+   void failedToExecuteListener(@Cause Throwable t);
 
    @LogMessage(id = 214003, value = "Failed to handle failover", level = LogMessage.Level.ERROR)
-   void failedToHandleFailover(Throwable t);
+   void failedToHandleFailover(@Cause Throwable t);
 
    @LogMessage(id = 214004, value = "XA end operation failed ", level = LogMessage.Level.ERROR)
-   void errorCallingEnd(Throwable t);
+   void errorCallingEnd(@Cause Throwable t);
 
    @LogMessage(id = 214005, value = "XA start operation failed {0} code:{1}", level = LogMessage.Level.ERROR)
    void errorCallingStart(String message, Integer code);
@@ -287,43 +288,43 @@ public interface ActiveMQClientLogger {
    void sessionNotXA();
 
    @LogMessage(id = 214007, value = "Received exception asynchronously from server", level = LogMessage.Level.ERROR)
-   void receivedExceptionAsynchronously(Exception e);
+   void receivedExceptionAsynchronously(@Cause Exception e);
 
    @LogMessage(id = 214008, value = "Failed to handle packet", level = LogMessage.Level.ERROR)
-   void failedToHandlePacket(Exception e);
+   void failedToHandlePacket(@Cause Exception e);
 
    @LogMessage(id = 214009, value = "Failed to stop discovery group", level = LogMessage.Level.ERROR)
-   void failedToStopDiscovery(Throwable e);
+   void failedToStopDiscovery(@Cause Throwable e);
 
    @LogMessage(id = 214010, value = "Failed to receive datagram", level = LogMessage.Level.ERROR)
-   void failedToReceiveDatagramInDiscovery(Throwable e);
+   void failedToReceiveDatagramInDiscovery(@Cause Throwable e);
 
    @LogMessage(id = 214011, value = "Failed to call discovery listener", level = LogMessage.Level.ERROR)
-   void failedToCallListenerInDiscovery(Throwable e);
+   void failedToCallListenerInDiscovery(@Cause Throwable e);
 
    @LogMessage(id = 214013, value = "Failed to decode packet", level = LogMessage.Level.ERROR)
-   void errorDecodingPacket(Throwable e);
+   void errorDecodingPacket(@Cause Throwable e);
 
    @LogMessage(id = 214014, value = "Failed to execute failure listener", level = LogMessage.Level.ERROR)
-   void errorCallingFailureListener(Throwable e);
+   void errorCallingFailureListener(@Cause Throwable e);
 
    @LogMessage(id = 214015, value = "Failed to execute connection life cycle listener", level = LogMessage.Level.ERROR)
-   void errorCallingLifeCycleListener(Throwable e);
+   void errorCallingLifeCycleListener(@Cause Throwable e);
 
    @LogMessage(id = 214016, value = "Failed to create netty connection", level = LogMessage.Level.ERROR)
-   void errorCreatingNettyConnection(Throwable e);
+   void errorCreatingNettyConnection(@Cause Throwable e);
 
    @LogMessage(id = 214017, value = "Caught unexpected Throwable", level = LogMessage.Level.ERROR)
-   void caughtunexpectedThrowable(Throwable t);
+   void caughtunexpectedThrowable(@Cause Throwable t);
 
    @LogMessage(id = 214018, value = "Failed to invoke getTextContent() on node {0}", level = LogMessage.Level.ERROR)
-   void errorOnXMLTransform(Throwable t, Node n);
+   void errorOnXMLTransform(@Cause Throwable t, Node n);
 
    @LogMessage(id = 214019, value = "Invalid configuration", level = LogMessage.Level.ERROR)
-   void errorOnXMLTransformInvalidConf(Throwable t);
+   void errorOnXMLTransformInvalidConf(@Cause Throwable t);
 
    @LogMessage(id = 214020, value = "Exception happened while stopping Discovery BroadcastEndpoint {0}", level = LogMessage.Level.ERROR)
-   void errorStoppingDiscoveryBroadcastEndpoint(Object endpoint, Throwable t);
+   void errorStoppingDiscoveryBroadcastEndpoint(Object endpoint, @Cause Throwable t);
 
    @LogMessage(id = 214021, value = "Invalid cipher suite specified. Supported cipher suites are: {0}", level = LogMessage.Level.ERROR)
    void invalidCipherSuite(String validSuites);
@@ -338,14 +339,14 @@ public interface ActiveMQClientLogger {
    void unexpectedResponseFromHttpServer(Object response);
 
    @LogMessage(id = 214030, value = "Failed to bind {0}={1}", level = LogMessage.Level.ERROR)
-   void failedToBind(String p1, String p2, Throwable cause);
+   void failedToBind(String p1, String p2, @Cause Throwable cause);
 
    @LogMessage(id = 214031, value = "Failed to decode buffer, disconnect immediately.", level = LogMessage.Level.ERROR)
-   void disconnectOnErrorDecoding(Throwable cause);
+   void disconnectOnErrorDecoding(@Cause Throwable cause);
 
    @LogMessage(id = 214032, value = "Unable to initialize VersionLoader ", level = LogMessage.Level.ERROR)
-   void unableToInitVersionLoaderError(Throwable e);
+   void unableToInitVersionLoaderError(@Cause Throwable e);
 
    @LogMessage(id = 214033, value = "Cannot resolve host ", level = LogMessage.Level.ERROR)
-   void unableToResolveHost(UnknownHostException e);
+   void unableToResolveHost(@Cause UnknownHostException e);
 }

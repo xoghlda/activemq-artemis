@@ -17,6 +17,7 @@
 package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
@@ -47,37 +48,37 @@ public interface ActiveMQUtilLogger {
    void urlWasntReacheable(String url);
 
    @LogMessage(id = 202004, value = "Error starting component {} ", level = LogMessage.Level.WARN)
-   void errorStartingComponent(Exception e, String component);
+   void errorStartingComponent(@Cause Exception e, String component);
 
    @LogMessage(id = 202005, value = "Error stopping component {} ", level = LogMessage.Level.WARN)
-   void errorStoppingComponent(Exception e, String component);
+   void errorStoppingComponent(@Cause Exception e, String component);
 
    @LogMessage(id = 202006, value = "Failed to check Url {}.", level = LogMessage.Level.WARN)
-   void failedToCheckURL(Exception e, String url);
+   void failedToCheckURL(@Cause Exception e, String url);
 
    @LogMessage(id = 202007, value = "Failed to check Address {}.", level = LogMessage.Level.WARN)
-   void failedToCheckAddress(Exception e, String address);
+   void failedToCheckAddress(@Cause Exception e, String address);
 
    @LogMessage(id = 202008, value = "Failed to check Address list {}.", level = LogMessage.Level.WARN)
-   void failedToParseAddressList(Exception e, String addressList);
+   void failedToParseAddressList(@Cause Exception e, String addressList);
 
    @LogMessage(id = 202009, value = "Failed to check Url list {}.", level = LogMessage.Level.WARN)
-   void failedToParseUrlList(Exception e, String urlList);
+   void failedToParseUrlList(@Cause Exception e, String urlList);
 
    @LogMessage(id = 202010, value = "Failed to set NIC {}.", level = LogMessage.Level.WARN)
-   void failedToSetNIC(Exception e, String nic);
+   void failedToSetNIC(@Cause Exception e, String nic);
 
    @LogMessage(id = 202011, value = "Failed to read from stream {}.", level = LogMessage.Level.WARN)
    void failedToReadFromStream(String stream);
 
    @LogMessage(id = 202012, value = "Object cannot be serialized.", level = LogMessage.Level.WARN)
-   void failedToSerializeObject(Exception e);
+   void failedToSerializeObject(@Cause Exception e);
 
    @LogMessage(id = 202013, value = "Unable to deserialize object.", level = LogMessage.Level.WARN)
-   void failedToDeserializeObject(Exception e);
+   void failedToDeserializeObject(@Cause Exception e);
 
    @LogMessage(id = 202014, value = "Unable to encode byte array into Base64 notation.", level = LogMessage.Level.WARN)
-   void failedToEncodeByteArrayToBase64Notation(Exception e);
+   void failedToEncodeByteArrayToBase64Notation(@Cause Exception e);
 
    @LogMessage(id = 202015, value = "Failed to clean up file {}", level = LogMessage.Level.WARN)
    void failedToCleanupFile(String file);
