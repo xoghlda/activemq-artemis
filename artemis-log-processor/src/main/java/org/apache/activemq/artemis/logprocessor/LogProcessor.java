@@ -202,6 +202,10 @@ public class LogProcessor extends AbstractProcessor {
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
          writerOutput.println("      return returnString;");
       } else {
+         // TODO: where the return type is actually an exception type, and a given arg was originally a Cause,
+         // it used to be set as the created exception cause, but now is being used in the formatter above incorrectly.
+
+         // TODO: where the return is an exception, the stacktrace will be different than before unless adjusted (as existing bits did).
          writerOutput.println("      return new " + executableMember.getReturnType().toString() + "(returnString);");
       }
 
