@@ -24,11 +24,12 @@ import org.apache.activemq.artemis.utils.Preconditions;
 import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.core.server.MessageReference;
 import org.apache.activemq.artemis.core.server.Queue;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class QueueMessageMetrics {
 
-   private static final Logger logger = Logger.getLogger(QueueMessageMetrics.class);
+   private static final Logger logger = LoggerFactory.getLogger(QueueMessageMetrics.class);
 
    private static final AtomicIntegerFieldUpdater<QueueMessageMetrics> COUNT_UPDATER =
          AtomicIntegerFieldUpdater.newUpdater(QueueMessageMetrics.class, "messageCount");

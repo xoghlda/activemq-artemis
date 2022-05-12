@@ -86,7 +86,8 @@ import org.apache.activemq.artemis.spi.core.remoting.Connection;
 import org.apache.activemq.artemis.spi.core.remoting.ReadyListener;
 import org.apache.activemq.artemis.utils.ExecutorFactory;
 import org.apache.activemq.artemis.utils.ReusableLatch;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Manages replication tasks on the live server (that is the live server side of a "remote backup"
@@ -98,7 +99,7 @@ import org.jboss.logging.Logger;
  */
 public final class ReplicationManager implements ActiveMQComponent {
 
-   private static final Logger logger = Logger.getLogger(ReplicationManager.class);
+   private static final Logger logger = LoggerFactory.getLogger(ReplicationManager.class);
 
    public enum ADD_OPERATION_TYPE {
       UPDATE {

@@ -77,11 +77,12 @@ import org.apache.activemq.artemis.spi.core.remoting.ssl.SSLContextFactoryProvid
 import org.apache.activemq.artemis.utils.ActiveMQThreadFactory;
 import org.apache.activemq.artemis.utils.ConfigurationHelper;
 import org.apache.activemq.artemis.utils.ReusableLatch;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RemotingServiceImpl implements RemotingService, ServerConnectionLifeCycleListener {
 
-   private static final Logger logger = Logger.getLogger(RemotingServiceImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(RemotingServiceImpl.class);
 
    private static final int ACCEPTOR_STOP_TIMEOUT = 3000;
 

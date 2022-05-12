@@ -210,7 +210,8 @@ import org.apache.activemq.artemis.utils.critical.CriticalAnalyzerImpl;
 import org.apache.activemq.artemis.utils.critical.CriticalAnalyzerPolicy;
 import org.apache.activemq.artemis.utils.critical.CriticalComponent;
 import org.apache.activemq.artemis.utils.critical.EmptyCriticalAnalyzer;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.utils.collections.IterableStream.iterableOf;
 
@@ -219,7 +220,7 @@ import static org.apache.activemq.artemis.utils.collections.IterableStream.itera
  */
 public class ActiveMQServerImpl implements ActiveMQServer {
 
-   private static final Logger logger = Logger.getLogger(ActiveMQServerImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(ActiveMQServerImpl.class);
 
    public static final String INTERNAL_NAMING_PREFIX = "$.artemis.internal";
 
@@ -805,7 +806,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
    }
 
    private static void checkCriticalAnalyzerLogging() {
-      Logger criticalLogger = Logger.getLogger("org.apache.activemq.artemis.utils.critical");
+      Logger criticalLogger = LoggerFactory.getLogger("org.apache.activemq.artemis.utils.critical");
       if (!criticalLogger.isTraceEnabled()) {
          ActiveMQServerLogger.LOGGER.enableTraceForCriticalAnalyzer();
       }

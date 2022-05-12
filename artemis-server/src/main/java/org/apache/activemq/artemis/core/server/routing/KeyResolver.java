@@ -21,7 +21,8 @@ import javax.security.auth.Subject;
 
 import org.apache.activemq.artemis.spi.core.remoting.Connection;
 import org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ public class KeyResolver {
    public static final String NULL_KEY_VALUE = "NULL";
 
 
-   private static final Logger logger = Logger.getLogger(KeyResolver.class);
+   private static final Logger logger = LoggerFactory.getLogger(KeyResolver.class);
 
    private static final char SOCKET_ADDRESS_DELIMITER = ':';
    private static final String SOCKET_ADDRESS_PREFIX = "/";

@@ -60,11 +60,12 @@ import org.apache.activemq.artemis.core.server.cluster.ClusterConnection;
 import org.apache.activemq.artemis.core.server.cluster.ha.ReplicatedPolicy;
 import org.apache.activemq.artemis.core.server.cluster.qourum.QuorumManager;
 import org.apache.activemq.artemis.spi.core.remoting.Acceptor;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SharedNothingLiveActivation extends LiveActivation {
 
-   private static final Logger logger = Logger.getLogger(SharedNothingLiveActivation.class);
+   private static final Logger logger = LoggerFactory.getLogger(SharedNothingLiveActivation.class);
 
    //this is how we act when we initially start as a live
    private ReplicatedPolicy replicatedPolicy;

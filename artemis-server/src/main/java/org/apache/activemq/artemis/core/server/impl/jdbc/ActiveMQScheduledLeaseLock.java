@@ -23,14 +23,15 @@ import java.util.concurrent.TimeUnit;
 import org.apache.activemq.artemis.core.server.ActiveMQScheduledComponent;
 import org.apache.activemq.artemis.core.server.NodeManager.LockListener;
 import org.apache.activemq.artemis.utils.actors.ArtemisExecutor;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Default implementation of a {@link ScheduledLeaseLock}: see {@link ScheduledLeaseLock#of(ScheduledExecutorService, ArtemisExecutor, String, LeaseLock, long, LockListener)}.
  */
 final class ActiveMQScheduledLeaseLock extends ActiveMQScheduledComponent implements ScheduledLeaseLock {
 
-   private static final Logger LOGGER = Logger.getLogger(ActiveMQScheduledLeaseLock.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(ActiveMQScheduledLeaseLock.class);
 
    private final String lockName;
    private final LeaseLock lock;

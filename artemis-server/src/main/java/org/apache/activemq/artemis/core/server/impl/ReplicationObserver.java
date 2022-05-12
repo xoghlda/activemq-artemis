@@ -34,11 +34,12 @@ import org.apache.activemq.artemis.core.replication.ReplicationEndpoint;
 import org.apache.activemq.artemis.core.server.LiveNodeLocator.BackupRegistrationListener;
 import org.apache.activemq.artemis.core.server.NodeManager;
 import org.apache.activemq.artemis.core.server.cluster.BackupManager;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 final class ReplicationObserver implements ClusterTopologyListener, SessionFailureListener, BackupRegistrationListener, ReplicationEndpoint.ReplicationEndpointEventListener, AutoCloseable {
 
-   private static final Logger LOGGER = Logger.getLogger(ReplicationObserver.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(ReplicationObserver.class);
 
    public enum ReplicationFailure {
       VoluntaryFailOver, BackupNotInSync, NonVoluntaryFailover, RegistrationError, AlreadyReplicating, ClosedObserver, WrongNodeId, WrongActivationSequence

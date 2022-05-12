@@ -25,12 +25,13 @@ import org.apache.activemq.artemis.core.config.ConfigurationUtils;
 import org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptor;
 import org.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants;
 import org.apache.activemq.artemis.utils.ConfigurationHelper;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class AcceptorParserTest {
-   private static final Logger log = Logger.getLogger(AcceptorParserTest.class);
+   private static final Logger log = LoggerFactory.getLogger(AcceptorParserTest.class);
 
    @Test
    public void testAcceptor() throws Exception {

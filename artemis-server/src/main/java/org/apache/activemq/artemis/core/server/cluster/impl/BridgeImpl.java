@@ -71,7 +71,8 @@ import org.apache.activemq.artemis.utils.FutureLatch;
 import org.apache.activemq.artemis.utils.ReusableLatch;
 import org.apache.activemq.artemis.utils.UUID;
 import org.apache.activemq.artemis.utils.collections.TypedProperties;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Core BridgeImpl
@@ -79,7 +80,7 @@ import org.jboss.logging.Logger;
 
 public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowledgementHandler, ReadyListener, ClientProducerFlowCallback {
 
-   private static final Logger logger = Logger.getLogger(BridgeImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(BridgeImpl.class);
 
    protected final ServerLocatorInternal serverLocator;
 

@@ -44,11 +44,12 @@ import org.apache.activemq.artemis.core.security.Role;
 import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.core.server.SecuritySettingPlugin;
 import org.apache.activemq.artemis.core.settings.HierarchicalRepository;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LegacyLDAPSecuritySettingPlugin implements SecuritySettingPlugin {
 
-   private static final Logger logger = Logger.getLogger(LegacyLDAPSecuritySettingPlugin.class);
+   private static final Logger logger = LoggerFactory.getLogger(LegacyLDAPSecuritySettingPlugin.class);
 
    private static final long serialVersionUID = 4793109879399750045L;
 

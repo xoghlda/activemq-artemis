@@ -22,7 +22,8 @@ import java.util.logging.LogManager;
 import org.apache.activemq.artemis.core.server.LoggingConfigurationFileReloader;
 import org.apache.activemq.artemis.utils.ClassloadingUtil;
 import org.apache.activemq.artemis.utils.SpawnedVMSupport;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -35,10 +36,10 @@ import static org.junit.Assert.assertTrue;
 public class LoggingConfigurationFileReloaderTest {
 
    private static final LogManager logManager = LogManager.getLogManager();
-   private static final Logger root = Logger.getLogger("");
-   private static final Logger test1 = Logger.getLogger("test1");
-   private static final Logger test2 = Logger.getLogger("test2");
-   private static final Logger test3 = Logger.getLogger("test3");
+   private static final Logger root = LoggerFactory.getLogger("");
+   private static final Logger test1 = LoggerFactory.getLogger("test1");
+   private static final Logger test2 = LoggerFactory.getLogger("test2");
+   private static final Logger test3 = LoggerFactory.getLogger("test3");
 
    public static void main(String[] args) {
       try {

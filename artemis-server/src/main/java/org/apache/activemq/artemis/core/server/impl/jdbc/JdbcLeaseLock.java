@@ -28,14 +28,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 import org.apache.activemq.artemis.jdbc.store.drivers.JDBCConnectionProvider;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * JDBC implementation of a {@link LeaseLock} with a {@code String} defined {@link #holderId()}.
  */
 final class JdbcLeaseLock implements LeaseLock {
 
-   private static final Logger LOGGER = Logger.getLogger(JdbcLeaseLock.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(JdbcLeaseLock.class);
    private static final int MAX_HOLDER_ID_LENGTH = 128;
    private final JDBCConnectionProvider connectionProvider;
    private final String holderId;

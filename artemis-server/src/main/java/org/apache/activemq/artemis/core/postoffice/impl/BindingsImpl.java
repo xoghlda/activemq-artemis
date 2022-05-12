@@ -46,11 +46,12 @@ import org.apache.activemq.artemis.core.server.group.GroupingHandler;
 import org.apache.activemq.artemis.core.server.group.impl.Proposal;
 import org.apache.activemq.artemis.core.server.group.impl.Response;
 import org.apache.activemq.artemis.utils.CompositeAddress;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class BindingsImpl implements Bindings {
 
-   private static final Logger logger = Logger.getLogger(BindingsImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(BindingsImpl.class);
 
    // This is public as we use on test assertions
    public static final int MAX_GROUP_RETRY = 10;

@@ -31,11 +31,12 @@ import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.core.server.LiveNodeLocator.BackupRegistrationListener;
 import org.apache.activemq.artemis.core.server.NetworkHealthCheck;
 import org.apache.activemq.artemis.core.server.NodeManager;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SharedNothingBackupQuorum implements Quorum, SessionFailureListener, BackupRegistrationListener {
 
-   private static final Logger LOGGER = Logger.getLogger(SharedNothingBackupQuorum.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(SharedNothingBackupQuorum.class);
 
    public enum BACKUP_ACTIVATION {
       FAIL_OVER, FAILURE_RETRY, FAILURE_REPLICATING, ALREADY_REPLICATING, STOP;

@@ -36,11 +36,12 @@ import org.apache.activemq.artemis.spi.core.remoting.BufferHandler;
 import org.apache.activemq.artemis.spi.core.remoting.Connection;
 import org.apache.activemq.artemis.spi.core.remoting.ReadyListener;
 import org.apache.activemq.artemis.utils.UUIDGenerator;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InVMConnection implements Connection {
 
-   private static final Logger logger = Logger.getLogger(InVMConnection.class);
+   private static final Logger logger = LoggerFactory.getLogger(InVMConnection.class);
 
    private final BufferHandler handler;
 

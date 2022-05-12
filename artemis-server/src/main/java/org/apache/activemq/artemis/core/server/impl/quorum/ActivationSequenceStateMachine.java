@@ -28,7 +28,8 @@ import org.apache.activemq.artemis.quorum.DistributedLock;
 import org.apache.activemq.artemis.quorum.DistributedPrimitiveManager;
 import org.apache.activemq.artemis.quorum.MutableLong;
 import org.apache.activemq.artemis.quorum.UnavailableStateException;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class contains the activation sequence logic of the pluggable quorum vote:

@@ -28,11 +28,12 @@ import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.core.server.federation.FederatedQueueConsumerImpl.ClientSessionCallback;
 import org.apache.activemq.artemis.core.server.plugin.ActiveMQServerBasePlugin;
 import org.apache.activemq.artemis.core.server.transformer.Transformer;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class FederatedAbstract implements ActiveMQServerBasePlugin {
 
-   private static final Logger logger = Logger.getLogger(FederatedAbstract.class);
+   private static final Logger logger = LoggerFactory.getLogger(FederatedAbstract.class);
 
    private static final WildcardConfiguration DEFAULT_WILDCARD_CONFIGURATION = new WildcardConfiguration();
    protected final Federation federation;

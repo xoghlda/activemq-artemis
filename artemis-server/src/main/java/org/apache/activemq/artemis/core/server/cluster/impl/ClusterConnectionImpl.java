@@ -74,11 +74,12 @@ import org.apache.activemq.artemis.spi.core.protocol.RemotingConnection;
 import org.apache.activemq.artemis.utils.ExecutorFactory;
 import org.apache.activemq.artemis.utils.FutureLatch;
 import org.apache.activemq.artemis.utils.collections.TypedProperties;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class ClusterConnectionImpl implements ClusterConnection, AfterConnectInternalListener, TopologyManager {
 
-   private static final Logger logger = Logger.getLogger(ClusterConnectionImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(ClusterConnectionImpl.class);
 
    private static final String SN_PREFIX = "sf.";
    /**

@@ -153,7 +153,8 @@ import org.apache.activemq.artemis.utils.ThreadLeakCheckRule;
 import org.apache.activemq.artemis.utils.UUIDGenerator;
 import org.apache.activemq.artemis.utils.Wait;
 import org.apache.activemq.artemis.utils.actors.OrderedExecutorFactory;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -172,17 +173,17 @@ import org.junit.runner.Description;
  */
 public abstract class ActiveMQTestBase extends Assert {
 
-   private static final Logger log = Logger.getLogger(ActiveMQTestBase.class);
+   private static final Logger log = LoggerFactory.getLogger(ActiveMQTestBase.class);
 
-   private static final Logger baseLog = Logger.getLogger(ActiveMQTestBase.class);
+   private static final Logger baseLog = LoggerFactory.getLogger(ActiveMQTestBase.class);
 
-   protected final Logger instanceLog = Logger.getLogger(this.getClass());
+   protected final Logger instanceLog = LoggerFactory.getLogger(this.getClass());
 
    static {
       Env.setTestEnv(true);
    }
 
-   private static final Logger logger = Logger.getLogger(ActiveMQTestBase.class);
+   private static final Logger logger = LoggerFactory.getLogger(ActiveMQTestBase.class);
 
    /** This will make sure threads are not leaking between tests */
    @ClassRule

@@ -39,7 +39,8 @@ import org.apache.activemq.artemis.core.server.cluster.ha.ReplicationBackupPolic
 import org.apache.activemq.artemis.quorum.DistributedLock;
 import org.apache.activemq.artemis.quorum.DistributedPrimitiveManager;
 import org.apache.activemq.artemis.quorum.UnavailableStateException;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.core.server.NodeManager.NULL_NODE_ACTIVATION_SEQUENCE;
 import static org.apache.activemq.artemis.core.server.impl.ReplicationObserver.ReplicationFailure;
@@ -52,7 +53,7 @@ import static org.apache.activemq.artemis.core.server.impl.quorum.ActivationSequ
  */
 public final class ReplicationBackupActivation extends Activation implements DistributedPrimitiveManager.UnavailableManagerListener {
 
-   private static final Logger LOGGER = Logger.getLogger(ReplicationBackupActivation.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(ReplicationBackupActivation.class);
 
    private final ReplicationBackupPolicy policy;
    private final ActiveMQServerImpl activeMQServer;

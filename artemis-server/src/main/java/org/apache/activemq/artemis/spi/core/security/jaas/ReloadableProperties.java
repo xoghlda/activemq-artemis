@@ -30,11 +30,12 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReloadableProperties {
 
-   private static final Logger logger = Logger.getLogger(ReloadableProperties.class);
+   private static final Logger logger = LoggerFactory.getLogger(ReloadableProperties.class);
 
    // use this whenever writing to the underlying properties files from another component
    public static final ReadWriteLock LOCK = new ReentrantReadWriteLock();

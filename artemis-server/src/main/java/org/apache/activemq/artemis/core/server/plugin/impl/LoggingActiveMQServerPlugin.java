@@ -42,6 +42,8 @@ import org.apache.activemq.artemis.core.transaction.Transaction;
 import org.apache.activemq.artemis.spi.core.protocol.RemotingConnection;
 import org.apache.activemq.artemis.spi.core.protocol.SessionCallback;
 import org.apache.activemq.artemis.utils.critical.CriticalComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * plugin to log various events within the broker, configured with the following booleans
@@ -55,6 +57,8 @@ import org.apache.activemq.artemis.utils.critical.CriticalComponent;
  */
 
 public class LoggingActiveMQServerPlugin implements ActiveMQServerPlugin, Serializable {
+
+   private static final Logger logger = LoggerFactory.getLogger(LoggingActiveMQServerPlugin.class);
 
    private static final long serialVersionUID = 1L;
 

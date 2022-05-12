@@ -52,14 +52,15 @@ import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.core.server.cluster.qourum.QuorumManager;
 import org.apache.activemq.artemis.core.server.impl.Activation;
 import org.apache.activemq.artemis.spi.core.remoting.Acceptor;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * used for creating and managing cluster control connections for each cluster connection and the replication connection
  */
 public class ClusterController implements ActiveMQComponent {
 
-   private static final Logger logger = Logger.getLogger(ClusterController.class);
+   private static final Logger logger = LoggerFactory.getLogger(ClusterController.class);
 
    private final QuorumManager quorumManager;
 

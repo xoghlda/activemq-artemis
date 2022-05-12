@@ -117,7 +117,8 @@ import org.apache.activemq.artemis.utils.collections.PriorityLinkedListImpl;
 import org.apache.activemq.artemis.utils.collections.TypedProperties;
 import org.apache.activemq.artemis.utils.critical.CriticalComponentImpl;
 import org.apache.activemq.artemis.utils.critical.EmptyCriticalAnalyzer;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jctools.queues.MpscUnboundedArrayQueue;
 
 import static org.apache.activemq.artemis.utils.collections.IterableStream.iterableOf;
@@ -136,7 +137,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
    protected static final int CRITICAL_CONSUMER = 3;
    protected static final int CRITICAL_CHECK_DEPAGE = 4;
 
-   private static final Logger logger = Logger.getLogger(QueueImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(QueueImpl.class);
    private static final AtomicIntegerFieldUpdater<QueueImpl> dispatchingUpdater = AtomicIntegerFieldUpdater.newUpdater(QueueImpl.class, "dispatching");
    private static final AtomicLongFieldUpdater<QueueImpl> dispatchStartTimeUpdater = AtomicLongFieldUpdater.newUpdater(QueueImpl.class, "dispatchStartTime");
    private static final AtomicLongFieldUpdater<QueueImpl> consumerRemovedTimestampUpdater = AtomicLongFieldUpdater.newUpdater(QueueImpl.class, "consumerRemovedTimestamp");

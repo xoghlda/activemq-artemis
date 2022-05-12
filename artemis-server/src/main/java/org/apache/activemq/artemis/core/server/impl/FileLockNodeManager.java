@@ -31,11 +31,12 @@ import org.apache.activemq.artemis.core.server.ActiveMQLockAcquisitionTimeoutExc
 import org.apache.activemq.artemis.core.server.ActiveMQScheduledComponent;
 import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.utils.UUID;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FileLockNodeManager extends FileBasedNodeManager {
 
-   private static final Logger logger = Logger.getLogger(FileLockNodeManager.class);
+   private static final Logger logger = LoggerFactory.getLogger(FileLockNodeManager.class);
 
    private static final int STATE_LOCK_POS = 0;
 

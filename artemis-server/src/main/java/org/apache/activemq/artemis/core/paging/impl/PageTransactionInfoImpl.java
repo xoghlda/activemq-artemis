@@ -35,12 +35,13 @@ import org.apache.activemq.artemis.core.transaction.Transaction;
 import org.apache.activemq.artemis.core.transaction.TransactionOperationAbstract;
 import org.apache.activemq.artemis.core.transaction.TransactionPropertyIndexes;
 import org.apache.activemq.artemis.utils.DataConstants;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class PageTransactionInfoImpl implements PageTransactionInfo {
 
 
-   private static final Logger logger = Logger.getLogger(PageTransactionInfoImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(PageTransactionInfoImpl.class);
 
    private static final AtomicIntegerFieldUpdater<PageTransactionInfoImpl> numberOfMessagesUpdater =
       AtomicIntegerFieldUpdater.newUpdater(PageTransactionInfoImpl.class, "numberOfMessages");

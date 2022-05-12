@@ -33,13 +33,14 @@ import org.apache.activemq.artemis.core.message.LargeBodyReader;
 import org.apache.activemq.artemis.core.persistence.StorageManager;
 import org.apache.activemq.artemis.core.server.ActiveMQServerLogger;
 import org.apache.activemq.artemis.core.server.LargeServerMessage;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LargeBody {
 
    static final int MEMORY_OFFSET = 56;
 
-   private static final Logger logger = Logger.getLogger(LargeBody.class);
+   private static final Logger logger = LoggerFactory.getLogger(LargeBody.class);
 
    private long bodySize = -1;
 
