@@ -695,7 +695,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
             fail(true, true);
 
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.warn(e.getMessage(), e);
+            logger.warn(e.getMessage(), e);
          }
       }
    }
@@ -840,7 +840,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
             }
             queue.removeConsumer(this);
          } catch (Exception dontcare) {
-            logger.debug(dontcare);
+            logger.debug(dontcare.getMessage(), dontcare);
          }
       }
 

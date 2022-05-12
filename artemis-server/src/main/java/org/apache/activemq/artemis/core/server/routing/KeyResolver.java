@@ -94,17 +94,13 @@ public class KeyResolver {
                            Matcher keyMatcher = keyFilter.matcher(roleName);
                            if (keyMatcher.find()) {
                               keyValue = keyMatcher.group();
-                              if (logger.isDebugEnabled()) {
-                                 logger.debugf("role match for %s via %s", roleName, keyMatcher);
-                              }
+                              logger.debug("role match for {} via {}", roleName, keyMatcher);
                               return keyValue;
                            }
                         } else {
                            // with no filter, first role is the candidate
                            keyValue = roleName;
-                           if (logger.isDebugEnabled()) {
-                              logger.debugf("first role match: %s", roleName);
-                           }
+                           logger.debug("first role match: {}", roleName);
                            return keyValue;
                         }
                      }
@@ -116,9 +112,7 @@ public class KeyResolver {
             throw new IllegalStateException("Unexpected value: " + key);
       }
 
-      if (logger.isDebugEnabled()) {
-         logger.debugf("keyValue for %s: %s", key, keyValue);
-      }
+      logger.debug("keyValue for {}: {}", key, keyValue);
 
       if (keyValue == null) {
          keyValue = NULL_KEY_VALUE;
@@ -128,15 +122,11 @@ public class KeyResolver {
          if (keyMatcher.find()) {
             keyValue = keyMatcher.group();
 
-            if (logger.isDebugEnabled()) {
-               logger.debugf("keyValue for %s matches filter %s: %s", key, keyFilter, keyValue);
-            }
+            logger.debug("keyValue for {} matches filter {}: {}", key, keyFilter, keyValue);
          } else {
             keyValue = NULL_KEY_VALUE;
 
-            if (logger.isDebugEnabled()) {
-               logger.debugf("keyValue for %s doesn't matches filter %s", key, keyFilter);
-            }
+            logger.debug("keyValue for {} doesn't matches filter {}", key, keyFilter);
          }
       }
 

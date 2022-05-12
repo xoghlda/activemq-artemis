@@ -180,7 +180,7 @@ public class ScaleDownHandler {
                   MessageReference messageReference = messagesIterator.next();
                   Message message = messageReference.getMessage().copy();
 
-                  logger.debugf("Reading message %s from queue %s", message, loopQueue);
+                  logger.debug("Reading message {} from queue {}", message, loopQueue);
                   Set<QueuesXRefInnerManager> queuesFound = new HashSet<>();
 
                   for (Map.Entry<Queue, QueuesXRefInnerManager> controlEntry : controls.entrySet()) {

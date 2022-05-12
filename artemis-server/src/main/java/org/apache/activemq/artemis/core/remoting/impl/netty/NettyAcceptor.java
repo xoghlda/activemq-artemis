@@ -476,9 +476,7 @@ public class NettyAcceptor extends AbstractAcceptor {
                   Throwable rootCause = getRootCause(e);
                   ActiveMQServerLogger.LOGGER.gettingSslHandlerFailed(channel.remoteAddress().toString(), rootCause.getClass().getName() + ": " + rootCause.getMessage());
 
-                  if (ActiveMQServerLogger.LOGGER.isDebugEnabled()) {
-                     ActiveMQServerLogger.LOGGER.debug("Getting SSL handler failed", e);
-                  }
+                  logger.debug("Getting SSL handler failed", e);
                   throw e;
                }
             }
@@ -1035,9 +1033,7 @@ public class NettyAcceptor extends AbstractAcceptor {
 
             ActiveMQServerLogger.LOGGER.sslHandshakeFailed(ctx.channel().remoteAddress().toString(), errorMessage);
 
-            if (ActiveMQServerLogger.LOGGER.isDebugEnabled()) {
-               ActiveMQServerLogger.LOGGER.debug("SSL handshake failed", cause);
-            }
+            logger.debug("SSL handshake failed", cause);
          }
       }
    }

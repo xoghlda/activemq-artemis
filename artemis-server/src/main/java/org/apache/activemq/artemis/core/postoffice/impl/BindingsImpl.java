@@ -190,7 +190,7 @@ public final class BindingsImpl implements Bindings {
       }
 
       if (logger.isTraceEnabled()) {
-         logger.tracef("Redistributing message %s", message);
+         logger.tracef("Redistributing message {}", message);
       }
 
       final SimpleString routingName = originatingQueue.getName();
@@ -337,9 +337,7 @@ public final class BindingsImpl implements Bindings {
    private void simpleRouting(final Message message,
                               final RoutingContext context,
                               final int currentVersion) throws Exception {
-      if (logger.isTraceEnabled()) {
-         logger.tracef("Routing message %s on binding=%s current context::$s", message, this, context);
-      }
+      logger.trace("Routing message {} on binding={} current context::{}", message, this, context);
 
       routingNameBindingMap.forEachBindings((bindings, nextPosition) -> {
          final Binding nextBinding = getNextBinding(message, bindings, nextPosition, getMessageLoadBalancingType(context));

@@ -253,7 +253,7 @@ public class FileLockNodeManager extends FileBasedNodeManager {
                   setLive();
                   startLockMonitoring();
                } catch (Exception e) {
-                  ActiveMQServerLogger.LOGGER.warn(e.getMessage(), e);
+                  logger.warn(e.getMessage(), e);
                   // that allows to restart/stop the broker if needed
                   throw e;
                }
@@ -426,8 +426,11 @@ public class FileLockNodeManager extends FileBasedNodeManager {
          } catch (IOException e) {
             // IOException during trylock() may be a temporary issue, e.g. NFS volume not being accessible
 
-            logger.log(isRecurringFailure ? Logger.Level.DEBUG : Logger.Level.WARN,
-                    "Failure when accessing a lock file", e);
+            if (isRecurringFailure) {
+               logger.debug("Failure when accessing a lock file", e);
+            } else {
+               logger.warn("Failure when accessing a lock file", e);
+            }
             isRecurringFailure = true;
 
             long waitTime = LOCK_ACCESS_FAILURE_WAIT_TIME_NANOS;

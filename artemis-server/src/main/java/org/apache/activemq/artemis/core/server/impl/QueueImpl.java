@@ -2435,7 +2435,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
                      iter.remove();
                   }
                   if (++elementsIterated >= MAX_DELIVERIES_IN_LOOP) {
-                     logger.debugf("Expiry Scanner on %s ran for %s iteration, scheduling a new one", QueueImpl.this.getName(), elementsIterated);
+                     logger.debug("Expiry Scanner on {} ran for {} iteration, scheduling a new one", QueueImpl.this.getName(), elementsIterated);
                      rescheduled = true;
                      getExecutor().execute(this);
                      break;
@@ -2443,7 +2443,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
                }
             } finally {
                if (!rescheduled) {
-                  logger.debugf("Scanning for expires on %s done", QueueImpl.this.getName());
+                  logger.debug("Scanning for expires on {} done", QueueImpl.this.getName());
 
                   if (server.hasBrokerQueuePlugins()) {
                      try {
@@ -3634,7 +3634,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
       if (isAutoCreate && !getAddress().equals(destinationAddress)) {
          if (destinationAddress != null && destinationAddress.length() != 0) {
             SimpleString destinationQueueName = prefix.concat(getAddress()).concat(suffix);
-            SimpleString filter = new SimpleString(String.format("%s = '%s'", Message.HDR_ORIGINAL_ADDRESS, getAddress()));
+            SimpleString filter = new SimpleString(String.format("{} = '{}'", Message.HDR_ORIGINAL_ADDRESS, getAddress()));
             try {
                server.createQueue(new QueueConfiguration(destinationQueueName).setAddress(destinationAddress).setFilterString(filter).setAutoCreated(true).setAutoCreateAddress(true), true);
             } catch (ActiveMQQueueExistsException e) {
@@ -3687,7 +3687,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
       //- deliverDirect first acquire QueueImpl::this, then ServerConsumerImpl::this
       //- DeliverRunner::run first acquire ServerConsumerImpl::this then QueueImpl::this
       if (!deliverLock.tryLock()) {
-         logger.tracef("Cannot perform a directDelivery because there is a running async deliver");
+         logger.trace("Cannot perform a directDelivery because there is a running async deliver");
          return false;
       }
       try {
@@ -3743,7 +3743,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
          }
 
          if (logger.isTraceEnabled()) {
-            logger.tracef("Queue " + getName() + " is out of direct delivery as no consumers handled a delivery");
+            logger.trace("Queue " + getName() + " is out of direct delivery as no consumers handled a delivery");
          }
          return false;
       }
@@ -4433,7 +4433,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
 
          if (refToAck != null) {
             if (logger.isDebugEnabled()) {
-               logger.debugf("Preserving ringSize %d by acking message ref %s", ringSize, refToAck);
+               logger.debug("Preserving ringSize {} by acking message ref {}", ringSize, refToAck);
             }
             referenceHandled(refToAck);
 
@@ -4448,7 +4448,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
             }
          } else {
             if (logger.isDebugEnabled()) {
-               logger.debugf("Cannot preserve ringSize %d; message ref is null", ringSize);
+               logger.debug("Cannot preserve ringSize {}; message ref is null", ringSize);
             }
          }
       }

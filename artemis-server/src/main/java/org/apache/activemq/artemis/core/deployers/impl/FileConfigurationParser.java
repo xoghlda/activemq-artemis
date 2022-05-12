@@ -359,7 +359,7 @@ public final class FileConfigurationParser extends XMLConfigurationUtil {
       try {
          validator.validate(new DOMSource(e));
       } catch (Exception ex) {
-         ActiveMQServerLogger.LOGGER.error(ex.getMessage());
+         logger.error(ex.getMessage(), ex);
       }
       Configuration config = new ConfigurationImpl();
       parseMainConfig(e, config);

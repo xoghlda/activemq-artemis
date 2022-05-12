@@ -129,9 +129,7 @@ public class MemoryManager implements ActiveMQComponent {
             info.append(String.format("total memory:     %s%n", SizeFormatterUtil.sizeof(totalMemory)));
             info.append(String.format("available memory: %.2f%%%n", availableMemoryPercent));
 
-            if (logger.isDebugEnabled()) {
-               logger.debug(info);
-            }
+            logger.debug(info.toString());
 
             if (availableMemoryPercent <= memoryWarningThreshold) {
                ActiveMQServerLogger.LOGGER.memoryError(memoryWarningThreshold, info.toString());

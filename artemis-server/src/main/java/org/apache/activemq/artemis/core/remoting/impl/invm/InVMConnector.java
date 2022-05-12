@@ -201,7 +201,7 @@ public class InVMConnector extends AbstractConnector {
          return conn;
       } else {
          if (logger.isDebugEnabled()) {
-            logger.debug(new StringBuilder().append("Connection limit of ").append(acceptor.getConnectionsAllowed()).append(" reached. Refusing connection."));
+            logger.debug(new StringBuilder().append("Connection limit of ").append(acceptor.getConnectionsAllowed()).append(" reached. Refusing connection.").toString());
          }
          return null;
       }
@@ -210,7 +210,7 @@ public class InVMConnector extends AbstractConnector {
    @Override
    public synchronized void start() {
       started = true;
-      ActiveMQClientLogger.LOGGER.startedInVMConnector();
+      logger.debug("Started InVM Connector");
    }
 
    public BufferHandler getHandler() {

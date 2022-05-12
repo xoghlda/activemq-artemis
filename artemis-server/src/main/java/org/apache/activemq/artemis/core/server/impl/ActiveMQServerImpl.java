@@ -904,9 +904,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
 
    @Override
    public void setHAPolicy(HAPolicy haPolicy) {
-      if (logger.isTraceEnabled()) {
-         logger.tracef("XXX @@@ Setting %s, isBackup=%s at %s", haPolicy, haPolicy.isBackup(), this);
-      }
+      logger.trace("Setting {}, isBackup={} at {}", haPolicy, haPolicy.isBackup(), this);
       this.haPolicy = haPolicy;
    }
 
@@ -3540,7 +3538,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
                   createQueue(config.setTemporary(false).setTransient(false).setAutoCreated(false).setConfigurationManaged(true).setAutoCreateAddress(true), false);
                } catch (ActiveMQQueueExistsException e) {
                   // the queue may exist on a *different* address
-                  ActiveMQServerLogger.LOGGER.warn(e.getMessage());
+                  logger.warn(e.getMessage(), e);
                }
             }
          } catch (Exception e) {

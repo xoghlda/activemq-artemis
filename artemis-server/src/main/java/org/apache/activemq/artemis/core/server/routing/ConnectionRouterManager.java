@@ -88,9 +88,7 @@ public final class ConnectionRouterManager implements ActiveMQComponent {
    }
 
    public void deployConnectionRouter(ConnectionRouterConfiguration config) throws Exception {
-      if (logger.isDebugEnabled()) {
-         logger.debugf("Deploying ConnectionRouter " + config.getName());
-      }
+      logger.debug("Deploying ConnectionRouter {}", config.getName());
 
       Target localTarget = new LocalTarget(null, server);
 

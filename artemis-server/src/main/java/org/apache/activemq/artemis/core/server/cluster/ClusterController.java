@@ -464,7 +464,7 @@ public class ClusterController implements ActiveMQComponent {
                if (quorumManager != null) {
                   quorumManager.handleQuorumVote(clusterChannel, packet);
                } else {
-                  logger.warnf("Received %s on a cluster connection that's using the new quorum vote algorithm.", packet);
+                  logger.warn("Received {} on a cluster connection that's using the new quorum vote algorithm.", packet);
                }
             } else if (packet.getType() == PacketImpl.SCALEDOWN_ANNOUNCEMENT) {
                ScaleDownAnnounceMessage message = (ScaleDownAnnounceMessage) packet;

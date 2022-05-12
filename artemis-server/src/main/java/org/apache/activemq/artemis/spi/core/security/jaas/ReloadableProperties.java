@@ -118,7 +118,7 @@ public class ReloadableProperties {
                   Pattern p = Pattern.compile(str.substring(1, str.length() - 1));
                   regexpProps.put((String) val.getKey(), p);
                } catch (PatternSyntaxException e) {
-                  ActiveMQServerLogger.LOGGER.warn("Ignoring invalid regexp: " + str);
+                  logger.warn("Ignoring invalid regexp: " + str, e);
                }
             }
          }

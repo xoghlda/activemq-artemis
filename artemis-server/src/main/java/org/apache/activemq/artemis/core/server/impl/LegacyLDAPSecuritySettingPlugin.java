@@ -333,7 +333,7 @@ public class LegacyLDAPSecuritySettingPlugin implements SecuritySettingPlugin {
                                             .append("\n\tfilter: ").append(filter)
                                             .append("\n\tcontrols:")
                                             .append("\n\t\treturningAttributes: ").append(roleAttribute)
-                                            .append("\n\t\tsearchScope: SUBTREE_SCOPE"));
+                                            .append("\n\t\tsearchScope: SUBTREE_SCOPE").toString());
          }
          NamingEnumeration<SearchResult> searchResults = context.search(destinationBase, filter, searchControls);
          while (searchResults.hasMore()) {
@@ -436,7 +436,7 @@ public class LegacyLDAPSecuritySettingPlugin implements SecuritySettingPlugin {
       }
 
       if (logger.isDebugEnabled()) {
-         logger.debug(logMessage);
+         logger.debug(logMessage.toString());
       }
 
       if (!exists) {

@@ -1751,9 +1751,9 @@ public abstract class AbstractJournalStorageManager extends CriticalComponentImp
             } catch (ActiveMQShutdownException e) {
                // this may happen, this is asynchronous as all that would happen is we missed the update
                // since the update was missed, next restart this operation will be retried
-               ActiveMQServerLogger.LOGGER.debug(e.getMessage(), e);
+               logger.debug(e.getMessage(), e);
             } catch (Throwable e) {
-               ActiveMQServerLogger.LOGGER.warn(e.getMessage(), e);
+               logger.warn(e.getMessage(), e);
             }
          }
       }

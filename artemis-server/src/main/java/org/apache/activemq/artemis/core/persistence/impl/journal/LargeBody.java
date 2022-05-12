@@ -284,7 +284,7 @@ public class LargeBody {
          final long fileSize = file.size();
          int fileSizeAsInt = (int) fileSize;
          if (fileSizeAsInt < 0) {
-            logger.warnf("suspicious large message file size of %d bytes for %s, will use %d instead.", fileSize, file.getFileName(), Integer.MAX_VALUE);
+            logger.warn("suspicious large message file size of {} bytes for {}, will use {} instead.", fileSize, file.getFileName(), Integer.MAX_VALUE);
             fileSizeAsInt = Integer.MAX_VALUE;
          }
          return fileSizeAsInt;
