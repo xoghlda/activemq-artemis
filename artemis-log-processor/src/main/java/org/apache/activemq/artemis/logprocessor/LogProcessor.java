@@ -210,7 +210,7 @@ public class LogProcessor extends AbstractProcessor {
       }
 
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
-         writerOutput.println("      return returnString;");
+         writerOutput.println("     return returnString;");
       } else {
          writerOutput.println();
          writerOutput.println("      {");
