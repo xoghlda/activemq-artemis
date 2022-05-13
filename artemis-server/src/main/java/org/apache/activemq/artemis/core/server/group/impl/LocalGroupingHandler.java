@@ -231,7 +231,7 @@ public final class LocalGroupingHandler extends GroupHandlingAbstract {
             storageManager.commitBindings(tx);
          } catch (Exception e) {
             // nothing we can do being log
-            ActiveMQServerLogger.LOGGER.warn(e.getMessage(), e);
+            logger.warn(e.getMessage(), e);
          }
       }
    }

@@ -87,7 +87,7 @@ public class EmbedMessageUtil {
       ActiveMQBuffer buffer = message.getReadOnlyBodyBuffer();
 
       if (buffer.readableBytes() < signature.length || !checkSignature(buffer)) {
-         logger.tracef("Message type %d was used for something other than embed messages, ignoring content and treating as a regular message", Message.EMBEDDED_TYPE);
+         logger.trace("Message type {} was used for something other than embed messages, ignoring content and treating as a regular message", Message.EMBEDDED_TYPE);
          return message;
       }
 

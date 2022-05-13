@@ -131,7 +131,7 @@ public class ReplicationPrimaryActivation extends LiveActivation implements Dist
          }
          if (liveLock == null) {
             distributedManager.stop();
-            LOGGER.infof("This broker cannot become a live server with NodeID = %s: restarting as backup", nodeManager.getNodeId());
+            LOGGER.info("This broker cannot become a live server with NodeID = {}: restarting as backup", nodeManager.getNodeId());
             activeMQServer.setHAPolicy(policy.getBackupPolicy());
             return;
          }
@@ -173,7 +173,7 @@ public class ReplicationPrimaryActivation extends LiveActivation implements Dist
          throw new IllegalStateException("NodeManager should be started");
       }
       final long activationSequence = activeMQServer.getNodeManager().getNodeActivationSequence();
-      LOGGER.infof("Applying shared peer NodeID=%s to enable coordinated live activation", coordinationId);
+      LOGGER.info("Applying shared peer NodeID={} to enable coordinated live activation", coordinationId);
       // REVISIT: this is quite clunky, also in backup activation, we just need new nodeID persisted!
       activeMQServer.resetNodeManager();
       final NodeManager nodeManager = activeMQServer.getNodeManager();
@@ -301,14 +301,14 @@ public class ReplicationPrimaryActivation extends LiveActivation implements Dist
          }
          final ReplicationManager replicationManager = this.replicationManager;
          if (replicationManager == null) {
-            LOGGER.warnf("Failback interrupted");
+            LOGGER.warn("Failback interrupted");
             // we got a disconnection from the replica *before* stopping acceptors: better not failback!
             return;
          }
          // IMPORTANT: this is going to save server::fail to issue a replica connection failure (with failed == false)
          // because onReplicationConnectionClose fail-fast on stopping == true.
          if (!stoppingServer.compareAndSet(false, true)) {
-            LOGGER.infof("Failback interrupted: server is already stopping");
+            LOGGER.info("Failback interrupted: server is already stopping");
             return;
          }
          coordinatedLockAndNodeId = activeMQServer.getNodeManager().getNodeId().toString();
@@ -320,7 +320,7 @@ public class ReplicationPrimaryActivation extends LiveActivation implements Dist
       try {
          distributedManager.start();
          if (!awaitNextCommittedActivationSequence(distributedManager, coordinatedLockAndNodeId, inSyncReplicaActivation, FAILBACK_TIMEOUT_MILLIS, LOGGER)) {
-            LOGGER.warnf("Timed out waiting for failback server activation with NodeID = %s: and sequence > %d: after %dms",
+            LOGGER.warn("Timed out waiting for failback server activation with NodeID = {}: and sequence > {}: after {}ms",
                          coordinatedLockAndNodeId, inSyncReplicaActivation, FAILBACK_TIMEOUT_MILLIS);
          }
       } catch (UnavailableStateException ignored) {
@@ -388,7 +388,7 @@ public class ReplicationPrimaryActivation extends LiveActivation implements Dist
                   try {
                      ensureSequentialAccessToNodeData(activeMQServer.toString(), activeMQServer.getNodeManager(), distributedManager, LOGGER);
                   } catch (Throwable fatal) {
-                     LOGGER.errorf(fatal, "Unexpected exception: %s on attempted activation sequence increment; stopping server async", fatal.getLocalizedMessage());
+                     LOGGER.error("Unexpected exception: {} on attempted activation sequence increment; stopping server async", fatal.getLocalizedMessage(), fatal);
                      asyncStopServer();
                   }
                }

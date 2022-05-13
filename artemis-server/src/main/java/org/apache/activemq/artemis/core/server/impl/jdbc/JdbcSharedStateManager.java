@@ -261,12 +261,12 @@ final class JdbcSharedStateManager extends AbstractJDBCDriver implements SharedS
             } else {
                //rawInitializeNodeId has failed just due to contention or nodeId wasn't committed yet
                connection.rollback();
-               logger.debugf("Rollback after failed to update NodeId to %s and haven't found any NodeId", newNodeId);
+               logger.debug("Rollback after failed to update NodeId to {} and haven't found any NodeId", newNodeId);
                return null;
             }
          } catch (SQLException e) {
             connection.rollback();
-            logger.debugf(e, "Rollback while trying to update NodeId to %s", newNodeId);
+            logger.debug("Rollback while trying to update NodeId to {}", newNodeId, e);
             return null;
          } finally {
             connection.setAutoCommit(autoCommit);

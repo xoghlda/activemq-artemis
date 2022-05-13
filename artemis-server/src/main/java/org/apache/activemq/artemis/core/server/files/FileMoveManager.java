@@ -106,17 +106,17 @@ public class FileMoveManager {
                boolean skip = false;
                for (String prefixToPreserve : prefixesToPreserve) {
                   if (fileMove.startsWith(prefixToPreserve)) {
-                     logger.tracef("skipping %s", fileFrom);
+                     logger.trace("skipping {}", fileFrom);
                      skip = true;
                      break;
                   }
                }
                if (!skip) {
-                  logger.tracef("deleting %s", fileFrom);
+                  logger.trace("deleting {}", fileFrom);
                   deleteTree(fileFrom);
                }
             } else {
-               logger.tracef("deleting %s", fileFrom);
+               logger.trace("deleting {}", fileFrom);
                deleteTree(fileFrom);
             }
          }
@@ -135,20 +135,20 @@ public class FileMoveManager {
                boolean copy = false;
                for (String prefixToPreserve : prefixesToPreserve) {
                   if (fileMove.startsWith(prefixToPreserve)) {
-                     logger.tracef("skipping %s", fileFrom);
+                     logger.trace("skipping {}", fileFrom);
                      copy = true;
                      break;
                   }
                }
                if (copy) {
-                  logger.tracef("copying %s to %s", fileFrom, fileTo);
+                  logger.trace("copying {} to {}", fileFrom, fileTo);
                   Files.copy(fileFrom.toPath(), fileTo.toPath());
                } else {
-                  logger.tracef("doMove:: moving %s as %s", fileFrom, fileTo);
+                  logger.trace("doMove:: moving {} as {}", fileFrom, fileTo);
                   Files.move(fileFrom.toPath(), fileTo.toPath());
                }
             } else {
-               logger.tracef("doMove:: moving %s as %s", fileFrom, fileTo);
+               logger.trace("doMove:: moving {} as {}", fileFrom, fileTo);
                Files.move(fileFrom.toPath(), fileTo.toPath());
             }
          }
@@ -173,7 +173,7 @@ public class FileMoveManager {
          int foldersToDelete = folders + creating - maxFolders;
 
          if (foldersToDelete > 0) {
-            logger.tracef("There are %d folders to delete", foldersToDelete);
+            logger.trace("There are {} folders to delete", foldersToDelete);
             int[] ids = getIDlist();
             for (int i = 0; i < foldersToDelete; i++) {
                File file = getFolder(ids[i]);

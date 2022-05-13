@@ -190,7 +190,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
          return;
       }
 
-      logger.tracef("Starting remoting service %s", this);
+      logger.trace("Starting remoting service {}", this);
 
       paused = false;
 

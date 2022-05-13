@@ -103,14 +103,12 @@ public class SharedNothingLiveActivation extends LiveActivation {
          if (replicatedPolicy.isCheckForLiveServer() && isNodeIdUsed()) {
             //set for when we failback
             if (logger.isTraceEnabled()) {
-               logger.tracef("@@@ setting up replicatedPolicy.getReplicaPolicy for back start, replicaPolicy::%s, isBackup=%s, server=%s", replicatedPolicy.getReplicaPolicy(), replicatedPolicy.isBackup(), activeMQServer);
+               logger.trace("setting up replicatedPolicy.getReplicaPolicy for back start, replicaPolicy::{}, isBackup={}, server={}", replicatedPolicy.getReplicaPolicy(), replicatedPolicy.isBackup(), activeMQServer);
             }
             replicatedPolicy.getReplicaPolicy().setReplicatedPolicy(replicatedPolicy);
             activeMQServer.setHAPolicy(replicatedPolicy.getReplicaPolicy());
             return;
          }
-
-         logger.trace("@@@ did not do it now");
 
          activeMQServer.initialisePart1(false);
 

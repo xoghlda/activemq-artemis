@@ -69,6 +69,10 @@ public class SimpleBundleTest {
       MyException myException = SimpleBundle.MESSAGES.someExceptionWithCause(logRandomString, myCause);
       Assert.assertEquals("TST8 EX" + logRandomString, myException.getMessage());
       Assert.assertSame(myCause, myException.getCause());
+   }
 
+   @Test
+   public void testABCD() {
+      Assert.assertEquals("TST9 A B C D", SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
    }
 }

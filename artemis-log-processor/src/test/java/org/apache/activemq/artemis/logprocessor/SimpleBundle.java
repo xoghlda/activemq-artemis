@@ -49,4 +49,7 @@ public interface SimpleBundle {
 
    @Message(id = 8, value = "EX{}")
    MyException someExceptionWithCause(String message, Exception myCause);
+
+   @Message(id = 9, value = "{} {} {} {} {}")
+   String abcd(String a, String b, String c, String d);
 }

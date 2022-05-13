@@ -190,7 +190,7 @@ public final class BindingsImpl implements Bindings {
       }
 
       if (logger.isTraceEnabled()) {
-         logger.tracef("Redistributing message {}", message);
+         logger.trace("Redistributing message {}", message);
       }
 
       final SimpleString routingName = originatingQueue.getName();
