@@ -229,10 +229,28 @@ public class LogProcessor extends AbstractProcessor {
    }
 
    boolean isException(TypeMirror parameter) {
-       //TODO: Or Exception? The args are fairly split, some Throwable, some Exception, some custom types.
-      if (parameter.toString().equals("java.lang.Throwable")) {
+      if (parameter == null) {
+         // This should never happen, but my OCD can't help here, I'm adding this just in case
+         return false;
+      }
+      String parameterClazz = parameter.toString();
+      if (parameterClazz.equals("java.lang.Throwable") || parameterClazz.endsWith("Exception")) { // bad luck if you named or class with Exception and it was not an exception ;)
          return true;
       }
+
+      switch(parameterClazz) {
+         // some known types
+         case "java.lang.String":
+         case "java.lang.Object":
+         case "java.lang.Long":
+         case "java.lang.Integer":
+         case "java.lang.Number":
+         case "java.lang.Thread":
+         case "java.lang.ThreadGroup":
+         case "org.apache.activemq.artemis.api.core.SimpleString":
+            return false;
+      }
+
       if (parameter instanceof DeclaredType) {
          DeclaredType declaredType = (DeclaredType) parameter;
          if (declaredType.asElement() instanceof TypeElement) {

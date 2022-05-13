@@ -52,4 +52,7 @@ public interface SimpleBundle {
 
    @Message(id = 9, value = "{} {} {} {}")
    String abcd(String a, String b, String c, String d);
+
+   @Message(id = 10, value = "{} {} {} {}")
+   String objectsAbcd(MyObject a, MyObject b, MyObject c, MyObject d);
 }

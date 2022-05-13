@@ -27,8 +27,6 @@ import org.slf4j.LoggerFactory;
 
 public class SimpleBundleTest {
 
-   private static final Logger logger = LoggerFactory.getLogger(SimpleBundleTest.class);
-
    @Test
    public void testSimple() {
       Assert.assertEquals("TST1 Test", SimpleBundle.MESSAGES.simpleTest());
@@ -77,7 +75,13 @@ public class SimpleBundleTest {
 
    @Test
    public void testABCD() {
-      System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D")); //TODO: use logger added at same time?
+      System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
       Assert.assertEquals("TST9 A B C D", SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
+   }
+
+   @Test
+   public void testObjectsABCD() {
+      System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
+      Assert.assertEquals("TST10 A B C D", SimpleBundle.MESSAGES.objectsAbcd(new MyObject("A"), new MyObject("B"), new MyObject("C"), new MyObject("D")));
    }
 }
