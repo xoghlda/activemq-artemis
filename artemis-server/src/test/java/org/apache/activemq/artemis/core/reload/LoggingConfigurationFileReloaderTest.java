@@ -65,43 +65,43 @@ public class LoggingConfigurationFileReloaderTest {
       LoggingConfigurationFileReloader loggingConfigurationFileReloader = new LoggingConfigurationFileReloader();
       loggingConfigurationFileReloader.reload(ClassloadingUtil.findResource("reload-logging-1.properties"));
 
-      assertTrue(root.isEnabled(Logger.Level.ERROR));
-      assertTrue(root.isEnabled(Logger.Level.WARN));
-      assertFalse(root.isEnabled(Logger.Level.INFO));
-      assertFalse(root.isEnabled(Logger.Level.DEBUG));
-      assertFalse(root.isEnabled(Logger.Level.TRACE));
+      assertTrue(root.isErrorEnabled());
+      assertTrue(root.isWarnEnabled());
+      assertFalse(root.isInfoEnabled());
+      assertFalse(root.isDebugEnabled());
+      assertFalse(root.isTraceEnabled());
 
-      assertTrue(test1.isEnabled(Logger.Level.ERROR));
-      assertTrue(test1.isEnabled(Logger.Level.WARN));
-      assertTrue(test1.isEnabled(Logger.Level.INFO));
-      assertTrue(test1.isEnabled(Logger.Level.DEBUG));
-      assertTrue(test1.isEnabled(Logger.Level.TRACE));
+      assertTrue(test1.isErrorEnabled());
+      assertTrue(test1.isWarnEnabled());
+      assertTrue(test1.isInfoEnabled());
+      assertTrue(test1.isDebugEnabled());
+      assertTrue(test1.isTraceEnabled());
 
-      assertTrue(test2.isEnabled(Logger.Level.ERROR));
-      assertFalse(test2.isEnabled(Logger.Level.WARN));
-      assertFalse(test2.isEnabled(Logger.Level.INFO));
-      assertFalse(test2.isEnabled(Logger.Level.DEBUG));
-      assertFalse(test2.isEnabled(Logger.Level.TRACE));
+      assertTrue(test2.isErrorEnabled());
+      assertFalse(test2.isWarnEnabled());
+      assertFalse(test2.isInfoEnabled());
+      assertFalse(test2.isDebugEnabled());
+      assertFalse(test2.isTraceEnabled());
 
       loggingConfigurationFileReloader.reload(ClassloadingUtil.findResource("reload-logging-2.properties"));
 
-      assertTrue(root.isEnabled(Logger.Level.ERROR));
-      assertFalse(root.isEnabled(Logger.Level.WARN));
-      assertFalse(root.isEnabled(Logger.Level.INFO));
-      assertFalse(root.isEnabled(Logger.Level.DEBUG));
-      assertFalse(root.isEnabled(Logger.Level.TRACE));
+      assertTrue(root.isErrorEnabled());
+      assertFalse(root.isWarnEnabled());
+      assertFalse(root.isInfoEnabled());
+      assertFalse(root.isDebugEnabled());
+      assertFalse(root.isTraceEnabled());
 
-      assertTrue(test1.isEnabled(Logger.Level.ERROR));
-      assertTrue(test1.isEnabled(Logger.Level.WARN));
-      assertFalse(test1.isEnabled(Logger.Level.INFO));
-      assertFalse(test1.isEnabled(Logger.Level.DEBUG));
-      assertFalse(test1.isEnabled(Logger.Level.TRACE));
+      assertTrue(test1.isErrorEnabled());
+      assertTrue(test1.isWarnEnabled());
+      assertFalse(test1.isInfoEnabled());
+      assertFalse(test1.isDebugEnabled());
+      assertFalse(test1.isTraceEnabled());
 
-      assertTrue(test3.isEnabled(Logger.Level.ERROR));
-      assertTrue(test3.isEnabled(Logger.Level.WARN));
-      assertTrue(test3.isEnabled(Logger.Level.INFO));
-      assertTrue(test3.isEnabled(Logger.Level.DEBUG));
-      assertFalse(test3.isEnabled(Logger.Level.TRACE));
+      assertTrue(test3.isErrorEnabled());
+      assertTrue(test3.isWarnEnabled());
+      assertTrue(test3.isInfoEnabled());
+      assertTrue(test3.isDebugEnabled());
+      assertFalse(test3.isTraceEnabled());
    }
 
    @Test
@@ -111,19 +111,19 @@ public class LoggingConfigurationFileReloaderTest {
 
    public void validateInitialLoggers() {
       // everything defaults to INFO
-      assertTrue(root.isEnabled(Logger.Level.ERROR));
-      assertTrue(root.isEnabled(Logger.Level.WARN));
-      assertFalse(root.isEnabled(Logger.Level.DEBUG));
-      assertFalse(root.isEnabled(Logger.Level.TRACE));
+      assertTrue(root.isErrorEnabled());
+      assertTrue(root.isWarnEnabled());
+      assertFalse(root.isDebugEnabled());
+      assertFalse(root.isTraceEnabled());
 
-      assertTrue(test1.isEnabled(Logger.Level.ERROR));
-      assertTrue(test1.isEnabled(Logger.Level.WARN));
-      assertFalse(test1.isEnabled(Logger.Level.DEBUG));
-      assertFalse(test1.isEnabled(Logger.Level.TRACE));
+      assertTrue(test1.isErrorEnabled());
+      assertTrue(test1.isWarnEnabled());
+      assertFalse(test1.isDebugEnabled());
+      assertFalse(test1.isTraceEnabled());
 
-      assertTrue(test2.isEnabled(Logger.Level.ERROR));
-      assertTrue(test2.isEnabled(Logger.Level.WARN));
-      assertFalse(test2.isEnabled(Logger.Level.DEBUG));
-      assertFalse(test2.isEnabled(Logger.Level.TRACE));
+      assertTrue(test2.isErrorEnabled());
+      assertTrue(test2.isWarnEnabled());
+      assertFalse(test2.isDebugEnabled());
+      assertFalse(test2.isTraceEnabled());
    }
 }

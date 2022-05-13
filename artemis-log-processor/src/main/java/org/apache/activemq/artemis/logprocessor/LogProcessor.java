@@ -32,12 +32,10 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.PrintWriter;
-import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.sun.jdi.ClassType;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
@@ -206,10 +204,9 @@ public class LogProcessor extends AbstractProcessor {
 
       String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
       if (!hasParameters) {
-         writerOutput.println("      String returnString = \"" + formattingString + "\";");
+         writerOutput.println("     String returnString = \"" + formattingString + "\";");
       } else {
-         writerOutput.println("      FormattingTuple tuple = MessageFormatter.format(\"" + formattingString + "\"," + callList + ");");
-         writerOutput.println("      String returnString = tuple.getMessage();");
+         writerOutput.println("     String returnString = MessageFormatter.arrayFormat(\"" + formattingString + "\", new Object[]{" + callList + "}).getMessage();");
       }
 
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {

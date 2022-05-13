@@ -136,7 +136,7 @@ public class ReloadableProperties {
          //                } catch (NoClassDefFoundError e) {
          //                    // this Happens whe jasypt is not on the classpath..
          //                    key.setDecrypt(false);
-         //                    ActiveMQServerLogger.LOGGER.info("jasypt is not on the classpath: password decryption disabled.");
+         //                    logger.info("jasypt is not on the classpath: password decryption disabled.");
          //                }
          //            }
       } finally {

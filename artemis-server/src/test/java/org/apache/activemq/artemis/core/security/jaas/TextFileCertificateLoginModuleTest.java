@@ -122,10 +122,10 @@ public class TextFileCertificateLoginModuleTest {
       long timeTaken = endTime - startTime;
 
       for (int i = 0; i < NUMBER_SUBJECTS; i++) {
-         ActiveMQServerLogger.LOGGER.info("subject is: " + subjects[i].getPrincipals().toString());
+         logger.info("subject is: " + subjects[i].getPrincipals().toString());
       }
 
-      ActiveMQServerLogger.LOGGER.info(usersFiles + ": Time taken is " + timeTaken);
+      logger.info(usersFiles + ": Time taken is " + timeTaken);
 
    }
 

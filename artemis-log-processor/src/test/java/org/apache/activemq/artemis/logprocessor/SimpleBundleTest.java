@@ -22,8 +22,12 @@ import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SimpleBundleTest {
+
+   private static final Logger logger = LoggerFactory.getLogger(SimpleBundleTest.class);
 
    @Test
    public void testSimple() {
@@ -73,6 +77,7 @@ public class SimpleBundleTest {
 
    @Test
    public void testABCD() {
+      System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
       Assert.assertEquals("TST9 A B C D", SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
    }
 }

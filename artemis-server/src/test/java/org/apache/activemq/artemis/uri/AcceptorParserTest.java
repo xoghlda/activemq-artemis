@@ -64,7 +64,7 @@ public class AcceptorParserTest {
 
       for (TransportConfiguration config : configs) {
          log.debug("config:" + config);
-         log.debug(config.getExtraParams().get("virtualTopicConsumerWildcards"));
+         log.debug("" + config.getExtraParams().get("virtualTopicConsumerWildcards"));
          Assert.assertTrue(config.getExtraParams().get("virtualTopicConsumerWildcards").equals("Consumer.*.>;2"));
       }
    }

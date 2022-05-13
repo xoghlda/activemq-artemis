@@ -748,8 +748,7 @@ public abstract class ActiveMQTestBase extends Assert {
       if (e != null) {
          e.printStackTrace(System.out);
       }
-      ActiveMQServerLogger log0 = ActiveMQServerLogger.LOGGER;
-      log0.debug(message, e);
+      logger.debug(message, e);
    }
 
    /**
@@ -1250,7 +1249,7 @@ public abstract class ActiveMQTestBase extends Assert {
          topology.describe() +
          ")";
 
-      ActiveMQServerLogger.LOGGER.error(msg);
+      logger.error(msg);
 
       throw new Exception(msg);
    }
@@ -1283,7 +1282,7 @@ public abstract class ActiveMQTestBase extends Assert {
          topology +
          ")";
 
-      ActiveMQServerLogger.LOGGER.error(msg);
+      logger.error(msg);
 
       throw new Exception(msg);
    }

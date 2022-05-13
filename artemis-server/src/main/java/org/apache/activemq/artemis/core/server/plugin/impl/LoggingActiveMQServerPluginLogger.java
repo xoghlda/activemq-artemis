@@ -36,14 +36,12 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.spi.core.protocol.RemotingConnection;
 import org.apache.activemq.artemis.utils.critical.CriticalComponent;
-import org.jboss.logging.BasicLogger;
-import org.jboss.logging.Logger;
 
 /**
  * Logger Code 84
  */
 @LogBundle(projectCode = "AMQ")
-public interface LoggingActiveMQServerPluginLogger extends BasicLogger {
+public interface LoggingActiveMQServerPluginLogger {
 
    /**
     * The LoggingPlugin logger.
