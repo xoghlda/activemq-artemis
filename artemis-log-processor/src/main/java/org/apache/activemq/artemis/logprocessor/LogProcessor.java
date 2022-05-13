@@ -234,7 +234,7 @@ public class LogProcessor extends AbstractProcessor {
          return false;
       }
       String parameterClazz = parameter.toString();
-      if (parameterClazz.equals("java.lang.Throwable") || parameterClazz.endsWith("Exception")) { // bad luck if you named or class with Exception and it was not an exception ;)
+      if (parameterClazz.equals("java.lang.Throwable") || parameterClazz.endsWith("Exception")) { // bad luck if you named a class with Exception and it was not an exception ;)
          return true;
       }
 
