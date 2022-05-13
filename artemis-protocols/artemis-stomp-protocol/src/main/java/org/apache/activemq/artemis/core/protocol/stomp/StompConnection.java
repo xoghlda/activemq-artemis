@@ -58,14 +58,15 @@ import org.apache.activemq.artemis.utils.CompositeAddress;
 import org.apache.activemq.artemis.utils.ConfigurationHelper;
 import org.apache.activemq.artemis.utils.ExecutorFactory;
 import org.apache.activemq.artemis.utils.VersionLoader;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.core.protocol.stomp.ActiveMQStompProtocolMessageBundle.BUNDLE;
 import static org.apache.activemq.artemis.reader.MessageUtil.CONNECTION_ID_PROPERTY_NAME_STRING;
 
 public final class StompConnection implements RemotingConnection {
 
-   private static final Logger logger = Logger.getLogger(StompConnection.class);
+   private static final Logger logger = LoggerFactory.getLogger(StompConnection.class);
 
    private static final String SERVER_NAME = "ActiveMQ-Artemis/" + VersionLoader.getVersion().getFullVersion() +
       " ActiveMQ Artemis Messaging Engine";
@@ -309,7 +310,7 @@ public final class StompConnection implements RemotingConnection {
       } catch (ActiveMQQueueExistsException e) {
          // ignore
       } catch (Exception e) {
-         ActiveMQStompProtocolLogger.LOGGER.debug("Exception while auto-creating destination", e);
+         logger.debug("Exception while auto-creating destination", e);
          throw new ActiveMQStompException(e.getMessage(), e).setHandler(frameHandler);
       }
    }
