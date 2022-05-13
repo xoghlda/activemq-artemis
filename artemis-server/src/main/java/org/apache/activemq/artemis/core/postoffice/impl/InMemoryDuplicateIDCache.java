@@ -96,7 +96,7 @@ final class InMemoryDuplicateIDCache implements DuplicateIDCache {
             if (id.equals(duplicateID)) {
                ids.set(index, null);
                if (logger.isTraceEnabled()) {
-                  logger.trace("address = {} deleting id=", address, describeID(duplicateID.bytes));
+                  logger.trace("address = {} deleting id=", address, describeID(duplicateID.bytes)); //TODO: second arg isnt (already wasnt) used. Value is logged at start of method though.
                }
             }
          }
@@ -118,7 +118,7 @@ final class InMemoryDuplicateIDCache implements DuplicateIDCache {
 
       if (logger.isTraceEnabled()) {
          if (contains) {
-            logger.trace("address = {} found a duplicate ", address, describeID(id.bytes));
+            logger.trace("address = {} found a duplicate ", address, describeID(id.bytes)); //TODO: second arg isnt (already wasnt) used.
          }
       }
       return contains;

@@ -229,6 +229,7 @@ public class LogProcessor extends AbstractProcessor {
    }
 
    boolean isException(TypeMirror parameter) {
+       //TODO: Or Exception? The args are fairly split, some Throwable, some Exception, some custom types.
       if (parameter.toString().equals("java.lang.Throwable")) {
          return true;
       }
@@ -316,6 +317,7 @@ public class LogProcessor extends AbstractProcessor {
             throw new IllegalStateException("illegal method level " + messageAnnotation.level());
       }
 
+      //TODO: handle causes being passed in the args to be logged, but not necessarily (often not) being last arg at present as SLF4J/frameworks expect.
       String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
       if (!hasParameters) {
          writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");

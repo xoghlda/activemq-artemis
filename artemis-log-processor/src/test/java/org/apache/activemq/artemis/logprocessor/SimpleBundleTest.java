@@ -77,7 +77,7 @@ public class SimpleBundleTest {
 
    @Test
    public void testABCD() {
-      System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
+      System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D")); //TODO: use logger added at same time?
       Assert.assertEquals("TST9 A B C D", SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
    }
 }

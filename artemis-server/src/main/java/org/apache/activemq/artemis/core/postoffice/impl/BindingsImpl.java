@@ -452,7 +452,7 @@ public final class BindingsImpl implements Bindings {
             resp = groupingGroupingHandler.propose(new Proposal(fullID, theBinding.getClusterName()));
 
             if (resp == null) {
-               logger.debug("it got a timeout on propose, trying again, number of retries: " + tries);
+               logger.debug("it got a timeout on propose, trying again, number of retries: {}", tries);
                // it timed out, so we will check it through routeAndcheckNull
                theBinding = null;
             }

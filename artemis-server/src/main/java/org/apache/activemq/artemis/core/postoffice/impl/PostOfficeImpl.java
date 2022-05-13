@@ -1174,7 +1174,7 @@ public class PostOfficeImpl implements PostOffice, NotificationListener, Binding
             addressInfo.incrementUnRoutedMessageCount();
          }
          // this is a debug and not warn because this could be a regular scenario on publish-subscribe queues (or topic subscriptions on JMS)
-         logger.debug("Couldn't find any bindings for address={} on message={}", message, address, message);
+         logger.debug("Couldn't find any bindings for address={} on message={}", address, message); //TODO: the arg-removal fix made reversed the values position but fixed the names. Could move the names instead to retain position?
       }
 
       if (server.hasBrokerMessagePlugins()) {

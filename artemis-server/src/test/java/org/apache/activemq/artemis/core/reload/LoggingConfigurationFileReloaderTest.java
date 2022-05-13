@@ -32,6 +32,7 @@ import org.junit.runners.MethodSorters;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+//TODO: This is testing JBoss Logging reloading via LoggingConfigurationFileReloader, it should be updated or removed if using something else
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoggingConfigurationFileReloaderTest {
 
