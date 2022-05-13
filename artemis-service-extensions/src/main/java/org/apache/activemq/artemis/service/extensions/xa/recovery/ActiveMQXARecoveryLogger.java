@@ -31,24 +31,24 @@ public interface ActiveMQXARecoveryLogger {
 
    ActiveMQXARecoveryLogger LOGGER = CodeFactory.getCodeClass(ActiveMQXARecoveryLogger.class, ActiveMQXARecoveryLogger.class.getPackage().getName());
 
-   @LogMessage(id = 171003, value = "JMS Server Manager Running cached command for {0}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 171003, value = "JMS Server Manager Running cached command for {}", level = LogMessage.Level.INFO)
    void serverRunningCachedCommand(Runnable run);
 
-   @LogMessage(id = 171004, value = "JMS Server Manager Caching command for {0} since the JMS Server is not active.",
+   @LogMessage(id = 171004, value = "JMS Server Manager Caching command for {} since the JMS Server is not active.",
       level = LogMessage.Level.INFO)
    void serverCachingCommand(Object runnable);
 
-   @LogMessage(id = 172005, value = "Invalid \"host\" value \"0.0.0.0\" detected for \"{0}\" connector. Switching to \"{1}\". If this new address is incorrect please manually configure the connector to use the proper one.",
+   @LogMessage(id = 172005, value = "Invalid \"host\" value \"0.0.0.0\" detected for \"{}\" connector. Switching to \"{}\". If this new address is incorrect please manually configure the connector to use the proper one.",
       level = LogMessage.Level.WARN)
    void invalidHostForConnector(String name, String newHost);
 
-   @LogMessage(id = 172007, value = "Queue {0} does not exist on the topic {1}. It was deleted manually probably.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 172007, value = "Queue {} does not exist on the topic {}. It was deleted manually probably.", level = LogMessage.Level.WARN)
    void noQueueOnTopic(String queueName, String name);
 
-   @LogMessage(id = 172008, value = "XA Recovery can not connect to any broker on recovery {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 172008, value = "XA Recovery can not connect to any broker on recovery {}", level = LogMessage.Level.WARN)
    void recoveryConnectFailed(String s);
 
-   @LogMessage(id = 172011, value = "error unbinding {0} from JNDI", level = LogMessage.Level.WARN)
+   @LogMessage(id = 172011, value = "error unbinding {} from JNDI", level = LogMessage.Level.WARN)
    void jndiUnbindError(@Cause Exception e, String key);
 
    @LogMessage(id = 172012, value = "JMS Server Manager error", level = LogMessage.Level.WARN)
@@ -57,26 +57,26 @@ public interface ActiveMQXARecoveryLogger {
    @LogMessage(id = 172013, value = "Error in XA Recovery recover", level = LogMessage.Level.WARN)
    void xaRecoverError(@Cause Exception e);
 
-   @LogMessage(id = 172014, value = "Notified of connection failure in xa recovery connectionFactory for provider {0} will attempt reconnect on next pass",
+   @LogMessage(id = 172014, value = "Notified of connection failure in xa recovery connectionFactory for provider {} will attempt reconnect on next pass",
       level = LogMessage.Level.WARN)
    void xaRecoverConnectionError(@Cause Exception e, ClientSessionFactory csf);
 
-   @LogMessage(id = 172015, value = "Can not connect to {0} on auto-generated resource recovery",
+   @LogMessage(id = 172015, value = "Can not connect to {} on auto-generated resource recovery",
       level = LogMessage.Level.WARN)
    void xaRecoverAutoConnectionError(@Cause Throwable e, XARecoveryConfig csf);
 
    @LogMessage(id = 172016, value = "Error in XA Recovery", level = LogMessage.Level.DEBUG)
    void xaRecoveryError(@Cause Exception e);
 
-   @LogMessage(id = 172017, value = "Tried to correct invalid \"host\" value \"0.0.0.0\" for \"{0}\" connector, but received an exception.",
+   @LogMessage(id = 172017, value = "Tried to correct invalid \"host\" value \"0.0.0.0\" for \"{}\" connector, but received an exception.",
       level = LogMessage.Level.WARN)
    void failedToCorrectHost(@Cause Exception e, String name);
 
-   @LogMessage(id = 172018, value = "Could not start recovery discovery on {0}, we will retry every recovery scan until the server is available",
+   @LogMessage(id = 172018, value = "Could not start recovery discovery on {}, we will retry every recovery scan until the server is available",
       level = LogMessage.Level.WARN)
    void xaRecoveryStartError(XARecoveryConfig e);
 
-   @LogMessage(id = 174000, value = "key attribute missing for JMS configuration {0}", level = LogMessage.Level.ERROR)
+   @LogMessage(id = 174000, value = "key attribute missing for JMS configuration {}", level = LogMessage.Level.ERROR)
    void jmsConfigMissingKey(Node e);
 
    @LogMessage(id = 174002, value = "Failed to start JMS deployer", level = LogMessage.Level.ERROR)
