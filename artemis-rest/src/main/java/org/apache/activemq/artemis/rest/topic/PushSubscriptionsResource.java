@@ -39,8 +39,12 @@ import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
 import org.apache.activemq.artemis.jms.client.ConnectionFactoryOptions;
 import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.queue.push.PushConsumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PushSubscriptionsResource {
+
+   private static final Logger logger = LoggerFactory.getLogger(PushSubscriptionsResource.class);
 
    protected Map<String, PushSubscription> consumers = new ConcurrentHashMap<>();
    protected ClientSessionFactory sessionFactory;
@@ -120,7 +124,7 @@ public class PushSubscriptionsResource {
 
    @POST
    public Response create(@Context UriInfo uriInfo, PushTopicRegistration registration) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       //System.out.println("PushRegistration: " + registration);
       // todo put some logic here to check for duplicates
@@ -156,7 +160,7 @@ public class PushSubscriptionsResource {
    @Path("{consumer-id}")
    @Produces("application/xml")
    public PushTopicRegistration getConsumer(@Context UriInfo uriInfo, @PathParam("consumer-id") String consumerId) {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
 
       PushConsumer consumer = consumers.get(consumerId);
       if (consumer == null) {
@@ -168,7 +172,7 @@ public class PushSubscriptionsResource {
    @DELETE
    @Path("{consumer-id}")
    public void deleteConsumer(@Context UriInfo uriInfo, @PathParam("consumer-id") String consumerId) {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       PushConsumer consumer = consumers.remove(consumerId);
       if (consumer == null) {

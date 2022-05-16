@@ -21,8 +21,12 @@ import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.MessageHandler;
 import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PushConsumerMessageHandler implements MessageHandler {
+
+   private static final Logger logger = LoggerFactory.getLogger(PushConsumerMessageHandler.class);
 
    private ClientSession session;
    private PushConsumer pushConsumer;
@@ -34,21 +38,21 @@ public class PushConsumerMessageHandler implements MessageHandler {
 
    @Override
    public void onMessage(ClientMessage clientMessage) {
-      ActiveMQRestLogger.LOGGER.debug(this + ": receiving " + clientMessage);
+      logger.debug(this + ": receiving " + clientMessage);
 
       try {
          clientMessage.acknowledge();
-         ActiveMQRestLogger.LOGGER.debug(this + ": acknowledged " + clientMessage);
+         logger.debug(this + ": acknowledged " + clientMessage);
       } catch (ActiveMQException e) {
          throw new RuntimeException(e.getMessage(), e);
       }
 
-      ActiveMQRestLogger.LOGGER.debug(this + ": pushing " + clientMessage + " via " + pushConsumer.getStrategy());
+      logger.debug(this + ": pushing " + clientMessage + " via " + pushConsumer.getStrategy());
       boolean acknowledge = pushConsumer.getStrategy().push(clientMessage);
 
       if (acknowledge) {
          try {
-            ActiveMQRestLogger.LOGGER.debug("Acknowledging: " + clientMessage.getMessageID());
+            logger.debug("Acknowledging: " + clientMessage.getMessageID());
             session.commit();
             return;
          } catch (ActiveMQException e) {

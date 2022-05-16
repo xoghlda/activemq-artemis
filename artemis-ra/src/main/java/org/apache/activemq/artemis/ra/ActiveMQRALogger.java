@@ -22,7 +22,6 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 import org.apache.activemq.artemis.ra.inflow.ActiveMQActivationSpec;
-import org.slf4j.Logger;
 
 import javax.jms.IllegalStateException;
 
