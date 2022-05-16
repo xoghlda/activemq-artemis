@@ -20,7 +20,8 @@ package org.apache.activemq.artemis.logprocessor;
 /** I don't want the log processor to depend on the logger itself.
  *  the reason for that is I would need to configure log4j to be used during compilation time on the javac.
  *  Instead I will just use a simple Logger controlled by a boolean property.
- *  Simply set a variable named org.apache.activemq.artemis.logprocessor.Logger.active=true
+ *
+ *  Set an env variable ARTEMIS_PROCESSOR_LOGGER=true to see this logger output
  */
 public class Logger {
 
