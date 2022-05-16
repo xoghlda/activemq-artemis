@@ -146,7 +146,7 @@ public abstract class Configurable extends ActionAbstract {
          // To support Windows paths as explained above.
          configuration = configuration.replace("\\", "/");
 
-         ActiveMQBootstrapLogger.LOGGER.usingBrokerConfig(configuration);
+         logger.debug("Using broker configuration: {}", configuration);
       }
 
       return configuration;

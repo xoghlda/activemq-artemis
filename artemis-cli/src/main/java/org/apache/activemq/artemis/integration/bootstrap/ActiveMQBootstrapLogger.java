@@ -52,18 +52,6 @@ public interface ActiveMQBootstrapLogger {
    @LogMessage(id = 101003, value = "Halting ActiveMQ Artemis Server after user request", level = LogMessage.Level.INFO)
    void serverKilled();
 
-   @LogMessage(id = 101005, value = "Using broker configuration: {}", level = LogMessage.Level.DEBUG)
-   void usingBrokerConfig(String location);
-
-   @LogMessage(id = 102000, value = "Error during undeployment: {}", level = LogMessage.Level.WARN)
-   void errorDuringUndeployment(@Cause Throwable t, String name);
-
    @LogMessage(id = 104000, value = "Failed to delete file {}", level = LogMessage.Level.ERROR)
    void errorDeletingFile(String name);
-
-   @LogMessage(id = 104001, value = "Failed to start server", level = LogMessage.Level.ERROR)
-   void errorStartingServer(@Cause Exception e);
-
-   @LogMessage(id = 104002, value = "The print data operation failed: {}", level = LogMessage.Level.ERROR)
-   void printDataFailed(String exceptionMessage);
 }
