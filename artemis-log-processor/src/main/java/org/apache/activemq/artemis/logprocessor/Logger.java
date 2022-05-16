@@ -48,7 +48,6 @@ public class Logger {
    public static final Logger LOGGER = new Logger();
 
    private Logger() {
-      System.out.println("Active = " + active);
    }
 
    public static Logger getLogger() {
