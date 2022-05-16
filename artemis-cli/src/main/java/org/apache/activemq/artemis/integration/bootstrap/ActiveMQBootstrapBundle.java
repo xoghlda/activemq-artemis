@@ -16,8 +16,8 @@
  */
 package org.apache.activemq.artemis.integration.bootstrap;
 
-import org.jboss.logging.Messages;
-import org.jboss.logging.annotations.MessageBundle;
+import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 
 /**
  * Logger Code 10
@@ -26,9 +26,9 @@ import org.jboss.logging.annotations.MessageBundle;
  *
  * so 109000 to 109999
  */
-@MessageBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ")
 public interface ActiveMQBootstrapBundle {
 
-   ActiveMQBootstrapBundle BUNDLE = Messages.getBundle(ActiveMQBootstrapBundle.class);
+   ActiveMQBootstrapBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQBootstrapBundle.class);
 
 }
