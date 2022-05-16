@@ -37,7 +37,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -51,18 +50,11 @@ public class LogProcessor extends AbstractProcessor {
 
       try {
 
-         System.out.println("*******************************************************************************************************************************");
-         for (TypeElement e : annotations) {
-            System.out.println("e::" + e);
-            for (Element annotatedTypeEl : roundEnv.getElementsAnnotatedWith(e)) {
-               System.out.println("annotated::" + annotatedTypeEl);
-            }
-         }
-         System.out.println("*******************************************************************************************************************************");
 
          for (TypeElement annotation : annotations) {
-            System.out.println("Annotation: " + annotation);
+            Logger.getLogger().debug("Annotation: " + annotation);
             for (Element annotatedTypeEl : roundEnv.getElementsAnnotatedWith(annotation)) {
+
 
                TypeElement annotatedType = (TypeElement) annotatedTypeEl;
 
@@ -72,7 +64,12 @@ public class LogProcessor extends AbstractProcessor {
                String interfaceName = annotatedType.getSimpleName().toString();
                String simpleClassName = interfaceName + "_impl";
                JavaFileObject fileObject = processingEnv.getFiler().createSourceFile(fullClassName);
-               System.out.println("file::" + fileObject);
+
+               if (Logger.getLogger().isDebug()) {
+                  Logger.getLogger().debug("*******************************************************************************************************************************");
+                  Logger.getLogger().debug("processing " + fullClassName + ", generating: " + fileObject.getName());
+               }
+
                PrintWriter writerOutput = new PrintWriter(fileObject.openWriter());
 
                // header
@@ -121,20 +118,26 @@ public class LogProcessor extends AbstractProcessor {
 
                      Message messageAnnotation = el.getAnnotation(Message.class);
                      LogMessage logAnnotation = el.getAnnotation(LogMessage.class);
-                     GetLogger getLogger = el.getAnnotation(GetLogger.class);
 
-
-                     if (messageAnnotation != null && logAnnotation != null && getLogger != null) { //This requires all 3 are set to fail, it wont pick up other combinations as the message suggests might be wanted.
+                     if (messageAnnotation != null && logAnnotation != null) {
                         processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Cannot use combied annotations " + el);
                         return false;
                      }
 
+                     if (Logger.getLogger().isDebug()) {
+                        Logger.getLogger().debug("Generating " + executableMember);
+                     }
+
                      if (messageAnnotation != null) {
+                        if (Logger.getLogger().isDebug()) {
+                           Logger.getLogger().debug("... annotated with " + messageAnnotation);
+                        }
                         generateMessage(bundleAnnotation, writerOutput, executableMember, messageAnnotation, messages);
                      } else if (logAnnotation != null) {
+                        if (Logger.getLogger().isDebug()) {
+                           Logger.getLogger().debug("... annotated with " + logAnnotation);
+                        }
                         generateLogger(bundleAnnotation, writerOutput, executableMember, logAnnotation, messages);
-                     } else if (getLogger != null) {
-                        generateGetLogger(bundleAnnotation, writerOutput, executableMember, getLogger);
                      }
                   }
                }
@@ -190,7 +193,7 @@ public class LogProcessor extends AbstractProcessor {
             callList.append(",");
          }
 
-         if (isException(parameter.asType())) {
+         if (isException(parameter.asType(), parameter)) {
             if (exceptionParameter != null) {
                throw new IllegalStateException("messageAnnotation " + messageAnnotation.value() + " has two exceptions defined on the method");
             }
@@ -228,13 +231,21 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println();
    }
 
-   boolean isException(TypeMirror parameter) {
-      if (parameter == null) {
+   boolean isException(TypeMirror parameterType, VariableElement methodParameter) {
+      if (parameterType == null) {
          // This should never happen, but my OCD can't help here, I'm adding this just in case
          return false;
       }
-      String parameterClazz = parameter.toString();
+
+      if (Logger.getLogger().isDebug() && methodParameter != null) {
+         Logger.getLogger().debug("... checking if parameter \"" + parameterType + " " + methodParameter + "\" is an exception");
+      }
+
+      String parameterClazz = parameterType.toString();
       if (parameterClazz.equals("java.lang.Throwable") || parameterClazz.endsWith("Exception")) { // bad luck if you named a class with Exception and it was not an exception ;)
+         if (Logger.getLogger().isDebug()) {
+            Logger.getLogger().debug("... Class " + parameterClazz + " was considered an exception");
+         }
          return true;
       }
 
@@ -248,14 +259,21 @@ public class LogProcessor extends AbstractProcessor {
          case "java.lang.Thread":
          case "java.lang.ThreadGroup":
          case "org.apache.activemq.artemis.api.core.SimpleString":
+         case "none":
+            if (Logger.getLogger().isDebug()) {
+               Logger.getLogger().debug("... " + parameterClazz + " is a known type, not an exception!");
+            }
             return false;
       }
 
-      if (parameter instanceof DeclaredType) {
-         DeclaredType declaredType = (DeclaredType) parameter;
+      if (parameterType instanceof DeclaredType) {
+         DeclaredType declaredType = (DeclaredType) parameterType;
          if (declaredType.asElement() instanceof TypeElement) {
             TypeElement theElement = (TypeElement) declaredType.asElement();
-            return isException(theElement.getSuperclass());
+            if (Logger.getLogger().isDebug()) {
+               Logger.getLogger().debug("... ... recursively inspecting super class for Exception on " + parameterClazz + ", looking at superClass " + theElement.getSuperclass());
+            }
+            return isException(theElement.getSuperclass(), null);
          }
       }
       return false;
@@ -263,18 +281,6 @@ public class LogProcessor extends AbstractProcessor {
 
    private String encodeSpecialChars(String input) {
       return input.replaceAll("\n", "\\\\n").replaceAll("\"", "\\\\\"");
-   }
-
-
-   private void generateGetLogger(LogBundle bundleAnnotation,
-                                  PrintWriter writerOutput,
-                                  ExecutableElement executableMember,
-                                  GetLogger loggerAnnotation) {
-
-      // This is really a debug output
-      writerOutput.println("   // " + loggerAnnotation.toString());
-      writerOutput.println("   public Logger " + executableMember.getSimpleName() + "() { return logger; }");
-      writerOutput.println();
    }
 
 
