@@ -156,7 +156,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
 
       this.flushExecutor = flushExecutor;
 
-      ActiveMQServerLogger.LOGGER.addingProtocolSupport(coreProtocolManagerFactory.getProtocols()[0], coreProtocolManagerFactory.getModuleName());
+      ActiveMQServerLogger.LOGGER.addingProtocolSupport(coreProtocolManagerFactory.getModuleName(), coreProtocolManagerFactory.getProtocols()[0]);
       this.protocolMap.put(coreProtocolManagerFactory.getProtocols()[0], coreProtocolManagerFactory);
 
       if (config.isResolveProtocols()) {
@@ -848,7 +848,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
          MessagePersister.registerProtocol(next);
          String[] protocols = next.getProtocols();
          for (String protocol : protocols) {
-            ActiveMQServerLogger.LOGGER.addingProtocolSupport(protocol, next.getModuleName());
+            ActiveMQServerLogger.LOGGER.addingProtocolSupport(next.getModuleName(), protocol);
             protocolMap.put(protocol, next);
          }
       }

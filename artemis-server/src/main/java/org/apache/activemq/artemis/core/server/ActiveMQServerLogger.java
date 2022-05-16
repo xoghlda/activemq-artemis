@@ -91,7 +91,7 @@ public interface ActiveMQServerLogger {
    void serverStopped(String version, SimpleString nodeId, String uptime);
 
    @LogMessage(id = 221003, value = "Deploying {} queue {} on address {}", level = LogMessage.Level.INFO)
-   void deployQueue(String queueName, String addressName, String routingType);
+   void deployQueue(String routingType, String queueName, String addressName);
 
    @LogMessage(id = 221004, value = "{}", level = LogMessage.Level.INFO)
    void dumpServerInfo(String serverInfo);
@@ -141,8 +141,8 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 221019, value = "Deleting unreferenced message id={} from the journal", level = LogMessage.Level.INFO)
    void journalUnreferencedMessage(Long messageID);
 
-   @LogMessage(id = 221020, value = "Started {} Acceptor at {}:{2,number,#} for protocols [{}]", level = LogMessage.Level.INFO)
-   void startedAcceptor(String acceptorType, String host, Integer port, String enabledProtocols);
+   @LogMessage(id = 221020, value = "Started {} Acceptor at {}:{} for protocols [{}]", level = LogMessage.Level.INFO)
+   void startedAcceptor(String acceptorType, String host, int port, String enabledProtocols);
 
    @LogMessage(id = 221021, value = "failed to remove connection", level = LogMessage.Level.INFO)
    void errorRemovingConnection();
@@ -214,7 +214,7 @@ public interface ActiveMQServerLogger {
    void timedOutWaitingCompletions(String bridgeName, long numberOfMessages);
 
    @LogMessage(id = 221043, value = "Protocol module found: [{}]. Adding protocol support for: {}", level = LogMessage.Level.INFO)
-   void addingProtocolSupport(String protocolKey, String moduleName);
+   void addingProtocolSupport(String moduleName, String protocolKey);
 
    @LogMessage(id = 221045, value = "libaio is not available, switching the configuration into NIO", level = LogMessage.Level.INFO)
    void switchingNIO();
@@ -961,7 +961,7 @@ public interface ActiveMQServerLogger {
    void serverIsolatedOnNetwork();
 
    @LogMessage(id = 222214, value = "Destination {} has an inconsistent and negative address size={}.", level = LogMessage.Level.WARN)
-   void negativeAddressSize(long size, String destination);
+   void negativeAddressSize(String destination, long size);
 
    @LogMessage(id = 222215, value = "Global Address Size has negative and inconsistent value as {}", level = LogMessage.Level.WARN)
    void negativeGlobalAddressSize(long size);
@@ -1409,7 +1409,8 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 224060, value = "Invalid protocol specified. Supported protocols are: {}", level = LogMessage.Level.ERROR)
    void invalidProtocol(String validProtocols);
 
-   @LogMessage(id = 224061, value = "Setting both <{}> and <ha-policy> is invalid. Please use <ha-policy> exclusively as <{}> is deprecated. Ignoring <{}> value.", level = LogMessage.Level.ERROR)
+   @Deprecated(since = "1.0.0")
+   @LogMessage(id = 224061, value = "Setting both <{}> and <ha-policy> is invalid. Please use <ha-policy> exclusively. Ignoring value.", level = LogMessage.Level.ERROR)
    void incompatibleWithHAPolicy(String parameter);
 
    @LogMessage(id = 224062, value = "Failed to send SLOW_CONSUMER notification: {}", level = LogMessage.Level.ERROR)
@@ -1418,11 +1419,12 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 224063, value = "Failed to close consumer connections for address {}", level = LogMessage.Level.ERROR)
    void failedToCloseConsumerConnectionsForAddress(String address, @Cause Exception e);
 
-   @LogMessage(id = 224064, value = "Setting <{}> is invalid with this HA Policy Configuration. Please use <ha-policy> exclusively or remove. Ignoring <{}> value.", level = LogMessage.Level.ERROR)
+   @Deprecated(since = "1.0.0")
+   @LogMessage(id = 224064, value = "Setting <{}> is invalid with this HA Policy Configuration. Please use <ha-policy> exclusively or remove. Ignoring value.", level = LogMessage.Level.ERROR)
    void incompatibleWithHAPolicyChosen(String parameter);
 
    @LogMessage(id = 224065, value = "Failed to remove auto-created {} {}", level = LogMessage.Level.ERROR)
-   void errorRemovingAutoCreatedDestination(@Cause Exception e, SimpleString bindingName, String destinationType);
+   void errorRemovingAutoCreatedDestination(@Cause Exception e, String destinationType, SimpleString bindingName);
 
    @LogMessage(id = 224066, value = "Error opening context for LDAP", level = LogMessage.Level.ERROR)
    void errorOpeningContextForLDAP(@Cause Exception e);

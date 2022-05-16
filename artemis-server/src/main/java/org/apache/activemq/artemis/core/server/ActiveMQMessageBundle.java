@@ -396,10 +396,10 @@ public interface ActiveMQMessageBundle {
    ActiveMQQueueMaxConsumerLimitReached maxConsumerLimitReachedForQueue(SimpleString address, SimpleString queueName);
 
    @Message(id = 229201, value = "Expected Routing Type {} but found {} for address {}")
-   ActiveMQUnexpectedRoutingTypeForAddress unexpectedRoutingTypeForAddress(SimpleString address, RoutingType expectedRoutingType, Set<RoutingType> supportedRoutingTypes);
+   ActiveMQUnexpectedRoutingTypeForAddress unexpectedRoutingTypeForAddress(RoutingType expectedRoutingType, Set<RoutingType> supportedRoutingTypes, SimpleString address);
 
    @Message(id = 229202, value = "Invalid Queue Configuration for Queue {}, Address {}.  Expected {} to be {} but was {}")
-   ActiveMQInvalidQueueConfiguration invalidQueueConfiguration(SimpleString address, SimpleString queueName, String queuePropertyName, Object expectedValue, Object actualValue);
+   ActiveMQInvalidQueueConfiguration invalidQueueConfiguration(SimpleString queueName, SimpleString address, String queuePropertyName, Object expectedValue, Object actualValue);
 
    @Message(id = 229203, value = "Address Does Not Exist: {}")
    ActiveMQAddressDoesNotExistException addressDoesNotExist(SimpleString address);

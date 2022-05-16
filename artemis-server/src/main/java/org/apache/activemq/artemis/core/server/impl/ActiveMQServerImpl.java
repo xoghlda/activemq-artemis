@@ -3524,7 +3524,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
 
             config.setAutoCreateAddress(true);
 
-            ActiveMQServerLogger.LOGGER.deployQueue(config.getName().toString(), config.getAddress().toString(), config.getRoutingType().toString());
+            ActiveMQServerLogger.LOGGER.deployQueue(config.getRoutingType().toString(), config.getName().toString(), config.getAddress().toString());
 
             // determine if there is an address::queue match; update it if so
             if (locateQueue(config.getName()) != null && locateQueue(config.getName()).getAddress().equals(config.getAddress())) {

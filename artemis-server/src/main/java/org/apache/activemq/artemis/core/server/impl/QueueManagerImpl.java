@@ -75,7 +75,7 @@ public class QueueManagerImpl extends ReferenceCounterUtil implements QueueManag
       try {
          server.destroyQueue(queueName, null, true, false, false, true);
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.errorRemovingAutoCreatedDestination(e, queueName, "queue");
+         ActiveMQServerLogger.LOGGER.errorRemovingAutoCreatedDestination(e, "queue", queueName);
       }
    }
 

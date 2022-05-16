@@ -935,7 +935,7 @@ public class PagingStoreImpl implements PagingStore {
       boolean globalFull = pagingManager.isGlobalFull();
 
       if (newSize < 0) {
-         ActiveMQServerLogger.LOGGER.negativeAddressSize(newSize, address.toString());
+         ActiveMQServerLogger.LOGGER.negativeAddressSize(address.toString(), newSize);
       }
 
       if (addressFullMessagePolicy == AddressFullMessagePolicy.BLOCK || addressFullMessagePolicy == AddressFullMessagePolicy.FAIL) {
