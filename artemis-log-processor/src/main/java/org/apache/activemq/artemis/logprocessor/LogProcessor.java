@@ -47,25 +47,20 @@ public class LogProcessor extends AbstractProcessor {
    private static final boolean DEBUG;
 
    static {
-      boolean activeResult;
-     {
-         try {
-            String activeEnv = System.getenv("ARTEMIS_PROCESSOR_DEBUG");
-            if (activeEnv != null) {
-               activeResult = Boolean.parseBoolean(activeEnv);
-            } else {
-               activeResult = false;
-            }
-         } catch (Exception e) {
-            e.printStackTrace();
-            activeResult = false;
+      boolean debugResult = false;
+      try {
+         String debugEnvVariable = System.getenv("ARTEMIS_LOG_PROCESSOR_DEBUG");
+         if (debugEnvVariable != null) {
+            debugResult = Boolean.parseBoolean(debugEnvVariable);
          }
+      } catch (Exception e) {
+         e.printStackTrace();
       }
-      DEBUG = activeResult;
+      DEBUG = debugResult;
    }
 
    /**
-    * define a system variable named ARTEMIS_PROCESSOR_DEBUG=true in order to see debug output
+    * define a system variable ARTEMIS_LOG_PROCESSOR_DEBUG=true in order to see debug output
     */
    protected static void debug(String debugMessage) {
       if (DEBUG) {
