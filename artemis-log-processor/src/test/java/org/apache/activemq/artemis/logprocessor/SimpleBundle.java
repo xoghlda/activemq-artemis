@@ -17,9 +17,11 @@
 
 package org.apache.activemq.artemis.logprocessor;
 
+import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.slf4j.Logger;
 
 @LogBundle(projectCode = "TST")
 public interface SimpleBundle {
@@ -55,4 +57,7 @@ public interface SimpleBundle {
 
    @Message(id = 10, value = "{} {} {} {}")
    String objectsAbcd(MyObject a, MyObject b, MyObject c, MyObject d);
+
+   @GetLogger
+   Logger getLogger();
 }

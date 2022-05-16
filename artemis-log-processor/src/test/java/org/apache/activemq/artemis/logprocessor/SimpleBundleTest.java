@@ -81,4 +81,10 @@ public class SimpleBundleTest {
       System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
       Assert.assertEquals("TST10 A B C D", SimpleBundle.MESSAGES.objectsAbcd(new MyObject("A"), new MyObject("B"), new MyObject("C"), new MyObject("D")));
    }
+
+
+   @Test
+   public void testGetLogger() {
+      Assert.assertNotNull(SimpleBundle.MESSAGES.getLogger());
+   }
 }

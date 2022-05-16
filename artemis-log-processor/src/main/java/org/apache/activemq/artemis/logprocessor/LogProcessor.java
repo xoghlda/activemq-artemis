@@ -37,6 +37,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -63,7 +64,9 @@ public class LogProcessor extends AbstractProcessor {
       DEBUG = activeResult;
    }
 
-   // define a system variable named ARTEMIS_PROCESSOR_DEBUG=true in order to see debug output
+   /**
+    * define a system variable named ARTEMIS_PROCESSOR_DEBUG=true in order to see debug output
+    */
    protected static void debug(String debugMessage) {
       if (DEBUG) {
          System.out.println(debugMessage);
@@ -144,27 +147,42 @@ public class LogProcessor extends AbstractProcessor {
 
                      Message messageAnnotation = el.getAnnotation(Message.class);
                      LogMessage logAnnotation = el.getAnnotation(LogMessage.class);
-
-                     if (messageAnnotation != null && logAnnotation != null) {
-                        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Cannot use combied annotations " + el);
-                        return false;
-                     }
+                     GetLogger getLogger = el.getAnnotation(GetLogger.class);
 
                      if (DEBUG) {
                         debug("Generating " + executableMember);
                      }
 
+                     int generatedPaths = 0;
+
                      if (messageAnnotation != null) {
+                        generatedPaths++;
                         if (DEBUG) {
                            debug("... annotated with " + messageAnnotation);
                         }
                         generateMessage(bundleAnnotation, writerOutput, executableMember, messageAnnotation, messages);
-                     } else if (logAnnotation != null) {
+                     }
+
+                     if (logAnnotation != null) {
+                        generatedPaths++;
                         if (DEBUG) {
                            debug("... annotated with " + logAnnotation);
                         }
                         generateLogger(bundleAnnotation, writerOutput, executableMember, logAnnotation, messages);
                      }
+
+                     if (getLogger != null) {
+                        generatedPaths++;
+                        debug("... annotated with " + getLogger);
+                        generateGetLogger(bundleAnnotation, writerOutput, executableMember, getLogger);
+                     }
+
+                     if (generatedPaths > 1) {
+                        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Cannot use combined annotations  on " + executableMember);
+                        return false;
+                     }
+
+
                   }
                }
 
@@ -172,7 +190,7 @@ public class LogProcessor extends AbstractProcessor {
                writerOutput.close();
 
                if (DEBUG) {
-                  debug("done processing " + fullClassName + ", generating: " + fileObject.getName());
+                  debug("done processing " + fullClassName);
                   debug("*******************************************************************************************************************************");
                   debug("");
                }
@@ -312,6 +330,18 @@ public class LogProcessor extends AbstractProcessor {
 
    private String encodeSpecialChars(String input) {
       return input.replaceAll("\n", "\\\\n").replaceAll("\"", "\\\\\"");
+   }
+
+
+   private void generateGetLogger(LogBundle bundleAnnotation,
+                                  PrintWriter writerOutput,
+                                  ExecutableElement executableMember,
+                                  GetLogger loggerAnnotation) {
+
+      // This is really a debug output
+      writerOutput.println("   // " + loggerAnnotation.toString());
+      writerOutput.println("   public Logger " + executableMember.getSimpleName() + "() { return logger; }");
+      writerOutput.println();
    }
 
 
