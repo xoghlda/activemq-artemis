@@ -70,9 +70,9 @@ public interface ActiveMQJMSBridgeLogger {
    @LogMessage(id = 342011, value = "Transaction rolled back, retrying TX", level = LogMessage.Level.WARN)
    void transactionRolledBack(@Cause Exception e);
 
-   @LogMessage(id = 344001, value = "JMS Bridge {}, failed to start source connection", level = LogMessage.Level.WARN)
+   @LogMessage(id = 344001, value = "JMS Bridge {}, failed to start source connection", level = LogMessage.Level.ERROR)
    void jmsBridgeSrcConnectError(@Cause Exception e, String bridgeName);
 
-   @LogMessage(id = 344002, value = "Failed to start JMS Bridge {}.  QoS Mode: {} requires a Transaction Manager, none found", level = LogMessage.Level.WARN)
+   @LogMessage(id = 344002, value = "Failed to start JMS Bridge {}.  QoS Mode: {} requires a Transaction Manager, none found", level = LogMessage.Level.ERROR)
    void jmsBridgeTransactionManagerMissing(String bridgeName, QualityOfServiceMode qosMode);
 }
