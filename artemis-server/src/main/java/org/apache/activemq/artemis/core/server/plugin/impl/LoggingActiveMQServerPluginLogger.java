@@ -116,7 +116,7 @@ public interface LoggingActiveMQServerPluginLogger {
 
    //DEBUG messages
 
-   @LogMessage(id = 843000, value = "beforeCreateSession called with name: {}, username: {}, minLargeMessageSize: {}, connection: {}," + " autoCommitSends: {}, autoCommitAcks: {}, preAcknowledge: {}, xa: {}, publicAddress: {}, context: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843000, value = "beforeCreateSession called with name: {}, username: {}, minLargeMessageSize: {}, connection: {}," + " autoCommitSends: {}, autoCommitAcks: {}, preAcknowledge: {}, xa: {}, publicAddress: {}, context: {}", level = LogMessage.Level.DEBUG)
    void beforeCreateSession(String name,
                             String username,
                             int minLargeMessageSize,
@@ -128,43 +128,43 @@ public interface LoggingActiveMQServerPluginLogger {
                             String publicAddress,
                             OperationContext context);
 
-   @LogMessage(id = 843001, value = "beforeCloseSession called with session name : {}, session: {}, failed: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843001, value = "beforeCloseSession called with session name : {}, session: {}, failed: {}", level = LogMessage.Level.DEBUG)
    void beforeCloseSession(String sessionName, ServerSession session, boolean failed);
 
-   @LogMessage(id = 843002, value = "beforeSessionMetadataAdded called with session name: {} , session: {}, key: {}," + " data: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843002, value = "beforeSessionMetadataAdded called with session name: {} , session: {}, key: {}," + " data: {}", level = LogMessage.Level.DEBUG)
    void beforeSessionMetadataAdded(String sessionName, ServerSession session, String key, String data);
 
-   @LogMessage(id = 843003, value = "added session metadata for session name : {}, session: {}, key: {}, data: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843003, value = "added session metadata for session name : {}, session: {}, key: {}, data: {}", level = LogMessage.Level.DEBUG)
    void afterSessionMetadataAddedDetails(String sessionName, ServerSession session, String key, String data);
 
-   @LogMessage(id = 843004, value = "beforeCreateConsumer called with ConsumerID: {}, QueueBinding: {}, filterString: {}," + " browseOnly: {}, supportLargeMessage: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843004, value = "beforeCreateConsumer called with ConsumerID: {}, QueueBinding: {}, filterString: {}," + " browseOnly: {}, supportLargeMessage: {}", level = LogMessage.Level.DEBUG)
    void beforeCreateConsumer(String consumerID,
                              QueueBinding queueBinding,
                              SimpleString filterString,
                              boolean browseOnly,
                              boolean supportLargeMessage);
 
-   @LogMessage(id = 843005, value = "beforeCloseConsumer called with consumer: {}, consumer sessionID: {}, failed: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843005, value = "beforeCloseConsumer called with consumer: {}, consumer sessionID: {}, failed: {}", level = LogMessage.Level.DEBUG)
    void beforeCloseConsumer(ServerConsumer consumer, String sessionID, boolean failed);
 
-   @LogMessage(id = 843006, value = "beforeCreateQueue called with queueConfig: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843006, value = "beforeCreateQueue called with queueConfig: {}", level = LogMessage.Level.DEBUG)
    void beforeCreateQueue(QueueConfiguration queueConfig);
 
-   @LogMessage(id = 843007, value = "beforeDestroyQueue called with queueName: {}, session: {}, checkConsumerCount: {}," + " removeConsumers: {}, autoDeleteAddress: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843007, value = "beforeDestroyQueue called with queueName: {}, session: {}, checkConsumerCount: {}," + " removeConsumers: {}, autoDeleteAddress: {}", level = LogMessage.Level.DEBUG)
    void beforeDestroyQueue(SimpleString queueName,
                            SecurityAuth session,
                            boolean checkConsumerCount,
                            boolean removeConsumers,
                            boolean autoDeleteAddress);
 
-   @LogMessage(id = 843008, value = "beforeSend called with message: {}, tx: {}, session: {}, direct: {}," + " noAutoCreateQueue: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843008, value = "beforeSend called with message: {}, tx: {}, session: {}, direct: {}," + " noAutoCreateQueue: {}", level = LogMessage.Level.DEBUG)
    void beforeSend(org.apache.activemq.artemis.api.core.Message message,
                    Transaction tx,
                    ServerSession session,
                    boolean direct,
                    boolean noAutoCreateQueue);
 
-   @LogMessage(id = 843009, value = "message ID: {}, message {}, session name: {} with tx: {}, session: {}, direct: {}," + " noAutoCreateQueue: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843009, value = "message ID: {}, message {}, session name: {} with tx: {}, session: {}, direct: {}," + " noAutoCreateQueue: {}", level = LogMessage.Level.DEBUG)
    void afterSendDetails(String messageID,
                          org.apache.activemq.artemis.api.core.Message message,
                          String sessionName,
@@ -173,22 +173,22 @@ public interface LoggingActiveMQServerPluginLogger {
                          boolean direct,
                          boolean noAutoCreateQueue);
 
-   @LogMessage(id = 843010, value = "beforeMessageRoute called with message: {}, context: {}, direct: {}, rejectDuplicates: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843010, value = "beforeMessageRoute called with message: {}, context: {}, direct: {}, rejectDuplicates: {}", level = LogMessage.Level.DEBUG)
    void beforeMessageRoute(org.apache.activemq.artemis.api.core.Message message,
                            RoutingContext context,
                            boolean direct,
                            boolean rejectDuplicates);
 
-   @LogMessage(id = 843011, value = "afterMessageRoute message: {}, with context: {}, direct: {}, rejectDuplicates: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843011, value = "afterMessageRoute message: {}, with context: {}, direct: {}, rejectDuplicates: {}", level = LogMessage.Level.DEBUG)
    void afterMessageRouteDetails(org.apache.activemq.artemis.api.core.Message message,
                                  RoutingContext context,
                                  boolean direct,
                                  boolean rejectDuplicates);
 
-   @LogMessage(id = 843012, value = "beforeDeliver called with consumer: {}, reference: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843012, value = "beforeDeliver called with consumer: {}, reference: {}", level = LogMessage.Level.DEBUG)
    void beforeDeliver(ServerConsumer consumer, MessageReference reference);
 
-   @LogMessage(id = 843013, value = "delivered message with message ID: {} to consumer on address: {}, queue: {}, consumer sessionID: {}," + " consumerID: {}, full message reference: {}, full consumer: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843013, value = "delivered message with message ID: {} to consumer on address: {}, queue: {}, consumer sessionID: {}," + " consumerID: {}, full message reference: {}, full consumer: {}", level = LogMessage.Level.DEBUG)
    void afterDeliverDetails(String messageID,
                             SimpleString queueAddress,
                             SimpleString queueName,
@@ -197,13 +197,13 @@ public interface LoggingActiveMQServerPluginLogger {
                             MessageReference reference,
                             ServerConsumer consumer);
 
-   @LogMessage(id = 843014, value = "acknowledged message: {}, with ackReason: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843014, value = "acknowledged message: {}, with ackReason: {}", level = LogMessage.Level.DEBUG)
    void messageAcknowledgedDetails(MessageReference ref, AckReason reason);
 
-   @LogMessage(id = 843015, value = "beforeDeployBridge called with bridgeConfiguration: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843015, value = "beforeDeployBridge called with bridgeConfiguration: {}", level = LogMessage.Level.DEBUG)
    void beforeDeployBridge(BridgeConfiguration config);
 
-   @LogMessage(id = 843016, value = "onSendError message ID: {}, message {}, session name: {} with tx: {}, session: {}, direct: {}," + " noAutoCreateQueue: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843016, value = "onSendError message ID: {}, message {}, session name: {} with tx: {}, session: {}, direct: {}," + " noAutoCreateQueue: {}", level = LogMessage.Level.DEBUG)
    void onSendErrorDetails(String messageID,
                            org.apache.activemq.artemis.api.core.Message message,
                            String sessionName,
@@ -212,7 +212,7 @@ public interface LoggingActiveMQServerPluginLogger {
                            boolean direct,
                            boolean noAutoCreateQueue);
 
-   @LogMessage(id = 843017, value = "onMessageRouteError message: {}, with context: {}, direct: {}, rejectDuplicates: {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 843017, value = "onMessageRouteError message: {}, with context: {}, direct: {}, rejectDuplicates: {}", level = LogMessage.Level.DEBUG)
    void onMessageRouteErrorDetails(org.apache.activemq.artemis.api.core.Message message,
                                    RoutingContext context,
                                    boolean direct,
