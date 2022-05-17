@@ -57,7 +57,7 @@ public interface ActiveMQRABundle {
    @Message(id = 159005, value = "Invalid Session Mode CLIENT_ACKNOWLEDGE")
    JMSRuntimeException invalidClientAcknowledgeModeRuntime();
 
-   @Message(id = 159006, value = "Invalid Session Mode {0}")
+   @Message(id = 159006, value = "Invalid Session Mode {}")
    JMSRuntimeException invalidAcknowledgeMode(int sessionMode);
 
    @Message(id = 159007, value = "Invalid Session Mode SESSION_TRANSACTED, to enable Local Transacted Sessions you can " +

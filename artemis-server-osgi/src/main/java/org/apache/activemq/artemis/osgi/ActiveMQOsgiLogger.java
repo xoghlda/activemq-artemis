@@ -35,19 +35,19 @@ public interface ActiveMQOsgiLogger {
    */
    ActiveMQOsgiLogger LOGGER = Logger.getMessageLogger(ActiveMQOsgiLogger.class, ActiveMQOsgiLogger.class.getPackage().getName());
 
-   @LogMessage(id = 581000, value = "Broker config {0} found. Tracking protocols {1}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 581000, value = "Broker config {} found. Tracking protocols {}", level = LogMessage.Level.INFO)
    void brokerConfigFound(String name, String protocols);
 
-   @LogMessage(id = 581001, value = "Required protocol {0} was added for broker {1}. {2}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 581001, value = "Required protocol {} was added for broker {}. {}", level = LogMessage.Level.INFO)
    void protocolWasAddedForBroker(String protocol, String name, String message);
 
-   @LogMessage(id = 581002, value = "Required protocol {0} was removed for broker {1}. {2}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 581002, value = "Required protocol {} was removed for broker {}. {}", level = LogMessage.Level.INFO)
    void protocolWasRemovedForBroker(String protocol, String name, String message);
 
-   @LogMessage(id = 582000, value = "Error starting broker: {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 582000, value = "Error starting broker: {}", level = LogMessage.Level.WARN)
    void errorStartingBroker(@Cause Exception e, String name);
 
-   @LogMessage(id = 582001, value = "Error stopping broker: {0}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 582001, value = "Error stopping broker: {}", level = LogMessage.Level.WARN)
    void errorStoppingBroker(@Cause Exception e, String name);
 
    @LogMessage(id = 582002, value = "Error getting dataSource provider infos.", level = LogMessage.Level.WARN)
