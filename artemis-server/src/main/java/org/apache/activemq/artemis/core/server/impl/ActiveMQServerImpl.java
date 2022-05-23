@@ -128,7 +128,6 @@ import org.apache.activemq.artemis.core.server.BrokerConnection;
 import org.apache.activemq.artemis.core.server.Divert;
 import org.apache.activemq.artemis.core.server.JournalType;
 import org.apache.activemq.artemis.core.server.LargeServerMessage;
-import org.apache.activemq.artemis.core.server.LoggingConfigurationFileReloader;
 import org.apache.activemq.artemis.core.server.MemoryManager;
 import org.apache.activemq.artemis.core.server.MessageReference;
 import org.apache.activemq.artemis.core.server.NetworkHealthCheck;
@@ -3208,15 +3207,6 @@ public class ActiveMQServerImpl implements ActiveMQServer {
 
          if (configuration.getConfigurationUrl() != null && getScheduledPool() != null) {
             reloadManager.addCallback(configuration.getConfigurationUrl(), uri -> reloadConfigurationFile(uri));
-         }
-
-         if (System.getProperty("logging.configuration") != null) {
-            try {
-               reloadManager.addCallback(new URL(System.getProperty("logging.configuration")), new LoggingConfigurationFileReloader());
-            } catch (Exception e) {
-               // a syntax error with the logging system property shouldn't prevent the server from starting
-               ActiveMQServerLogger.LOGGER.problemAddingConfigReloadCallback(System.getProperty("logging.configuration"), e);
-            }
          }
       }
 
