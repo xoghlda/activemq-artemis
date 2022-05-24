@@ -330,7 +330,7 @@ public final class XmlDataImporter extends ActionAbstract {
 
       logMessage.delete(logMessage.length() - 2, logMessage.length()); // take off the trailing comma
       if (logger.isDebugEnabled()) {
-         logger.debug(logMessage.toString());
+         logger.debug(logMessage.toString()); //TODO: this potentially expensive logMessage StringBuilder is still prepared even if debug isnt enabled
       }
 
       message.putBytesProperty(Message.HDR_ROUTE_TO_IDS, buffer.array());
