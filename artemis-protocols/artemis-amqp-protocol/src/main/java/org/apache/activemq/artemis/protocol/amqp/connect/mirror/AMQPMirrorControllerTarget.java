@@ -55,7 +55,8 @@ import org.apache.qpid.proton.amqp.messaging.AmqpValue;
 import org.apache.qpid.proton.amqp.transport.ReceiverSettleMode;
 import org.apache.qpid.proton.engine.Delivery;
 import org.apache.qpid.proton.engine.Receiver;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.protocol.amqp.connect.mirror.AMQPMirrorControllerSource.ADDRESS;
 import static org.apache.activemq.artemis.protocol.amqp.connect.mirror.AMQPMirrorControllerSource.ADD_ADDRESS;
@@ -73,7 +74,7 @@ import static org.apache.activemq.artemis.protocol.amqp.connect.mirror.AMQPMirro
 
 public class AMQPMirrorControllerTarget extends ProtonAbstractReceiver implements MirrorController {
 
-   private static final Logger logger = Logger.getLogger(AMQPMirrorControllerTarget.class);
+   private static final Logger logger = LoggerFactory.getLogger(AMQPMirrorControllerTarget.class);
 
    private static ThreadLocal<MirrorController> controllerThreadLocal = new ThreadLocal<>();
 
@@ -133,7 +134,7 @@ public class AMQPMirrorControllerTarget extends ProtonAbstractReceiver implement
 
       @Override
       public void onError(int errorCode, String errorMessage) {
-         logger.warn(errorMessage + "-"  + errorMessage);
+         logger.warn("{}-{}", errorMessage, errorMessage);
       }
    }
 
