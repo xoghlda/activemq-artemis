@@ -134,7 +134,7 @@ public class AMQPMirrorControllerTarget extends ProtonAbstractReceiver implement
 
       @Override
       public void onError(int errorCode, String errorMessage) {
-         logger.warn("{}-{}", errorMessage, errorMessage);
+         logger.warn("{}-{}", errorMessage, errorMessage); //TODO: uses message twice, should use code + message?
       }
    }
 
@@ -433,7 +433,7 @@ public class AMQPMirrorControllerTarget extends ProtonAbstractReceiver implement
          duplicateIDCache = lruduplicateIDCache;
       } else {
          // we use the number of credits for the duplicate detection, as that means the maximum number of elements you can have pending
-         if (logger.isDebugEnabled()) {
+         if (logger.isDebugEnabled()) {//TODO: mismatch between check and log level
             logger.trace("Setting up duplicate detection cache on " + ProtonProtocolManager.MIRROR_ADDRESS + ", ServerID=" + internalMirrorID + " with " + connection.getAmqpCredits() + " elements, being the number of credits");
          }
 
