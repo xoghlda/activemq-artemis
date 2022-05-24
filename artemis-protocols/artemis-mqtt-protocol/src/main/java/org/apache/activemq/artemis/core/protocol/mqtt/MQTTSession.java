@@ -30,11 +30,12 @@ import org.apache.activemq.artemis.core.persistence.CoreMessageObjectPools;
 import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.core.server.impl.ServerSessionImpl;
 import org.apache.activemq.artemis.spi.core.protocol.SessionCallback;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MQTTSession {
 
-   private static final Logger logger = Logger.getLogger(MQTTSession.class);
+   private static final Logger logger = LoggerFactory.getLogger(MQTTSession.class);
 
    private final String id = UUID.randomUUID().toString();
 
@@ -90,7 +91,7 @@ public class MQTTSession {
 
       state = MQTTSessionState.DEFAULT;
 
-      logger.debugf("MQTT session created: %s", id);
+      logger.debug("MQTT session created: {}", id);
    }
 
    // Called after the client has Connected.
@@ -273,7 +274,7 @@ public class MQTTSession {
             .payload(state.getWillMessage() == null ? new EmptyByteBuf(PooledByteBufAllocator.DEFAULT) : state.getWillMessage())
             .properties(properties)
             .build();
-         logger.debugf("%s sending will message: %s", this, publishMessage);
+         logger.debug("{} sending will message: {}", this, publishMessage);
          getMqttPublishManager().sendToQueue(publishMessage, true);
          state.setWillSent(true);
          state.setWillMessage(null);
