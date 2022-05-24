@@ -523,7 +523,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229241, value = "Embedded web server not found")
    ActiveMQIllegalStateException embeddedWebServerNotFound();
 
-   @Message(id = 229242, value = "Embedded web server not restarted in {0} milliseconds")
+   @Message(id = 229242, value = "Embedded web server not restarted in {} milliseconds")
    ActiveMQTimeoutException embeddedWebServerRestartTimeout(long timeout);
 
    @Message(id = 229243, value = "Embedded web server restart failed")

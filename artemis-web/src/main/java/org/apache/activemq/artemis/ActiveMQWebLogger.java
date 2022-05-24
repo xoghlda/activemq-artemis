@@ -19,7 +19,6 @@ package org.apache.activemq.artemis;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
-import org.jboss.logging.Logger;
 
 import java.io.File;
 
@@ -41,7 +40,7 @@ public interface ActiveMQWebLogger  {
    @LogMessage(id = 241003, value = "Starting embedded web server", level = LogMessage.Level.INFO)
    void startingEmbeddedWebServer();
 
-   @LogMessage(id = 241004, value = "Artemis Console available at {0}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 241004, value = "Artemis Console available at {}", level = LogMessage.Level.INFO)
    void consoleAvailable(String bind);
 
    @LogMessage(id = 241005, value = "Stopping embedded web server", level = LogMessage.Level.INFO)
