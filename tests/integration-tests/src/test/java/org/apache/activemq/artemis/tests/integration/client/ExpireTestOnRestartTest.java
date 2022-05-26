@@ -120,7 +120,7 @@ public class ExpireTestOnRestartTest extends ActiveMQTestBase {
       int extras = 0;
       ClientMessage msg;
       while ((msg = cons.receiveImmediate()) != null) {
-         instanceLog.debug(msg);
+         instanceLog.debug("{}", msg);
          extras++;
       }
 
