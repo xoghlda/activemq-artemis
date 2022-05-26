@@ -79,17 +79,18 @@ import org.apache.activemq.artemis.utils.Wait;
 import org.apache.activemq.artemis.utils.actors.ArtemisExecutor;
 import org.apache.activemq.artemis.utils.collections.LinkedList;
 import org.apache.activemq.artemis.utils.collections.LinkedListIterator;
-import org.jboss.logging.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.logs.AssertionLoggerHandler.findText;
 
 public class PagingStoreImplTest extends ActiveMQTestBase {
-   private static final Logger log = Logger.getLogger(PagingStoreImplTest.class);
+   private static final Logger log = LoggerFactory.getLogger(PagingStoreImplTest.class);
 
    static {
       MessagePersister.registerPersister(CoreMessagePersister.getInstance());
@@ -577,7 +578,7 @@ public class PagingStoreImplTest extends ActiveMQTestBase {
       for (int pageNr = 0; pageNr < 2; pageNr++) {
          Page page = store.depage();
 
-         log.debug("numberOfPages = " + store.getNumberOfPages());
+         log.debug("numberOfPages = {}", store.getNumberOfPages());
 
          page.open(true);
 

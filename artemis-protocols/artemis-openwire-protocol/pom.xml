@@ -128,7 +128,6 @@
                      !javax.jmdns,
                      javax.jms;version="[2,3)",
                      com.thoughtworks.xstream.*;resolution:="optional",
-                     org.apache.activemq.artemis.logprocessor.*;resolution:="optional",
                      *
                   </Import-Package>
                </instructions>

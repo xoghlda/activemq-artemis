@@ -38,6 +38,8 @@
          <artifactId>artemis-log-processor</artifactId>
          <version>${project.version}</version>
          <scope>provided</scope>
+         <!-- Superfluous, except for osgi manifest handling -->
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.slf4j</groupId>
