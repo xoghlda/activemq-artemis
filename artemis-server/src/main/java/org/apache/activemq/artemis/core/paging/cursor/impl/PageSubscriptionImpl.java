@@ -1033,7 +1033,7 @@ public final class PageSubscriptionImpl implements PageSubscription {
       // Number of messages existent on this page
       private int numberOfMessages;
 
-      private final long/ pageId;
+      private final long pageId;
 
       private IntObjectHashMap<PagePosition> acks = new IntObjectHashMap<>();
 
