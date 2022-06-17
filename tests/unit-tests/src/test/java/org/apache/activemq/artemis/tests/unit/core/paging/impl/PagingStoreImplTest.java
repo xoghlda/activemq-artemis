@@ -280,7 +280,7 @@ public class PagingStoreImplTest extends ActiveMQTestBase {
 
       for (int repeat = 0; repeat < 5; repeat++) {
          log.debug("###############################################################################################################################");
-         log.debug("#repeat " + repeat);
+         log.debug("#repeat {}", repeat);
 
          storeImpl.startPaging();
          Assert.assertEquals(1, storeImpl.getNumberOfPages());
@@ -340,7 +340,7 @@ public class PagingStoreImplTest extends ActiveMQTestBase {
 
             Assert.assertTrue(subscription.contains(reference));
 
-            log.debug("#received message " + messagesRead + ", " + reference);
+            log.debug("#received message {}, {}", messagesRead, reference);
             messagesRead++;
             int pageOnMsg = reference.getMessage().getIntProperty("page");
             Assert.assertTrue("received " + reference, pageOnMsg <= 2 || pageOnMsg >= 10);
@@ -367,7 +367,7 @@ public class PagingStoreImplTest extends ActiveMQTestBase {
       for (long pgID = startPage; pgID <= endPage; pgID++) {
          Page page = storeImpl.newPageObject(pgID);
          page.open(false);
-         log.debug("# Page " + pgID);
+         log.debug("# Page {}", pgID);
          page.getMessages().forEach(p -> {
             String acked;
             try {
@@ -376,7 +376,7 @@ public class PagingStoreImplTest extends ActiveMQTestBase {
                e.printStackTrace();
                acked = "";
             }
-            log.debug(acked + p);
+            log.debug("{}{}", acked, p);
          });
          page.close(false);
       }
