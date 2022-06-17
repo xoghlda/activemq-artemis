@@ -399,7 +399,7 @@ public class PagingStoreImplTest extends ActiveMQTestBase {
 
       for (int repeat = 0; repeat < 5; repeat++) {
 
-         log.debug("#repeat " + repeat);
+         log.debug("#repeat {}", repeat);
 
          storeImpl.startPaging();
 
