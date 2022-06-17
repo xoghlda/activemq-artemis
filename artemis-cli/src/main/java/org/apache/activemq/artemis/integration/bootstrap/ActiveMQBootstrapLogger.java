@@ -17,7 +17,6 @@
 package org.apache.activemq.artemis.integration.bootstrap;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 

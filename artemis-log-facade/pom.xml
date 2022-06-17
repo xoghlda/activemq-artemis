@@ -24,20 +24,15 @@
       <version>2.24.0-SNAPSHOT</version>
    </parent>
 
-   <artifactId>artemis-log-processor</artifactId>
+   <artifactId>artemis-log-facade</artifactId>
    <packaging>jar</packaging>
-   <name>ActiveMQ Log Processor</name>
+   <name>ActiveMQ Log Facade</name>
 
    <properties>
       <activemq.basedir>${project.basedir}/..</activemq.basedir>
    </properties>
 
    <dependencies>
-      <dependency>
-         <groupId>org.apache.activemq</groupId>
-         <artifactId>artemis-log-facade</artifactId>
-         <version>${project.version}</version>
-      </dependency>
       <dependency>
          <groupId>org.slf4j</groupId>
          <artifactId>slf4j-api</artifactId>
