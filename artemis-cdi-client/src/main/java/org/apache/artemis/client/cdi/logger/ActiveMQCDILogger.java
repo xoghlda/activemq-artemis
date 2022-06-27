@@ -21,11 +21,9 @@ package org.apache.artemis.client.cdi.logger;
 
 import javax.enterprise.inject.spi.ProcessBean;
 
-import org.jboss.logging.BasicLogger;
-import org.jboss.logging.Logger;
-import org.jboss.logging.annotations.LogMessage;
-import org.jboss.logging.annotations.Message;
-import org.jboss.logging.annotations.MessageLogger;
+import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
 /**
  * Logger code 57
@@ -41,24 +39,20 @@ import org.jboss.logging.annotations.MessageLogger;
  *
  * so an INFO message would be 571000 to 571999
  */
-@MessageLogger(projectCode = "AMQ")
-public interface ActiveMQCDILogger extends BasicLogger {
+@LogBundle(projectCode = "AMQ")
+public interface ActiveMQCDILogger {
 
-   ActiveMQCDILogger LOGGER = Logger.getMessageLogger(ActiveMQCDILogger.class, ActiveMQCDILogger.class.getPackage().getName());
+   ActiveMQCDILogger LOGGER = CodeFactory.getCodeClass(ActiveMQCDILogger.class, ActiveMQCDILogger.class.getPackage().getName());
 
-   @LogMessage
-   @Message(id = 571000, value = "Discovered configuration class {0}", format = Message.Format.MESSAGE_FORMAT)
+   @LogMessage(id = 571000, value = "Discovered configuration class {}", level = LogMessage.Level.INFO)
    void discoveredConfiguration(ProcessBean<?> pb);
 
-   @LogMessage
-   @Message(id = 571001, value = "Discovered client configuration class {0}", format = Message.Format.MESSAGE_FORMAT)
+   @LogMessage(id = 571001, value = "Discovered client configuration class {}", level = LogMessage.Level.INFO)
    void discoveredClientConfiguration(ProcessBean<?> pb);
 
-   @LogMessage(level = Logger.Level.DEBUG)
-   @Message(id = 573000, value = "Configuration found, not using built in configuration")
+   @LogMessage(id = 573000, value = "Configuration found, not using built in configuration", level = LogMessage.Level.DEBUG)
    void notUsingDefaultConfiguration();
 
-   @LogMessage(level = Logger.Level.DEBUG)
-   @Message(id = 573001, value = "Configuration found, not using built in configuration")
+   @LogMessage(id = 573001, value = "Configuration found, not using built in configuration", level = LogMessage.Level.DEBUG)
    void notUsingDefaultClientConfiguration();
 }

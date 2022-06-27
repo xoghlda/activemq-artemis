@@ -58,13 +58,21 @@
          <artifactId>artemis-selector</artifactId>
          <version>${project.version}</version>
       </dependency>
-
-      <!-- stuff needed to resolve various classes during javadoc processing -->
       <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-processor</artifactId>
+         <groupId>org.apache.activemq</groupId>
+         <artifactId>artemis-log-processor</artifactId>
+         <version>${project.version}</version>
          <scope>provided</scope>
-         <optional>true</optional>
+      </dependency>
+      <!-- logging -->
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-slf4j-impl</artifactId>
+         <scope>provided</scope>
       </dependency>
       <dependency>
          <groupId>xalan</groupId>

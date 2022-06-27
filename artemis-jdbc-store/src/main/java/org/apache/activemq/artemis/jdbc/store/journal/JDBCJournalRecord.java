@@ -33,8 +33,12 @@ import org.apache.activemq.artemis.core.persistence.Persister;
 import org.apache.activemq.artemis.core.journal.RecordInfo;
 import org.apache.activemq.artemis.journal.ActiveMQJournalLogger;
 import org.apache.activemq.artemis.utils.ActiveMQBufferInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class JDBCJournalRecord {
+
+   private static final Logger logger = LoggerFactory.getLogger(JDBCJournalRecord.class);
    /*
    Database Table Schema:
 
@@ -137,7 +141,7 @@ class JDBCJournalRecord {
          record.read(recordBytes);
          txData.read(txDataBytes);
       } catch (IOException e) {
-         ActiveMQJournalLogger.LOGGER.error("Error occurred whilst reading Journal Record", e);
+         logger.error("Error occurred whilst reading Journal Record", e);
          throw e;
       }
 

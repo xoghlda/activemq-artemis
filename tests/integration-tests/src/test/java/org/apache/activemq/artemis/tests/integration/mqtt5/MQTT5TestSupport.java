@@ -44,7 +44,6 @@ import org.apache.activemq.artemis.core.postoffice.impl.LocalQueueBinding;
 import org.apache.activemq.artemis.core.protocol.mqtt.MQTTInterceptor;
 import org.apache.activemq.artemis.core.protocol.mqtt.MQTTProtocolManager;
 import org.apache.activemq.artemis.core.protocol.mqtt.MQTTSessionState;
-import org.apache.activemq.artemis.core.protocol.mqtt.MQTTUtil;
 import org.apache.activemq.artemis.core.remoting.impl.AbstractAcceptor;
 import org.apache.activemq.artemis.core.remoting.impl.netty.TransportConstants;
 import org.apache.activemq.artemis.core.security.Role;
@@ -166,7 +165,8 @@ public class MQTT5TestSupport extends ActiveMQTestBase {
       exceptions.clear();
       startBroker();
       createJMSConnection();
-      org.jboss.logmanager.Logger.getLogger(MQTTUtil.class.getName()).setLevel(org.jboss.logmanager.Level.TRACE);
+      //TODO: shouldnt really be doing this as it never resets the level
+      //org.jboss.logmanager.Logger.getLogger(MQTTUtil.class.getName()).setLevel(org.jboss.logmanager.Level.TRACE);
    }
 
    @Override

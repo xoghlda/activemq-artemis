@@ -29,10 +29,14 @@ import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.HttpHeaderProperty;
 import org.apache.activemq.artemis.utils.ObjectInputStreamWithClassLoader;
 import org.jboss.resteasy.client.ClientRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.rest.HttpHeaderProperty.MESSAGE_PROPERTY_DISCRIMINATOR;
 
 public class HttpMessageHelper {
+
+   private static final Logger logger = LoggerFactory.getLogger(HttpMessageHelper.class);
 
    public static final String POSTED_AS_HTTP_MESSAGE = "postedAsHttpMessage";
 
@@ -58,11 +62,11 @@ public class HttpMessageHelper {
          String value = message.getStringProperty(k);
 
          request.header(headerName, value);
-         ActiveMQRestLogger.LOGGER.debug("Examining " + headerName + ": " + value);
+         logger.debug("Examining " + headerName + ": " + value);
          // override default content type if it is set as a message property
          if (headerName.equalsIgnoreCase("content-type")) {
             contentType = value;
-            ActiveMQRestLogger.LOGGER.debug("Using contentType: " + contentType);
+            logger.debug("Using contentType: " + contentType);
          }
       }
       int size = message.getBodySize();
@@ -71,7 +75,7 @@ public class HttpMessageHelper {
          if (aBoolean != null && aBoolean.booleanValue()) {
             byte[] body = new byte[size];
             message.getBodyBuffer().readBytes(body);
-            ActiveMQRestLogger.LOGGER.debug("Building Message from HTTP message");
+            logger.debug("Building Message from HTTP message");
             request.body(contentType, body);
          } else {
             // assume posted as a JMS or ActiveMQ Artemis object message
@@ -86,7 +90,7 @@ public class HttpMessageHelper {
                   ois.setWhiteList(jmsOptions.getDeserializationWhiteList());
                }
                obj = ois.readObject();
-               ActiveMQRestLogger.LOGGER.debug("**** Building Message from object: " + obj.toString());
+               logger.debug("**** Building Message from object: " + obj.toString());
                request.body(contentType, obj);
             } catch (Exception e) {
                ActiveMQRestLogger.LOGGER.failedToBuildMessageFromObject(e);

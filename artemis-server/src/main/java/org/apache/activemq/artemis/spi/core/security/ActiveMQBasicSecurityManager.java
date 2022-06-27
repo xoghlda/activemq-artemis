@@ -38,14 +38,15 @@ import org.apache.activemq.artemis.spi.core.security.jaas.RolePrincipal;
 import org.apache.activemq.artemis.spi.core.security.jaas.UserPrincipal;
 import org.apache.activemq.artemis.utils.ClassloadingUtil;
 import org.apache.activemq.artemis.utils.SecurityManagerUtil;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * All user and role state (both in memory and on disk) is maintained by the underlying StorageManager
  */
 public class ActiveMQBasicSecurityManager implements ActiveMQSecurityManager5, UserManagement {
 
-   private static final Logger logger = Logger.getLogger(ActiveMQBasicSecurityManager.class);
+   private static final Logger logger = LoggerFactory.getLogger(ActiveMQBasicSecurityManager.class);
 
    public static final String BOOTSTRAP_USER = "bootstrapUser";
    public static final String BOOTSTRAP_PASSWORD = "bootstrapPassword";

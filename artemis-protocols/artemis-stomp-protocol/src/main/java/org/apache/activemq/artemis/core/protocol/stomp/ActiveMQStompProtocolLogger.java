@@ -16,12 +16,10 @@
  */
 package org.apache.activemq.artemis.core.protocol.stomp;
 
-import org.jboss.logging.BasicLogger;
-import org.jboss.logging.Logger;
-import org.jboss.logging.annotations.Cause;
-import org.jboss.logging.annotations.LogMessage;
-import org.jboss.logging.annotations.Message;
-import org.jboss.logging.annotations.MessageLogger;
+import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.Cause;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
 /**
  * Logger Code 33
@@ -38,23 +36,17 @@ import org.jboss.logging.annotations.MessageLogger;
  * so an INFO message would be 331000 to 331999
  */
 
-@MessageLogger(projectCode = "AMQ")
-public interface ActiveMQStompProtocolLogger extends BasicLogger {
+@LogBundle(projectCode = "AMQ")
+public interface ActiveMQStompProtocolLogger {
 
-   /**
-    * The default logger.
-    */
-   ActiveMQStompProtocolLogger LOGGER = Logger.getMessageLogger(ActiveMQStompProtocolLogger.class, ActiveMQStompProtocolLogger.class.getPackage().getName());
+   ActiveMQStompProtocolLogger LOGGER = CodeFactory.getCodeClass(ActiveMQStompProtocolLogger.class, ActiveMQStompProtocolLogger.class.getPackage().getName());
 
-   @LogMessage(level = Logger.Level.WARN)
-   @Message(id = 332068, value = "connection closed {0}", format = Message.Format.MESSAGE_FORMAT)
+   @LogMessage(id = 332068, value = "connection closed {}", level = LogMessage.Level.WARN)
    void connectionClosed(StompConnection connection);
 
-   @LogMessage(level = Logger.Level.WARN)
-   @Message(id = 332069, value = "Sent ERROR frame to STOMP client {0}: {1}", format = Message.Format.MESSAGE_FORMAT)
+   @LogMessage(id = 332069, value = "Sent ERROR frame to STOMP client {}: {}", level = LogMessage.Level.WARN)
    void sentErrorToClient(String address, String message);
 
-   @LogMessage(level = Logger.Level.ERROR)
-   @Message(id = 334023, value = "Unable to send frame {0}", format = Message.Format.MESSAGE_FORMAT)
+   @LogMessage(id = 334023, value = "Unable to send frame {}", level = LogMessage.Level.ERROR)
    void errorSendingFrame(@Cause Exception e, StompFrame frame);
 }

@@ -3768,7 +3768,7 @@ public class QueueControlTest extends ManagementTestBase {
       consumer.setMessageHandler(new MessageHandler() {
          @Override
          public void onMessage(ClientMessage message) {
-            instanceLog.debug(message);
+            instanceLog.debug("{}", message);
          }
       });
       session.start();

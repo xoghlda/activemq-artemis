@@ -40,12 +40,13 @@ import org.apache.activemq.artemis.utils.actors.ArtemisExecutor;
 import org.apache.activemq.artemis.utils.collections.ConcurrentLongHashMap;
 import org.apache.activemq.artemis.utils.collections.LinkedList;
 import org.apache.activemq.artemis.utils.collections.LongHashSet;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PageCursorProviderImpl implements PageCursorProvider {
 
 
-   private static final Logger logger = Logger.getLogger(PageCursorProviderImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(PageCursorProviderImpl.class);
 
 
    /**
@@ -114,7 +115,6 @@ public class PageCursorProviderImpl implements PageCursorProvider {
       return new PagedReferenceImpl(msg, subscription);
    }
 
-
    @Override
    public void processReload() throws Exception {
       Collection<PageSubscription> cursorList = this.activeCursors.values();
@@ -149,7 +149,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
       }
       final int pendingCleanupTasks = scheduledCleanup.get();
       if (pendingCleanupTasks > 0) {
-         logger.tracef("Stopping with %d cleanup tasks to be completed yet", pendingCleanupTasks);
+         logger.trace("Stopping with {} cleanup tasks to be completed yet", pendingCleanupTasks);
       }
    }
 
@@ -251,7 +251,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
                return;
          }
 
-         logger.tracef(">>>> Cleanup %s", this.pagingStore.getAddress());
+         logger.trace(">>>> Cleanup {}", this.pagingStore.getAddress());
 
          synchronized (this) {
             try {
@@ -271,7 +271,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
                final long firstPage = pagingStore.getFirstPage();
                deliverIfNecessary(cursorList, minPage);
 
-               logger.tracef("firstPage=%s, minPage=%s, currentWritingPage=%s", firstPage, minPage, pagingStore.getCurrentWritingPage());
+               logger.trace("firstPage={}, minPage={}, currentWritingPage={}", firstPage, minPage, pagingStore.getCurrentWritingPage());
 
                // First we cleanup regular streaming, at the beginning of set of files
                cleanupRegularStream(depagedPages, depagedPagesSet, cursorList, minPage, firstPage);
@@ -282,7 +282,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
                assert pagingStore.getNumberOfPages() >= 0;
 
                if (pagingStore.getNumberOfPages() == 0 || pagingStore.getNumberOfPages() == 1 && (pagingStore.getCurrentPage() == null || pagingStore.getCurrentPage().getNumberOfMessages() == 0)) {
-                  logger.tracef("StopPaging being called on %s", pagingStore);
+                  logger.trace("StopPaging being called on {}", pagingStore);
                   pagingStore.stopPaging();
                } else {
                   if (logger.isTraceEnabled()) {
@@ -294,7 +294,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
                logger.warn(ex.getMessage(), ex);
                return;
             } finally {
-               logger.tracef("<<<< Cleanup end on %s", pagingStore.getAddress());
+               logger.trace("<<<< Cleanup end on {}", pagingStore.getAddress());
                pagingStore.unlock();
             }
          }
@@ -384,7 +384,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
                if (counter.get() >= subscriptions) {
                   if (!depagedPagesSet.contains(pageID.longValue())) {
                      Page page = pagingStore.removePage(pageID.intValue());
-                     logger.debugf("Removing page %s", pageID);
+                     logger.debug("Removing page {}", pageID);
                      if (page != null) {
                         depagedPages.add(page);
                         depagedPagesSet.add(page.getPageId());
@@ -417,7 +417,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
 
    // Protected as a way to inject testing
    protected void finishCleanup(ArrayList<Page> depagedPages) {
-      logger.tracef("this(%s) finishing cleanup on %s", this, depagedPages);
+      logger.trace("this({}) finishing cleanup on {}", this, depagedPages);
       try {
          for (Page depagedPage : depagedPages) {
             PagedMessage[] pgdMessages;
@@ -449,12 +449,12 @@ public class PageCursorProviderImpl implements PageCursorProvider {
 
    private boolean checkPageCompletion(ArrayList<PageSubscription> cursorList, long minPage) throws Exception {
 
-      logger.tracef("checkPageCompletion(%d)", minPage);
+      logger.trace("checkPageCompletion({})", minPage);
 
       boolean complete = true;
 
       if (!pagingStore.checkPageFileExists(minPage)) {
-         logger.tracef("store %s did not have an existing file, considering it a complete file then", pagingStore.getAddress());
+         logger.trace("store {} did not have an existing file, considering it a complete file then", pagingStore.getAddress());
          return true;
       }
 
@@ -533,7 +533,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
          }
       }
 
-      logger.tracef("checkMinPage(%s) will have minPage=%s", pagingStore.getAddress(), minPage);
+      logger.trace("checkMinPage({}) will have minPage={}", pagingStore.getAddress(), minPage);
 
       return minPage;
 

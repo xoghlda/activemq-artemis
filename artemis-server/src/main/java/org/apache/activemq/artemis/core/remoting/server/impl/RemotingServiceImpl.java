@@ -77,11 +77,12 @@ import org.apache.activemq.artemis.spi.core.remoting.ssl.SSLContextFactoryProvid
 import org.apache.activemq.artemis.utils.ActiveMQThreadFactory;
 import org.apache.activemq.artemis.utils.ConfigurationHelper;
 import org.apache.activemq.artemis.utils.ReusableLatch;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RemotingServiceImpl implements RemotingService, ServerConnectionLifeCycleListener {
 
-   private static final Logger logger = Logger.getLogger(RemotingServiceImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(RemotingServiceImpl.class);
 
    private static final int ACCEPTOR_STOP_TIMEOUT = 3000;
 
@@ -155,7 +156,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
 
       this.flushExecutor = flushExecutor;
 
-      ActiveMQServerLogger.LOGGER.addingProtocolSupport(coreProtocolManagerFactory.getProtocols()[0], coreProtocolManagerFactory.getModuleName());
+      ActiveMQServerLogger.LOGGER.addingProtocolSupport(coreProtocolManagerFactory.getModuleName(), coreProtocolManagerFactory.getProtocols()[0]);
       this.protocolMap.put(coreProtocolManagerFactory.getProtocols()[0], coreProtocolManagerFactory);
 
       if (config.isResolveProtocols()) {
@@ -189,7 +190,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
          return;
       }
 
-      logger.tracef("Starting remoting service %s", this);
+      logger.trace("Starting remoting service {}", this);
 
       paused = false;
 
@@ -847,7 +848,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
          MessagePersister.registerProtocol(next);
          String[] protocols = next.getProtocols();
          for (String protocol : protocols) {
-            ActiveMQServerLogger.LOGGER.addingProtocolSupport(protocol, next.getModuleName());
+            ActiveMQServerLogger.LOGGER.addingProtocolSupport(next.getModuleName(), protocol);
             protocolMap.put(protocol, next);
          }
       }

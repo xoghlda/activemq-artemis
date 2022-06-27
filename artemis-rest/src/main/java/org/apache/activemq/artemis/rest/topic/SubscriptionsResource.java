@@ -44,8 +44,12 @@ import org.apache.activemq.artemis.rest.queue.Acknowledgement;
 import org.apache.activemq.artemis.rest.queue.DestinationServiceManager;
 import org.apache.activemq.artemis.rest.queue.QueueConsumer;
 import org.apache.activemq.artemis.rest.util.TimeoutTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SubscriptionsResource implements TimeoutTask.Callback {
+
+   private static final Logger logger = LoggerFactory.getLogger(SubscriptionsResource.class);
 
    protected ConcurrentMap<String, QueueConsumer> queueConsumers = new ConcurrentHashMap<>();
    protected ClientSessionFactory sessionFactory;
@@ -146,7 +150,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
                                       @FormParam("delete-when-idle") Boolean destroyWhenIdle,
                                       @FormParam("idle-timeout") Long timeout,
                                       @Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       if (timeout == null)
          timeout = Long.valueOf((long) consumerTimeoutSeconds * 1000);
@@ -245,7 +249,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
    @GET
    public Response getAutoAckSubscription(@PathParam("consumer-id") String consumerId,
                                           @Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
 
       return internalHeadAutoAckSubscription(uriInfo, consumerId);
    }
@@ -254,7 +258,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
    @HEAD
    public Response headAutoAckSubscription(@PathParam("consumer-id") String consumerId,
                                            @Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
 
       return internalHeadAutoAckSubscription(uriInfo, consumerId);
    }
@@ -291,7 +295,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
    @GET
    public Response getAcknowledgedConsumer(@PathParam("consumer-id") String consumerId,
                                            @Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
 
       return internalHeadAcknowledgedConsumer(uriInfo, consumerId);
    }
@@ -300,7 +304,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
    @HEAD
    public Response headAcknowledgedConsumer(@PathParam("consumer-id") String consumerId,
                                             @Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
 
       return internalHeadAcknowledgedConsumer(uriInfo, consumerId);
    }
@@ -380,7 +384,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
    @Path("acknowledged/{subscription-id}")
    @DELETE
    public void deleteAckSubscription(@Context UriInfo uriInfo, @PathParam("subscription-id") String consumerId) {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       internalDeleteSubscription(consumerId);
    }
@@ -388,7 +392,7 @@ public class SubscriptionsResource implements TimeoutTask.Callback {
    @Path("auto-ack/{subscription-id}")
    @DELETE
    public void deleteSubscription(@Context UriInfo uriInfo, @PathParam("subscription-id") String consumerId) {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       internalDeleteSubscription(consumerId);
    }
