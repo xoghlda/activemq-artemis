@@ -23,11 +23,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.activemq.artemis.core.persistence.impl.journal.JournalRecordIds;
 import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.logs.AssertionLoggerHandler;
+import org.apache.activemq.artemis.logs.AssertionLoggerHandler.LogLevel;
 import org.apache.activemq.artemis.tests.util.ActiveMQTestBase;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("Needs updated to account for logging impl changes") //TODO: reinstate
 public class SimpleStartStopTest extends ActiveMQTestBase {
 
    /**
@@ -52,7 +51,7 @@ public class SimpleStartStopTest extends ActiveMQTestBase {
          }
 
          // There shouldn't be any error from starting / stopping the server
-         //TODO: assertFalse("There shouldn't be any error for just starting / stopping the server", AssertionLoggerHandler.hasLevel(Level.ERROR));
+         assertFalse("There shouldn't be any error for just starting / stopping the server", AssertionLoggerHandler.hasLevel(LogLevel.ERROR));
          assertFalse(AssertionLoggerHandler.findText("AMQ224008"));
 
          HashMap<Integer, AtomicInteger> records = this.internalCountJournalLivingRecords(server.getConfiguration(), false);
