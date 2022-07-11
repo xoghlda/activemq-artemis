@@ -118,15 +118,21 @@
 
             <!-- stuff needed to resolve various classes during javadoc processing -->
             <dependency>
-               <groupId>org.jboss.logging</groupId>
-               <artifactId>jboss-logging-processor</artifactId>
-               <scope>provided</scope>
+               <groupId>xalan</groupId>
+               <artifactId>xalan</artifactId>
                <optional>true</optional>
+               <scope>provided</scope>
             </dependency>
             <dependency>
                <groupId>com.google.code.findbugs</groupId>
                <artifactId>jsr305</artifactId>
               <scope>provided</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.activemq</groupId>
+               <artifactId>artemis-log-processor</artifactId>
+               <version>${project.version}</version>
+               <scope>provided</scope>
             </dependency>
          </dependencies>
 
