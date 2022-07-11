@@ -159,6 +159,11 @@
          <artifactId>commons-beanutils</artifactId>
       </dependency>
       <dependency>
+         <!-- Needed to replace commons-logging for commons-beanutils -->
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+      </dependency>
+      <dependency>
          <groupId>org.apache.commons</groupId>
          <artifactId>commons-configuration2</artifactId>
       </dependency>
