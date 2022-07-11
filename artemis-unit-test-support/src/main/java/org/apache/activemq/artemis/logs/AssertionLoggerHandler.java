@@ -29,6 +29,8 @@ import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.Property;
+import org.apache.logging.log4j.core.config.plugins.Plugin;
+import org.apache.logging.log4j.core.config.plugins.PluginBuilderFactory;
 
 /**
  * This class contains a tool where programs could intercept for LogMessage given an interval of time between {@link #startCapture()}
@@ -36,29 +38,25 @@ import org.apache.logging.log4j.core.config.Property;
  *
  * Be careful with this use as this is intended for testing only (such as testcases)
  */
+
+@Plugin(name = "AssertionLoggerHandler", category = "Core", elementType = "appender")
 public class AssertionLoggerHandler extends AbstractAppender {
-
-   public enum LogLevel {
-      ERROR(Level.ERROR),
-      WARN(Level.WARN),
-      INFO(Level.INFO),
-      DEBUG(Level.DEBUG),
-      TRACE(Level.TRACE);
-
-      Level implLevel;
-
-      private LogLevel(Level implLevel) {
-         this.implLevel = implLevel;
-      }
-
-      private Level toImplLevel() {
-         return implLevel;
-      }
-   }
 
    private static final Map<String, LogEvent> messages = new ConcurrentHashMap<>();
    private static List<String> traceMessages;
    private static volatile boolean capture = false;
+
+   public static class Builder<B extends Builder<B>> extends AbstractAppender.Builder<B> implements org.apache.logging.log4j.core.util.Builder<AssertionLoggerHandler> {
+      @Override
+      public AssertionLoggerHandler build() {
+         return new AssertionLoggerHandler(getName(), getFilter(), getOrCreateLayout(), isIgnoreExceptions(), getPropertyArray());
+      }
+   }
+
+   @PluginBuilderFactory
+   public static <B extends Builder<B>> B newBuilder() {
+      return new Builder<B>().asBuilder();
+   }
 
    protected AssertionLoggerHandler(String name, Filter filter, Layout<? extends Serializable> layout, boolean ignoreExceptions, Property[] properties) {
       super(name, filter, layout, ignoreExceptions, properties);
@@ -221,4 +219,23 @@ public class AssertionLoggerHandler extends AbstractAppender {
       clear();
       traceMessages = null;
    }
+
+   public enum LogLevel {
+      ERROR(Level.ERROR),
+      WARN(Level.WARN),
+      INFO(Level.INFO),
+      DEBUG(Level.DEBUG),
+      TRACE(Level.TRACE);
+
+      Level implLevel;
+
+      LogLevel(Level implLevel) {
+         this.implLevel = implLevel;
+      }
+
+      private Level toImplLevel() {
+         return implLevel;
+      }
+   }
+
 }

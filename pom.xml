@@ -83,7 +83,7 @@
       <staging.siteURL>scp://people.apache.org/x1/www/activemq.apache.org</staging.siteURL>
 
       <retryTests>false</retryTests>
-      <logging.config>logging.properties</logging.config>
+      <logging.config>log4j2-tests-config.properties</logging.config>
       <modular.jdk.surefire.arg>--add-modules java.sql,jdk.unsupported </modular.jdk.surefire.arg>
 
       <activemq-artemis-native-version>2.0.0-SNAPSHOT</activemq-artemis-native-version>
@@ -235,6 +235,7 @@
          -Djava.library.path="${activemq.basedir}/target/bin/lib/linux-x86_64:${activemq.basedir}/target/bin/lib/linux-i686" -Djgroups.bind_addr=localhost
          -Djava.net.preferIPv4Stack=true -Dbasedir=${basedir}
          -Djdk.attach.allowAttachSelf=true
+         -Dlog4j2.configurationFile="file:${activemq.basedir}/tests/config/${logging.config}"
       </activemq-surefire-argline>
       <activemq.basedir>${project.basedir}</activemq.basedir>
       <skipOWASP>true</skipOWASP>
@@ -1281,7 +1282,7 @@
          <id>tests-CI</id>
          <properties>
             <!-- notice I did not intend to use retryTests on this profile, as this will be optional depending on where you run the tests -->
-            <logging.config>logging-CI.properties</logging.config>
+            <logging.config>log4j2-tests-config-CI.properties</logging.config>
          </properties>
       </profile>
       <profile>
@@ -1344,6 +1345,7 @@
             <jacoco.agent />
 
             <activemq-surefire-argline>
+               -Dlog4j2.configurationFile="file:${activemq.basedir}/tests/config/${logging.config}"
                -Djava.library.path="${activemq.basedir}/activemq-artemis-native/bin" -Djgroups.bind_addr=localhost -Dorg.apache.activemq.artemis.api.core.UDPBroadcastEndpointFactory.localBindAddress=localhost
                -Djava.net.preferIPv4Stack=true -Dbasedir=${basedir}
                @{jacoco.agent} -Djacoco.agent=@{jacoco.agent}
