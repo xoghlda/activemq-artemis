@@ -507,7 +507,7 @@ public class ArtemisTest extends CliTestBase {
          context = new TestActionContext();
          addCmd.execute(context);
          result = context.getStderr();
-         assertTrue(result.contains("Failed to add user scott. Reason: AMQ229223: User scott already exists"));
+         assertTrue("Unexpected output: '" + result + "'", result.contains("Failed to add user scott. Reason: AMQ229223: User scott already exists"));
 
          //check existing users are intact
          context = new TestActionContext();

@@ -240,7 +240,7 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println(")");
       writerOutput.println("   {");
 
-      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
+      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
       if (!hasParameters) {
          writerOutput.println("     String returnString = \"" + formattingString + "\";");
       } else {
@@ -390,7 +390,7 @@ public class LogProcessor extends AbstractProcessor {
       }
 
       //TODO: handle causes being passed in the args to be logged, but not necessarily (often not) being last arg at present as SLF4J/frameworks expect.
-      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + " " + messageAnnotation.value());
+      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
       if (!hasParameters) {
          writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");
       } else {
