@@ -82,7 +82,7 @@ public class Create extends InputAbstract {
    public static final String BIN_ARTEMIS = "bin/artemis";
    public static final String BIN_ARTEMIS_SERVICE = "bin/artemis-service";
    public static final String ETC_ARTEMIS_PROFILE = "artemis.profile";
-   public static final String ETC_LOGGING_PROPERTIES = "logging.properties";
+   public static final String ETC_LOGGING_PROPERTIES = "log4j2-config.properties";
    public static final String ETC_BOOTSTRAP_XML = "bootstrap.xml";
    public static final String ETC_MANAGEMENT_XML = "management.xml";
    public static final String ETC_BROKER_XML = "broker.xml";
