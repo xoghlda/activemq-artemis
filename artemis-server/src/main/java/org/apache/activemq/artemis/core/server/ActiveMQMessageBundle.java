@@ -91,6 +91,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229005, value = "connections for {} closed by management")
    ActiveMQInternalErrorException connectionsClosedByManagement(String ipAddress);
 
+   // TODO: replace now-unecessary '' escapes in messages with just ', throughout the codebase...in order to maintain prior output, and make the code seem less whack :/
    @Message(id = 229006, value = "journals are not JournalImpl. You can''t set a replicator!")
    ActiveMQInternalErrorException notJournalImpl();
 
