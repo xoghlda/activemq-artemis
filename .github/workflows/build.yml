@@ -4,7 +4,6 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test:
-    if: github.repository != 'apache/activemq-artemis' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
     name: Test (${{ matrix.java }})
     runs-on: ubuntu-20.04
     strategy:
@@ -44,7 +43,6 @@ jobs:
           if [ -d ~/.m2/repository/org/apache/activemq ]; then find ~/.m2/repository/org/apache/activemq -name "*-SNAPSHOT" -type d -prune -exec rm -r '{}' \; ; fi
 
   checks:
-    if: github.repository != 'apache/activemq-artemis' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
     name: Checks (${{ matrix.java }})
     runs-on: ubuntu-20.04
     strategy:
