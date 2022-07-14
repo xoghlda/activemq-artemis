@@ -81,16 +81,16 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219010, value = "Connection is destroyed")
    ActiveMQNotConnectedException connectionDestroyed();
 
-   @Message(id = 219011, value = "Did not receive data from server for {0}")
+   @Message(id = 219011, value = "Did not receive data from server for {}")
    ActiveMQConnectionTimedOutException connectionTimedOut(Connection transportConnection);
 
    @Message(id = 219012, value = "Timed out waiting to receive initial broadcast from cluster")
    ActiveMQConnectionTimedOutException connectionTimedOutInInitialBroadcast();
 
-   @Message(id = 219013, value = "Timed out waiting to receive cluster topology. Group:{0}")
+   @Message(id = 219013, value = "Timed out waiting to receive cluster topology. Group:{}")
    ActiveMQConnectionTimedOutException connectionTimedOutOnReceiveTopology(DiscoveryGroup discoveryGroup);
 
-   @Message(id = 219014, value = "Timed out after waiting {0} ms for response when sending packet {1}")
+   @Message(id = 219014, value = "Timed out after waiting {} ms for response when sending packet {}")
    ActiveMQConnectionTimedOutException timedOutSendingPacket(long timeout, Byte type);
 
    @Message(id = 219015, value = "The connection was disconnected because of server shutdown")
@@ -114,7 +114,7 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219021, value = "Cannot set MessageHandler - consumer is in receive(...)")
    ActiveMQIllegalStateException inReceive();
 
-   @Message(id = 219022, value = "Header size ({0}) is too big, use the messageBody for large data, or increase minLargeMessageSize")
+   @Message(id = 219022, value = "Header size ({}) is too big, use the messageBody for large data, or increase minLargeMessageSize")
    ActiveMQIllegalStateException headerSizeTooBig(Integer headerSize);
 
    @Message(id = 219023, value = "The large message lost connection with its session, either because of a rollback or a closed session")
@@ -144,22 +144,22 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219031, value = "The transaction was rolled back on failover however commit may have been successful")
    ActiveMQTransactionOutcomeUnknownException txOutcomeUnknown();
 
-   @Message(id = 219032, value = "Invalid type: {0}")
+   @Message(id = 219032, value = "Invalid type: {}")
    IllegalArgumentException invalidType(Object type);
 
-   @Message(id = 219033, value = "Invalid type: {0}")
+   @Message(id = 219033, value = "Invalid type: {}")
    IllegalArgumentException invalidEncodeType(Object type);
 
-   @Message(id = 219034, value = "Params for management operations must be of the following type: int long double String boolean Map or array thereof but found {0}")
+   @Message(id = 219034, value = "Params for management operations must be of the following type: int long double String boolean Map or array thereof but found {}")
    IllegalArgumentException invalidManagementParam(Object type);
 
-   @Message(id = 219035, value = "Invalid window size {0}")
+   @Message(id = 219035, value = "Invalid window size {}")
    IllegalArgumentException invalidWindowSize(Integer size);
 
-   @Message(id = 219037, value = "Invalid last Received Command ID: {0}")
+   @Message(id = 219037, value = "Invalid last Received Command ID: {}")
    IllegalArgumentException invalidCommandID(Integer lastReceivedCommandID);
 
-   @Message(id = 219038, value = "Cannot find channel with id {0} to close")
+   @Message(id = 219038, value = "Cannot find channel with id {} to close")
    IllegalArgumentException noChannelToClose(Long id);
 
    @Message(id = 219039, value = "Close Listener cannot be null")
@@ -168,7 +168,7 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219040, value = "Fail Listener cannot be null")
    IllegalArgumentException failListenerCannotBeNull();
 
-   @Message(id = 219041, value = "Connection already exists with id {0}")
+   @Message(id = 219041, value = "Connection already exists with id {}")
    IllegalArgumentException connectionExists(Object id);
 
    @Message(id = 219042, value = "Invalid argument null listener")
@@ -189,7 +189,7 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219048, value = "nodes have a different number of attributes")
    IllegalArgumentException nodeHaveDifferentAttNumber();
 
-   @Message(id = 219049, value = "attribute {0}={1} does not match")
+   @Message(id = 219049, value = "attribute {}={} does not match")
    IllegalArgumentException attsDontMatch(String name, String value);
 
    @Message(id = 219050, value = "one node has children and the other does not")
@@ -198,25 +198,25 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219051, value = "nodes have a different number of children")
    IllegalArgumentException nodeHasDifferentChildNumber();
 
-   @Message(id = 219052, value = "Element {0} requires a valid Boolean value, but ''{1}'' cannot be parsed as a Boolean")
+   @Message(id = 219052, value = "Element {} requires a valid Boolean value, but ''{}'' cannot be parsed as a Boolean")
    IllegalArgumentException mustBeBoolean(Node elem, String value);
 
-   @Message(id = 219053, value = "Element {0} requires a valid Double value, but ''{1}'' cannot be parsed as a Double")
+   @Message(id = 219053, value = "Element {} requires a valid Double value, but ''{}'' cannot be parsed as a Double")
    IllegalArgumentException mustBeDouble(Node elem, String value);
 
-   @Message(id = 219054, value = "Element {0} requires a valid Integer value, but ''{1}'' cannot be parsed as an Integer")
+   @Message(id = 219054, value = "Element {} requires a valid Integer value, but ''{}'' cannot be parsed as an Integer")
    IllegalArgumentException mustBeInteger(Node elem, String value);
 
-   @Message(id = 219055, value = "Element {0} requires a valid Long value, but ''{1}'' cannot be parsed as a Long")
+   @Message(id = 219055, value = "Element {} requires a valid Long value, but ''{}'' cannot be parsed as a Long")
    IllegalArgumentException mustBeLong(Node element, String value);
 
    @Message(id = 219057, value = "Error decoding password")
    IllegalArgumentException errordecodingPassword(@Cause Exception e);
 
-   @Message(id = 219058, value = "Address \"{0}\" is full. Message encode size = {1}B")
+   @Message(id = 219058, value = "Address \"{}\" is full. Message encode size = {}B")
    ActiveMQAddressFullException addressIsFull(String addressName, int size);
 
-   @Message(id = 219059, value = "Interceptor {0} rejected packet in a blocking call. This call will never complete.")
+   @Message(id = 219059, value = "Interceptor {} rejected packet in a blocking call. This call will never complete.")
    ActiveMQInterceptorRejectedPacketException interceptorRejectedPacket(String interceptionResult);
 
    @Message(id = 219060, value = "Large Message Transmission interrupted on consumer shutdown.")
@@ -231,7 +231,7 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219063, value = "Cannot send a packet while response cache is full.")
    IllegalStateException cannotSendPacketWhilstResponseCacheFull();
 
-   @Message(id = 219064, value = "Invalide packet: {0}")
+   @Message(id = 219064, value = "Invalide packet: {}")
    IllegalStateException invalidPacket(byte type);
 
    @Message(id = 219065, value = "Failed to handle packet.")
