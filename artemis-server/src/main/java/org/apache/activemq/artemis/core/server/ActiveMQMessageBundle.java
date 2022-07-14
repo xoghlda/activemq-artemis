@@ -166,7 +166,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229031, value = "Unable to validate user from {}. Username: {}; SSL certificate subject DN: {}")
    ActiveMQSecurityException unableToValidateUser(String remoteAddress, String user, String certMessage);
 
-   @Message(id = 229032, value = "User: {} does not have permission=''{}'' on address {}")
+   @Message(id = 229032, value = "User: {} does not have permission='{}' on address {}")
    ActiveMQSecurityException userNoPermissions(String username, CheckType checkType, SimpleString address);
 
    @Message(id = 229033, value = "Server and client versions incompatible")
@@ -436,7 +436,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229212, value = "Invalid deletion policy type {}")
    IllegalArgumentException invalidDeletionPolicyType(String val);
 
-   @Message(id = 229213, value = "User: {} does not have permission=''{}'' for queue {} on address {}")
+   @Message(id = 229213, value = "User: {} does not have permission='{}' for queue {} on address {}")
    ActiveMQSecurityException userNoPermissionsQueue(String username, CheckType checkType, SimpleString queue, SimpleString address);
 
    @Message(id = 229214, value = "{} must be a valid percentage value between 0 and 100 or -1 (actual value: {})")
