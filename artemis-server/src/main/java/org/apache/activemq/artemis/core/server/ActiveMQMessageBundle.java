@@ -91,8 +91,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229005, value = "connections for {} closed by management")
    ActiveMQInternalErrorException connectionsClosedByManagement(String ipAddress);
 
-   // TODO: replace now-unecessary '' escapes in messages with just ', throughout the codebase...in order to maintain prior output, and make the code seem less whack :/
-   @Message(id = 229006, value = "journals are not JournalImpl. You can''t set a replicator!")
+   @Message(id = 229006, value = "journals are not JournalImpl. You can't set a replicator!")
    ActiveMQInternalErrorException notJournalImpl();
 
    @Message(id = 229007, value = "unhandled error during replication")
@@ -155,10 +154,10 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229027, value = "Could not find reference on consumer ID={}, messageId = {} queue = {}")
    ActiveMQIllegalStateException consumerNoReference(Long id, Long messageID, SimpleString name);
 
-   @Message(id = 229028, value = "Consumer {} doesn''t exist on the server")
+   @Message(id = 229028, value = "Consumer {} doesn't exist on the server")
    ActiveMQIllegalStateException consumerDoesntExist(long consumerID);
 
-   @Message(id = 229029, value = "No address configured on the Server''s Session")
+   @Message(id = 229029, value = "No address configured on the Server's Session")
    ActiveMQIllegalStateException noAddress();
 
    @Message(id = 229030, value = "large-message not initialized on server")
@@ -290,13 +289,13 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229074, value = "Error instantiating transformer class {}")
    IllegalArgumentException errorCreatingTransformerClass(@Cause Exception e, String transformerClassName);
 
-   @Message(id = 229075, value = "method autoEncode doesn''t know how to convert {} yet")
+   @Message(id = 229075, value = "method autoEncode doesn't know how to convert {} yet")
    IllegalArgumentException autoConvertError(Class<? extends Object> aClass);
 
    /**
     * Message used on on {@link org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl#destroyConnectionWithSessionMetadata(String, String)}
     */
-   @Message(id = 229076, value = "Executing destroyConnection with {}={} through management''s request")
+   @Message(id = 229076, value = "Executing destroyConnection with {}={} through management's request")
    String destroyConnectionWithSessionMetadataHeader(String key, String value);
 
    /**
@@ -308,7 +307,7 @@ public interface ActiveMQMessageBundle {
    /**
     * Exception used on on {@link org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl#destroyConnectionWithSessionMetadata(String, String)}
     */
-   @Message(id = 229078, value = "Disconnected per admin''s request on {}={}")
+   @Message(id = 229078, value = "Disconnected per admin's request on {}={}")
    ActiveMQDisconnectedException destroyConnectionWithSessionMetadataSendException(String key, String value);
 
    /**
@@ -360,10 +359,10 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229109, value = "unsupported HA Policy Configuration {}")
    ActiveMQIllegalStateException unsupportedHAPolicyConfiguration(Object o);
 
-   @Message(id = 229110, value = "Too many sessions for user ''{}''. Sessions allowed: {}.")
+   @Message(id = 229110, value = "Too many sessions for user '{}'. Sessions allowed: {}.")
    ActiveMQSessionCreationException sessionLimitReached(String username, int limit);
 
-   @Message(id = 229111, value = "Too many queues created by user ''{}''. Queues allowed: {}.")
+   @Message(id = 229111, value = "Too many queues created by user '{}'. Queues allowed: {}.")
    ActiveMQSecurityException queueLimitReached(String username, int limit);
 
    @Message(id = 229112, value = "Cannot set MBeanServer during startup or while started")
@@ -375,7 +374,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229114, value = "Replication synchronization process timed out after waiting {} milliseconds")
    ActiveMQReplicationTimeooutException replicationSynchronizationTimeout(long timeout);
 
-   @Message(id = 229115, value = "Colocated Policy hasn''t different type live and backup")
+   @Message(id = 229115, value = "Colocated Policy hasn't different type live and backup")
    ActiveMQIllegalStateException liveBackupMismatch();
 
    @Message(id = 229116, value = "Netty Acceptor unavailable")
@@ -422,13 +421,13 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229208, value = "Invalid routing type {}")
    IllegalArgumentException invalidRoutingType(String val);
 
-   @Message(id = 229209, value = "Can''t remove routing type {}, queues exists for address: {}. Please delete queues before removing this routing type.")
+   @Message(id = 229209, value = "Can't remove routing type {}, queues exists for address: {}. Please delete queues before removing this routing type.")
    IllegalStateException invalidRoutingTypeDelete(RoutingType routingType, String address);
 
-   @Message(id = 229210, value = "Can''t update queue {} with maxConsumers: {}. Current consumers are {}.")
+   @Message(id = 229210, value = "Can't update queue {} with maxConsumers: {}. Current consumers are {}.")
    IllegalStateException invalidMaxConsumersUpdate(String queueName, int maxConsumers, int consumers);
 
-   @Message(id = 229211, value = "Can''t update queue {} with routing type: {}, Supported routing types for address: {} are {}")
+   @Message(id = 229211, value = "Can't update queue {} with routing type: {}, Supported routing types for address: {} are {}")
    IllegalStateException invalidRoutingTypeUpdate(String queueName,
                                                   RoutingType routingType,
                                                   String address,

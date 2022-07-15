@@ -176,7 +176,7 @@ public interface ActiveMQClientLogger {
    @LogMessage(id = 212051, value = "Invalid concurrent session usage. Sessions are not supposed to be used by more than one thread concurrently.", level = LogMessage.Level.WARN)
    void invalidConcurrentSessionUsage(@Cause Throwable t);
 
-   @LogMessage(id = 212052, value = "Packet {} was answered out of sequence due to a previous server timeout and it''s being ignored", level = LogMessage.Level.WARN)
+   @LogMessage(id = 212052, value = "Packet {} was answered out of sequence due to a previous server timeout and it's being ignored", level = LogMessage.Level.WARN)
    void packetOutOfOrder(Object obj, @Cause Throwable t);
 
    /**
@@ -259,7 +259,7 @@ public interface ActiveMQClientLogger {
    @LogMessage(id = 212079, value = "The upstream connector from the downstream federation will ignore url parameter {}", level = LogMessage.Level.WARN)
    void ignoredParameterForDownstreamFederation(String name);
 
-   @LogMessage(id = 212080, value = "Using legacy SSL store provider value: {}. Please use either ''keyStoreType'' or ''trustStoreType'' instead as appropriate.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 212080, value = "Using legacy SSL store provider value: {}. Please use either 'keyStoreType' or 'trustStoreType' instead as appropriate.", level = LogMessage.Level.WARN)
    void oldStoreProvider(String value);
 
    @LogMessage(id = 214000, value = "Failed to call onMessage", level = LogMessage.Level.ERROR)

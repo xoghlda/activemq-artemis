@@ -35,13 +35,13 @@ public interface ActiveMQJMSServerBundle {
    @Message(id = 129000, value = "Connection Factory {} does not exist")
    ActiveMQInternalErrorException cfDoesntExist(String name);
 
-   @Message(id = 129003, value = "Discovery Group ''{}'' does not exist on main config")
+   @Message(id = 129003, value = "Discovery Group '{}' does not exist on main config")
    ActiveMQIllegalStateException discoveryGroupDoesntExist(String name);
 
    @Message(id = 129004, value = "No Connector name configured on create ConnectionFactory")
    ActiveMQIllegalStateException noConnectorNameOnCF();
 
-   @Message(id = 129005, value = "Connector ''{}'' not found on the main configuration file")
+   @Message(id = 129005, value = "Connector '{}' not found on the main configuration file")
    ActiveMQIllegalStateException noConnectorNameConfiguredOnCF(String name);
 
    @Message(id = 129006, value = "Binding {} is already being used by another connection factory")

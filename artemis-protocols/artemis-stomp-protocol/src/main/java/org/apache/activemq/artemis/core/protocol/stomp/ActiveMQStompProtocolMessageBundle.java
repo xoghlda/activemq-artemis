@@ -141,10 +141,10 @@ public interface ActiveMQStompProtocolMessageBundle {
    @Message(id = 339034, value = "This method should not be called")
    IllegalStateException invalidCall();
 
-   @Message(id = 339035, value = "Must specify the subscription''s id or the destination you are unsubscribing from")
+   @Message(id = 339035, value = "Must specify the subscription's id or the destination you are unsubscribing from")
    ActiveMQStompException needIDorDestination();
 
-   @Message(id = 339037, value = "Must specify the subscription''s id")
+   @Message(id = 339037, value = "Must specify the subscription's id")
    ActiveMQStompException needSubscriptionID();
 
    @Message(id = 339039, value = "No id header in ACK/NACK frame.")

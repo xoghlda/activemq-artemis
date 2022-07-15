@@ -40,7 +40,7 @@ public interface ActiveMQJMSClientLogger {
 
    ActiveMQJMSClientLogger LOGGER = CodeFactory.getCodeClass(ActiveMQJMSClientLogger.class, ActiveMQJMSClientLogger.class.getPackage().getName());
 
-   @LogMessage(id = 132000, value = "I''m closing a JMS connection you left open. Please make sure you close all JMS connections explicitly before letting them go out of scope! see stacktrace to find out where it was created", level = LogMessage.Level.WARN)
+   @LogMessage(id = 132000, value = "I'm closing a JMS connection you left open. Please make sure you close all JMS connections explicitly before letting them go out of scope! see stacktrace to find out where it was created", level = LogMessage.Level.WARN)
    void connectionLeftOpen(@Cause Exception e);
 
    @LogMessage(id = 132001, value = "Unhandled exception thrown from onMessage", level = LogMessage.Level.WARN)

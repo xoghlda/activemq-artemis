@@ -195,10 +195,10 @@ public interface ActiveMQServerLogger {
                                SimpleString address,
                                SimpleString simpleString);
 
-   @LogMessage(id = 221037, value = "{} to become ''live''", level = LogMessage.Level.INFO)
+   @LogMessage(id = 221037, value = "{} to become 'live'", level = LogMessage.Level.INFO)
    void becomingLive(ActiveMQServer server);
 
-   @LogMessage(id = 221038, value = "Configuration option ''{}'' is deprecated. Consult the manual for details.", level = LogMessage.Level.INFO)
+   @LogMessage(id = 221038, value = "Configuration option '{}' is deprecated. Consult the manual for details.", level = LogMessage.Level.INFO)
    void deprecatedConfigurationOption(String deprecatedOption);
 
    @LogMessage(id = 221039, value = "Restarting as Replicating backup server after live restart", level = LogMessage.Level.INFO)
@@ -219,13 +219,13 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 221045, value = "libaio is not available, switching the configuration into NIO", level = LogMessage.Level.INFO)
    void switchingNIO();
 
-   @LogMessage(id = 221046, value = "Unblocking message production on address ''{}''; {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 221046, value = "Unblocking message production on address '{}'; {}", level = LogMessage.Level.INFO)
    void unblockingMessageProduction(SimpleString addressName, String sizeInfo);
 
    @LogMessage(id = 221047, value = "Backup Server has scaled down to live server", level = LogMessage.Level.INFO)
    void backupServerScaledDown();
 
-   @LogMessage(id = 221048, value = "Consumer {}:{} attached to queue ''{}'' from {} identified as ''slow.'' Expected consumption rate: {} msgs/second; actual consumption rate: {} msgs/second.", level = LogMessage.Level.INFO)
+   @LogMessage(id = 221048, value = "Consumer {}:{} attached to queue '{}' from {} identified as 'slow.' Expected consumption rate: {} msgs/second; actual consumption rate: {} msgs/second.", level = LogMessage.Level.INFO)
    void slowConsumerDetected(String sessionID,
                              long consumerID,
                              String queueName,
@@ -245,7 +245,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 221052, value = "Deploying topic {}", level = LogMessage.Level.INFO)
    void deployTopic(SimpleString topicName);
 
-   @LogMessage(id = 221053, value = "Disallowing use of vulnerable protocol ''{}'' on acceptor ''{}''. See http://www.oracle.com/technetwork/topics/security/poodlecve-2014-3566-2339408.html for more details.", level = LogMessage.Level.INFO)
+   @LogMessage(id = 221053, value = "Disallowing use of vulnerable protocol '{}' on acceptor '{}'. See http://www.oracle.com/technetwork/topics/security/poodlecve-2014-3566-2339408.html for more details.", level = LogMessage.Level.INFO)
    void disallowedProtocol(String protocol, String acceptorName);
 
    @LogMessage(id = 221054, value = "libaio was found but the filesystem does not support AIO. Switching the configuration into NIO. Journal path: {}", level = LogMessage.Level.INFO)
@@ -401,7 +401,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222019, value = "There is already a discovery group with name {} deployed. This one will not be deployed.", level = LogMessage.Level.WARN)
    void discoveryGroupAlreadyDeployed(String name);
 
-   @LogMessage(id = 222020, value = "error scanning for URL''s", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222020, value = "error scanning for URL's", level = LogMessage.Level.WARN)
    void errorScanningURLs(@Cause Exception e);
 
    @LogMessage(id = 222021, value = "problem undeploying {}", level = LogMessage.Level.WARN)
@@ -455,10 +455,10 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222037, value = "IO Error, impossible to start paging", level = LogMessage.Level.WARN)
    void pageStoreStartIOError(@Cause Exception e);
 
-   @LogMessage(id = 222038, value = "Starting paging on address ''{}''; {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 222038, value = "Starting paging on address '{}'; {}", level = LogMessage.Level.INFO)
    void pageStoreStart(SimpleString storeName, String sizeInfo);
 
-   @LogMessage(id = 222039, value = "Messages sent to address ''{}'' are being dropped; {}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222039, value = "Messages sent to address '{}' are being dropped; {}", level = LogMessage.Level.WARN)
    void pageStoreDropMessages(SimpleString storeName, String sizeInfo);
 
    @LogMessage(id = 222040, value = "Server is stopped", level = LogMessage.Level.WARN)
@@ -828,13 +828,13 @@ public interface ActiveMQServerLogger {
    void groupingQueueRemoved(int size, SimpleString clusterName);
 
    @SuppressWarnings("deprecation")
-   @LogMessage(id = 222168, value = "The ''" + TransportConstants.PROTOCOL_PROP_NAME + "'' property is deprecated. If you want this Acceptor to support multiple protocols, use the ''" + TransportConstants.PROTOCOLS_PROP_NAME + "'' property, e.g. with value ''CORE,AMQP,STOMP''", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222168, value = "The '" + TransportConstants.PROTOCOL_PROP_NAME + "' property is deprecated. If you want this Acceptor to support multiple protocols, use the '" + TransportConstants.PROTOCOLS_PROP_NAME + "' property, e.g. with value 'CORE,AMQP,STOMP'", level = LogMessage.Level.WARN)
    void warnDeprecatedProtocol();
 
-   @LogMessage(id = 222169, value = "You have old legacy clients connected to the queue {} and we can''t disconnect them, these clients may just hang", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222169, value = "You have old legacy clients connected to the queue {} and we can't disconnect them, these clients may just hang", level = LogMessage.Level.WARN)
    void warnDisconnectOldClient(String queueName);
 
-   @LogMessage(id = 222170, value = "Bridge {} forwarding address {} has confirmation-window-size ({}) greater than address'' max-size-bytes'' ({})", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222170, value = "Bridge {} forwarding address {} has confirmation-window-size ({}) greater than address' max-size-bytes' ({})", level = LogMessage.Level.WARN)
    void bridgeConfirmationWindowTooSmall(String bridgeName, String address, int windowConfirmation, long maxSizeBytes);
 
    @LogMessage(id = 222171, value = "Bridge {} forwarding address {} could not be resolved on address-settings configuration", level = LogMessage.Level.WARN)
@@ -867,7 +867,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222182, value = "Missing cluster-configuration for scale-down-clustername {}", level = LogMessage.Level.WARN)
    void missingClusterConfigForScaleDown(String scaleDownCluster);
 
-   @LogMessage(id = 222183, value = "Blocking message production on address ''{}''; {}", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222183, value = "Blocking message production on address '{}'; {}", level = LogMessage.Level.WARN)
    void blockingMessageProduction(SimpleString addressName, String pageInfo);
 
    @LogMessage(id = 222184, value = "Unable to recover group bindings in SCALE_DOWN mode, only FULL backup server can do this", level = LogMessage.Level.WARN)
@@ -900,7 +900,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222194, value = "PageCursorInfo == null on address {}, pos = {}, queue = {}.", level = LogMessage.Level.WARN)
    void nullPageCursorInfo(String address, String position, long id);
 
-   @LogMessage(id = 222195, value = "Large message {} wasn''t found when dealing with add pending large message", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222195, value = "Large message {} wasn't found when dealing with add pending large message", level = LogMessage.Level.WARN)
    void largeMessageNotFound(long id);
 
    @LogMessage(id = 222196, value = "Could not find binding with id={} on routeFromCluster for message={} binding = {}", level = LogMessage.Level.WARN)
@@ -954,7 +954,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222211, value = "Free storage space is at {} of {} total. Usage rate is {} which is below the configured <max-disk-usage>.", level = LogMessage.Level.INFO)
    void diskCapacityRestored(String usableSpace, String totalSpace, String usage);
 
-   @LogMessage(id = 222212, value = "Disk Full! Blocking message production on address ''{}''. Clients will report blocked.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222212, value = "Disk Full! Blocking message production on address '{}'. Clients will report blocked.", level = LogMessage.Level.WARN)
    void blockingDiskFull(SimpleString addressName);
 
    @LogMessage(id = 222213, value = "There was an issue on the network, server is isolated!", level = LogMessage.Level.WARN)
@@ -1546,7 +1546,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 224107, value = "The Critical Analyzer detected slow paths on the broker.  It is recommended that you enable trace logs on org.apache.activemq.artemis.utils.critical while you troubleshoot this issue. You should disable the trace logs when you have finished troubleshooting.", level = LogMessage.Level.INFO)
    void enableTraceForCriticalAnalyzer();
 
-   @LogMessage(id = 224108, value = "Stopped paging on address ''{}''; {}", level = LogMessage.Level.INFO)
+   @LogMessage(id = 224108, value = "Stopped paging on address '{}'; {}", level = LogMessage.Level.INFO)
    void pageStoreStop(SimpleString storeName, String pageInfo);
 
    @LogMessage(id = 224109, value = "ConnectionRouter {} not found", level = LogMessage.Level.WARN)
@@ -1564,10 +1564,10 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 224113, value = "Auto removing Address {}", level = LogMessage.Level.INFO)
    void autoRemoveAddress(String name);
 
-   @LogMessage(id = 224114, value = "Address control block, blocking message production on address ''{}''. Clients will not get further credit.", level = LogMessage.Level.INFO)
+   @LogMessage(id = 224114, value = "Address control block, blocking message production on address '{}'. Clients will not get further credit.", level = LogMessage.Level.INFO)
    void blockingViaControl(SimpleString addressName);
 
-   @LogMessage(id = 224115, value = "Address control unblock of address ''{}''. Clients will be granted credit as normal.", level = LogMessage.Level.INFO)
+   @LogMessage(id = 224115, value = "Address control unblock of address '{}'. Clients will be granted credit as normal.", level = LogMessage.Level.INFO)
    void unblockingViaControl(SimpleString addressName);
 
    @LogMessage(id = 224116, value = "The component {} is not responsive during start up. The Server may be taking too long to start", level = LogMessage.Level.WARN)

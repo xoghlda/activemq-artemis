@@ -81,7 +81,7 @@ public interface ActiveMQJMSClientBundle {
    @Message(id = 139011, value = "LargeMessage streaming is only possible on ByteMessage or StreamMessage")
    IllegalStateException onlyValidForByteOrStreamMessages();
 
-   @Message(id = 139012, value = "The property name ''{}'' is not a valid java identifier.")
+   @Message(id = 139012, value = "The property name '{}' is not a valid java identifier.")
    JMSRuntimeException invalidJavaIdentifier(String propertyName);
 
    @Message(id = 139013, value = "Message is read-only")

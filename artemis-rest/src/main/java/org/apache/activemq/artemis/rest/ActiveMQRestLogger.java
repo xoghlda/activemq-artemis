@@ -53,7 +53,7 @@ public interface ActiveMQRestLogger {
    @LogMessage(id = 182003, value = "Failed to build Message from object", level = LogMessage.Level.WARN)
    void failedToBuildMessageFromObject(@Cause Exception e);
 
-   @LogMessage(id = 182004, value = "REST configuration parameter ''{}'' is deprecated. Use ''{1}'' instead.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 182004, value = "REST configuration parameter '{}' is deprecated. Use '{}' instead.", level = LogMessage.Level.WARN)
    void deprecatedConfiguration(String oldConfigParameter, String newConfigParameter);
 
    @LogMessage(id = 184000, value = "Failed to load push store {}, it is probably corrupted", level = LogMessage.Level.ERROR)

@@ -99,7 +99,7 @@ public interface ActiveMQJournalLogger {
    @LogMessage(id = 142011, value = "Error on reading compacting for {}", level = LogMessage.Level.WARN)
    void compactReadError(JournalFile file);
 
-   @LogMessage(id = 142012, value = "Couldn''t find tx={} to merge after compacting", level = LogMessage.Level.WARN)
+   @LogMessage(id = 142012, value = "Couldn't find tx={} to merge after compacting", level = LogMessage.Level.WARN)
    void compactMergeError(Long id);
 
    @LogMessage(id = 142013, value = "Prepared transaction {} was not considered completed, it will be ignored", level = LogMessage.Level.WARN)
@@ -132,7 +132,7 @@ public interface ActiveMQJournalLogger {
    @LogMessage(id = 142022, value = "Timed out on AIO poller shutdown", level = LogMessage.Level.WARN)
    void timeoutOnPollerShutdown(@Cause Exception e);
 
-   @LogMessage(id = 142023, value = "Executor on file {} couldn''t complete its tasks in 60 seconds.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 142023, value = "Executor on file {} couldn't complete its tasks in 60 seconds.", level = LogMessage.Level.WARN)
    void couldNotCompleteTask(@Cause Exception e, String name);
 
    @LogMessage(id = 142024, value = "Error completing callback", level = LogMessage.Level.WARN)

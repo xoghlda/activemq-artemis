@@ -198,16 +198,16 @@ public interface ActiveMQClientMessageBundle {
    @Message(id = 219051, value = "nodes have a different number of children")
    IllegalArgumentException nodeHasDifferentChildNumber();
 
-   @Message(id = 219052, value = "Element {} requires a valid Boolean value, but ''{}'' cannot be parsed as a Boolean")
+   @Message(id = 219052, value = "Element {} requires a valid Boolean value, but '{}' cannot be parsed as a Boolean")
    IllegalArgumentException mustBeBoolean(Node elem, String value);
 
-   @Message(id = 219053, value = "Element {} requires a valid Double value, but ''{}'' cannot be parsed as a Double")
+   @Message(id = 219053, value = "Element {} requires a valid Double value, but '{}' cannot be parsed as a Double")
    IllegalArgumentException mustBeDouble(Node elem, String value);
 
-   @Message(id = 219054, value = "Element {} requires a valid Integer value, but ''{}'' cannot be parsed as an Integer")
+   @Message(id = 219054, value = "Element {} requires a valid Integer value, but '{}' cannot be parsed as an Integer")
    IllegalArgumentException mustBeInteger(Node elem, String value);
 
-   @Message(id = 219055, value = "Element {} requires a valid Long value, but ''{}'' cannot be parsed as a Long")
+   @Message(id = 219055, value = "Element {} requires a valid Long value, but '{}' cannot be parsed as a Long")
    IllegalArgumentException mustBeLong(Node element, String value);
 
    @Message(id = 219057, value = "Error decoding password")
