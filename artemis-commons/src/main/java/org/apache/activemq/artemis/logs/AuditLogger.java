@@ -2341,11 +2341,11 @@ public interface AuditLogger {
    void sendMessageFailure(String user, String queueName, String sendUser);
 
    static void browseMessagesSuccess(String queueName, int numMessages) {
-      RESOURCE_LOGGER.browseMessagesSuccess(getCaller(), queueName, numMessages);
+      RESOURCE_LOGGER.browseMessagesSuccess(getCaller(), numMessages, queueName);
    }
 
    @LogMessage(id = 601725, value = "User {} browsed {} messages from queue {}", level = LogMessage.Level.INFO)
-   void browseMessagesSuccess(String user, String queueName, int numMessages);
+   void browseMessagesSuccess(String user, int numMessages, String queueName);
 
    static void browseMessagesFailure(String queueName) {
       RESOURCE_LOGGER.browseMessagesFailure(getCaller(), queueName);
