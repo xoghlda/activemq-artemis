@@ -556,7 +556,7 @@ public class ClientSessionFactoryImpl implements ClientSessionFactoryInternal, C
    private void failoverOrReconnect(final Object connectionID,
                                     final ActiveMQException me,
                                     String scaleDownTargetNodeID) {
-      logger.debug("Failure captured on connectionID={0}, performing failover or reconnection now", connectionID, me);
+      logger.debug("Failure captured on connectionID={}, performing failover or reconnection now", connectionID, me);
 
       for (ClientSessionInternal session : sessions) {
          SessionContext context = session.getSessionContext();

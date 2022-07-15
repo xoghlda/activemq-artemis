@@ -751,7 +751,7 @@ public class NettyConnector extends AbstractConnector {
 
          batchFlusherFuture = scheduledThreadPool.scheduleWithFixedDelay(flusher, batchDelay, batchDelay, TimeUnit.MILLISECONDS);
       }
-      logger.debug("Started {0} Netty Connector version {1} to {2}:{3,number,#}", connectorType, TransportConstants.NETTY_VERSION, host, port);
+      logger.debug("Started {} Netty Connector version {} to {}:{}", connectorType, TransportConstants.NETTY_VERSION, host, port);
    }
 
    private SSLEngine loadJdkSslEngine(final SSLContextConfig sslContextConfig) throws Exception {
