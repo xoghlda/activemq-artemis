@@ -32,14 +32,17 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.slf4j.helpers.MessageFormatter;
 
 @SupportedAnnotationTypes({"org.apache.activemq.artemis.logprocessor.annotation.LogBundle"})
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
@@ -351,26 +354,56 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println("   @Override");
       writerOutput.write("   public void " + executableMember.getSimpleName() + "(");
 
-      Iterator<? extends VariableElement> parameters = executableMember.getParameters().iterator();
+      List<? extends VariableElement> parametersList = executableMember.getParameters();
 
       boolean hasParameters = false;
 
-      // the one that will be used on the call
-      StringBuffer callList = new StringBuffer();
+      VariableElement exceptionParameter = null;
+      ArrayList<VariableElement> nonExceptionParameters = new ArrayList<>();
+
+      Iterator<? extends VariableElement> parameters = parametersList.iterator();
       while (parameters.hasNext()) {
          hasParameters = true;
          VariableElement parameter = parameters.next();
          writerOutput.write(parameter.asType() + " " + parameter.getSimpleName());
-         callList.append(parameter.getSimpleName());
          if (parameters.hasNext()) {
             writerOutput.write(", ");
+         }
+
+         boolean isException = isException(parameter.asType(), parameter);
+
+         if (isException) {
+            if (exceptionParameter != null) {
+               throw new IllegalArgumentException("You can only have one exception defined per log message, check:: " + executableMember);
+            }
+            exceptionParameter = parameter;
+         }
+
+         if (DEBUG) {
+            debug("Parameter " + parameter + (isException? "is" : "is not") + " an exception");
+         }
+
+         if (!isException) {
+            nonExceptionParameters.add(parameter);
+         }
+      }
+
+      writerOutput.println(")");
+      writerOutput.println("   {");
+
+      // the one that will be used on the call
+      StringBuffer callList = new StringBuffer();
+      parameters = nonExceptionParameters.iterator();
+
+      while (parameters.hasNext()) {
+         hasParameters = true;
+         VariableElement parameter = parameters.next();
+         callList.append(parameter.getSimpleName());
+         if (parameters.hasNext()) {
             callList.append(",");
          }
       }
 
-      // the real implementation
-      writerOutput.println(")");
-      writerOutput.println("   {");
 
       String methodName;
 
@@ -389,12 +422,16 @@ public class LogProcessor extends AbstractProcessor {
             throw new IllegalStateException("illegal method level " + messageAnnotation.level());
       }
 
-      //TODO: handle causes being passed in the args to be logged, but not necessarily (often not) being last arg at present as SLF4J/frameworks expect.
       String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
-      if (!hasParameters) {
-         writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");
+      if (exceptionParameter != null) {
+         writerOutput.println("     FormattingTuple output = org.slf4j.helpers.MessageFormatter.arrayFormat(\"" + formattingString + "\",new Object[] {" + callList + "});");
+         writerOutput.println("     logger." + methodName + "(output.getMessage(), " + exceptionParameter.getSimpleName() +");");
       } else {
-         writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\", " + callList + ");");
+         if (!hasParameters) {
+            writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");
+         } else {
+            writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\", " + callList + ");");
+         }
       }
       writerOutput.println("   }");
       writerOutput.println();

@@ -17,6 +17,8 @@
 
 package org.apache.activemq.artemis.logprocessor;
 
+import java.io.IOException;
+
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
@@ -57,6 +59,22 @@ public interface SimpleBundle {
 
    @Message(id = 10, value = "{} {} {} {}")
    String objectsAbcd(MyObject a, MyObject b, MyObject c, MyObject d);
+
+   @LogMessage(id = 11, value = "This message has the following parameter:: {}", level = LogMessage.Level.WARN)
+   void parameterException(String parameter, IOException e);
+
+   @LogMessage(id = 12, value = "This message has the following parameter:: {}", level = LogMessage.Level.WARN)
+   void myExceptionLogger(String parameter, MyException e);
+
+   @LogMessage(id = 13, value = "This message has the following parameter:: p{}", level = LogMessage.Level.WARN)
+   void outOfOrder(MyException e, String parameter);
+
+   @LogMessage(id = 14, value = "OutOfOrder with 4 parameters p{} p{} p{}", level = LogMessage.Level.WARN)
+   void outOfOrder(MyException p1, String p2, String p3, String p4);
+
+   @LogMessage(id = 15, value = "Long with 5 parameters p{} p{} p{} p{} p{}", level = LogMessage.Level.WARN)
+   void longParameters(String p1, String p2, String p3, String p4, String p5);
+
 
    @GetLogger
    Logger getLogger();

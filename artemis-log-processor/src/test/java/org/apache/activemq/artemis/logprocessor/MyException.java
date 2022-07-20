@@ -27,5 +27,8 @@ public class MyException extends Exception {
       super(error, cause);
    }
 
+   public String toString() {
+      return getMessage();
+   }
 
 }

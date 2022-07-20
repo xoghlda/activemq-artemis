@@ -16,7 +16,9 @@
  */
 package org.apache.activemq.artemis.logs;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,8 @@ public class AssertionLoggerHandler extends AbstractAppender {
    private static final Map<String, LogEvent> messages = new ConcurrentHashMap<>();
    private static List<String> traceMessages;
    private static volatile boolean capture = false;
+   private static volatile boolean captureStackTrace = false;
+
 
    public static class Builder<B extends Builder<B>> extends AbstractAppender.Builder<B> implements org.apache.logging.log4j.core.util.Builder<AssertionLoggerHandler> {
       @Override
@@ -67,7 +71,15 @@ public class AssertionLoggerHandler extends AbstractAppender {
       if (capture) {
          //TODO: see getFormattedMessage() around handling StringBuilderFormattable interface as well, check it out
          String formattedMessage = event.getMessage().getFormattedMessage();
+
+         if (captureStackTrace && event.getThrown() != null) {
+            StringWriter stackOutput = new StringWriter();
+            event.getThrown().printStackTrace(new PrintWriter(stackOutput));
+            formattedMessage += stackOutput.toString();
+         }
+
          messages.put(formattedMessage, event);
+
          if (traceMessages != null) {
             traceMessages.add(formattedMessage);
          }
@@ -207,15 +219,25 @@ public class AssertionLoggerHandler extends AbstractAppender {
     * @param individualMessages enables counting individual messages.
     */
    public static final void startCapture(boolean individualMessages) {
+      startCapture(individualMessages, captureStackTrace);
+   }
+
+   /**
+    *
+    * @param individualMessages enables counting individual messages.
+    */
+   public static final void startCapture(boolean individualMessages, boolean captureStackTrace) {
       clear();
       if (individualMessages) {
          traceMessages = new LinkedList<>();
       }
       capture = true;
+      AssertionLoggerHandler.captureStackTrace = captureStackTrace;
    }
 
    public static final void stopCapture() {
       capture = false;
+      captureStackTrace = false;
       clear();
       traceMessages = null;
    }

@@ -17,10 +17,12 @@
 
 package org.apache.activemq.artemis.logprocessor;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.apache.activemq.artemis.logs.AssertionLoggerHandler;
 
 public class SimpleBundleTest {
 
@@ -80,6 +82,75 @@ public class SimpleBundleTest {
    public void testObjectsABCD() {
       System.out.println(SimpleBundle.MESSAGES.abcd("A", "B", "C", "D"));
       Assert.assertEquals("TST10: A B C D", SimpleBundle.MESSAGES.objectsAbcd(new MyObject("A"), new MyObject("B"), new MyObject("C"), new MyObject("D")));
+   }
+
+
+   @Test
+   public void exceptions() {
+      SimpleBundle.MESSAGES.parameterException("hello", new IOException("this is an exception"));
+      SimpleBundle.MESSAGES.myExceptionLogger("hello2", new MyException("this is an exception"));
+   }
+
+   @Test
+   public void outOfOrderException() {
+      AssertionLoggerHandler.startCapture(false, true);
+      try {
+         SimpleBundle.MESSAGES.outOfOrder(createMyException("NotHere"), "2");
+         Assert.assertTrue("parameter2 was not on the output", AssertionLoggerHandler.findText("p2"));
+         Assert.assertFalse(AssertionLoggerHandler.findText("pNotHere"));
+         Assert.assertTrue("Stack trace was not printed", AssertionLoggerHandler.findText("createMyException"));
+         Assert.assertFalse("logging not working", AssertionLoggerHandler.findText("{}"));
+      } finally {
+         AssertionLoggerHandler.stopCapture();
+      }
+   }
+
+   @Test
+   public void outOfOrderExceptionLongParameter() {
+      try {
+         AssertionLoggerHandler.startCapture(false, false);
+         SimpleBundle.MESSAGES.outOfOrder(new MyException("ex1"), "2", "3", "4");
+         Assert.assertFalse("parameter not found", AssertionLoggerHandler.findText("pex1"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p2"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
+         Assert.assertFalse("formatting not working", AssertionLoggerHandler.findText("{}"));
+
+         AssertionLoggerHandler.clear();
+         AssertionLoggerHandler.startCapture(false, true);
+
+         SimpleBundle.MESSAGES.outOfOrder(createMyException("ex1"), "2", "3", "4");
+         Assert.assertFalse("parameter not found", AssertionLoggerHandler.findText("pex1"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
+         Assert.assertTrue("stack not found", AssertionLoggerHandler.findText("createMyException"));
+         Assert.assertFalse("formatting not working", AssertionLoggerHandler.findText("{}"));
+
+      } finally {
+         AssertionLoggerHandler.stopCapture();
+      }
+   }
+
+   @Test
+   public void longList() {
+      AssertionLoggerHandler.startCapture(false, true);
+      try {
+         SimpleBundle.MESSAGES.longParameters("1", "2", "3", "4", "5");
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p1"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p2"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
+         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p5"));
+         Assert.assertFalse("{}", AssertionLoggerHandler.findText("{}"));
+      } finally {
+         AssertionLoggerHandler.stopCapture();
+      }
+   }
+
+
+   // I'm doing it on a method just to assert if this method will appear on the stack trace
+   private MyException createMyException(String message) {
+      return new MyException(message);
    }
 
 
