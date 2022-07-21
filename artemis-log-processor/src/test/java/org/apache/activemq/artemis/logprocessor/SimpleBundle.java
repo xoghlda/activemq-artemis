@@ -75,6 +75,10 @@ public interface SimpleBundle {
    @LogMessage(id = 15, value = "Long with 5 parameters p{} p{} p{} p{} p{}", level = LogMessage.Level.WARN)
    void longParameters(String p1, String p2, String p3, String p4, String p5);
 
+   @LogMessage(id = 16, value = "An Exceptional example", level = LogMessage.Level.WARN)
+   void onlyException(MyException e);
+
+
 
    @GetLogger
    Logger getLogger();

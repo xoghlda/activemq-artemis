@@ -148,6 +148,29 @@ public class SimpleBundleTest {
    }
 
 
+   @Test
+   public void onlyException() {
+      try {
+         AssertionLoggerHandler.startCapture(false, false);
+
+         SimpleBundle.MESSAGES.onlyException(createMyException("MSG7777"));
+
+         Assert.assertTrue(AssertionLoggerHandler.findText("TST16"));
+         Assert.assertFalse(AssertionLoggerHandler.findText("MSG7777"));
+
+         AssertionLoggerHandler.clear();
+
+         AssertionLoggerHandler.startCapture(false, true);
+         SimpleBundle.MESSAGES.onlyException(createMyException("MSG7777"));
+         Assert.assertTrue(AssertionLoggerHandler.findText("TST16"));
+         Assert.assertTrue(AssertionLoggerHandler.findText("MSG7777"));
+         Assert.assertTrue(AssertionLoggerHandler.findText("createMyException"));
+      } finally {
+         AssertionLoggerHandler.stopCapture();
+      }
+   }
+
+
    // I'm doing it on a method just to assert if this method will appear on the stack trace
    private MyException createMyException(String message) {
       return new MyException(message);
