@@ -19,6 +19,8 @@ package org.apache.activemq.artemis.logprocessor;
 
 public class MyException extends Exception {
 
+   private static final long serialVersionUID = 1L;
+
    public MyException(String error) {
       super(error);
    }
@@ -27,6 +29,7 @@ public class MyException extends Exception {
       super(error, cause);
    }
 
+   @Override
    public String toString() {
       return getMessage();
    }
