@@ -110,7 +110,7 @@ public class SimpleBundleTest {
       try {
          AssertionLoggerHandler.startCapture(false, false);
          SimpleBundle.MESSAGES.outOfOrder(new MyException("ex1"), "2", "3", "4");
-         Assert.assertFalse("parameter not found", AssertionLoggerHandler.findText("pex1"));
+         Assert.assertFalse("Exception should not be on the output", AssertionLoggerHandler.findText("pex1"));
          Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p2"));
          Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
          Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
@@ -120,7 +120,7 @@ public class SimpleBundleTest {
          AssertionLoggerHandler.startCapture(false, true);
 
          SimpleBundle.MESSAGES.outOfOrder(createMyException("ex1"), "2", "3", "4");
-         Assert.assertFalse("parameter not found", AssertionLoggerHandler.findText("pex1"));
+         Assert.assertFalse("Exception should not be on the output", AssertionLoggerHandler.findText("pex1"));
          Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
          Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
          Assert.assertTrue("stack not found", AssertionLoggerHandler.findText("createMyException"));
