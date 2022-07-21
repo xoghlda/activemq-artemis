@@ -25,7 +25,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 import org.slf4j.Logger;
 
-@LogBundle(projectCode = "TST")
+@LogBundle(projectCode = "TST", enforceExceptionParameterAsLast = false)
 public interface SimpleBundle {
 
    SimpleBundle MESSAGES = CodeFactory.getCodeClass(SimpleBundle.class);

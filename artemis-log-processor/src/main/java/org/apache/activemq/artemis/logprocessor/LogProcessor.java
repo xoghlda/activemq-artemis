@@ -383,6 +383,10 @@ public class LogProcessor extends AbstractProcessor {
             debug("Parameter " + parameter + (isException? "is" : "is not") + " an exception");
          }
 
+         if (bundleAnnotation.enforceExceptionParameterAsLast() && isException && parameters.hasNext()) {
+            throw new IllegalArgumentException("Exception argument " + parameter + " has to be the last argument on the list. Look at " + executableMember);
+         }
+
          if (!isException) {
             nonExceptionParameters.add(parameter);
          }

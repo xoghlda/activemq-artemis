@@ -27,4 +27,6 @@ import java.lang.annotation.Target;
 public @interface LogBundle {
 
    String projectCode();
+
+   boolean enforceExceptionParameterAsLast() default true;
 }
