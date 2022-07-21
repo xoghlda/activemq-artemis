@@ -42,7 +42,6 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
-import org.slf4j.helpers.MessageFormatter;
 
 @SupportedAnnotationTypes({"org.apache.activemq.artemis.logprocessor.annotation.LogBundle"})
 @SupportedSourceVersion(SourceVersion.RELEASE_11)
@@ -380,7 +379,7 @@ public class LogProcessor extends AbstractProcessor {
          }
 
          if (DEBUG) {
-            debug("Parameter " + parameter + (isException? "is" : "is not") + " an exception");
+            debug("Parameter " + parameter + (isException ? "is" : "is not") + " an exception");
          }
 
          if (bundleAnnotation.enforceExceptionParameterAsLast() && isException && parameters.hasNext()) {
@@ -429,7 +428,7 @@ public class LogProcessor extends AbstractProcessor {
       String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
       if (exceptionParameter != null) {
          writerOutput.println("     FormattingTuple output = org.slf4j.helpers.MessageFormatter.arrayFormat(\"" + formattingString + "\",new Object[] {" + callList + "});");
-         writerOutput.println("     logger." + methodName + "(output.getMessage(), " + exceptionParameter.getSimpleName() +");");
+         writerOutput.println("     logger." + methodName + "(output.getMessage(), " + exceptionParameter.getSimpleName() + ");");
       } else {
          if (!hasParameters) {
             writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");
