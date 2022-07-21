@@ -44,7 +44,7 @@ public interface ActiveMQUtilBundle {
    IllegalStateException stringTooLong(Integer length);
 
    @Message(id = 209003, value = "Error instantiating codec {}")
-   IllegalArgumentException errorCreatingCodec(@Cause Exception e, String codecClassName);
+   IllegalArgumentException errorCreatingCodec(String codecClassName, @Cause Exception e);
 
    @Message(id = 209004, value = "Failed to parse long value from {}")
    IllegalArgumentException failedToParseLong(String value);

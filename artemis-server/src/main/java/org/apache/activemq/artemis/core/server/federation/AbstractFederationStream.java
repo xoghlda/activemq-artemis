@@ -123,7 +123,7 @@ public abstract class AbstractFederationStream implements FederationStream {
          try {
             server.callBrokerFederationPlugins(plugin -> plugin.federationStreamStarted(this));
          } catch (ActiveMQException t) {
-            ActiveMQServerLogger.LOGGER.federationPluginExecutionError(t, "federationStreamStarted");
+            ActiveMQServerLogger.LOGGER.federationPluginExecutionError("federationStreamStarted", t);
             throw new IllegalStateException(t.getMessage(), t.getCause());
          }
       }
@@ -134,7 +134,7 @@ public abstract class AbstractFederationStream implements FederationStream {
          try {
             server.callBrokerFederationPlugins(plugin -> plugin.federationStreamStopped(this));
          } catch (ActiveMQException t) {
-            ActiveMQServerLogger.LOGGER.federationPluginExecutionError(t, "federationStreamStopped");
+            ActiveMQServerLogger.LOGGER.federationPluginExecutionError("federationStreamStopped", t);
             throw new IllegalStateException(t.getMessage(), t.getCause());
          }
       }

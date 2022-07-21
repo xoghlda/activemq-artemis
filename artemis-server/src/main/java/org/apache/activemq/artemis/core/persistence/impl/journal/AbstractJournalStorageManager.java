@@ -456,7 +456,7 @@ public abstract class AbstractJournalStorageManager extends CriticalComponentImp
 
    private void messageUpdateCallback(long id, boolean found) {
       if (!found) {
-         ActiveMQServerLogger.LOGGER.cannotFindMessageOnJournal(new Exception(), id);
+         ActiveMQServerLogger.LOGGER.cannotFindMessageOnJournal(id, new Exception());
       }
    }
 
@@ -1280,7 +1280,7 @@ public abstract class AbstractJournalStorageManager extends CriticalComponentImp
       } catch (Throwable ignored) {
       }
 
-      ActiveMQServerLogger.LOGGER.failedToLoadPreparedTX(e, String.valueOf(encodingXid != null ? encodingXid.xid : null));
+      ActiveMQServerLogger.LOGGER.failedToLoadPreparedTX(String.valueOf(encodingXid != null ? encodingXid.xid : null), e);
 
       try {
          rollback(txInfo.getId());

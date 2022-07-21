@@ -706,7 +706,7 @@ public class ActiveMQActivation {
          } else if (failure instanceof ActiveMQException && ((ActiveMQException) failure).getType() == ActiveMQExceptionType.NOT_CONNECTED) {
             ActiveMQRALogger.LOGGER.awaitingJMSServerCreation();
          } else {
-            ActiveMQRALogger.LOGGER.failureInActivation(failure, spec);
+            ActiveMQRALogger.LOGGER.failureInActivation(spec, failure);
          }
       }
       int reconnectCount = 0;
@@ -747,7 +747,7 @@ public class ActiveMQActivation {
                      ActiveMQRALogger.LOGGER.awaitingJMSServerCreation();
                   }
                } else {
-                  ActiveMQRALogger.LOGGER.errorReconnecting(t, spec);
+                  ActiveMQRALogger.LOGGER.errorReconnecting(spec, t);
                }
             }
             ++reconnectCount;

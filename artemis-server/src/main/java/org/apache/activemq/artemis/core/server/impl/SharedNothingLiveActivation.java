@@ -276,7 +276,7 @@ public class SharedNothingLiveActivation extends LiveActivation {
                                           }
                                           activeMQServer.stop();
                                        } catch (Exception e) {
-                                          ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(e, activeMQServer);
+                                          ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(activeMQServer, e);
                                        }
                                     }
                                  });

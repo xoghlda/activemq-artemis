@@ -122,7 +122,7 @@ public class FederatedQueue extends FederatedAbstract implements ActiveMQServerC
                conditionalCreate.set(conditionalCreate.get() && plugin.federatedQueueConditionalCreateConsumer(consumer));
             });
          } catch (ActiveMQException t) {
-            ActiveMQServerLogger.LOGGER.federationPluginExecutionError(t, "federatedQueueConditionalCreateConsumer");
+            ActiveMQServerLogger.LOGGER.federationPluginExecutionError("federatedQueueConditionalCreateConsumer", t);
             throw new IllegalStateException(t.getMessage(), t.getCause());
          }
          if (!conditionalCreate.get()) {

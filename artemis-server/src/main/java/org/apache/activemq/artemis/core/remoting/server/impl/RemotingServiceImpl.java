@@ -283,7 +283,7 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
             managementService.registerAcceptor(acceptor, info);
          }
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.errorCreatingAcceptor(e, info.getFactoryClassName());
+         ActiveMQServerLogger.LOGGER.errorCreatingAcceptor(info.getFactoryClassName(), e);
       }
 
       return acceptor;

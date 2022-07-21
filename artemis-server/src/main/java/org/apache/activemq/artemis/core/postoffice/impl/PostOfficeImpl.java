@@ -1960,7 +1960,7 @@ public class PostOfficeImpl implements PostOffice, NotificationListener, Binding
                // that the address is removed before the reaper removes it
                logger.debug(e.getMessage(), e);
             } else {
-               ActiveMQServerLogger.LOGGER.errorRemovingAutoCreatedDestination(e, "address", address);
+               ActiveMQServerLogger.LOGGER.errorRemovingAutoCreatedDestination("address", address, e);
             }
          }
       }

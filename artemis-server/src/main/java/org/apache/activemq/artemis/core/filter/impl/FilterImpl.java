@@ -88,7 +88,7 @@ public class FilterImpl implements Filter {
          if (logger.isDebugEnabled()) {
             logger.debug("Invalid filter", e);
          }
-         throw ActiveMQMessageBundle.BUNDLE.invalidFilter(e, filterStr);
+         throw ActiveMQMessageBundle.BUNDLE.invalidFilter(filterStr, e);
       }
       return new FilterImpl(filterStr, booleanExpression);
    }

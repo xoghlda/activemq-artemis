@@ -46,7 +46,7 @@ public interface ActiveMQJMSClientBundle {
    ActiveMQJMSClientBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQJMSClientBundle.class);
 
    @Message(id = 139000, value = "Invalid filter: {}")
-   ActiveMQInvalidFilterExpressionException invalidFilter(@Cause Throwable e, SimpleString filter);
+   ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, @Cause Throwable e);
 
    @Message(id = 139001, value = "Invalid Subscription Name. It is required to set the subscription name")
    ActiveMQIllegalStateException invalidSubscriptionName();

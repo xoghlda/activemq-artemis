@@ -1139,7 +1139,7 @@ public class ServerSessionImpl implements ServerSession, FailureListener {
                logger.debug(e.getMessage(), e);
             }
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.errorRemovingTempQueue(e, bindingName);
+            ActiveMQServerLogger.LOGGER.errorRemovingTempQueue(bindingName, e);
          }
       }
 

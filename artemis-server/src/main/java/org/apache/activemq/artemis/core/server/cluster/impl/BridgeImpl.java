@@ -304,7 +304,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
             refqueue.cancel(ref, timeBase);
          } catch (Exception e) {
             // There isn't much we can do besides log an error
-            ActiveMQServerLogger.LOGGER.errorCancellingRefOnBridge(e, ref);
+            ActiveMQServerLogger.LOGGER.errorCancellingRefOnBridge(ref, e);
          }
       }
    }
@@ -730,7 +730,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
                }
             } catch (final ActiveMQException e) {
                unsetLargeMessageDelivery();
-               ActiveMQServerLogger.LOGGER.bridgeUnableToSendMessage(e, ref);
+               ActiveMQServerLogger.LOGGER.bridgeUnableToSendMessage(ref, e);
 
                connectionFailed(e, false);
             }
@@ -756,7 +756,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
       try {
          producer.send(dest, message);
       } catch (final ActiveMQException e) {
-         ActiveMQServerLogger.LOGGER.bridgeUnableToSendMessage(e, ref);
+         ActiveMQServerLogger.LOGGER.bridgeUnableToSendMessage(ref, e);
 
          synchronized (refs) {
             // We remove this reference as we are returning busy which means the reference will never leave the Queue.
@@ -946,7 +946,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
                try {
                   query = session.addressQuery(SimpleString.toSimpleString(configuration.getForwardingAddress()));
                } catch (Throwable e) {
-                  ActiveMQServerLogger.LOGGER.errorQueryingBridge(e, configuration.getName());
+                  ActiveMQServerLogger.LOGGER.errorQueryingBridge(configuration.getName(), e);
                   // This was an issue during startup, we will not count this retry
                   retryCount--;
 
@@ -1001,9 +1001,9 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
                scheduleRetryConnect();
             }
          } catch (ActiveMQInterruptedException | InterruptedException e) {
-            ActiveMQServerLogger.LOGGER.errorConnectingBridge(e, this);
+            ActiveMQServerLogger.LOGGER.errorConnectingBridge(this, e);
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.errorConnectingBridge(e, this);
+            ActiveMQServerLogger.LOGGER.errorConnectingBridge(this, e);
             if (csf != null) {
                try {
                   csf.close();

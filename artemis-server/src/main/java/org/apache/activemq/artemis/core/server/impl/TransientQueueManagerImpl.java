@@ -48,7 +48,7 @@ public class TransientQueueManagerImpl extends ReferenceCounterUtil implements T
             ActiveMQServerLogger.LOGGER.errorOnDeletingQueue(queueName.toString(), e);
          }
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.errorRemovingTempQueue(e, queueName);
+         ActiveMQServerLogger.LOGGER.errorRemovingTempQueue(queueName, e);
       }
    }
 

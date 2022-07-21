@@ -49,7 +49,7 @@ public interface ActiveMQJMSServerLogger {
    void recoveryConnectFailed(String s);
 
    @LogMessage(id = 122011, value = "error unbinding {} from Registry", level = LogMessage.Level.WARN)
-   void bindingsUnbindError(@Cause Exception e, String key);
+   void bindingsUnbindError(String key, @Cause Exception e);
 
    @LogMessage(id = 122012, value = "JMS Server Manager error", level = LogMessage.Level.WARN)
    void jmsServerError(@Cause Exception e);
@@ -59,14 +59,14 @@ public interface ActiveMQJMSServerLogger {
 
    @LogMessage(id = 122014, value = "Notified of connection failure in xa recovery connectionFactory for provider {} will attempt reconnect on next pass",
       level = LogMessage.Level.WARN)
-   void xaRecoverConnectionError(@Cause Exception e, ClientSessionFactory csf);
+   void xaRecoverConnectionError(ClientSessionFactory csf, @Cause Exception e);
 
    @LogMessage(id = 122016, value = "Error in XA Recovery", level = LogMessage.Level.DEBUG)
    void xaRecoveryError(@Cause Exception e);
 
    @LogMessage(id = 122017, value = "Tried to correct invalid \"host\" value \"0.0.0.0\" for \"{}\" connector, but received an exception.",
       level = LogMessage.Level.WARN)
-   void failedToCorrectHost(@Cause Exception e, String name);
+   void failedToCorrectHost(String name, @Cause Exception e);
 
    @LogMessage(id = 122018,
       value = "Failed to send notification: {}",

@@ -713,7 +713,7 @@ public class JournalFilesRepository {
          try {
             return Long.parseLong(fileName.substring(fileName.lastIndexOf("-") + 1, fileName.indexOf('.')));
          } catch (Throwable e2) {
-            ActiveMQJournalLogger.LOGGER.errorRetrievingID(e, fileName);
+            ActiveMQJournalLogger.LOGGER.errorRetrievingID(fileName, e);
          }
          return 0;
       }

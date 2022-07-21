@@ -274,7 +274,7 @@ public final class SharedNothingBackupActivation extends Activation implements R
                            }
                         }
                      } catch (Exception e) {
-                        ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(e, activeMQServer);
+                        ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(activeMQServer, e);
                      }
                   }
                });

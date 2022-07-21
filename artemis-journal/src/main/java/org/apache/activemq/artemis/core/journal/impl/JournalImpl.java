@@ -3079,7 +3079,7 @@ public class JournalImpl extends JournalBase implements TestableJournal, Journal
                   try {
                      filesRepository.addFreeFile(file, false);
                   } catch (Throwable e) {
-                     ActiveMQJournalLogger.LOGGER.errorReinitializingFile(e, file);
+                     ActiveMQJournalLogger.LOGGER.errorReinitializingFile(file, e);
                   }
                }
             } finally {

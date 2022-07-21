@@ -195,7 +195,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
          try {
             sub.onPageModeCleared(tx);
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.errorCleaningPagingOnQueue(e, sub.getQueue().getName().toString());
+            ActiveMQServerLogger.LOGGER.errorCleaningPagingOnQueue(sub.getQueue().getName().toString(), e);
          }
       }
 
@@ -279,7 +279,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
                   }
                }
             } catch (Exception ex) {
-               ActiveMQServerLogger.LOGGER.problemCleaningPageAddress(ex, pagingStore.getAddress());
+               ActiveMQServerLogger.LOGGER.problemCleaningPageAddress(pagingStore.getAddress(), ex);
                logger.warn(ex.getMessage(), ex);
                return;
             } finally {
@@ -424,7 +424,7 @@ public class PageCursorProviderImpl implements PageCursorProvider {
             onDeletePage(depagedPage);
          }
       } catch (Exception ex) {
-         ActiveMQServerLogger.LOGGER.problemCleaningPageAddress(ex, pagingStore.getAddress());
+         ActiveMQServerLogger.LOGGER.problemCleaningPageAddress(pagingStore.getAddress(), ex);
          return;
       }
 

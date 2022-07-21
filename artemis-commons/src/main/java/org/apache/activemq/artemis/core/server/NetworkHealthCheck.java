@@ -88,7 +88,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
             netToUse = null;
          }
       } catch (Exception e) {
-         ActiveMQUtilLogger.LOGGER.failedToSetNIC(e, nicName);
+         ActiveMQUtilLogger.LOGGER.failedToSetNIC(nicName, e);
          netToUse = null;
       }
 
@@ -131,7 +131,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
                   String strAddress = address.trim();
                   this.addAddress(strAddress);
                } catch (Exception e) {
-                  ActiveMQUtilLogger.LOGGER.failedToParseAddressList(e, addressList);
+                  ActiveMQUtilLogger.LOGGER.failedToParseAddressList(addressList, e);
                }
             }
          }
@@ -149,7 +149,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
                try {
                   this.addURL(new URL(address.trim()));
                } catch (Exception e) {
-                  ActiveMQUtilLogger.LOGGER.failedToParseUrlList(e, addressList);
+                  ActiveMQUtilLogger.LOGGER.failedToParseUrlList(addressList, e);
                }
             }
          }
@@ -289,7 +289,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
                   ActiveMQUtilLogger.LOGGER.startingService(component.toString());
                   component.start();
                } catch (Exception e) {
-                  ActiveMQUtilLogger.LOGGER.errorStartingComponent(e, component.toString());
+                  ActiveMQUtilLogger.LOGGER.errorStartingComponent(component.toString(), e);
                }
             }
             ownShutdown = false;
@@ -302,7 +302,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
                   ActiveMQUtilLogger.LOGGER.stoppingService(component.toString());
                   component.stop();
                } catch (Exception e) {
-                  ActiveMQUtilLogger.LOGGER.errorStoppingComponent(e, component.toString());
+                  ActiveMQUtilLogger.LOGGER.errorStoppingComponent(component.toString(), e);
                }
             }
          }
@@ -351,7 +351,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
             return null;
          }
       } catch (Exception e) {
-         ActiveMQUtilLogger.LOGGER.failedToCheckAddress(e, straddress);
+         ActiveMQUtilLogger.LOGGER.failedToCheckAddress(straddress, e);
          return null;
       }
    }
@@ -433,7 +433,7 @@ public class NetworkHealthCheck extends ActiveMQScheduledComponent {
          is.close();
          return true;
       } catch (Exception e) {
-         ActiveMQUtilLogger.LOGGER.failedToCheckURL(e, url.toString());
+         ActiveMQUtilLogger.LOGGER.failedToCheckURL(url.toString(), e);
          return false;
       }
    }

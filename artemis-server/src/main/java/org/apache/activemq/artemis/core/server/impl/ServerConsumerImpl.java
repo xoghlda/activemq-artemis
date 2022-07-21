@@ -700,7 +700,7 @@ public class ServerConsumerImpl implements ServerConsumer, ReadyListener {
             pendingLargeMessageDeliverer.finish();
          }
       } catch (Throwable e) {
-         ActiveMQServerLogger.LOGGER.errorResttingLargeMessage(e, largeMessageDeliverer);
+         ActiveMQServerLogger.LOGGER.errorResttingLargeMessage(largeMessageDeliverer, e);
       } finally {
          largeMessageDeliverer = null;
       }
@@ -1454,7 +1454,7 @@ public class ServerConsumerImpl implements ServerConsumer, ReadyListener {
 
                current = null;
             } catch (Exception e) {
-               ActiveMQServerLogger.LOGGER.errorBrowserHandlingMessage(e, current);
+               ActiveMQServerLogger.LOGGER.errorBrowserHandlingMessage(current, e);
                return;
             }
          }
@@ -1488,7 +1488,7 @@ public class ServerConsumerImpl implements ServerConsumer, ReadyListener {
                   break;
                }
             } catch (Exception e) {
-               ActiveMQServerLogger.LOGGER.errorBrowserHandlingMessage(e, ref);
+               ActiveMQServerLogger.LOGGER.errorBrowserHandlingMessage(ref, e);
                break;
             }
          }

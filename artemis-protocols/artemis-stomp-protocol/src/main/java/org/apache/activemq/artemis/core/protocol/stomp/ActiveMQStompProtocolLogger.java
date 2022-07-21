@@ -48,5 +48,5 @@ public interface ActiveMQStompProtocolLogger {
    void sentErrorToClient(String address, String message);
 
    @LogMessage(id = 334023, value = "Unable to send frame {}", level = LogMessage.Level.ERROR)
-   void errorSendingFrame(@Cause Exception e, StompFrame frame);
+   void errorSendingFrame(StompFrame frame, @Cause Exception e);
 }

@@ -205,7 +205,7 @@ public class ActiveMQBasicSecurityManager implements ActiveMQSecurityManager5, U
             addNewUser(user, password, roles);
          }
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.failedToCreateBootstrapCredentials(e, user);
+         ActiveMQServerLogger.LOGGER.failedToCreateBootstrapCredentials(user, e);
       }
    }
 

@@ -258,7 +258,7 @@ public class PostOfficeJournalLoader implements JournalLoader {
             try {
                storageManager.deleteMessage(msg.getMessageID());
             } catch (Exception ignored) {
-               ActiveMQServerLogger.LOGGER.journalErrorDeletingMessage(ignored, msg.getMessageID());
+               ActiveMQServerLogger.LOGGER.journalErrorDeletingMessage(msg.getMessageID(), ignored);
             }
          }
       }

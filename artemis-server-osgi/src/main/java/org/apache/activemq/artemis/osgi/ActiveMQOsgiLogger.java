@@ -42,10 +42,10 @@ public interface ActiveMQOsgiLogger {
    void protocolWasRemovedForBroker(String protocol, String name, String message);
 
    @LogMessage(id = 582000, value = "Error starting broker: {}", level = LogMessage.Level.WARN)
-   void errorStartingBroker(@Cause Exception e, String name);
+   void errorStartingBroker(String name, @Cause Exception e);
 
    @LogMessage(id = 582001, value = "Error stopping broker: {}", level = LogMessage.Level.WARN)
-   void errorStoppingBroker(@Cause Exception e, String name);
+   void errorStoppingBroker(String name, @Cause Exception e);
 
    @LogMessage(id = 582002, value = "Error getting dataSource provider infos.", level = LogMessage.Level.WARN)
    void errorGettingDataSourceProviderInfo(@Cause Exception e);

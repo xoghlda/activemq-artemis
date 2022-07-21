@@ -216,7 +216,7 @@ public class ActiveMQXAResourceWrapper implements XAResource, SessionFailureList
             logger.debug("being disconnected for server shutdown", me);
          }
       } else {
-         ActiveMQXARecoveryLogger.LOGGER.xaRecoverConnectionError(me, csf);
+         ActiveMQXARecoveryLogger.LOGGER.xaRecoverConnectionError(csf, me);
       }
       close();
    }
@@ -321,7 +321,7 @@ public class ActiveMQXAResourceWrapper implements XAResource, SessionFailureList
                cs = csf.createSession(xaRecoveryConfig.getUsername(), xaRecoveryConfig.getPassword(), true, false, false, false, 1);
             }
          } catch (Throwable e) {
-            ActiveMQXARecoveryLogger.LOGGER.xaRecoverAutoConnectionError(e, xaRecoveryConfig);
+            ActiveMQXARecoveryLogger.LOGGER.xaRecoverAutoConnectionError(xaRecoveryConfig, e);
             if (logger.isDebugEnabled()) {
                logger.debug(e.getMessage(), e);
             }

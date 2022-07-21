@@ -2506,7 +2506,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
                   expire(tx, ref, true);
                   refRemoved(ref);
                } catch (Exception e) {
-                  ActiveMQServerLogger.LOGGER.errorExpiringReferencesOnQueue(e, ref);
+                  ActiveMQServerLogger.LOGGER.errorExpiringReferencesOnQueue(ref, e);
                }
             }
 
@@ -3890,7 +3890,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
 
    private void internalErrorProcessing(Consumer consumer, Throwable t, MessageReference reference) {
       synchronized (this) {
-         ActiveMQServerLogger.LOGGER.removingBadConsumer(t, consumer, reference);
+         ActiveMQServerLogger.LOGGER.removingBadConsumer(consumer, reference, t);
          // If the consumer throws an exception we remove the consumer
          try {
             removeConsumer(consumer);
@@ -3932,7 +3932,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
       try {
          status = consumer.handle(reference);
       } catch (Throwable t) {
-         ActiveMQServerLogger.LOGGER.removingBadConsumer(t, consumer, reference);
+         ActiveMQServerLogger.LOGGER.removingBadConsumer(consumer, reference, t);
 
          // If the consumer throws an exception we remove the consumer
          try {
@@ -4024,7 +4024,7 @@ public class QueueImpl extends CriticalComponentImpl implements Queue {
                try {
                   storageManager.deleteMessage(message.getMessageID());
                } catch (Exception e) {
-                  ActiveMQServerLogger.LOGGER.cannotFindMessageOnJournal(e, message.getMessageID());
+                  ActiveMQServerLogger.LOGGER.cannotFindMessageOnJournal(message.getMessageID(), e);
                }
             }
          }

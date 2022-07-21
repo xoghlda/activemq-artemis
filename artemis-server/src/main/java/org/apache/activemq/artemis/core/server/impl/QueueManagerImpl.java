@@ -59,7 +59,7 @@ public class QueueManagerImpl extends ReferenceCounterUtil implements QueueManag
       try {
          queue.deleteMatchingReferences(QueueImpl.DEFAULT_FLUSH_LIMIT, null, AckReason.KILLED);
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.failedToPurgeQueue(e, queue.getName());
+         ActiveMQServerLogger.LOGGER.failedToPurgeQueue(queue.getName(), e);
       }
    }
 
@@ -75,7 +75,7 @@ public class QueueManagerImpl extends ReferenceCounterUtil implements QueueManag
       try {
          server.destroyQueue(queueName, null, true, false, false, true);
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.errorRemovingAutoCreatedDestination(e, "queue", queueName);
+         ActiveMQServerLogger.LOGGER.errorRemovingAutoCreatedDestination("queue", queueName, e);
       }
    }
 

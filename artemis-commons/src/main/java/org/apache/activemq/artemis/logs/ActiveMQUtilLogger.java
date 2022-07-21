@@ -48,25 +48,25 @@ public interface ActiveMQUtilLogger {
    void urlWasntReacheable(String url);
 
    @LogMessage(id = 202004, value = "Error starting component {} ", level = LogMessage.Level.WARN)
-   void errorStartingComponent(@Cause Exception e, String component);
+   void errorStartingComponent(String component, @Cause Exception e);
 
    @LogMessage(id = 202005, value = "Error stopping component {} ", level = LogMessage.Level.WARN)
-   void errorStoppingComponent(@Cause Exception e, String component);
+   void errorStoppingComponent(String component, @Cause Exception e);
 
    @LogMessage(id = 202006, value = "Failed to check Url {}.", level = LogMessage.Level.WARN)
-   void failedToCheckURL(@Cause Exception e, String url);
+   void failedToCheckURL(String url, @Cause Exception e);
 
    @LogMessage(id = 202007, value = "Failed to check Address {}.", level = LogMessage.Level.WARN)
-   void failedToCheckAddress(@Cause Exception e, String address);
+   void failedToCheckAddress(String address, @Cause Exception e);
 
    @LogMessage(id = 202008, value = "Failed to check Address list {}.", level = LogMessage.Level.WARN)
-   void failedToParseAddressList(@Cause Exception e, String addressList);
+   void failedToParseAddressList(String addressList, @Cause Exception e);
 
    @LogMessage(id = 202009, value = "Failed to check Url list {}.", level = LogMessage.Level.WARN)
-   void failedToParseUrlList(@Cause Exception e, String urlList);
+   void failedToParseUrlList(String urlList, @Cause Exception e);
 
    @LogMessage(id = 202010, value = "Failed to set NIC {}.", level = LogMessage.Level.WARN)
-   void failedToSetNIC(@Cause Exception e, String nic);
+   void failedToSetNIC(String nic, @Cause Exception e);
 
    @LogMessage(id = 202011, value = "Failed to read from stream {}.", level = LogMessage.Level.WARN)
    void failedToReadFromStream(String stream);

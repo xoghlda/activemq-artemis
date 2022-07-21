@@ -342,7 +342,7 @@ public class ReplicationPrimaryActivation extends LiveActivation implements Dist
             try {
                activeMQServer.stop();
             } catch (Exception e) {
-               ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(e, activeMQServer);
+               ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(activeMQServer, e);
             }
          }).start();
       }

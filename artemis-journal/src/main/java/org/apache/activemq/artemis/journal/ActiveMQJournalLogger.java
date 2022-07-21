@@ -133,7 +133,7 @@ public interface ActiveMQJournalLogger {
    void timeoutOnPollerShutdown(@Cause Exception e);
 
    @LogMessage(id = 142023, value = "Executor on file {} couldn't complete its tasks in 60 seconds.", level = LogMessage.Level.WARN)
-   void couldNotCompleteTask(@Cause Exception e, String name);
+   void couldNotCompleteTask(String name, @Cause Exception e);
 
    @LogMessage(id = 142024, value = "Error completing callback", level = LogMessage.Level.WARN)
    void errorCompletingCallback(@Cause Throwable e);
@@ -145,7 +145,7 @@ public interface ActiveMQJournalLogger {
    void timeoutOnWriterShutdown(@Cause Throwable e);
 
    @LogMessage(id = 142027, value = "Error on writing data! {} code - {}", level = LogMessage.Level.WARN)
-   void errorWritingData(@Cause Throwable e, String errorMessage, Integer errorCode);
+   void errorWritingData(String errorMessage, int errorCode, @Cause Throwable e);
 
    @LogMessage(id = 142028, value = "Error replaying pending commands after compacting", level = LogMessage.Level.WARN)
    void errorReplayingCommands(@Cause Throwable e);
@@ -157,13 +157,13 @@ public interface ActiveMQJournalLogger {
    void errorOpeningFile(@Cause Throwable e);
 
    @LogMessage(id = 142031, value = "Error retrieving ID part of the file name {}", level = LogMessage.Level.WARN)
-   void errorRetrievingID(@Cause Throwable e, String fileName);
+   void errorRetrievingID(String fileName, @Cause Throwable e);
 
    @LogMessage(id = 142032, value = "Error reading journal file", level = LogMessage.Level.WARN)
    void errorReadingFile(@Cause Throwable e);
 
    @LogMessage(id = 142033, value = "Error reinitializing file {}", level = LogMessage.Level.WARN)
-   void errorReinitializingFile(@Cause Throwable e, JournalFile file);
+   void errorReinitializingFile(JournalFile file, @Cause Throwable e);
 
    @LogMessage(id = 142034, value = "Exception on submitting write", level = LogMessage.Level.WARN)
    void errorSubmittingWrite(@Cause Throwable e);

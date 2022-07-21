@@ -202,7 +202,7 @@ public class FederatedQueueConsumerImpl implements FederatedQueueConsumer, Sessi
             try {
                server.callBrokerFederationPlugins(plugin -> plugin.beforeFederatedQueueConsumerMessageHandled(this, clientMessage));
             } catch (ActiveMQException t) {
-               ActiveMQServerLogger.LOGGER.federationPluginExecutionError(t, "beforeFederatedQueueConsumerMessageHandled");
+               ActiveMQServerLogger.LOGGER.federationPluginExecutionError("beforeFederatedQueueConsumerMessageHandled", t);
                throw new IllegalStateException(t.getMessage(), t.getCause());
             }
          }
@@ -217,12 +217,12 @@ public class FederatedQueueConsumerImpl implements FederatedQueueConsumer, Sessi
             try {
                server.callBrokerFederationPlugins(plugin -> plugin.afterFederatedQueueConsumerMessageHandled(this, clientMessage));
             } catch (ActiveMQException t) {
-               ActiveMQServerLogger.LOGGER.federationPluginExecutionError(t, "afterFederatedQueueConsumerMessageHandled");
+               ActiveMQServerLogger.LOGGER.federationPluginExecutionError("afterFederatedQueueConsumerMessageHandled", t);
                throw new IllegalStateException(t.getMessage(), t.getCause());
             }
          }
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.federationDispatchError(e, clientMessage.toString());
+         ActiveMQServerLogger.LOGGER.federationDispatchError(clientMessage.toString(), e);
          try {
             clientSession.rollback();
          } catch (ActiveMQException e1) {

@@ -589,7 +589,7 @@ public final class ChannelImpl implements Channel {
                   return interceptor.getClass().getName();
                }
             } catch (final Throwable e) {
-               ActiveMQClientLogger.LOGGER.errorCallingInterceptor(e, interceptor);
+               ActiveMQClientLogger.LOGGER.errorCallingInterceptor(interceptor, e);
             }
          }
       }

@@ -75,7 +75,7 @@ public interface ActiveMQRALogger {
    void handlingJMSFailure(@Cause Exception e);
 
    @LogMessage(id = 152005, value = "Failure in broker activation {}", level = LogMessage.Level.WARN)
-   void failureInActivation(@Cause Throwable t, ActiveMQActivationSpec spec);
+   void failureInActivation(ActiveMQActivationSpec spec, @Cause Throwable t);
 
    @LogMessage(id = 152006, value = "Unable to call after delivery", level = LogMessage.Level.WARN)
    void unableToCallAfterDelivery(@Cause Exception e);
@@ -102,7 +102,7 @@ public interface ActiveMQRALogger {
    void errorStoppingRA(@Cause Exception e);
 
    @LogMessage(id = 154003, value = "Unable to reconnect {}", level = LogMessage.Level.ERROR)
-   void errorReconnecting(@Cause Throwable t, ActiveMQActivationSpec spec);
+   void errorReconnecting(ActiveMQActivationSpec spec, @Cause Throwable t);
 
    @LogMessage(id = 154004, value = "Failed to deliver message", level = LogMessage.Level.ERROR)
    void errorDeliveringMessage(@Cause Throwable t);

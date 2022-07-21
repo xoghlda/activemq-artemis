@@ -59,19 +59,19 @@ public interface ActiveMQJMSBridgeLogger {
    void bridgeNotStarted(String bridgeName);
 
    @LogMessage(id = 342006, value = "JMS Bridge {}, detected failure on bridge connection", level = LogMessage.Level.WARN)
-   void bridgeFailure(@Cause Exception e, String bridgeName);
+   void bridgeFailure(String bridgeName, @Cause Exception e);
 
    @LogMessage(id = 342009, value = "JMS Bridge {} failed to send + acknowledge batch, closing JMS objects", level = LogMessage.Level.WARN)
-   void bridgeAckError(@Cause Exception e, String bridgeName);
+   void bridgeAckError(String bridgeName, @Cause Exception e);
 
    @LogMessage(id = 342010, value = "Failed to connect JMS Bridge {}", level = LogMessage.Level.WARN)
-   void bridgeConnectError(@Cause Exception e, String bridgeName);
+   void bridgeConnectError(String bridgeName, @Cause Exception e);
 
    @LogMessage(id = 342011, value = "Transaction rolled back, retrying TX", level = LogMessage.Level.WARN)
    void transactionRolledBack(@Cause Exception e);
 
    @LogMessage(id = 344001, value = "JMS Bridge {}, failed to start source connection", level = LogMessage.Level.ERROR)
-   void jmsBridgeSrcConnectError(@Cause Exception e, String bridgeName);
+   void jmsBridgeSrcConnectError(String bridgeName, @Cause Exception e);
 
    @LogMessage(id = 344002, value = "Failed to start JMS Bridge {}.  QoS Mode: {} requires a Transaction Manager, none found", level = LogMessage.Level.ERROR)
    void jmsBridgeTransactionManagerMissing(String bridgeName, QualityOfServiceMode qosMode);

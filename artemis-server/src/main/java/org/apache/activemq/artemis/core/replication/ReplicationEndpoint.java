@@ -241,11 +241,11 @@ public final class ReplicationEndpoint implements ChannelHandler, ActiveMQCompon
          }
       } catch (ActiveMQException e) {
          logger.warn(e.getMessage(), e);
-         ActiveMQServerLogger.LOGGER.errorHandlingReplicationPacket(e, packet);
+         ActiveMQServerLogger.LOGGER.errorHandlingReplicationPacket(packet, e);
          response = new ActiveMQExceptionMessage(e);
       } catch (Exception e) {
          logger.warn(e.getMessage(), e);
-         ActiveMQServerLogger.LOGGER.errorHandlingReplicationPacket(e, packet);
+         ActiveMQServerLogger.LOGGER.errorHandlingReplicationPacket(packet, e);
          response = new ActiveMQExceptionMessage(ActiveMQMessageBundle.BUNDLE.replicationUnhandledError(e));
       }
 
@@ -637,7 +637,7 @@ public final class ReplicationEndpoint implements ChannelHandler, ActiveMQCompon
                      }
                      message.deleteFile();
                   } catch (Exception e) {
-                     ActiveMQServerLogger.LOGGER.errorDeletingLargeMessage(e, packet.getMessageId());
+                     ActiveMQServerLogger.LOGGER.errorDeletingLargeMessage(packet.getMessageId(), e);
                   }
                }
             });

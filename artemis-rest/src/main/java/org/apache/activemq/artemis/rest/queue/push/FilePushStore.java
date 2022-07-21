@@ -50,7 +50,7 @@ public class FilePushStore implements PushStore {
                ActiveMQRestLogger.LOGGER.addingPushRegistration(reg.getId());
                map.put(reg.getId(), reg);
             } catch (Exception e) {
-               ActiveMQRestLogger.LOGGER.errorLoadingStore(e, file.getName());
+               ActiveMQRestLogger.LOGGER.errorLoadingStore(file.getName(), e);
             }
          }
       }

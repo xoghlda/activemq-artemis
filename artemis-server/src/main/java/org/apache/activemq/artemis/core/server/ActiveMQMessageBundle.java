@@ -131,7 +131,7 @@ public interface ActiveMQMessageBundle {
    ActiveMQQueueExistsException queueAlreadyExists(SimpleString queueName, SimpleString addressName);
 
    @Message(id = 229020, value = "Invalid filter: {}")
-   ActiveMQInvalidFilterExpressionException invalidFilter(@Cause Throwable e, SimpleString filter);
+   ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, @Cause Throwable e);
 
    @Message(id = 229021, value = "MessageId was not assigned to Message")
    ActiveMQIllegalStateException messageIdNotAssigned();
@@ -287,7 +287,7 @@ public interface ActiveMQMessageBundle {
    IllegalArgumentException nullPassword();
 
    @Message(id = 229074, value = "Error instantiating transformer class {}")
-   IllegalArgumentException errorCreatingTransformerClass(@Cause Exception e, String transformerClassName);
+   IllegalArgumentException errorCreatingTransformerClass(String transformerClassName, @Cause Exception e);
 
    @Message(id = 229075, value = "method autoEncode doesn't know how to convert {} yet")
    IllegalArgumentException autoConvertError(Class<? extends Object> aClass);

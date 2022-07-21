@@ -57,7 +57,7 @@ public interface ActiveMQRestLogger {
    void deprecatedConfiguration(String oldConfigParameter, String newConfigParameter);
 
    @LogMessage(id = 184000, value = "Failed to load push store {}, it is probably corrupted", level = LogMessage.Level.ERROR)
-   void errorLoadingStore(@Cause Exception e, String name);
+   void errorLoadingStore(String name, @Cause Exception e);
 
    @LogMessage(id = 184001, value = "Error updating store", level = LogMessage.Level.ERROR)
    void errorUpdatingStore(@Cause Exception e);

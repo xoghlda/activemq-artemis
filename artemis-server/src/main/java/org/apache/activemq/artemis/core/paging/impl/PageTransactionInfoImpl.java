@@ -105,7 +105,7 @@ public final class PageTransactionInfoImpl implements PageTransactionInfo {
             try {
                storageManager.deletePageTransactional(this.recordID);
             } catch (Exception e) {
-               ActiveMQServerLogger.LOGGER.pageTxDeleteError(e, recordID);
+               ActiveMQServerLogger.LOGGER.pageTxDeleteError(recordID, e);
             }
          }
          if (pagingManager != null) {

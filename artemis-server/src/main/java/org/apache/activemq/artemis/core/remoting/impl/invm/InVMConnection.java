@@ -214,7 +214,7 @@ public class InVMConnection implements Connection {
                   }
                } catch (Exception e) {
                   final String msg = "Failed to write to handler on connector " + this;
-                  ActiveMQServerLogger.LOGGER.errorWritingToInvmConnector(e, this);
+                  ActiveMQServerLogger.LOGGER.errorWritingToInvmConnector(this, e);
                   throw new IllegalStateException(msg, e);
                } finally {
                   buffer.release();

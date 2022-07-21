@@ -264,7 +264,7 @@ public class ClusterManager implements ActiveMQComponent {
          try {
             group.start();
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.unableToStartBroadcastGroup(e, group.getName());
+            ActiveMQServerLogger.LOGGER.unableToStartBroadcastGroup(group.getName(), e);
          }
       }
 
@@ -272,7 +272,7 @@ public class ClusterManager implements ActiveMQComponent {
          try {
             conn.start();
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.unableToStartClusterConnection(e, conn.getName());
+            ActiveMQServerLogger.LOGGER.unableToStartClusterConnection(conn.getName(), e);
          }
       }
 
@@ -282,7 +282,7 @@ public class ClusterManager implements ActiveMQComponent {
          try {
             bridge.start();
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.unableToStartBridge(e, bridge.getName());
+            ActiveMQServerLogger.LOGGER.unableToStartBridge(bridge.getName(), e);
          }
       }
 
@@ -333,7 +333,7 @@ public class ClusterManager implements ActiveMQComponent {
          try {
             clusterLocator.close();
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.errorClosingServerLocator(e, clusterLocator);
+            ActiveMQServerLogger.LOGGER.errorClosingServerLocator(clusterLocator, e);
          }
       }
       clusterLocators.clear();

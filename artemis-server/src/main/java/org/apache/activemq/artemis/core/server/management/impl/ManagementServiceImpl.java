@@ -554,7 +554,7 @@ public class ManagementServiceImpl implements ManagementService {
 
             reply.putBooleanProperty(ManagementHelper.HDR_OPERATION_SUCCEEDED, true);
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.managementOperationError(e, operation, resourceName);
+            ActiveMQServerLogger.LOGGER.managementOperationError(operation, resourceName, e);
             reply.putBooleanProperty(ManagementHelper.HDR_OPERATION_SUCCEEDED, false);
             String exceptionMessage;
             if (e instanceof InvocationTargetException) {
@@ -575,7 +575,7 @@ public class ManagementServiceImpl implements ManagementService {
 
                reply.putBooleanProperty(ManagementHelper.HDR_OPERATION_SUCCEEDED, true);
             } catch (Exception e) {
-               ActiveMQServerLogger.LOGGER.managementAttributeError(e, attribute, resourceName);
+               ActiveMQServerLogger.LOGGER.managementAttributeError(attribute, resourceName, e);
                reply.putBooleanProperty(ManagementHelper.HDR_OPERATION_SUCCEEDED, false);
                String exceptionMessage;
                if (e instanceof InvocationTargetException) {

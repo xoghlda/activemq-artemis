@@ -49,7 +49,7 @@ public interface ActiveMQXARecoveryLogger {
    void recoveryConnectFailed(String s);
 
    @LogMessage(id = 172011, value = "error unbinding {} from JNDI", level = LogMessage.Level.WARN)
-   void jndiUnbindError(@Cause Exception e, String key);
+   void jndiUnbindError(String key, @Cause Exception e);
 
    @LogMessage(id = 172012, value = "JMS Server Manager error", level = LogMessage.Level.WARN)
    void jmsServerError(@Cause Exception e);
@@ -59,18 +59,18 @@ public interface ActiveMQXARecoveryLogger {
 
    @LogMessage(id = 172014, value = "Notified of connection failure in xa recovery connectionFactory for provider {} will attempt reconnect on next pass",
       level = LogMessage.Level.WARN)
-   void xaRecoverConnectionError(@Cause Exception e, ClientSessionFactory csf);
+   void xaRecoverConnectionError(ClientSessionFactory csf, @Cause Exception e);
 
    @LogMessage(id = 172015, value = "Can not connect to {} on auto-generated resource recovery",
       level = LogMessage.Level.WARN)
-   void xaRecoverAutoConnectionError(@Cause Throwable e, XARecoveryConfig csf);
+   void xaRecoverAutoConnectionError(XARecoveryConfig csf, @Cause Throwable e);
 
    @LogMessage(id = 172016, value = "Error in XA Recovery", level = LogMessage.Level.DEBUG)
    void xaRecoveryError(@Cause Exception e);
 
    @LogMessage(id = 172017, value = "Tried to correct invalid \"host\" value \"0.0.0.0\" for \"{}\" connector, but received an exception.",
       level = LogMessage.Level.WARN)
-   void failedToCorrectHost(@Cause Exception e, String name);
+   void failedToCorrectHost(String name, @Cause Exception e);
 
    @LogMessage(id = 172018, value = "Could not start recovery discovery on {}, we will retry every recovery scan until the server is available",
       level = LogMessage.Level.WARN)

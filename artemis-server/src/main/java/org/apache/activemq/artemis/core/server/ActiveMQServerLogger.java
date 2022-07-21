@@ -148,10 +148,10 @@ public interface ActiveMQServerLogger {
    void errorRemovingConnection();
 
    @LogMessage(id = 221022, value = "unable to start connector service: {}", level = LogMessage.Level.INFO)
-   void errorStartingConnectorService(@Cause Throwable e, String name);
+   void errorStartingConnectorService(String name, @Cause Throwable e);
 
    @LogMessage(id = 221023, value = "unable to stop connector service: {}", level = LogMessage.Level.INFO)
-   void errorStoppingConnectorService(@Cause Throwable e, String name);
+   void errorStoppingConnectorService(String name, @Cause Throwable e);
 
    @LogMessage(id = 221024, value = "Backup server {} is synchronized with live server, nodeID={}.", level = LogMessage.Level.INFO)
    void backupServerSynchronized(ActiveMQServerImpl server, String liveID);
@@ -405,13 +405,13 @@ public interface ActiveMQServerLogger {
    void errorScanningURLs(@Cause Exception e);
 
    @LogMessage(id = 222021, value = "problem undeploying {}", level = LogMessage.Level.WARN)
-   void problemUndeployingNode(@Cause Exception e, Node node);
+   void problemUndeployingNode(Node node, @Cause Exception e);
 
    @LogMessage(id = 222022, value = "Timed out waiting for paging cursor to stop {}", level = LogMessage.Level.WARN)
    void timedOutStoppingPagingCursor(Executor executor);
 
    @LogMessage(id = 222023, value = "problem cleaning page address {}", level = LogMessage.Level.WARN)
-   void problemCleaningPageAddress(@Cause Exception e, SimpleString address);
+   void problemCleaningPageAddress(SimpleString address, @Cause Exception e);
 
    @LogMessage(id = 222024, value = "Could not complete operations on IO context {}", level = LogMessage.Level.WARN)
    void problemCompletingOperations(OperationContext e);
@@ -444,7 +444,7 @@ public interface ActiveMQServerLogger {
    void pageSuspectFile(String fileName, int position, int msgNumber);
 
    @LogMessage(id = 222034, value = "Can not delete page transaction id={}", level = LogMessage.Level.WARN)
-   void pageTxDeleteError(@Cause Exception e, long recordID);
+   void pageTxDeleteError(long recordID, @Cause Exception e);
 
    @LogMessage(id = 222035, value = "Directory {} did not have an identification file {}", level = LogMessage.Level.WARN)
    void pageStoreFactoryNoIdFile(String s, String addressFile);
@@ -474,7 +474,7 @@ public interface ActiveMQServerLogger {
    void journalCannotFindQueueForMessage(Long queueID);
 
    @LogMessage(id = 222044, value = "It was not possible to delete message {}", level = LogMessage.Level.WARN)
-   void journalErrorDeletingMessage(@Cause Exception e, Long messageID);
+   void journalErrorDeletingMessage(Long messageID, @Cause Exception e);
 
    @LogMessage(id = 222045, value = "Message in prepared tx for queue {} which does not exist. This message will be ignored.", level = LogMessage.Level.WARN)
    void journalMessageInPreparedTX(Long queueID);
@@ -501,7 +501,7 @@ public interface ActiveMQServerLogger {
    void errorIncrementDelayDeletionCount(@Cause Exception e);
 
    @LogMessage(id = 222053, value = "Error on copying large message {} for DLA or Expiry", level = LogMessage.Level.WARN)
-   void lareMessageErrorCopying(@Cause Exception e, LargeServerMessage largeServerMessage);
+   void lareMessageErrorCopying(LargeServerMessage largeServerMessage, @Cause Exception e);
 
    @LogMessage(id = 222054, value = "Error on executing IOCallback", level = LogMessage.Level.WARN)
    void errorExecutingAIOCallback(@Cause Throwable t);
@@ -519,7 +519,7 @@ public interface ActiveMQServerLogger {
    void duplicateMessageDetected(org.apache.activemq.artemis.api.core.Message message);
 
    @LogMessage(id = 222060, value = "Error while confirming large message completion on rollback for recordID={}", level = LogMessage.Level.WARN)
-   void journalErrorConfirmingLargeMessage(@Cause Throwable e, Long messageID);
+   void journalErrorConfirmingLargeMessage(Long messageID, @Cause Throwable e);
 
    @LogMessage(id = 222061, value = "Client connection failed, clearing up resources for session {}", level = LogMessage.Level.WARN)
    void clientConnectionFailed(String name);
@@ -564,13 +564,13 @@ public interface ActiveMQServerLogger {
    void nettyChannelStillBound(Channel channel, SocketAddress remoteAddress);
 
    @LogMessage(id = 222078, value = "Error instantiating remoting interceptor {}", level = LogMessage.Level.WARN)
-   void errorCreatingRemotingInterceptor(@Cause Exception e, String interceptorClass);
+   void errorCreatingRemotingInterceptor(String interceptorClass, @Cause Exception e);
 
    @LogMessage(id = 222079, value = "The following keys are invalid for configuring the acceptor: {} the acceptor will not be started.", level = LogMessage.Level.WARN)
    void invalidAcceptorKeys(String s);
 
    @LogMessage(id = 222080, value = "Error instantiating remoting acceptor {}", level = LogMessage.Level.WARN)
-   void errorCreatingAcceptor(@Cause Exception e, String factoryClassName);
+   void errorCreatingAcceptor(String factoryClassName, @Cause Exception e);
 
    @LogMessage(id = 222081, value = "Timed out waiting for remoting thread pool to terminate", level = LogMessage.Level.WARN)
    void timeoutRemotingThreadPool();
@@ -588,7 +588,7 @@ public interface ActiveMQServerLogger {
    void invalidPacketForReplication(Packet packet);
 
    @LogMessage(id = 222086, value = "error handling packet {} for replication", level = LogMessage.Level.WARN)
-   void errorHandlingReplicationPacket(@Cause Exception e, Packet packet);
+   void errorHandlingReplicationPacket(Packet packet, @Cause Exception e);
 
    @LogMessage(id = 222087, value = "Replication Error while closing the page on backup", level = LogMessage.Level.WARN)
    void errorClosingPageOnReplication(@Cause Exception e);
@@ -597,7 +597,7 @@ public interface ActiveMQServerLogger {
    void journalcomparisonMismatch(String s);
 
    @LogMessage(id = 222089, value = "Replication Error deleting large message ID = {}", level = LogMessage.Level.WARN)
-   void errorDeletingLargeMessage(@Cause Exception e, long messageId);
+   void errorDeletingLargeMessage(long messageId, @Cause Exception e);
 
    @LogMessage(id = 222090, value = "Replication Large MessageID {}  is not available on backup server. Ignoring replication message", level = LogMessage.Level.WARN)
    void largeMessageNotAvailable(long messageId);
@@ -612,13 +612,13 @@ public interface ActiveMQServerLogger {
    void timedOutWaitingToStopBridge();
 
    @LogMessage(id = 222094, value = "Bridge unable to send message {}, will try again once bridge reconnects", level = LogMessage.Level.WARN)
-   void bridgeUnableToSendMessage(@Cause Exception e, MessageReference ref);
+   void bridgeUnableToSendMessage(MessageReference ref, @Cause Exception e);
 
    @LogMessage(id = 222095, value = "Connection failed with failedOver={}", level = LogMessage.Level.WARN)
    void bridgeConnectionFailed(Boolean failedOver);
 
    @LogMessage(id = 222096, value = "Error on querying binding on bridge {}. Retrying in 100 milliseconds", level = LogMessage.Level.WARN)
-   void errorQueryingBridge(@Cause Throwable t, String name);
+   void errorQueryingBridge(String name, @Cause Throwable t);
 
    @LogMessage(id = 222097, value = "Address {} does not have any bindings, retry #({})", level = LogMessage.Level.WARN)
    void errorQueryingBridge(String address, Integer retryCount);
@@ -627,7 +627,7 @@ public interface ActiveMQServerLogger {
    void errorStartingBridge(String name);
 
    @LogMessage(id = 222099, value = "Bridge {} is unable to connect to destination. It will be disabled.", level = LogMessage.Level.WARN)
-   void errorConnectingBridge(@Cause Exception e, Bridge bridge);
+   void errorConnectingBridge(Bridge bridge, @Cause Exception e);
 
    @LogMessage(id = 222100, value = "ServerLocator was shutdown, can not retry on opening connection for bridge", level = LogMessage.Level.WARN)
    void bridgeLocatorShutdown();
@@ -660,28 +660,28 @@ public interface ActiveMQServerLogger {
    void noQueueIdDefined(org.apache.activemq.artemis.api.core.Message message, org.apache.activemq.artemis.api.core.Message messageCopy, SimpleString idsHeaderName);
 
    @LogMessage(id = 222111, value = "exception while invoking {} on {}", level = LogMessage.Level.TRACE)
-   void managementOperationError(@Cause Exception e, String op, String resourceName);
+   void managementOperationError(String op, String resourceName, @Cause Exception e);
 
    @LogMessage(id = 222112, value = "exception while retrieving attribute {} on {}", level = LogMessage.Level.WARN)
-   void managementAttributeError(@Cause Exception e, String att, String resourceName);
+   void managementAttributeError(String att, String resourceName, @Cause Exception e);
 
    @LogMessage(id = 222113, value = "On ManagementService stop, there are {} unexpected registered MBeans: {}", level = LogMessage.Level.WARN)
    void managementStopError(Integer size, List<String> unexpectedResourceNames);
 
    @LogMessage(id = 222114, value = "Unable to delete group binding info {}", level = LogMessage.Level.WARN)
-   void unableToDeleteGroupBindings(@Cause Exception e, SimpleString groupId);
+   void unableToDeleteGroupBindings(SimpleString groupId, @Cause Exception e);
 
    @LogMessage(id = 222115, value = "Error closing serverLocator={}", level = LogMessage.Level.WARN)
-   void errorClosingServerLocator(@Cause Exception e, ServerLocatorInternal clusterLocator);
+   void errorClosingServerLocator(ServerLocatorInternal clusterLocator, @Cause Exception e);
 
    @LogMessage(id = 222116, value = "unable to start broadcast group {}", level = LogMessage.Level.WARN)
-   void unableToStartBroadcastGroup(@Cause Exception e, String name);
+   void unableToStartBroadcastGroup(String name, @Cause Exception e);
 
    @LogMessage(id = 222117, value = "unable to start cluster connection {}", level = LogMessage.Level.WARN)
-   void unableToStartClusterConnection(@Cause Exception e, SimpleString name);
+   void unableToStartClusterConnection(SimpleString name, @Cause Exception e);
 
    @LogMessage(id = 222118, value = "unable to start Bridge {}", level = LogMessage.Level.WARN)
-   void unableToStartBridge(@Cause Exception e, SimpleString name);
+   void unableToStartBridge(SimpleString name, @Cause Exception e);
 
    @LogMessage(id = 222119, value = "No connector with name {}. backup cannot be announced.", level = LogMessage.Level.WARN)
    void announceBackupNoConnector(String connectorName);
@@ -747,10 +747,10 @@ public interface ActiveMQServerLogger {
    void remoteQueueAlreadyBoundOnClusterConnection(Object messageFlowRecord, SimpleString clusterName);
 
    @LogMessage(id = 222141, value = "Node Manager can not open file {}", level = LogMessage.Level.WARN)
-   void nodeManagerCantOpenFile(@Cause Exception e, File file);
+   void nodeManagerCantOpenFile(File file, @Cause Exception e);
 
    @LogMessage(id = 222142, value = "Error on resetting large message deliver - {}", level = LogMessage.Level.WARN)
-   void errorResttingLargeMessage(@Cause Throwable e, Object deliverer);
+   void errorResttingLargeMessage(Object deliverer, @Cause Throwable e);
 
    @LogMessage(id = 222143, value = "Timed out waiting for executor to complete", level = LogMessage.Level.WARN)
    void errorTransferringConsumer();
@@ -759,7 +759,7 @@ public interface ActiveMQServerLogger {
    void errorFlushingExecutorsOnQueue();
 
    @LogMessage(id = 222145, value = "Error expiring reference {} on queue", level = LogMessage.Level.WARN)
-   void errorExpiringReferencesOnQueue(@Cause Exception e, MessageReference ref);
+   void errorExpiringReferencesOnQueue(MessageReference ref, @Cause Exception e);
 
    @LogMessage(id = 222146, value = "Message has expired. No bindings for Expiry Address {} so dropping it", level = LogMessage.Level.WARN)
    void errorExpiringReferencesNoBindings(SimpleString expiryAddress);
@@ -777,13 +777,13 @@ public interface ActiveMQServerLogger {
    void sendingMessageToDLAnoDLA(MessageReference ref, SimpleString name);
 
    @LogMessage(id = 222151, value = "removing consumer which did not handle a message, consumer={}, message={}", level = LogMessage.Level.WARN)
-   void removingBadConsumer(@Cause Throwable e, Consumer consumer, Object reference);
+   void removingBadConsumer(Consumer consumer, Object reference, @Cause Throwable e);
 
    @LogMessage(id = 222152, value = "Unable to decrement reference counting on queue", level = LogMessage.Level.WARN)
    void errorDecrementingRefCount(@Cause Throwable e);
 
    @LogMessage(id = 222153, value = "Cannot locate record for message id = {} on Journal", level = LogMessage.Level.WARN)
-   void cannotFindMessageOnJournal(@Cause Throwable e, Long messageID);
+   void cannotFindMessageOnJournal(Long messageID, @Cause Throwable e);
 
    @LogMessage(id = 222154, value = "Error checking DLQ", level = LogMessage.Level.WARN)
    void errorCheckingDLQ(@Cause Throwable e);
@@ -979,7 +979,7 @@ public interface ActiveMQServerLogger {
    void fileDoesNotExist(String path);
 
    @LogMessage(id = 222220, value = "   Error while cleaning paging on queue {}", level = LogMessage.Level.WARN)
-   void errorCleaningPagingOnQueue(@Cause Exception e, String queue);
+   void errorCleaningPagingOnQueue(String queue, @Cause Exception e);
 
    @LogMessage(id = 222221, value = "Error while cleaning page, during the commit", level = LogMessage.Level.WARN)
    void errorCleaningPagingDuringCommit(@Cause Exception e);
@@ -1174,10 +1174,10 @@ public interface ActiveMQServerLogger {
    void emptyAddressFile(String addressFile, String directory);
 
    @LogMessage(id = 222286, value = "Error executing {} federation plugin method.", level = LogMessage.Level.WARN)
-   void federationPluginExecutionError(@Cause Throwable e, String pluginMethod);
+   void federationPluginExecutionError(String pluginMethod, @Cause Throwable e);
 
    @LogMessage(id = 222287, value = "Error looking up bindings for address {}.", level = LogMessage.Level.WARN)
-   void federationBindingsLookupError(@Cause Throwable e, SimpleString address);
+   void federationBindingsLookupError(SimpleString address, @Cause Throwable e);
 
    @LogMessage(id = 222288, value = "Page {}, message {} could not be found on offset {}, with starting message {}. This represents a logic error or inconsistency on the data, and the system will try once again from the beggining of the page file.", level = LogMessage.Level.WARN)
    void pageLookupError(long pageNr, int messageNr, int offset, int startNr);
@@ -1210,7 +1210,7 @@ public interface ActiveMQServerLogger {
    void unableStartManagementContext(@Cause Exception e);
 
    @LogMessage(id = 222298, value = "Failed to create bootstrap user \"{}\". User management may not function.", level = LogMessage.Level.WARN)
-   void failedToCreateBootstrapCredentials(@Cause Exception e, String user);
+   void failedToCreateBootstrapCredentials(String user, @Cause Exception e);
 
    @LogMessage(id = 222299, value = "No bootstrap credentials found. User management may not function.", level = LogMessage.Level.WARN)
    void noBootstrapCredentialsFound();
@@ -1225,16 +1225,16 @@ public interface ActiveMQServerLogger {
    void failedToDealWithObjectProperty(SimpleString property, String exceptionMessage);
 
    @LogMessage(id = 222303, value = "Redistribution by {} of messageID = {} failed", level = LogMessage.Level.WARN)
-   void errorRedistributing(@Cause Throwable t, String queueName, long m);
+   void errorRedistributing(String queueName, long m, @Cause Throwable t);
 
    @LogMessage(id = 222304, value = "Unable to load message from journal", level = LogMessage.Level.WARN)
    void unableToLoadMessageFromJournal(@Cause Throwable t);
 
    @LogMessage(id = 222305, value = "Error federating message {}.", level = LogMessage.Level.WARN)
-   void federationDispatchError(@Cause Throwable e, String message);
+   void federationDispatchError(String message, @Cause Throwable e);
 
    @LogMessage(id = 222306, value = "Failed to load prepared TX and it will be rolled back: {}", level = LogMessage.Level.WARN)
-   void failedToLoadPreparedTX(@Cause Throwable e, String message);
+   void failedToLoadPreparedTX(String message, @Cause Throwable e);
 
    @LogMessage(id = 222307, value = "The queues element is deprecated and replaced by the addresses element", level = LogMessage.Level.WARN)
    void queuesElementDeprecated();
@@ -1248,16 +1248,16 @@ public interface ActiveMQServerLogger {
    void initializationError(@Cause Throwable e);
 
    @LogMessage(id = 224001, value = "Error deploying URI {}", level = LogMessage.Level.ERROR)
-   void errorDeployingURI(@Cause Throwable e, URI uri);
+   void errorDeployingURI(URI uri, @Cause Throwable e);
 
    @LogMessage(id = 224002, value = "Error deploying URI", level = LogMessage.Level.ERROR)
    void errorDeployingURI(@Cause Throwable e);
 
    @LogMessage(id = 224003, value = "Error undeploying URI {}", level = LogMessage.Level.ERROR)
-   void errorUnDeployingURI(@Cause Throwable e, URI a);
+   void errorUnDeployingURI(URI a, @Cause Throwable e);
 
    @LogMessage(id = 224005, value = "Unable to deploy node {}", level = LogMessage.Level.ERROR)
-   void unableToDeployNode(@Cause Exception e, Node node);
+   void unableToDeployNode(Node node, @Cause Exception e);
 
    @LogMessage(id = 224006, value = "Invalid filter: {}", level = LogMessage.Level.ERROR)
    void invalidFilter(SimpleString filter);
@@ -1311,7 +1311,7 @@ public interface ActiveMQServerLogger {
    void stompErrorTXExists(String txID);
 
    @LogMessage(id = 224027, value = "Failed to write to handler on invm connector {}", level = LogMessage.Level.ERROR)
-   void errorWritingToInvmConnector(@Cause Exception e, Runnable runnable);
+   void errorWritingToInvmConnector(Runnable runnable, @Cause Exception e);
 
    @LogMessage(id = 224028, value = "Failed to stop acceptor {}", level = LogMessage.Level.ERROR)
    void errorStoppingAcceptor(String name);
@@ -1320,7 +1320,7 @@ public interface ActiveMQServerLogger {
    void largeMessageIncompatible();
 
    @LogMessage(id = 224030, value = "Could not cancel reference {}", level = LogMessage.Level.ERROR)
-   void errorCancellingRefOnBridge(@Cause Exception e, MessageReference ref2);
+   void errorCancellingRefOnBridge(MessageReference ref2, @Cause Exception e);
 
    @LogMessage(id = 224032, value = "Failed to pause bridge", level = LogMessage.Level.ERROR)
    void errorPausingBridge(@Cause Exception e);
@@ -1353,7 +1353,7 @@ public interface ActiveMQServerLogger {
    void errorDelivering(@Cause Exception e);
 
    @LogMessage(id = 224042, value = "Error while restarting the backup server: {}", level = LogMessage.Level.ERROR)
-   void errorRestartingBackupServer(@Cause Exception e, ActiveMQServer backup);
+   void errorRestartingBackupServer(ActiveMQServer backup, @Cause Exception e);
 
    @LogMessage(id = 224043, value = "Failed to send forced delivery message", level = LogMessage.Level.ERROR)
    void errorSendingForcedDelivery(@Cause Exception e);
@@ -1365,13 +1365,13 @@ public interface ActiveMQServerLogger {
    void errorRunningLargeMessageDeliverer(@Cause Exception e);
 
    @LogMessage(id = 224046, value = "Exception while browser handled from {}", level = LogMessage.Level.ERROR)
-   void errorBrowserHandlingMessage(@Cause Exception e, MessageReference current);
+   void errorBrowserHandlingMessage(MessageReference current, @Cause Exception e);
 
    @LogMessage(id = 224047, value = "Failed to delete large message file", level = LogMessage.Level.ERROR)
    void errorDeletingLargeMessageFile(@Cause Throwable e);
 
    @LogMessage(id = 224048, value = "Failed to remove temporary queue {}", level = LogMessage.Level.ERROR)
-   void errorRemovingTempQueue(@Cause Exception e, SimpleString bindingName);
+   void errorRemovingTempQueue(SimpleString bindingName, @Cause Exception e);
 
    @LogMessage(id = 224049, value = "Cannot find consumer with id {}", level = LogMessage.Level.ERROR)
    void cannotFindConsumer(long consumerID);
@@ -1386,7 +1386,7 @@ public interface ActiveMQServerLogger {
    void errorCallingRepoListener(@Cause Throwable e);
 
    @LogMessage(id = 224053, value = "failed to timeout transaction, xid:{}", level = LogMessage.Level.ERROR)
-   void errorTimingOutTX(@Cause Exception e, Xid xid);
+   void errorTimingOutTX(Xid xid, @Cause Exception e);
 
    @LogMessage(id = 224054, value = "exception while stopping the replication manager", level = LogMessage.Level.ERROR)
    void errorStoppingReplicationManager(@Cause Throwable t);
@@ -1424,7 +1424,7 @@ public interface ActiveMQServerLogger {
    void incompatibleWithHAPolicyChosen(String parameter);
 
    @LogMessage(id = 224065, value = "Failed to remove auto-created {} {}", level = LogMessage.Level.ERROR)
-   void errorRemovingAutoCreatedDestination(@Cause Exception e, String destinationType, SimpleString bindingName);
+   void errorRemovingAutoCreatedDestination(String destinationType, SimpleString bindingName, @Cause Exception e);
 
    @LogMessage(id = 224066, value = "Error opening context for LDAP", level = LogMessage.Level.ERROR)
    void errorOpeningContextForLDAP(@Cause Exception e);
@@ -1433,7 +1433,7 @@ public interface ActiveMQServerLogger {
    void errorPopulatingSecurityRolesFromLDAP(@Cause Exception e);
 
    @LogMessage(id = 224068, value = "Unable to stop component: {}", level = LogMessage.Level.ERROR)
-   void errorStoppingComponent(@Cause Throwable t, String componentClassName);
+   void errorStoppingComponent(String componentClassName, @Cause Throwable t);
 
    @LogMessage(id = 224069, value = "Change detected in broker configuration file, but reload failed", level = LogMessage.Level.ERROR)
    void configurationReloadFailed(@Cause Throwable t);
@@ -1445,7 +1445,7 @@ public interface ActiveMQServerLogger {
    void journalUseMAPPED();
 
    @LogMessage(id = 224074, value = "Failed to purge queue {} on no consumers", level = LogMessage.Level.ERROR)
-   void failedToPurgeQueue(@Cause Exception e, SimpleString bindingName);
+   void failedToPurgeQueue(SimpleString bindingName, @Cause Exception e);
 
    @LogMessage(id = 224075, value = "Cannot find pageTX id = {}", level = LogMessage.Level.ERROR)
    void journalCannotFindPageTX(Long id);
@@ -1478,7 +1478,7 @@ public interface ActiveMQServerLogger {
    void failedToOpenContext(@Cause Exception e);
 
    @LogMessage(id = 224085, value = "Failed to load property {}, reason: {}", level = LogMessage.Level.ERROR)
-   void failedToLoadProperty(@Cause Exception e, String key, String reason);
+   void failedToLoadProperty(String key, String reason, @Cause Exception e);
 
    @LogMessage(id = 224086, value = "Caught unexpected exception", level = LogMessage.Level.ERROR)
    void caughtUnexpectedException(@Cause NamingException e);
@@ -1541,7 +1541,7 @@ public interface ActiveMQServerLogger {
    void failedConnectingToCluster(@Cause Exception e);
 
    @LogMessage(id = 224106, value = "failed to remove transaction, xid:{}", level = LogMessage.Level.ERROR)
-   void errorRemovingTX(@Cause Exception e, Xid xid);
+   void errorRemovingTX(Xid xid, @Cause Exception e);
 
    @LogMessage(id = 224107, value = "The Critical Analyzer detected slow paths on the broker.  It is recommended that you enable trace logs on org.apache.activemq.artemis.utils.critical while you troubleshoot this issue. You should disable the trace logs when you have finished troubleshooting.", level = LogMessage.Level.INFO)
    void enableTraceForCriticalAnalyzer();

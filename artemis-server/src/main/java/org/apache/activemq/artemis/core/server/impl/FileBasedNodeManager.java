@@ -146,7 +146,7 @@ public abstract class FileBasedNodeManager extends NodeManager {
          try {
             fileCreated = serverLockFile.createNewFile();
          } catch (RuntimeException e) {
-            ActiveMQServerLogger.LOGGER.nodeManagerCantOpenFile(e, serverLockFile);
+            ActiveMQServerLogger.LOGGER.nodeManagerCantOpenFile(serverLockFile, e);
             throw e;
          } catch (IOException e) {
             /*
@@ -160,7 +160,7 @@ public abstract class FileBasedNodeManager extends NodeManager {
                count++;
                continue;
             }
-            ActiveMQServerLogger.LOGGER.nodeManagerCantOpenFile(e, serverLockFile);
+            ActiveMQServerLogger.LOGGER.nodeManagerCantOpenFile(serverLockFile, e);
             throw e;
          }
       }

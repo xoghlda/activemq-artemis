@@ -53,7 +53,7 @@ public interface ActiveMQClientLogger {
    void createConnectorException(@Cause Exception e);
 
    @LogMessage(id = 212008, value = "I am closing a core ClientSessionFactory you left open. Please make sure you close all ClientSessionFactories explicitly " + "before letting them go out of scope! {}", level = LogMessage.Level.WARN)
-   void factoryLeftOpen(@Cause Exception e, int i);
+   void factoryLeftOpen(int i, @Cause Exception e);
 
    @LogMessage(id = 212009, value = "resetting session after failure", level = LogMessage.Level.WARN)
    void resettingSessionAfterFailure();
@@ -74,7 +74,7 @@ public interface ActiveMQClientLogger {
    void errorDuringPrepare(@Cause Throwable e);
 
    @LogMessage(id = 212016, value = "I am closing a core ClientSession you left open. Please make sure you close all ClientSessions explicitly before letting them go out of scope! {}", level = LogMessage.Level.WARN)
-   void clientSessionNotClosed(@Cause Exception e, int identity);
+   void clientSessionNotClosed(int identity, @Cause Exception e);
 
    @LogMessage(id = 212017, value = "error adding packet", level = LogMessage.Level.WARN)
    void errorAddingPacket(@Cause Exception e);
@@ -138,7 +138,7 @@ public interface ActiveMQClientLogger {
    void connectionFailureDetected(String remoteAddress, String message, ActiveMQExceptionType type);
 
    @LogMessage(id = 212038, value = "Failure in calling interceptor: {}", level = LogMessage.Level.WARN)
-   void errorCallingInterceptor(@Cause Throwable e, Interceptor interceptor);
+   void errorCallingInterceptor(Interceptor interceptor, @Cause Throwable e);
 
    @LogMessage(id = 212040, value = "Timed out waiting for netty ssl close future to complete", level = LogMessage.Level.WARN)
    void timeoutClosingSSL();
@@ -221,7 +221,7 @@ public interface ActiveMQClientLogger {
    void unableToReceiveClusterTopology(@Cause Throwable e);
 
    @LogMessage(id = 212065, value = "{} getting exception when receiving broadcasting ", level = LogMessage.Level.WARN)
-   void unableToReceiveBroadcast(@Cause Exception e, String target);
+   void unableToReceiveBroadcast(String target, @Cause Exception e);
 
    @LogMessage(id = 212066, value = "failed to parse int property ", level = LogMessage.Level.WARN)
    void unableToParseValue(@Cause Throwable e);
@@ -314,7 +314,7 @@ public interface ActiveMQClientLogger {
    void caughtunexpectedThrowable(@Cause Throwable t);
 
    @LogMessage(id = 214018, value = "Failed to invoke getTextContent() on node {}", level = LogMessage.Level.ERROR)
-   void errorOnXMLTransform(@Cause Throwable t, Node n);
+   void errorOnXMLTransform(Node n, @Cause Throwable t);
 
    @LogMessage(id = 214019, value = "Invalid configuration", level = LogMessage.Level.ERROR)
    void errorOnXMLTransformInvalidConf(@Cause Throwable t);

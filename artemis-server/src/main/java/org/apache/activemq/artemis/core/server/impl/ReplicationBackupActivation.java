@@ -483,7 +483,7 @@ public final class ReplicationBackupActivation extends Activation implements Dis
                   }
                } catch (Exception e) {
                   if (restart) {
-                     ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(e, server);
+                     ActiveMQServerLogger.LOGGER.errorRestartingBackupServer(server, e);
                   } else {
                      ActiveMQServerLogger.LOGGER.errorStoppingServer(e);
                   }

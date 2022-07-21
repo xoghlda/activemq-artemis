@@ -307,7 +307,7 @@ public final class LargeServerMessageImpl extends CoreMessage implements CoreLar
          return newMessage.toMessage();
 
       } catch (Exception e) {
-         ActiveMQServerLogger.LOGGER.lareMessageErrorCopying(e, this);
+         ActiveMQServerLogger.LOGGER.lareMessageErrorCopying(this, e);
          return null;
       }
    }
