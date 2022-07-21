@@ -29,7 +29,6 @@ import org.apache.activemq.artemis.api.core.ActiveMQInvalidFilterExpressionExcep
 import org.apache.activemq.artemis.api.core.ActiveMQNonExistentQueueException;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -46,7 +45,7 @@ public interface ActiveMQJMSClientBundle {
    ActiveMQJMSClientBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQJMSClientBundle.class);
 
    @Message(id = 139000, value = "Invalid filter: {}")
-   ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, @Cause Throwable e);
+   ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, Throwable e);
 
    @Message(id = 139001, value = "Invalid Subscription Name. It is required to set the subscription name")
    ActiveMQIllegalStateException invalidSubscriptionName();

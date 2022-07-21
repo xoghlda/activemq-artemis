@@ -17,7 +17,6 @@
 package org.apache.activemq.artemis.core.protocol.stomp;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -64,34 +63,34 @@ public interface ActiveMQStompProtocolMessageBundle {
    ActiveMQStompException connectionNotEstablished();
 
    @Message(id = 339009, value = "Exception getting session")
-   ActiveMQStompException errorGetSession(@Cause Exception e);
+   ActiveMQStompException errorGetSession(Exception e);
 
    @Message(id = 339010, value = "Connection is not valid.")
    ActiveMQStompException invalidConnection();
 
    @Message(id = 339011, value = "Error sending message {}")
-   ActiveMQStompException errorSendMessage(org.apache.activemq.artemis.api.core.Message message, @Cause Exception e);
+   ActiveMQStompException errorSendMessage(org.apache.activemq.artemis.api.core.Message message, Exception e);
 
    @Message(id = 339012, value = "Error beginning a transaction {}")
-   ActiveMQStompException errorBeginTx(String txID, @Cause Exception e);
+   ActiveMQStompException errorBeginTx(String txID, Exception e);
 
    @Message(id = 339013, value = "Error committing {}")
-   ActiveMQStompException errorCommitTx(String txID, @Cause Exception e);
+   ActiveMQStompException errorCommitTx(String txID, Exception e);
 
    @Message(id = 339014, value = "Error aborting {}")
-   ActiveMQStompException errorAbortTx(String txID, @Cause Exception e);
+   ActiveMQStompException errorAbortTx(String txID, Exception e);
 
    @Message(id = 339015, value = "Client must set destination or id header to a SUBSCRIBE command")
    ActiveMQStompException noDestination();
 
    @Message(id = 339016, value = "Error creating subscription {}")
-   ActiveMQStompException errorCreatingSubscription(String subscriptionID, @Cause Exception e);
+   ActiveMQStompException errorCreatingSubscription(String subscriptionID, Exception e);
 
    @Message(id = 339017, value = "Error unsubscribing {}")
-   ActiveMQStompException errorUnsubscribing(String subscriptionID, @Cause Exception e);
+   ActiveMQStompException errorUnsubscribing(String subscriptionID, Exception e);
 
    @Message(id = 339018, value = "Error acknowledging message {}")
-   ActiveMQStompException errorAck(String messageID, @Cause Exception e);
+   ActiveMQStompException errorAck(String messageID, Exception e);
 
    @Message(id = 339019, value = "Invalid char sequence: two consecutive CRs.")
    ActiveMQStompException invalidTwoCRs();
@@ -130,7 +129,7 @@ public interface ActiveMQStompProtocolMessageBundle {
    ActiveMQStompException needTxIDHeader();
 
    @Message(id = 339031, value = "Error handling send")
-   ActiveMQStompException errorHandleSend(@Cause Exception e);
+   ActiveMQStompException errorHandleSend(Exception e);
 
    @Message(id = 339032, value = "Need a transaction id to begin")
    ActiveMQStompException beginTxNoID();

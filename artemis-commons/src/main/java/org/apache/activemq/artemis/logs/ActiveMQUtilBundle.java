@@ -18,7 +18,6 @@ package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -44,7 +43,7 @@ public interface ActiveMQUtilBundle {
    IllegalStateException stringTooLong(Integer length);
 
    @Message(id = 209003, value = "Error instantiating codec {}")
-   IllegalArgumentException errorCreatingCodec(String codecClassName, @Cause Exception e);
+   IllegalArgumentException errorCreatingCodec(String codecClassName, Exception e);
 
    @Message(id = 209004, value = "Failed to parse long value from {}")
    IllegalArgumentException failedToParseLong(String value);

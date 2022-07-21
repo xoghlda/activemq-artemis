@@ -55,7 +55,6 @@ import org.apache.activemq.artemis.core.postoffice.Binding;
 import org.apache.activemq.artemis.core.protocol.core.impl.wireformat.ReplicationSyncFileMessage;
 import org.apache.activemq.artemis.core.security.CheckType;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -95,7 +94,7 @@ public interface ActiveMQMessageBundle {
    ActiveMQInternalErrorException notJournalImpl();
 
    @Message(id = 229007, value = "unhandled error during replication")
-   ActiveMQInternalErrorException replicationUnhandledError(@Cause Exception e);
+   ActiveMQInternalErrorException replicationUnhandledError(Exception e);
 
    @Message(id = 229008, value = "Live Node contains more journals than the backup node. Probably a version match error")
    ActiveMQInternalErrorException replicationTooManyJournals();
@@ -131,7 +130,7 @@ public interface ActiveMQMessageBundle {
    ActiveMQQueueExistsException queueAlreadyExists(SimpleString queueName, SimpleString addressName);
 
    @Message(id = 229020, value = "Invalid filter: {}")
-   ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, @Cause Throwable e);
+   ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, Throwable e);
 
    @Message(id = 229021, value = "MessageId was not assigned to Message")
    ActiveMQIllegalStateException messageIdNotAssigned();
@@ -287,7 +286,7 @@ public interface ActiveMQMessageBundle {
    IllegalArgumentException nullPassword();
 
    @Message(id = 229074, value = "Error instantiating transformer class {}")
-   IllegalArgumentException errorCreatingTransformerClass(String transformerClassName, @Cause Exception e);
+   IllegalArgumentException errorCreatingTransformerClass(String transformerClassName, Exception e);
 
    @Message(id = 229075, value = "method autoEncode doesn't know how to convert {} yet")
    IllegalArgumentException autoConvertError(Class<? extends Object> aClass);
@@ -488,7 +487,7 @@ public interface ActiveMQMessageBundle {
    IllegalArgumentException failedToParseJson(String json);
 
    @Message(id = 229230, value = "Failed to bind acceptor {} to {}")
-   IllegalStateException failedToBind(String acceptor, String hostPort, @Cause Exception e);
+   IllegalStateException failedToBind(String acceptor, String hostPort, Exception e);
 
    @Message(id = 229231, value = "Divert Does Not Exist: {}")
    ActiveMQDivertDoesNotExistException divertDoesNotExist(String divert);
@@ -527,5 +526,5 @@ public interface ActiveMQMessageBundle {
    ActiveMQTimeoutException embeddedWebServerRestartTimeout(long timeout);
 
    @Message(id = 229243, value = "Embedded web server restart failed")
-   ActiveMQException embeddedWebServerRestartFailed(@Cause Exception e);
+   ActiveMQException embeddedWebServerRestartFailed(Exception e);
 }

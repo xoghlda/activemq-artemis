@@ -17,7 +17,6 @@
 package org.apache.activemq.artemis.jms.client;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
@@ -41,27 +40,27 @@ public interface ActiveMQJMSClientLogger {
    ActiveMQJMSClientLogger LOGGER = CodeFactory.getCodeClass(ActiveMQJMSClientLogger.class, ActiveMQJMSClientLogger.class.getPackage().getName());
 
    @LogMessage(id = 132000, value = "I'm closing a JMS connection you left open. Please make sure you close all JMS connections explicitly before letting them go out of scope! see stacktrace to find out where it was created", level = LogMessage.Level.WARN)
-   void connectionLeftOpen(@Cause Exception e);
+   void connectionLeftOpen(Exception e);
 
    @LogMessage(id = 132001, value = "Unhandled exception thrown from onMessage", level = LogMessage.Level.WARN)
-   void onMessageError(@Cause Exception e);
+   void onMessageError(Exception e);
 
    @LogMessage(id = 134000, value = "Failed to call JMS exception listener", level = LogMessage.Level.ERROR)
-   void errorCallingExcListener(@Cause Exception e);
+   void errorCallingExcListener(Exception e);
 
    @LogMessage(id = 134002, value = "Queue Browser failed to create message {}", level = LogMessage.Level.ERROR)
-   void errorCreatingMessage(String messageToString, @Cause Throwable e);
+   void errorCreatingMessage(String messageToString, Throwable e);
 
    @LogMessage(id = 134003, value = "Message Listener failed to prepare message for receipt, message={}", level = LogMessage.Level.ERROR)
-   void errorPreparingMessageForReceipt(String messagetoString, @Cause Throwable e);
+   void errorPreparingMessageForReceipt(String messagetoString, Throwable e);
 
    @LogMessage(id = 134004, value = "Message Listener failed to process message", level = LogMessage.Level.ERROR)
-   void errorProcessingMessage(@Cause Throwable e);
+   void errorProcessingMessage(Throwable e);
 
    @LogMessage(id = 134005, value = "Message Listener failed to recover session", level = LogMessage.Level.ERROR)
-   void errorRecoveringSession(@Cause Throwable e);
+   void errorRecoveringSession(Throwable e);
 
    @LogMessage(id = 134006, value = "Failed to call Failover listener", level = LogMessage.Level.ERROR)
-   void errorCallingFailoverListener(@Cause Exception e);
+   void errorCallingFailoverListener(Exception e);
 
 }

@@ -19,7 +19,6 @@ package org.apache.activemq.artemis.rest;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.rest.queue.push.xml.XmlLink;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
@@ -48,23 +47,23 @@ public interface ActiveMQRestLogger {
    void shutdownRestSubscription(String id);
 
    @LogMessage(id = 182002, value = "Failed to push message to {}", level = LogMessage.Level.WARN)
-   void failedToPushMessageToUri(String uri, @Cause Exception e);
+   void failedToPushMessageToUri(String uri, Exception e);
 
    @LogMessage(id = 182003, value = "Failed to build Message from object", level = LogMessage.Level.WARN)
-   void failedToBuildMessageFromObject(@Cause Exception e);
+   void failedToBuildMessageFromObject(Exception e);
 
    @LogMessage(id = 182004, value = "REST configuration parameter '{}' is deprecated. Use '{}' instead.", level = LogMessage.Level.WARN)
    void deprecatedConfiguration(String oldConfigParameter, String newConfigParameter);
 
    @LogMessage(id = 184000, value = "Failed to load push store {}, it is probably corrupted", level = LogMessage.Level.ERROR)
-   void errorLoadingStore(String name, @Cause Exception e);
+   void errorLoadingStore(String name, Exception e);
 
    @LogMessage(id = 184001, value = "Error updating store", level = LogMessage.Level.ERROR)
-   void errorUpdatingStore(@Cause Exception e);
+   void errorUpdatingStore(Exception e);
 
    @LogMessage(id = 184002, value = "Failed to push message to {} disabling push registration...", level = LogMessage.Level.ERROR)
    void errorPushingMessage(XmlLink link);
 
    @LogMessage(id = 184003, value = "Error deleting Subscriber queue", level = LogMessage.Level.ERROR)
-   void errorDeletingSubscriberQueue(@Cause ActiveMQException e);
+   void errorDeletingSubscriberQueue(ActiveMQException e);
 }

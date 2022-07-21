@@ -18,7 +18,6 @@ package org.apache.activemq.artemis.jms.server;
 
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.w3c.dom.Node;
@@ -49,24 +48,24 @@ public interface ActiveMQJMSServerLogger {
    void recoveryConnectFailed(String s);
 
    @LogMessage(id = 122011, value = "error unbinding {} from Registry", level = LogMessage.Level.WARN)
-   void bindingsUnbindError(String key, @Cause Exception e);
+   void bindingsUnbindError(String key, Exception e);
 
    @LogMessage(id = 122012, value = "JMS Server Manager error", level = LogMessage.Level.WARN)
-   void jmsServerError(@Cause Exception e);
+   void jmsServerError(Exception e);
 
    @LogMessage(id = 122013, value = "Error in XA Recovery recover", level = LogMessage.Level.WARN)
-   void xaRecoverError(@Cause Exception e);
+   void xaRecoverError(Exception e);
 
    @LogMessage(id = 122014, value = "Notified of connection failure in xa recovery connectionFactory for provider {} will attempt reconnect on next pass",
       level = LogMessage.Level.WARN)
-   void xaRecoverConnectionError(ClientSessionFactory csf, @Cause Exception e);
+   void xaRecoverConnectionError(ClientSessionFactory csf, Exception e);
 
    @LogMessage(id = 122016, value = "Error in XA Recovery", level = LogMessage.Level.DEBUG)
-   void xaRecoveryError(@Cause Exception e);
+   void xaRecoveryError(Exception e);
 
    @LogMessage(id = 122017, value = "Tried to correct invalid \"host\" value \"0.0.0.0\" for \"{}\" connector, but received an exception.",
       level = LogMessage.Level.WARN)
-   void failedToCorrectHost(String name, @Cause Exception e);
+   void failedToCorrectHost(String name, Exception e);
 
    @LogMessage(id = 122018,
       value = "Failed to send notification: {}",
@@ -76,7 +75,7 @@ public interface ActiveMQJMSServerLogger {
    @LogMessage(id = 122019,
       value = "Unable to deactivate server",
       level = LogMessage.Level.WARN)
-   void failedToDeactivateServer(@Cause Exception e);
+   void failedToDeactivateServer(Exception e);
 
    @LogMessage(id = 123000, value = "JMS Server Manager Running cached command for {}." + "(In the event of failover after failback has occurred, this message may be output multiple times.)",
       level = LogMessage.Level.DEBUG)
@@ -86,5 +85,5 @@ public interface ActiveMQJMSServerLogger {
    void jmsConfigMissingKey(Node e);
 
    @LogMessage(id = 124002, value = "Failed to start JMS deployer", level = LogMessage.Level.ERROR)
-   void jmsDeployerStartError(@Cause Exception e);
+   void jmsDeployerStartError(Exception e);
 }

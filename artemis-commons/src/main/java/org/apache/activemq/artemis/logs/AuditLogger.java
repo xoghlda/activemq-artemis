@@ -18,7 +18,6 @@ package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.slf4j.Logger;
@@ -2000,7 +1999,7 @@ public interface AuditLogger {
    }
 
    @LogMessage(id = 601264, value = "User {} gets security check failure", level = LogMessage.Level.INFO)
-   void securityFailure(String user, @Cause Throwable cause);
+   void securityFailure(String user, Throwable cause);
 
 
    static void createCoreConsumer(Object source, Subject user, String remoteAddress, Object... args) {

@@ -22,7 +22,6 @@ import javax.resource.NotSupportedException;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -40,7 +39,7 @@ public interface ActiveMQRABundle {
    ActiveMQRABundle BUNDLE = CodeFactory.getCodeClass(ActiveMQRABundle.class);
 
    @Message(id = 159000, value = "Error decoding password using codec instance")
-   ActiveMQIllegalStateException errorDecodingPassword(@Cause Exception e);
+   ActiveMQIllegalStateException errorDecodingPassword(Exception e);
 
    @Message(id = 159001, value = "MDB cannot be deployed as it has no Activation Spec. Please provide an Activation!")
    NotSupportedException noActivationSpec();

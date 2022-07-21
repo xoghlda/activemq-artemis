@@ -20,7 +20,6 @@ import org.apache.activemq.artemis.api.core.ActiveMQAddressExistsException;
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.api.core.ActiveMQInternalErrorException;
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -48,5 +47,5 @@ public interface ActiveMQJMSServerBundle {
    ActiveMQAddressExistsException cfBindingsExists(String name);
 
    @Message(id = 129007, value = "Error decoding password using codec instance")
-   ActiveMQIllegalStateException errorDecodingPassword(@Cause Exception e);
+   ActiveMQIllegalStateException errorDecodingPassword(Exception e);
 }

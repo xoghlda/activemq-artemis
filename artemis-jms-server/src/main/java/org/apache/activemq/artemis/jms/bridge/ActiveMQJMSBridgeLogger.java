@@ -19,7 +19,6 @@ package org.apache.activemq.artemis.jms.bridge;
 import javax.management.ObjectName;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
@@ -59,19 +58,19 @@ public interface ActiveMQJMSBridgeLogger {
    void bridgeNotStarted(String bridgeName);
 
    @LogMessage(id = 342006, value = "JMS Bridge {}, detected failure on bridge connection", level = LogMessage.Level.WARN)
-   void bridgeFailure(String bridgeName, @Cause Exception e);
+   void bridgeFailure(String bridgeName, Exception e);
 
    @LogMessage(id = 342009, value = "JMS Bridge {} failed to send + acknowledge batch, closing JMS objects", level = LogMessage.Level.WARN)
-   void bridgeAckError(String bridgeName, @Cause Exception e);
+   void bridgeAckError(String bridgeName, Exception e);
 
    @LogMessage(id = 342010, value = "Failed to connect JMS Bridge {}", level = LogMessage.Level.WARN)
-   void bridgeConnectError(String bridgeName, @Cause Exception e);
+   void bridgeConnectError(String bridgeName, Exception e);
 
    @LogMessage(id = 342011, value = "Transaction rolled back, retrying TX", level = LogMessage.Level.WARN)
-   void transactionRolledBack(@Cause Exception e);
+   void transactionRolledBack(Exception e);
 
    @LogMessage(id = 344001, value = "JMS Bridge {}, failed to start source connection", level = LogMessage.Level.ERROR)
-   void jmsBridgeSrcConnectError(String bridgeName, @Cause Exception e);
+   void jmsBridgeSrcConnectError(String bridgeName, Exception e);
 
    @LogMessage(id = 344002, value = "Failed to start JMS Bridge {}.  QoS Mode: {} requires a Transaction Manager, none found", level = LogMessage.Level.ERROR)
    void jmsBridgeTransactionManagerMissing(String bridgeName, QualityOfServiceMode qosMode);

@@ -17,7 +17,6 @@
 package org.apache.activemq.artemis.osgi;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 
@@ -42,12 +41,12 @@ public interface ActiveMQOsgiLogger {
    void protocolWasRemovedForBroker(String protocol, String name, String message);
 
    @LogMessage(id = 582000, value = "Error starting broker: {}", level = LogMessage.Level.WARN)
-   void errorStartingBroker(String name, @Cause Exception e);
+   void errorStartingBroker(String name, Exception e);
 
    @LogMessage(id = 582001, value = "Error stopping broker: {}", level = LogMessage.Level.WARN)
-   void errorStoppingBroker(String name, @Cause Exception e);
+   void errorStoppingBroker(String name, Exception e);
 
    @LogMessage(id = 582002, value = "Error getting dataSource provider infos.", level = LogMessage.Level.WARN)
-   void errorGettingDataSourceProviderInfo(@Cause Exception e);
+   void errorGettingDataSourceProviderInfo(Exception e);
 
 }

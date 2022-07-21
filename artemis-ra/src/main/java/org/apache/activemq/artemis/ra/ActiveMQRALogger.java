@@ -17,7 +17,6 @@
 package org.apache.activemq.artemis.ra;
 
 import org.apache.activemq.artemis.logprocessor.CodeFactory;
-import org.apache.activemq.artemis.logprocessor.annotation.Cause;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
@@ -63,49 +62,49 @@ public interface ActiveMQRALogger {
    void resourceAdaptorStarted();
 
    @LogMessage(id = 152001, value = "problem resetting xa session after failure", level = LogMessage.Level.WARN)
-   void problemResettingXASession(@Cause Throwable t);
+   void problemResettingXASession(Throwable t);
 
    @LogMessage(id = 152002, value = "Unable to roll local transaction back", level = LogMessage.Level.WARN)
    void unableToRollbackTX();
 
    @LogMessage(id = 152003, value = "unable to reset session after failure, we will place the MDB Inflow now in setup mode for activation={}", level = LogMessage.Level.WARN)
-   void unableToResetSession(String spec, @Cause Exception e);
+   void unableToResetSession(String spec, Exception e);
 
    @LogMessage(id = 152004, value = "Handling JMS exception failure", level = LogMessage.Level.WARN)
-   void handlingJMSFailure(@Cause Exception e);
+   void handlingJMSFailure(Exception e);
 
    @LogMessage(id = 152005, value = "Failure in broker activation {}", level = LogMessage.Level.WARN)
-   void failureInActivation(ActiveMQActivationSpec spec, @Cause Throwable t);
+   void failureInActivation(ActiveMQActivationSpec spec, Throwable t);
 
    @LogMessage(id = 152006, value = "Unable to call after delivery", level = LogMessage.Level.WARN)
-   void unableToCallAfterDelivery(@Cause Exception e);
+   void unableToCallAfterDelivery(Exception e);
 
    @LogMessage(id = 152007, value = "Thread {} could not be finished", level = LogMessage.Level.WARN)
    void threadCouldNotFinish(String thread);
 
    @LogMessage(id = 152008, value = "Error interrupting handler on endpoint {} handler = {}", level = LogMessage.Level.WARN)
-   void errorInterruptingHandler(String endpoint, String handler, @Cause Throwable cause);
+   void errorInterruptingHandler(String endpoint, String handler, Throwable cause);
 
    @LogMessage(id = 152009, value = "Unable to validate properties", level = LogMessage.Level.WARN)
-   void unableToValidateProperties(@Cause Exception e);
+   void unableToValidateProperties(Exception e);
 
    @LogMessage(id = 152010, value = "Unable to clear the transaction", level = LogMessage.Level.WARN)
-   void unableToClearTheTransaction(@Cause Exception e);
+   void unableToClearTheTransaction(Exception e);
 
    @LogMessage(id = 152011, value = "Unable to close the factory", level = LogMessage.Level.WARN)
-   void unableToCloseFactory(@Cause Throwable e);
+   void unableToCloseFactory(Throwable e);
 
    @LogMessage(id = 154000, value = "Error while creating object Reference.", level = LogMessage.Level.ERROR)
-   void errorCreatingReference(@Cause Exception e);
+   void errorCreatingReference(Exception e);
 
    @LogMessage(id = 154001, value = "Unable to stop resource adapter.", level = LogMessage.Level.ERROR)
-   void errorStoppingRA(@Cause Exception e);
+   void errorStoppingRA(Exception e);
 
    @LogMessage(id = 154003, value = "Unable to reconnect {}", level = LogMessage.Level.ERROR)
-   void errorReconnecting(ActiveMQActivationSpec spec, @Cause Throwable t);
+   void errorReconnecting(ActiveMQActivationSpec spec, Throwable t);
 
    @LogMessage(id = 154004, value = "Failed to deliver message", level = LogMessage.Level.ERROR)
-   void errorDeliveringMessage(@Cause Throwable t);
+   void errorDeliveringMessage(Throwable t);
 
    @LogMessage(id = 153001, value = "using different ActiveMQRAConnectionFactory", level = LogMessage.Level.DEBUG)
    void warnDifferentConnectionfactory();
