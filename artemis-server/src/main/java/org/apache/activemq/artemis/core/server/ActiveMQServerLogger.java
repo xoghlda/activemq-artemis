@@ -1203,7 +1203,7 @@ public interface ActiveMQServerLogger {
 
 
    @LogMessage(id = 222296, value = "Unable to deploy Hawtio MBeam, console client side RBAC not available", level = LogMessage.Level.WARN)
-   void unableToDeployHawtioMBean(Exception e);
+   void unableToDeployHawtioMBean(Throwable e);
 
    @LogMessage(id = 222297, value = "Unable to start Management Context, RBAC not available", level = LogMessage.Level.WARN)
    void unableStartManagementContext(Exception e);
