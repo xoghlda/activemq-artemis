@@ -1994,12 +1994,12 @@ public interface AuditLogger {
    void handleManagementMessage2(String user, Object source, String args);
 
 
-   static void securityFailure(Exception cause) {
-      BASE_LOGGER.securityFailure(getCaller(), cause);
+   static void securityFailure(String reason, Exception cause) {
+      BASE_LOGGER.securityFailure(getCaller(), reason, cause);
    }
 
-   @LogMessage(id = 601264, value = "User {} gets security check failure", level = LogMessage.Level.INFO)
-   void securityFailure(String user, Throwable cause);
+   @LogMessage(id = 601264, value = "User {} gets security check failure, reason = {}", level = LogMessage.Level.INFO)
+   void securityFailure(String user, String reason, Throwable cause);
 
 
    static void createCoreConsumer(Object source, Subject user, String remoteAddress, Object... args) {

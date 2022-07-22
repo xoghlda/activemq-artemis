@@ -291,7 +291,7 @@ public class SecurityStoreImpl implements SecurityStore, HierarchicalRepositoryC
             } else {
                ex = ActiveMQMessageBundle.BUNDLE.userNoPermissionsQueue(session.getUsername(), checkType, bareQueue, bareAddress);
             }
-            AuditLogger.securityFailure(ex);
+            AuditLogger.securityFailure(ex.getMessage(), ex);
             throw ex;
          }
 
