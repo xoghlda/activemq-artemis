@@ -1,0 +1,9 @@
+TODOs not explicitly noted in the code itself already:
+
+- Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
+- Remove references to wildfly-common in scripts and profiles and cli commands
+- Replace logging.config files in smoke tests needing their own custom config
+- Remove stale logging.config file from artemis-cli
+- Remove stale log4j.properties file(s) from activemq5-unit-tests
+- Restore the NettySecurityClientTest and figure out what needs changed to make it work.
+- Restore the Travis config file
