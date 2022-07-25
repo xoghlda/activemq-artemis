@@ -116,6 +116,7 @@
          <groupId>org.apache.activemq</groupId>
          <artifactId>artemis-unit-test-support</artifactId>
          <version>${project.version}</version>
+         <scope>test</scope>
       </dependency>
    </dependencies>
 
