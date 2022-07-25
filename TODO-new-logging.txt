@@ -1,5 +1,6 @@
 TODOs not explicitly noted in the code itself already:
 
+- Remove JBL use from many integration-tests etc tests still using it
 - Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
 - Remove references to wildfly-common in scripts and profiles and cli commands
 - Replace logging.config files in smoke tests needing their own custom config
