@@ -67,13 +67,14 @@ import org.eclipse.paho.mqttv5.client.MqttDisconnectResponse;
 import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
 import org.eclipse.paho.mqttv5.common.MqttException;
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
-import org.jboss.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static java.util.Collections.singletonList;
 import static org.apache.activemq.artemis.core.protocol.mqtt.MQTTProtocolManagerFactory.MQTT_PROTOCOL_NAME;
@@ -109,7 +110,7 @@ public class MQTT5TestSupport extends ActiveMQTestBase {
       return new MqttAsyncClient(protocol + "://localhost:" + (isUseSsl() ? getSslPort() : getPort()), clientId, new MemoryPersistence());
    }
 
-   private static final Logger log = Logger.getLogger(MQTT5TestSupport.class);
+   private static final Logger log = LoggerFactory.getLogger(MQTT5TestSupport.class);
    protected static final long DEFAULT_TIMEOUT = 300000;
    protected ActiveMQServer server;
 
@@ -166,7 +167,7 @@ public class MQTT5TestSupport extends ActiveMQTestBase {
       startBroker();
       createJMSConnection();
       //TODO: shouldnt really be doing this as it never resets the level
-      //org.jboss.logmanager.Logger.getLogger(MQTTUtil.class.getName()).setLevel(org.jboss.logmanager.Level.TRACE);
+      //TODO: org.jboss.logmanager.Logger.getLogger(MQTTUtil.class.getName()).setLevel(org.jboss.logmanager.Level.TRACE);
    }
 
    @Override
