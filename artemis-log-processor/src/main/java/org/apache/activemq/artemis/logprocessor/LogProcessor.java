@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
@@ -70,6 +71,23 @@ public class LogProcessor extends AbstractProcessor {
       }
    }
 
+
+   private static void tupples(String arg, char open, char close, Consumer<String> stringConsumer) {
+      int openAt = -1;
+      for (int i = 0; i < arg.length(); i++) {
+         char charAt = arg.charAt(i);
+
+         if (charAt == open) {
+            openAt = i;
+         } else if (charAt == close) {
+            if (openAt >= 0) {
+               stringConsumer.accept(arg.substring(openAt + 1, i));
+            }
+            openAt = -1;
+         }
+
+      }
+   }
 
 
    @Override
@@ -192,6 +210,14 @@ public class LogProcessor extends AbstractProcessor {
       return true;
    }
 
+   private void verifyLogArguments(String logMessage, Object holder) {
+      tupples(logMessage, '{', '}', (tupple) -> {
+         if (!tupple.equals("")) {
+            throw new IllegalArgumentException("Invalid log argument {" + tupple + "} on message \'" + logMessage + "\' as part of " + holder + "\nreplace it by {}");
+         }
+      });
+   }
+
    private void generateMessage(LogBundle bundleAnnotation,
                                 PrintWriter writerOutput,
                                 ExecutableElement executableMember,
@@ -203,6 +229,8 @@ public class LogProcessor extends AbstractProcessor {
       if (processedMessages.containsKey(messageAnnotation.id())) {
          throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);
       }
+
+      verifyLogArguments(messageAnnotation.value(), executableMember);
 
       processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
 
@@ -345,6 +373,8 @@ public class LogProcessor extends AbstractProcessor {
       if (processedMessages.containsKey(messageAnnotation.id())) {
          throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);
       }
+
+      verifyLogArguments(messageAnnotation.value(), executableMember);
 
       processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
 
