@@ -48,7 +48,7 @@ public class PageCleanupWhileReplicaCatchupTest extends FailoverTestBase {
    private static final int NUMBER_OF_WORKERS = 5;
    private static final int NUMBER_OF_RESTARTS = 5;
 
-   private static final Logger logger = Logger.getFactoryLogger(PageCleanupWhileReplicaCatchupTest.class);
+   private static final Logger logger = LoggerFactory.getLogger(PageCleanupWhileReplicaCatchupTest.class);
    volatile boolean running = true;
 
    @Override

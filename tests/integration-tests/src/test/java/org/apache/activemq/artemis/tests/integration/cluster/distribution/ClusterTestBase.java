@@ -149,7 +149,7 @@ public abstract class ClusterTestBase extends ActiveMQTestBase {
       try {
          pluggableQuorumConfiguration = new DistributedPrimitiveManagerConfiguration(FileBasedPrimitiveManager.class.getName(), Collections.singletonMap("locks-folder", temporaryFolder.newFolder("manager").toString()));
       } catch (IOException ioException) {
-         log.error(ioException);
+         log.error(ioException.getMessage(), ioException);
          return null;
       }
       return pluggableQuorumConfiguration;

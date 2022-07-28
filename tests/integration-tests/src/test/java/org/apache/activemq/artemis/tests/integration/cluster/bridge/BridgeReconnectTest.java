@@ -506,7 +506,7 @@ public class BridgeReconnectTest extends BridgeTestBase {
                // Simulate CPU load until bridge delivery after failure
                deliveryAfterFailureLatch.await();
             } catch (InterruptedException e) {
-               log.debug(e);
+               log.debug("Interrupted", e);
             }
          }
 
@@ -518,9 +518,9 @@ public class BridgeReconnectTest extends BridgeTestBase {
                   // before routing messages delivered by bridge before failure
                   routingBarrier.await();
                } catch (InterruptedException e) {
-                  log.debug(e);
+                  log.debug("Interrupted", e);
                } catch (BrokenBarrierException e) {
-                  log.debug(e);
+                  log.debug("Interrupted", e);
                }
             }
          }
