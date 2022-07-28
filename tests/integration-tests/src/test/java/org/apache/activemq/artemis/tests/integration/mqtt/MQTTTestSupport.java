@@ -417,7 +417,7 @@ public class MQTTTestSupport extends ActiveMQTestBase {
 
          @Override
          public void debug(String message, Object... args) {
-            if(log.isDebugEnabled()) {
+            if (log.isDebugEnabled()) {
                log.debug(String.format(message, args));
             }
          }
