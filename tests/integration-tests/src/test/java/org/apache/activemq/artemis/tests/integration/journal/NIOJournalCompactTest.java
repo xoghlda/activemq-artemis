@@ -60,14 +60,15 @@ import org.apache.activemq.artemis.utils.IDGenerator;
 import org.apache.activemq.artemis.utils.actors.OrderedExecutorFactory;
 import org.apache.activemq.artemis.utils.SimpleIDGenerator;
 import org.apache.activemq.artemis.utils.critical.EmptyCriticalAnalyzer;
-import org.jboss.logging.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NIOJournalCompactTest extends JournalImplTestBase {
 
-   private static final Logger logger = Logger.getLogger(NIOJournalCompactTest.class);
+   private static final Logger logger = LoggerFactory.getLogger(NIOJournalCompactTest.class);
 
    private static final int NUMBER_OF_RECORDS = 100;
 
@@ -2037,14 +2038,14 @@ public class NIOJournalCompactTest extends JournalImplTestBase {
 
                      survivingMsgs.add(message.getMessageID());
 
-                     logger.debug("Going to store " + message);
+                     logger.debug("Going to store {}", message);
                      // This one will stay here forever
                      storage.storeMessage(message);
-                     logger.debug("message stored " + message);
+                     logger.debug("message stored {}", message);
 
-                     logger.debug("Going to commit " + tx);
+                     logger.debug("Going to commit {}", tx);
                      storage.commit(tx);
-                     logger.debug("Committed " + tx);
+                     logger.debug("Committed {}", tx);
 
                      ctx.executeOnCompletion(new IOCallback() {
                         @Override
