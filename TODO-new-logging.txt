@@ -3,8 +3,7 @@ TODOs not explicitly noted in the code itself already:
 - Update e2e-tests instance logging config and scripts/profiles
 - Remove JBL use from last remaining integration-tests etc tests still using it
 - Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
-- Remove references to wildfly-common in scripts and profiles and cli commands
-- Replace logging.config files in smoke tests needing their own custom config
+- Replace logging.config files in remaining tests/examples needing their own custom config
 - Remove stale log4j.properties file(s) from activemq5-unit-tests
 - Restore the NettySecurityClientTest and figure out what needs changed to make it work.
 - Restore the Travis config file

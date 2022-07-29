@@ -21,7 +21,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -770,9 +769,6 @@ public class Create extends InputAbstract {
       File dataFolder = createDirectory(data, directory);
       filters.put("${artemis.instance.data}", path(dataFolder));
 
-      filters.put("${logmanager}", getLogManager());
-      filters.put("${wildfly-common}", getWildflyCommon());
-
       if (javaOptions == null || javaOptions.length() == 0) {
          javaOptions = "";
       }
@@ -1008,41 +1004,6 @@ public class Create extends InputAbstract {
       return count;
    }
 
-   private String getLogManager() throws IOException {
-      String logManager = "";
-      File dir = new File(path(getHome().toString()) + "/lib");
-
-      File[] matches = dir.listFiles(new FilenameFilter() {
-         @Override
-         public boolean accept(File dir, String name) {
-            return name.startsWith("jboss-logmanager") && name.endsWith(".jar");
-         }
-      });
-
-      if (matches != null && matches.length > 0) {
-         logManager = matches[0].getName();
-      }
-
-      return logManager;
-   }
-
-   private String getWildflyCommon() throws IOException {
-      String logManager = "";
-      File dir = new File(path(getHome().toString()) + "/lib");
-
-      File[] matches = dir.listFiles(new FilenameFilter() {
-         @Override
-         public boolean accept(File dir, String name) {
-            return name.startsWith("wildfly-common") && name.endsWith(".jar");
-         }
-      });
-
-      if (matches != null && matches.length > 0) {
-         logManager = matches[0].getName();
-      }
-
-      return logManager;
-   }
    /**
     * It will create the address and queue configurations
     */

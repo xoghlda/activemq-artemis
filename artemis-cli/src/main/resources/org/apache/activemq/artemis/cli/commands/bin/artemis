@@ -98,21 +98,6 @@ if $cygwin ; then
   CLASSPATH=`cygpath --windows "$CLASSPATH"`
 fi
 
-
-# finding the Log Manager
-LOG_MANAGER=`ls $ARTEMIS_HOME/lib/jboss-logmanager*jar 2>/dev/null`
-
-if [ -z "$LOG_MANAGER" ] ; then
-  # this is the one found when the server was created
-  LOG_MANAGER="$ARTEMIS_HOME/lib/${logmanager}"
-fi
-
-WILDFLY_COMMON=`ls $ARTEMIS_HOME/lib/wildfly-common*jar 2>/dev/null`
-if [ -z "$WILDFLY_COMMON" ] ; then
-  # this is the one found when the server was created
-  WILDFLY_COMMON="$ARTEMIS_HOME/lib/${wildfly-common}"
-fi
-
 if [ -f "$ARTEMIS_OOME_DUMP" ] ; then
   # backup the last OOME heap dump
   mv $ARTEMIS_OOME_DUMP $ARTEMIS_OOME_DUMP.bkp
@@ -121,7 +106,6 @@ fi
 exec "$JAVACMD" \
     $JAVA_ARGS \
     -Dhawtio.role="$HAWTIO_ROLE" \
-    -Xbootclasspath/a:"$LOG_MANAGER:$WILDFLY_COMMON" \
     -Djava.security.auth.login.config="$ARTEMIS_INSTANCE_ETC/login.config" \
     $ARTEMIS_CLUSTER_PROPS \
     -classpath "$CLASSPATH" \
