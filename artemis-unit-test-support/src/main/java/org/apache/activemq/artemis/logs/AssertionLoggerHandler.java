@@ -26,6 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
@@ -108,6 +110,13 @@ public class AssertionLoggerHandler extends AbstractAppender {
       }
 
       return false;
+   }
+
+   public static LogLevel setLevel(String loggerName, LogLevel level) {
+      final Logger logger = LogManager.getLogger(loggerName);
+      final Level implLevel = logger.getLevel();
+
+      return LogLevel.fromImplLevel(implLevel);
    }
 
    public static boolean findText(long mstimeout, String... text) {
@@ -243,6 +252,7 @@ public class AssertionLoggerHandler extends AbstractAppender {
    }
 
    public enum LogLevel {
+      OFF(Level.OFF),
       ERROR(Level.ERROR),
       WARN(Level.WARN),
       INFO(Level.INFO),
@@ -257,6 +267,24 @@ public class AssertionLoggerHandler extends AbstractAppender {
 
       private Level toImplLevel() {
          return implLevel;
+      }
+
+      private static LogLevel fromImplLevel(Level implLevel) {
+         if (Level.ERROR.equals(implLevel)) {
+            return ERROR;
+         } else if (Level.WARN.equals(implLevel)) {
+            return WARN;
+         } else if (Level.INFO.equals(implLevel)) {
+            return INFO;
+         } else if (Level.DEBUG.equals(implLevel)) {
+            return DEBUG;
+         } else if (Level.TRACE.equals(implLevel)) {
+            return TRACE;
+         } else if (Level.OFF.equals(implLevel)) {
+            return OFF;
+         } else {
+            throw new IllegalArgumentException("Unexpected level:" + implLevel);
+         }
       }
    }
 
