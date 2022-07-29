@@ -212,6 +212,7 @@ public class SpawnedVMSupport {
          }
       }
 
+      // TODO: look into the usage of these (BEGINNING >)
       // The logs will be huge if you don't set this
       if (useLogging) {
          commandList.add("-Djava.util.logging.manager=org.jboss.logmanager.LogManager");
@@ -236,6 +237,7 @@ public class SpawnedVMSupport {
       if (loggingPlugin != null) {
          commandList.add("-Dorg.jboss.logging.Logger.pluginClass=" + loggingPlugin + " ");
       }
+      // TODO: look into these (< END)
 
       commandList.add(className);
       for (String arg : args) {

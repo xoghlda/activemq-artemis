@@ -116,6 +116,7 @@ public class Artemis {
          System.setProperty("java.io.tmpdir", new File(fileInstance, "tmp").getCanonicalPath());
       }
 
+      //TODO: Remove or update? We arent using this prop anymore.
       // Lets try to covert the logging.configuration setting to a valid URI
       String loggingConfig = System.getProperty("logging.configuration");
       if (loggingConfig != null) {
