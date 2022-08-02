@@ -118,12 +118,6 @@
 
             <!-- stuff needed to resolve various classes during javadoc processing -->
             <dependency>
-               <groupId>xalan</groupId>
-               <artifactId>xalan</artifactId>
-               <optional>true</optional>
-               <scope>provided</scope>
-            </dependency>
-            <dependency>
                <groupId>com.google.code.findbugs</groupId>
                <artifactId>jsr305</artifactId>
               <scope>provided</scope>
