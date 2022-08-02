@@ -159,11 +159,6 @@
          <artifactId>commons-beanutils</artifactId>
       </dependency>
       <dependency>
-         <!-- Needed to replace commons-logging for commons-beanutils -->
-         <groupId>org.slf4j</groupId>
-         <artifactId>jcl-over-slf4j</artifactId>
-      </dependency>
-      <dependency>
          <groupId>org.apache.commons</groupId>
          <artifactId>commons-configuration2</artifactId>
       </dependency>
@@ -185,6 +180,12 @@
          <groupId>org.apache.activemq</groupId>
          <artifactId>artemis-unit-test-support</artifactId>
          <version>${project.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <!-- Needed to replace commons-logging for commons-beanutils -->
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
          <scope>test</scope>
       </dependency>
       <dependency>

@@ -104,6 +104,12 @@
          <version>${project.version}</version>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <!-- Needed to replace commons-logging for commons-beanutils -->
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+         <scope>test</scope>
+      </dependency>
    </dependencies>
 
    <build>
