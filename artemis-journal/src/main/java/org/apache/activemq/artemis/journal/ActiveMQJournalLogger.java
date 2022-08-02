@@ -17,9 +17,9 @@
 package org.apache.activemq.artemis.journal;
 
 import org.apache.activemq.artemis.core.journal.impl.JournalFile;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 14
@@ -30,7 +30,7 @@ public interface ActiveMQJournalLogger {
    /**
     * The journal logger.
     */
-   ActiveMQJournalLogger LOGGER = CodeFactory.getCodeClass(ActiveMQJournalLogger.class, ActiveMQJournalLogger.class.getPackage().getName());
+   ActiveMQJournalLogger LOGGER = BundleFactory.newBundle(ActiveMQJournalLogger.class, ActiveMQJournalLogger.class.getPackage().getName());
 
    @LogMessage(id = 141000, value = "*** running direct journal blast: {}", level = LogMessage.Level.INFO)
    void runningJournalBlast(Integer numIts);

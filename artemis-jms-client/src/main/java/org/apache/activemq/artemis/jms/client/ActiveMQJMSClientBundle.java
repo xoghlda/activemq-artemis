@@ -28,9 +28,9 @@ import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
 import org.apache.activemq.artemis.api.core.ActiveMQInvalidFilterExpressionException;
 import org.apache.activemq.artemis.api.core.ActiveMQNonExistentQueueException;
 import org.apache.activemq.artemis.api.core.SimpleString;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 13
@@ -42,7 +42,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQJMSClientBundle {
 
-   ActiveMQJMSClientBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQJMSClientBundle.class);
+   ActiveMQJMSClientBundle BUNDLE = BundleFactory.newBundle(ActiveMQJMSClientBundle.class);
 
    @Message(id = 139000, value = "Invalid filter: {}")
    ActiveMQInvalidFilterExpressionException invalidFilter(SimpleString filter, Throwable e);

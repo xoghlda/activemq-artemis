@@ -17,9 +17,9 @@
 package org.apache.activemq.artemis.journal;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIOErrorException;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 14
@@ -31,7 +31,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQJournalBundle {
 
-   ActiveMQJournalBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQJournalBundle.class);
+   ActiveMQJournalBundle BUNDLE = BundleFactory.newBundle(ActiveMQJournalBundle.class);
 
    @Message(id = 149000, value = "failed to rename file {} to {}")
    ActiveMQIOErrorException ioRenameFileError(String name, String newFileName);

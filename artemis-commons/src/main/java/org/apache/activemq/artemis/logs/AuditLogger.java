@@ -16,7 +16,6 @@
  */
 package org.apache.activemq.artemis.logs;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
@@ -35,9 +34,9 @@ import java.util.Set;
 @LogBundle(projectCode = "AMQ")
 public interface AuditLogger {
 
-   AuditLogger BASE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.base");
-   AuditLogger RESOURCE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.resource");
-   AuditLogger MESSAGE_LOGGER = CodeFactory.getCodeClass(AuditLogger.class, "org.apache.activemq.audit.message");
+   AuditLogger BASE_LOGGER = BundleFactory.newBundle(AuditLogger.class, "org.apache.activemq.audit.base");
+   AuditLogger RESOURCE_LOGGER = BundleFactory.newBundle(AuditLogger.class, "org.apache.activemq.audit.resource");
+   AuditLogger MESSAGE_LOGGER = BundleFactory.newBundle(AuditLogger.class, "org.apache.activemq.audit.message");
 
    ThreadLocal<String> remoteAddress = new ThreadLocal<>();
 

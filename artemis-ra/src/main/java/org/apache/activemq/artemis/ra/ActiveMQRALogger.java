@@ -16,10 +16,10 @@
  */
 package org.apache.activemq.artemis.ra;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.BundleFactory;
 import org.apache.activemq.artemis.ra.inflow.ActiveMQActivationSpec;
 
 import javax.jms.IllegalStateException;
@@ -35,7 +35,7 @@ public interface ActiveMQRALogger {
     * like the other loggers, this is because some Application Servers use introspection to identify properties which can
     * sometimes use a classloader when the rar is uploaded and its possible getpackage() can return null
     */
-   ActiveMQRALogger LOGGER = CodeFactory.getCodeClass(ActiveMQRALogger.class, ActiveMQRALogger.class.getName());
+   ActiveMQRALogger LOGGER = BundleFactory.newBundle(ActiveMQRALogger.class, ActiveMQRALogger.class.getName());
 
    @LogMessage(id = 151000, value = "awaiting topic/queue creation {}", level = LogMessage.Level.INFO)
    void awaitingTopicQueueCreation(String destination);

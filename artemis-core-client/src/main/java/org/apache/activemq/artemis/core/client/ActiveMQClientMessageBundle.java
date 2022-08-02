@@ -32,9 +32,9 @@ import org.apache.activemq.artemis.api.core.ActiveMQTransactionOutcomeUnknownExc
 import org.apache.activemq.artemis.api.core.ActiveMQTransactionRolledBackException;
 import org.apache.activemq.artemis.api.core.ActiveMQUnBlockedException;
 import org.apache.activemq.artemis.core.cluster.DiscoveryGroup;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.BundleFactory;
 import org.apache.activemq.artemis.spi.core.remoting.Connection;
 import org.w3c.dom.Node;
 
@@ -48,7 +48,7 @@ import org.w3c.dom.Node;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQClientMessageBundle {
 
-   ActiveMQClientMessageBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQClientMessageBundle.class);
+   ActiveMQClientMessageBundle BUNDLE = BundleFactory.newBundle(ActiveMQClientMessageBundle.class);
 
    @Message(id = 219000, value = "ClientSession closed while creating session")
    ActiveMQInternalErrorException clientSessionClosed();

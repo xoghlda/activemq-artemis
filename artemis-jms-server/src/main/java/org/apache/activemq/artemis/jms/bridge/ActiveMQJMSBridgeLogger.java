@@ -18,9 +18,9 @@ package org.apache.activemq.artemis.jms.bridge;
 
 import javax.management.ObjectName;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 34
@@ -28,7 +28,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQJMSBridgeLogger {
 
-   ActiveMQJMSBridgeLogger LOGGER = CodeFactory.getCodeClass(ActiveMQJMSBridgeLogger.class, ActiveMQJMSBridgeLogger.class.getPackage().getName());
+   ActiveMQJMSBridgeLogger LOGGER = BundleFactory.newBundle(ActiveMQJMSBridgeLogger.class, ActiveMQJMSBridgeLogger.class.getPackage().getName());
 
    @LogMessage(id = 341000, value = "Failed to set up JMS bridge {}} connections. Most probably the source or target servers are unavailable." + " Will retry after a pause of {} ms", level = LogMessage.Level.INFO)
    void failedToSetUpBridge(String bridgeName, long failureRetryInterval);

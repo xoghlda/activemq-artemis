@@ -17,7 +17,6 @@
 package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
@@ -31,7 +30,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQUtilBundle {
 
-   ActiveMQUtilBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQUtilBundle.class);
+   ActiveMQUtilBundle BUNDLE = BundleFactory.newBundle(ActiveMQUtilBundle.class);
 
    @Message(id = 209000, value = "invalid property: {}")
    ActiveMQIllegalStateException invalidProperty(String part);

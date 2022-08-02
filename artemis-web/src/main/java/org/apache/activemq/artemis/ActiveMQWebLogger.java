@@ -16,9 +16,9 @@
  */
 package org.apache.activemq.artemis;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 import java.io.File;
 
@@ -29,7 +29,7 @@ import java.io.File;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQWebLogger  {
 
-   ActiveMQWebLogger LOGGER = CodeFactory.getCodeClass(ActiveMQWebLogger.class, ActiveMQWebLogger.class.getPackage().getName());
+   ActiveMQWebLogger LOGGER = BundleFactory.newBundle(ActiveMQWebLogger.class, ActiveMQWebLogger.class.getPackage().getName());
 
    @LogMessage(id = 241001, value = "HTTP Server started at {}", level = LogMessage.Level.INFO)
    void webserverStarted(String bind);

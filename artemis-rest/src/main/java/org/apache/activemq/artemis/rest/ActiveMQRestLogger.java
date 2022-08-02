@@ -17,7 +17,7 @@
 package org.apache.activemq.artemis.rest;
 
 import org.apache.activemq.artemis.api.core.ActiveMQException;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logs.BundleFactory;
 import org.apache.activemq.artemis.rest.queue.push.xml.XmlLink;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
@@ -29,7 +29,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQRestLogger {
 
-   ActiveMQRestLogger LOGGER = CodeFactory.getCodeClass(ActiveMQRestLogger.class, ActiveMQRestLogger.class.getPackage().getName());
+   ActiveMQRestLogger LOGGER = BundleFactory.newBundle(ActiveMQRestLogger.class, ActiveMQRestLogger.class.getPackage().getName());
 
    @LogMessage(id = 181000, value = "Loading REST push store from: {}", level = LogMessage.Level.INFO)
    void loadingRestStore(String path);

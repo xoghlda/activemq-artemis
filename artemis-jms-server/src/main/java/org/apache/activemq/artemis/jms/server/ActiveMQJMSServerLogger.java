@@ -17,9 +17,9 @@
 package org.apache.activemq.artemis.jms.server;
 
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 import org.w3c.dom.Node;
 
 /**
@@ -31,7 +31,7 @@ public interface ActiveMQJMSServerLogger {
    /**
     * The default logger.
     */
-   ActiveMQJMSServerLogger LOGGER = CodeFactory.getCodeClass(ActiveMQJMSServerLogger.class, ActiveMQJMSServerLogger.class.getPackage().getName());
+   ActiveMQJMSServerLogger LOGGER = BundleFactory.newBundle(ActiveMQJMSServerLogger.class, ActiveMQJMSServerLogger.class.getPackage().getName());
 
    @LogMessage(id = 121004, value = "JMS Server Manager Caching command for {} since the JMS Server is not active.",
       level = LogMessage.Level.INFO)

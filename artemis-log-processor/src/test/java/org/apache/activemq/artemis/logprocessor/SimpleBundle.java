@@ -24,11 +24,22 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @LogBundle(projectCode = "TST", enforceExceptionParameterAsLast = false)
 public interface SimpleBundle {
 
-   SimpleBundle MESSAGES = CodeFactory.getCodeClass(SimpleBundle.class);
+   static SimpleBundle init() {
+      try {
+         Logger logger = LoggerFactory.getLogger(SimpleBundle.class.getName());
+         return (SimpleBundle) Class.forName(SimpleBundle.class.getName() + "_impl").getConstructor(Logger.class).newInstance(logger);
+      } catch (Exception e) {
+         LoggerFactory.getLogger(SimpleBundle.class).error(e.getMessage(), e);
+      }
+      return null;
+   }
+
+   SimpleBundle MESSAGES = init();
 
    @Message(id = 1, value = "Test")
    String simpleTest();

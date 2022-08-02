@@ -30,7 +30,6 @@
    </parent>
 
    <modules>
-      <module>artemis-log-facade</module>
       <module>artemis-log-processor</module>
       <module>artemis-protocols</module>
       <module>artemis-dto</module>

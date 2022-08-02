@@ -16,9 +16,9 @@
  */
 package org.apache.activemq.artemis.core.protocol.stomp;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 33
@@ -33,7 +33,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.Message;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQStompProtocolMessageBundle {
 
-   ActiveMQStompProtocolMessageBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQStompProtocolMessageBundle.class);
+   ActiveMQStompProtocolMessageBundle BUNDLE = BundleFactory.newBundle(ActiveMQStompProtocolMessageBundle.class);
 
    @Message(id = 339000, value = "Stomp Connection TTL cannot be negative: {}")
    IllegalStateException negativeConnectionTTL(Long ttl);

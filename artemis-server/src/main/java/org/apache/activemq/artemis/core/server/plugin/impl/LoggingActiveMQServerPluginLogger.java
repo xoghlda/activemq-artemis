@@ -30,9 +30,9 @@ import org.apache.activemq.artemis.core.server.ServerSession;
 import org.apache.activemq.artemis.core.server.cluster.Bridge;
 import org.apache.activemq.artemis.core.server.impl.AckReason;
 import org.apache.activemq.artemis.core.transaction.Transaction;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 import org.apache.activemq.artemis.spi.core.protocol.RemotingConnection;
 import org.apache.activemq.artemis.utils.critical.CriticalComponent;
 
@@ -45,7 +45,7 @@ public interface LoggingActiveMQServerPluginLogger {
    /**
     * The LoggingPlugin logger.
     */
-   LoggingActiveMQServerPluginLogger LOGGER = CodeFactory.getCodeClass(LoggingActiveMQServerPluginLogger.class, LoggingActiveMQServerPluginLogger.class.getPackage().getName());
+   LoggingActiveMQServerPluginLogger LOGGER = BundleFactory.newBundle(LoggingActiveMQServerPluginLogger.class, LoggingActiveMQServerPluginLogger.class.getPackage().getName());
 
    @LogMessage(id = 841000, value = "created connection: {}", level = LogMessage.Level.INFO)
    void afterCreateConnection(RemotingConnection connection);

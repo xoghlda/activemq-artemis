@@ -20,9 +20,9 @@ import java.net.UnknownHostException;
 
 import org.apache.activemq.artemis.api.core.ActiveMQExceptionType;
 import org.apache.activemq.artemis.api.core.Interceptor;
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 import org.w3c.dom.Node;
 
 /**
@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQClientLogger {
 
-   ActiveMQClientLogger LOGGER = CodeFactory.getCodeClass(ActiveMQClientLogger.class, ActiveMQClientLogger.class.getPackage().getName());
+   ActiveMQClientLogger LOGGER = BundleFactory.newBundle(ActiveMQClientLogger.class, ActiveMQClientLogger.class.getPackage().getName());
 
    @LogMessage(id = 212001, value = "Error on clearing messages", level = LogMessage.Level.WARN)
    void errorClearingMessages(Throwable e);

@@ -16,9 +16,9 @@
  */
 package org.apache.activemq.artemis.core.protocol.stomp;
 
-import org.apache.activemq.artemis.logprocessor.CodeFactory;
 import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
 import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 33
@@ -38,7 +38,7 @@ import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
 @LogBundle(projectCode = "AMQ")
 public interface ActiveMQStompProtocolLogger {
 
-   ActiveMQStompProtocolLogger LOGGER = CodeFactory.getCodeClass(ActiveMQStompProtocolLogger.class, ActiveMQStompProtocolLogger.class.getPackage().getName());
+   ActiveMQStompProtocolLogger LOGGER = BundleFactory.newBundle(ActiveMQStompProtocolLogger.class, ActiveMQStompProtocolLogger.class.getPackage().getName());
 
    @LogMessage(id = 332068, value = "connection closed {}", level = LogMessage.Level.WARN)
    void connectionClosed(StompConnection connection);
