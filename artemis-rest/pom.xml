@@ -150,11 +150,6 @@
          <artifactId>httpclient</artifactId>
       </dependency>
       <dependency>
-         <!-- Needed to replace commons-logging for httpclient -->
-         <groupId>org.slf4j</groupId>
-         <artifactId>jcl-over-slf4j</artifactId>
-      </dependency>
-      <dependency>
          <groupId>commons-codec</groupId>
          <artifactId>commons-codec</artifactId>
       </dependency>

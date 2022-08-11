@@ -495,16 +495,10 @@
             <!-- License: Apache 2.0 -->
          </dependency>
          <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-configuration2</artifactId>
-            <version>${commons.config.version}</version>
-            <!-- License: Apache 2.0 -->
-            <exclusions>
-               <exclusion>
-                  <groupId>commons-logging</groupId>
-                  <artifactId>commons-logging</artifactId>
-               </exclusion>
-            </exclusions>
+             <groupId>org.apache.commons</groupId>
+             <artifactId>commons-configuration2</artifactId>
+             <version>${commons.config.version}</version>
+             <!-- License: Apache 2.0 -->
          </dependency>
          <dependency>
              <groupId>org.apache.commons</groupId>
@@ -792,18 +786,14 @@
             <artifactId>commons-beanutils</artifactId>
             <version>${commons.beanutils.version}</version>
             <!-- License: Apache 2.0 -->
-            <exclusions>
-               <exclusion>
-                  <groupId>commons-logging</groupId>
-                  <artifactId>commons-logging</artifactId>
-               </exclusion>
-            </exclusions>
          </dependency>
-         <!-- needed to replace commons-logging for commons-beanutils etc -->
+
+         <!-- needed by commons-beanutils-->
          <dependency>
-           <groupId>org.slf4j</groupId>
-           <artifactId>jcl-over-slf4j</artifactId>
-           <version>${slf4j.version}</version>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <!-- License: Apache 2.0 -->
          </dependency>
 
          <!-- needed by artemis-selector -->
@@ -824,12 +814,6 @@
             <artifactId>commons-dbcp2</artifactId>
             <version>${commons.dbcp2.version}</version>
             <!-- license Apache 2 -->
-            <exclusions>
-               <exclusion>
-                  <groupId>commons-logging</groupId>
-                  <artifactId>commons-logging</artifactId>
-               </exclusion>
-            </exclusions>
          </dependency>
          <!-- used by commons-dbcp2 -->
          <dependency>
@@ -1078,12 +1062,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>${apache.httpclient.version}</version>
-            <exclusions>
-               <exclusion>
-                  <groupId>commons-logging</groupId>
-                  <artifactId>commons-logging</artifactId>
-               </exclusion>
-            </exclusions>
          </dependency>
 
       </dependencies>

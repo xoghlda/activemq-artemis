@@ -64,11 +64,6 @@
          <groupId>org.apache.commons</groupId>
          <artifactId>commons-dbcp2</artifactId>
       </dependency>
-      <dependency>
-         <!-- Needed to replace commons-logging for commons-dbcp2 -->
-         <groupId>org.slf4j</groupId>
-         <artifactId>jcl-over-slf4j</artifactId>
-      </dependency>
 
       <!-- Database driver support -->
       <dependency>
