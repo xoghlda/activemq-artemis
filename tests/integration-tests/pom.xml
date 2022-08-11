@@ -33,6 +33,14 @@
    </properties>
 
    <dependencies>
+      <!-- TODO: seems like this shouldnt be needed, some other dep is
+           causing the commons-logging output to occur, investigate. -->
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+         <version>${slf4j.version}</version>
+      </dependency>
+
       <dependency>
          <groupId>org.apache.activemq</groupId>
          <artifactId>artemis-quorum-ri</artifactId>

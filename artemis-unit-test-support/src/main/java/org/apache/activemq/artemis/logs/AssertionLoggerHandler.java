@@ -32,6 +32,7 @@ import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginBuilderFactory;
@@ -114,9 +115,15 @@ public class AssertionLoggerHandler extends AbstractAppender {
 
    public static LogLevel setLevel(String loggerName, LogLevel level) {
       final Logger logger = LogManager.getLogger(loggerName);
-      final Level implLevel = logger.getLevel();
+      final Level existingLevel = logger.getLevel();
 
-      return LogLevel.fromImplLevel(implLevel);
+      final Level newLevel = level.toImplLevel();
+
+      if (!existingLevel.equals(newLevel)) {
+         Configurator.setLevel(logger, newLevel);
+      }
+
+      return LogLevel.fromImplLevel(existingLevel);
    }
 
    public static boolean findText(long mstimeout, String... text) {

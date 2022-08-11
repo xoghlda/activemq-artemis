@@ -31,20 +31,23 @@ import org.apache.activemq.artemis.api.core.client.ServerLocator;
 import org.apache.activemq.artemis.core.security.Role;
 import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.logs.AssertionLoggerHandler;
+import org.apache.activemq.artemis.logs.AssertionLoggerHandler.LogLevel;
+import org.apache.activemq.artemis.logs.AuditLogger;
 import org.apache.activemq.artemis.spi.core.security.ActiveMQBasicSecurityManager;
 import org.apache.activemq.artemis.tests.util.ActiveMQTestBase;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("Needs updated to account for logging impl changes") //TODO: reinstate
 public class MultiThreadedAuditLoggingTest extends ActiveMQTestBase {
 
    protected ActiveMQServer server;
    private static final int MESSAGE_COUNT = 10;
+   private static final String MESSAGE_AUDIT_LOGGER_NAME = AuditLogger.MESSAGE_LOGGER.getLogger().getName();
+
+   private static LogLevel previousLevel = null;
 
    @Override
    @Before
@@ -63,19 +66,19 @@ public class MultiThreadedAuditLoggingTest extends ActiveMQTestBase {
       server.getActiveMQServerControl().addUser("queue2", "queue2", "queue2", true);
    }
 
-   //TODO: private static final Logger logManager = Logger.getLogger("org.apache.activemq.audit.message");
-   //TODO: private static java.util.logging.Level previousLevel = logManager.getLevel();
-
    @BeforeClass
    public static void prepareLogger() {
-      //TODO: logManager.setLevel(Level.INFO);
+      previousLevel = AssertionLoggerHandler.setLevel(MESSAGE_AUDIT_LOGGER_NAME, LogLevel.INFO);
       AssertionLoggerHandler.startCapture();
    }
 
    @AfterClass
    public static void clearLogger() {
-      AssertionLoggerHandler.stopCapture();
-      //TODO: logManager.setLevel(previousLevel);
+      try {
+         AssertionLoggerHandler.stopCapture();
+      } finally {
+         AssertionLoggerHandler.setLevel(MESSAGE_AUDIT_LOGGER_NAME, previousLevel);
+      }
    }
 
    class SomeConsumer extends Thread {
