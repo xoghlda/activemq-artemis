@@ -2492,9 +2492,7 @@ public class StompV12Test extends StompTestBase {
    }
 
    @Test
-   @Ignore("Needs updated to account for logging impl changes") //TODO: reinstate
    public void testSubscribeWithNonZeroConsumerWindowSizeAndClientAck() throws Exception {
-      //TODO: Note it is also never reset: org.jboss.logmanager.Logger.getLogger(StompConnection.class.getName()).setLevel(org.jboss.logmanager.Level.DEBUG);
       // the size of each message was determined from the DEBUG logging from org.apache.activemq.artemis.core.protocol.stomp.StompConnection
       final int MESSAGE_SIZE = 270;
       final int TIMEOUT = 1000;

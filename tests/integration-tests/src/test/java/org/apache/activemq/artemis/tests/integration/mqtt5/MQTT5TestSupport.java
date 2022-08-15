@@ -166,8 +166,6 @@ public class MQTT5TestSupport extends ActiveMQTestBase {
       exceptions.clear();
       startBroker();
       createJMSConnection();
-      //TODO: shouldnt really be doing this as it never resets the level
-      //TODO: org.jboss.logmanager.Logger.getLogger(MQTTUtil.class.getName()).setLevel(org.jboss.logmanager.Level.TRACE);
    }
 
    @Override
