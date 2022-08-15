@@ -59,9 +59,11 @@ public class AddressFullLoggingTest extends ActiveMQTestBase {
 
    @AfterClass
    public static void clearLogger() {
-      AssertionLoggerHandler.stopCapture();
-
-      AssertionLoggerHandler.setLevel(SERVER_LOGGER_NAME, previousLevel);
+      try {
+         AssertionLoggerHandler.stopCapture();
+      } finally {
+         AssertionLoggerHandler.setLevel(SERVER_LOGGER_NAME, previousLevel);
+      }
    }
 
    @Test

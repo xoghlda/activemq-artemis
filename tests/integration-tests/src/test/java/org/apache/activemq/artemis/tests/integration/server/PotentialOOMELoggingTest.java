@@ -35,6 +35,11 @@ public class PotentialOOMELoggingTest extends ActiveMQTestBase {
       AssertionLoggerHandler.startCapture();
    }
 
+   @AfterClass
+   public static void clearLogger() {
+      AssertionLoggerHandler.stopCapture();
+   }
+
    /**
     * When running this test from an IDE add this to the test command line so that the AssertionLoggerHandler works properly:
     *
@@ -52,10 +57,5 @@ public class PotentialOOMELoggingTest extends ActiveMQTestBase {
 
       // Using the code only so the test doesn't fail just because someone edits the log text
       Assert.assertTrue("Expected to find 222205", AssertionLoggerHandler.findText("AMQ222205"));
-   }
-
-   @AfterClass
-   public static void clearLogger() {
-      AssertionLoggerHandler.stopCapture();
    }
 }

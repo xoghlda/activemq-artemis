@@ -194,7 +194,6 @@ public class StompTest extends StompTestBase {
          // It should encounter the exception on logs
          AssertionLoggerHandler.findText("AMQ119119");
       } finally {
-         AssertionLoggerHandler.clear();
          AssertionLoggerHandler.stopCapture();
       }
    }

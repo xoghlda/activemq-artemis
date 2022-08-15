@@ -37,6 +37,11 @@ public class WrongRoleFileConfigurationParserTest extends ActiveMQTestBase {
       AssertionLoggerHandler.startCapture();
    }
 
+   @AfterClass
+   public static void clearLogger() {
+      AssertionLoggerHandler.stopCapture();
+   }
+
    /**
     *
     *
@@ -51,11 +56,6 @@ public class WrongRoleFileConfigurationParserTest extends ActiveMQTestBase {
       // Using the code only because I don't want a test failing just for someone editing Log text
       assertTrue(AssertionLoggerHandler.findText("AMQ222177", "create-durable-queue"));
       assertTrue(AssertionLoggerHandler.findText("AMQ222177", "delete-durable-queue"));
-   }
-
-   @AfterClass
-   public static void clearLogger() {
-      AssertionLoggerHandler.stopCapture();
    }
 
    private static final String configuration = "<configuration xmlns=\"urn:activemq\"\n" +

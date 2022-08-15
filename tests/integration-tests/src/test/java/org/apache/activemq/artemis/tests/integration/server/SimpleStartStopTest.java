@@ -39,7 +39,6 @@ public class SimpleStartStopTest extends ActiveMQTestBase {
     */
    @Test
    public void testStartStopAndCleanupIDs() throws Exception {
-      AssertionLoggerHandler.clear();
       AssertionLoggerHandler.startCapture();
       try {
          ActiveMQServer server = null;

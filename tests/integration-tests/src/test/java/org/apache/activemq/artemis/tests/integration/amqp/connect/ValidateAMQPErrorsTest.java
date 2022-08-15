@@ -90,20 +90,23 @@ public class ValidateAMQPErrorsTest extends AmqpClientTestSupport {
 
    @After
    public void stop() throws Exception {
-      if (mockServer != null) {
-         mockServer.close();
-         mockServer = null;
-      }
-      if (vertx != null) {
-         try {
-            CountDownLatch latch = new CountDownLatch(1);
-            vertx.close((x) -> latch.countDown());
-            Assert.assertTrue(latch.await(10, TimeUnit.SECONDS));
-         } finally {
-            vertx = null;
+      try {
+         if (mockServer != null) {
+            mockServer.close();
+            mockServer = null;
          }
+         if (vertx != null) {
+            try {
+               CountDownLatch latch = new CountDownLatch(1);
+               vertx.close((x) -> latch.countDown());
+               Assert.assertTrue(latch.await(10, TimeUnit.SECONDS));
+            } finally {
+               vertx = null;
+            }
+         }
+      } finally {
+         AssertionLoggerHandler.stopCapture(); // Just in case startCapture was called in any of the tests here
       }
-      AssertionLoggerHandler.stopCapture(); // Just in case startCapture was called in any of the tests here
    }
 
    @Override
