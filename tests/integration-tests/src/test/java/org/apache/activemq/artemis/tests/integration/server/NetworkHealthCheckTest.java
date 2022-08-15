@@ -21,29 +21,31 @@ import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.core.server.NetworkHealthCheck;
 import org.apache.activemq.artemis.logs.AssertionLoggerHandler;
+import org.apache.activemq.artemis.logs.AssertionLoggerHandler.LogLevel;
 import org.apache.activemq.artemis.tests.util.ActiveMQTestBase;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("Needs updated to account for logging impl changes") //TODO: reinstate
 public class NetworkHealthCheckTest extends ActiveMQTestBase {
 
-   //TODO: private static final Logger logManager = org.jboss.logmanager.Logger.getLogger(NetworkHealthCheck.class.getPackage().getName());
-   //TODO: private static java.util.logging.Level previousLevel = logManager.getLevel();
+   private static final String HEALTH_CHECK_LOGGER_NAME = NetworkHealthCheck.class.getName();
+   private static LogLevel previousLevel = null;
 
    @BeforeClass
    public static void prepareLogger() {
-      //TODO: logManager.setLevel(Level.ALL);
+      previousLevel = AssertionLoggerHandler.setLevel(HEALTH_CHECK_LOGGER_NAME, LogLevel.DEBUG);
       AssertionLoggerHandler.startCapture();
    }
 
    @AfterClass
    public static void clearLogger() {
-      AssertionLoggerHandler.stopCapture();
-      //TODO: logManager.setLevel(previousLevel);
+      try {
+         AssertionLoggerHandler.stopCapture();
+      } finally {
+         AssertionLoggerHandler.setLevel(HEALTH_CHECK_LOGGER_NAME, previousLevel);
+      }
    }
 
 
@@ -63,7 +65,7 @@ public class NetworkHealthCheckTest extends ActiveMQTestBase {
 
       server.start();
       try {
-         Assert.assertTrue(AssertionLoggerHandler.findText(String.format(customIpv4Command, checkingTimeout, checkingHost)));
+         Assert.assertTrue(AssertionLoggerHandler.findText("executing ping:: " + String.format(customIpv4Command, checkingTimeout, checkingHost)));
          Assert.assertFalse(AssertionLoggerHandler.findText(String.format(NetworkHealthCheck.IPV4_DEFAULT_COMMAND, checkingTimeout, checkingHost)));
       } finally {
          server.stop();
