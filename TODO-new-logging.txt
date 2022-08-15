@@ -1,10 +1,10 @@
 TODOs not explicitly noted in the code itself already:
 
 - Update e2e-tests instance logging config and scripts/profiles
-- Remove JBL use from last remaining integration-tests etc tests still using it
+- Remove JBL use from last remaining tests etc tests still using it
 - Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
 - Replace logging.config files in remaining tests/examples needing their own custom config
 - Remove stale log4j.properties file(s) from activemq5-unit-tests
 - Restore the NettySecurityClientTest and figure out what needs changed to make it work.
 - Restore the Travis config file
-- Delete the old DELETE-ME-logging.properties and DELETE-ME-tests-logging.properties files once all needed comparisons are done.
+- Delete the old DELETE-ME-logging.properties and DELETE-ME-tests-logging.properties files once all needed comparisons during old test etc config replacements are done.
