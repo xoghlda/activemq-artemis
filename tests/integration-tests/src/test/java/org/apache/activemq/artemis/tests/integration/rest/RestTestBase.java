@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.activemq.artemis.tests.util.JMSTestBase;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jetty.security.DefaultAuthenticatorFactory;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
@@ -31,7 +32,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
-import shaded.org.apache.commons.io.FileUtils;
 
 public class RestTestBase extends JMSTestBase {
 
