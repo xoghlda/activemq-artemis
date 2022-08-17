@@ -6,3 +6,4 @@ TODOs not explicitly noted in the code itself already:
 - Restore the NettySecurityClientTest and figure out what needs changed to make it work.
 - Restore the Travis config file
 - Delete the old DELETE-ME-logging.properties and DELETE-ME-tests-logging.properties files once all needed comparisons during old test etc config replacements are done.
+- Update references to JBL in documentation
