@@ -1,6 +1,5 @@
 TODOs not explicitly noted in the code itself already:
 
-- Update e2e-tests instance logging config and scripts/profiles
 - Remove JBL use from last remaining tests etc tests still using it
 - Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
 - Replace logging.config files in remaining tests/examples needing their own custom config
