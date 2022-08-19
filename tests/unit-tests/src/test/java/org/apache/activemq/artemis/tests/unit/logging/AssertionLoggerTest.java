@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This will validate the AssertionLoggerHandler is working as expected.
- * Even though this class belongs to artemis commons, this test has to be done here as we
- * are validating the logging.properties, and logging-ci.properties and the classloading of everything.
+ * Even though the class belongs to artemis-unit-test-support, this test has to be done here as we
+ * are validating the log4j2-tests-config.properties and log4j2-tests-config-CI.properties files and the classloading of everything.
  */
 public class AssertionLoggerTest {
 
