@@ -2606,34 +2606,30 @@ public interface AuditLogger {
    void rolledBackTransaction(String user, String tx, String resource);
 
    static void addConnector(Object source, Object... args) {
-      BASE_LOGGER.addConnector(getCaller(), source, arrayToString(args));
+      BASE_LOGGER.addConnector(getCaller(), source, parametersList(args));
    }
 
-   @LogMessage(level = Logger.Level.INFO)
-   @Message(id = 601762, value = "User {0} is adding a connector on target resource: {1} {2}", format = Message.Format.MESSAGE_FORMAT)
-   void addConnector(String user, Object source, Object... args);
+   @LogMessage(id = 601762, value = "User {} is adding a connector on target resource: {} {}", level = LogMessage.Level.INFO)
+   void addConnector(String user, Object source, String args);
 
    static void removeConnector(Object source, Object... args) {
-      BASE_LOGGER.removeConnector(getCaller(), source, arrayToString(args));
+      BASE_LOGGER.removeConnector(getCaller(), source, parametersList(args));
    }
 
-   @LogMessage(level = Logger.Level.INFO)
-   @Message(id = 601763, value = "User {0} is removing a connector on target resource: {1} {2}", format = Message.Format.MESSAGE_FORMAT)
-   void removeConnector(String user, Object source, Object... args);
+   @LogMessage(id = 601763, value = "User {} is removing a connector on target resource: {} {}", level = LogMessage.Level.INFO)
+   void removeConnector(String user, Object source, String args);
 
    static void deliverScheduledMessage(Object source, Object... args) {
-      BASE_LOGGER.deliverScheduledMessage(getCaller(), source, arrayToString(args));
+      BASE_LOGGER.deliverScheduledMessage(getCaller(), source, parametersList(args));
    }
 
-   @LogMessage(level = Logger.Level.INFO)
-   @Message(id = 601764, value = "User {0} is calling deliverScheduledMessage on queue: {1} {2}", format = Message.Format.MESSAGE_FORMAT)
-   void deliverScheduledMessage(String user, Object source, Object... args);
+   @LogMessage(id = 601764, value = "User {} is calling deliverScheduledMessage on queue: {} {}", level = LogMessage.Level.INFO)
+   void deliverScheduledMessage(String user, Object source, String args);
 
-   static void getStatus(Object source, Object... args) {
+   static void getStatus(Object source) {
       BASE_LOGGER.getStatus(getCaller(), source);
    }
 
-   @LogMessage(level = Logger.Level.INFO)
-   @Message(id = 601765, value = "User {0} is getting status on target resource: {1}", format = Message.Format.MESSAGE_FORMAT)
+   @LogMessage(id = 601765, value = "User {} is getting status on target resource: {}", level = LogMessage.Level.INFO)
    void getStatus(String user, Object source);
 }
