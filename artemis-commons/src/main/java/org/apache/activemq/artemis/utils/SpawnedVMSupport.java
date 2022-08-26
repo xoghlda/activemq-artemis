@@ -212,32 +212,25 @@ public class SpawnedVMSupport {
          }
       }
 
-      // TODO: look into the usage of these (BEGINNING >)
       // The logs will be huge if you don't set this
       if (useLogging) {
-         commandList.add("-Djava.util.logging.manager=org.jboss.logmanager.LogManager");
-         commandList.add("-Dlogging.configuration=file:../config/logging.properties");
+         // TODO: visible uses appear to set this true, but we no longer do anything with it
+         // as we dont use the logging.configuration property anymore..remove method arg?
       }
 
       commandList.add("-Djava.io.tmpdir=" + System.getProperty("java.io.tmpdir", "./tmp"));
       commandList.add("-Djava.library.path=" + System.getProperty("java.library.path", "./native/bin"));
 
-      String loggingConfigFile = System.getProperty("java.util.logging.config.file");
-
+      String loggingConfigFile = System.getProperty("log4j2.configurationFile");
       if (loggingConfigFile != null) {
-         commandList.add("-Djava.util.logging.config.file=" + loggingConfigFile + " ");
+         // TODO: why does it add the trailing space here but not other places?
+         commandList.add("-Dlog4j2.configurationFile=" + loggingConfigFile + " ");
       }
 
       String jacocoAgent = System.getProperty("jacoco.agent");
       if (jacocoAgent != null && !jacocoAgent.isEmpty()) {
          commandList.add(jacocoAgent);
       }
-
-      String loggingPlugin = System.getProperty("org.jboss.logging.Logger.pluginClass");
-      if (loggingPlugin != null) {
-         commandList.add("-Dorg.jboss.logging.Logger.pluginClass=" + loggingPlugin + " ");
-      }
-      // TODO: look into these (< END)
 
       commandList.add(className);
       for (String arg : args) {
