@@ -89,12 +89,6 @@ public class AssertionLoggerHandler extends AbstractAppender {
       }
    }
 
-   @Override
-   public void stop() {
-      super.stop();
-      // TODO Do we need to do anything here? Set capture false and clear?
-   }
-
    /**
     * is there any record matching Level?
     *
