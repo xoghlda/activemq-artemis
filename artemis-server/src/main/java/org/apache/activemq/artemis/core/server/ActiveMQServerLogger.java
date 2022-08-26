@@ -1142,9 +1142,11 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222275, value = "Failed to deploy queue {}: {}", level = LogMessage.Level.WARN)
    void problemDeployingQueue(String queueName, String message);
 
+   //TODO: deprecate or remove? This is part of the logging config itself now
    @LogMessage(id = 222276, value = "Failed to process changes to the logging configuration file: {}", level = LogMessage.Level.WARN)
    void loggingReloadFailed(String configFile, Exception e);
 
+   //TODO: deprecate or remove? This is part of the logging config itself now
    @LogMessage(id = 222277, value = "Problem initializing automatic logging configuration reload for {}", level = LogMessage.Level.WARN)
    void problemAddingConfigReloadCallback(String propertyName, Exception e);
 
