@@ -34,10 +34,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
 import org.apache.activemq.artemis.jms.client.ConnectionFactoryOptions;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.queue.push.xml.PushRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PushConsumerResource {
+
+   private static final Logger logger = LoggerFactory.getLogger(PushConsumerResource.class);
 
    protected Map<String, PushConsumer> consumers = new ConcurrentHashMap<>();
    protected ClientSessionFactory sessionFactory;
@@ -77,7 +80,7 @@ public class PushConsumerResource {
    @POST
    @Consumes("application/xml")
    public Response create(@Context UriInfo uriInfo, PushRegistration registration) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       // todo put some logic here to check for duplicates
       String genId = sessionCounter.getAndIncrement() + "-" + startup;
@@ -104,7 +107,7 @@ public class PushConsumerResource {
    @Path("{consumer-id}")
    @Produces("application/xml")
    public PushRegistration getConsumer(@Context UriInfo uriInfo, @PathParam("consumer-id") String consumerId) {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
 
       PushConsumer consumer = consumers.get(consumerId);
       if (consumer == null) {
@@ -116,7 +119,7 @@ public class PushConsumerResource {
    @DELETE
    @Path("{consumer-id}")
    public void deleteConsumer(@Context UriInfo uriInfo, @PathParam("consumer-id") String consumerId) {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       PushConsumer consumer = consumers.remove(consumerId);
       if (consumer == null) {

@@ -128,7 +128,6 @@ import org.apache.activemq.artemis.core.server.BrokerConnection;
 import org.apache.activemq.artemis.core.server.Divert;
 import org.apache.activemq.artemis.core.server.JournalType;
 import org.apache.activemq.artemis.core.server.LargeServerMessage;
-import org.apache.activemq.artemis.core.server.LoggingConfigurationFileReloader;
 import org.apache.activemq.artemis.core.server.MemoryManager;
 import org.apache.activemq.artemis.core.server.MessageReference;
 import org.apache.activemq.artemis.core.server.NetworkHealthCheck;
@@ -211,7 +210,8 @@ import org.apache.activemq.artemis.utils.critical.CriticalAnalyzerImpl;
 import org.apache.activemq.artemis.utils.critical.CriticalAnalyzerPolicy;
 import org.apache.activemq.artemis.utils.critical.CriticalComponent;
 import org.apache.activemq.artemis.utils.critical.EmptyCriticalAnalyzer;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.apache.activemq.artemis.utils.collections.IterableStream.iterableOf;
 
@@ -220,7 +220,7 @@ import static org.apache.activemq.artemis.utils.collections.IterableStream.itera
  */
 public class ActiveMQServerImpl implements ActiveMQServer {
 
-   private static final Logger logger = Logger.getLogger(ActiveMQServerImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(ActiveMQServerImpl.class);
 
    public static final String INTERNAL_NAMING_PREFIX = "$.artemis.internal";
 
@@ -814,7 +814,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
    }
 
    private static void checkCriticalAnalyzerLogging() {
-      Logger criticalLogger = Logger.getLogger("org.apache.activemq.artemis.utils.critical");
+      Logger criticalLogger = LoggerFactory.getLogger("org.apache.activemq.artemis.utils.critical");
       if (!criticalLogger.isTraceEnabled()) {
          ActiveMQServerLogger.LOGGER.enableTraceForCriticalAnalyzer();
       }
@@ -912,9 +912,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
 
    @Override
    public void setHAPolicy(HAPolicy haPolicy) {
-      if (logger.isTraceEnabled()) {
-         logger.tracef("XXX @@@ Setting %s, isBackup=%s at %s", haPolicy, haPolicy.isBackup(), this);
-      }
+      logger.trace("Setting {}, isBackup={} at {}", haPolicy, haPolicy.isBackup(), this);
       this.haPolicy = haPolicy;
    }
 
@@ -3269,15 +3267,6 @@ public class ActiveMQServerImpl implements ActiveMQServer {
                }
             }
          }
-
-         if (System.getProperty("logging.configuration") != null) {
-            try {
-               reloadManager.addCallback(new URL(System.getProperty("logging.configuration")), new LoggingConfigurationFileReloader());
-            } catch (Exception e) {
-               // a syntax error with the logging system property shouldn't prevent the server from starting
-               ActiveMQServerLogger.LOGGER.problemAddingConfigReloadCallback(System.getProperty("logging.configuration"), e);
-            }
-         }
       }
 
       if (hasBrokerPlugins()) {
@@ -3584,7 +3573,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
 
             config.setAutoCreateAddress(true);
 
-            ActiveMQServerLogger.LOGGER.deployQueue(config.getName().toString(), config.getAddress().toString(), config.getRoutingType().toString());
+            ActiveMQServerLogger.LOGGER.deployQueue(config.getRoutingType().toString(), config.getName().toString(), config.getAddress().toString());
 
             // determine if there is an address::queue match; update it if so
             if (locateQueue(config.getName()) != null && locateQueue(config.getName()).getAddress().equals(config.getAddress())) {
@@ -3598,7 +3587,7 @@ public class ActiveMQServerImpl implements ActiveMQServer {
                   createQueue(config.setTemporary(false).setTransient(false).setAutoCreated(false).setConfigurationManaged(true).setAutoCreateAddress(true), false);
                } catch (ActiveMQQueueExistsException e) {
                   // the queue may exist on a *different* address
-                  ActiveMQServerLogger.LOGGER.warn(e.getMessage());
+                  logger.warn(e.getMessage(), e);
                }
             }
          } catch (Exception e) {

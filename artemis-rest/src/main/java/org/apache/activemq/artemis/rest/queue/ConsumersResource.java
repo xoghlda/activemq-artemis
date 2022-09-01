@@ -37,8 +37,12 @@ import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
 import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.util.TimeoutTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConsumersResource implements TimeoutTask.Callback {
+
+   private static final Logger logger = LoggerFactory.getLogger( ConsumersResource.class );
 
    protected ConcurrentMap<String, QueueConsumer> queueConsumers = new ConcurrentHashMap<>();
    protected ClientSessionFactory sessionFactory;
@@ -124,7 +128,7 @@ public class ConsumersResource implements TimeoutTask.Callback {
    public Response createSubscription(@FormParam("autoAck") @DefaultValue("true") boolean autoAck,
                                       @FormParam("selector") String selector,
                                       @Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       try {
          QueueConsumer consumer = null;
@@ -184,7 +188,7 @@ public class ConsumersResource implements TimeoutTask.Callback {
    public Response getConsumer(@PathParam("attributes") int attributes,
                                @PathParam("consumer-id") String consumerId,
                                @Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
 
       return headConsumer(attributes, consumerId, uriInfo);
    }
@@ -194,7 +198,7 @@ public class ConsumersResource implements TimeoutTask.Callback {
    public Response headConsumer(@PathParam("attributes") int attributes,
                                 @PathParam("consumer-id") String consumerId,
                                 @Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
 
       QueueConsumer consumer = findConsumer(attributes, consumerId, uriInfo);
       Response.ResponseBuilder builder = Response.noContent();
@@ -258,7 +262,7 @@ public class ConsumersResource implements TimeoutTask.Callback {
    @Path("attributes-{attributes}/{consumer-id}")
    @DELETE
    public void closeSession(@PathParam("consumer-id") String consumerId, @Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       QueueConsumer consumer = queueConsumers.remove(consumerId);
       if (consumer == null) {

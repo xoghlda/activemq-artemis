@@ -28,11 +28,14 @@ import javax.ws.rs.core.UriInfo;
 
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.queue.DestinationResource;
 import org.apache.activemq.artemis.rest.queue.PostMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TopicResource extends DestinationResource {
+
+   private static final Logger logger = LoggerFactory.getLogger(TopicResource.class);
 
    protected SubscriptionsResource subscriptions;
    protected PushSubscriptionsResource pushSubscriptions;
@@ -50,7 +53,7 @@ public class TopicResource extends DestinationResource {
    @GET
    @Produces("application/xml")
    public Response get(@Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling GET request for \"" + uriInfo.getPath() + "\"");
 
       StringBuilder msg = new StringBuilder();
       msg.append("<topic>").append("<name>").append(destination).append("</name>").append("<atom:link rel=\"create\" href=\"").append(createSenderLink(uriInfo)).append("\"/>").append("<atom:link rel=\"create-with-id\" href=\"").append(createSenderWithIdLink(uriInfo)).append("\"/>").append("<atom:link rel=\"pull-consumers\" href=\"").append(createSubscriptionsLink(uriInfo)).append("\"/>").append("<atom:link rel=\"push-consumers\" href=\"").append(createPushSubscriptionsLink(uriInfo)).append("\"/>")
@@ -68,7 +71,7 @@ public class TopicResource extends DestinationResource {
    @HEAD
    @Produces("application/xml")
    public Response head(@Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling HEAD request for \"" + uriInfo.getPath() + "\"");
 
       Response.ResponseBuilder builder = Response.ok();
       setSenderLink(builder, uriInfo);
@@ -152,7 +155,7 @@ public class TopicResource extends DestinationResource {
 
    @DELETE
    public void deleteTopic(@Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       topicDestinationsResource.getTopics().remove(destination);
 

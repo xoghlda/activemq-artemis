@@ -37,15 +37,18 @@ import org.apache.activemq.artemis.jms.client.ActiveMQDestination;
 import org.apache.activemq.artemis.jms.client.ActiveMQTopic;
 import org.apache.activemq.artemis.jms.server.config.TopicConfiguration;
 import org.apache.activemq.artemis.jms.server.config.impl.FileJMSConfiguration;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.queue.DestinationSettings;
 import org.apache.activemq.artemis.rest.queue.PostMessage;
 import org.apache.activemq.artemis.rest.queue.PostMessageDupsOk;
 import org.apache.activemq.artemis.rest.queue.PostMessageNoDups;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 @Path("/topics")
 public class TopicDestinationsResource {
+
+   private static final Logger logger = LoggerFactory.getLogger(TopicDestinationsResource.class);
 
    private final Map<String, TopicResource> topics = new ConcurrentHashMap<>();
    private final TopicServiceManager manager;
@@ -57,7 +60,7 @@ public class TopicDestinationsResource {
    @POST
    @Consumes("application/activemq.jms.topic+xml")
    public Response createJmsTopic(@Context UriInfo uriInfo, Document document) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       try {
          TopicConfiguration topic = FileJMSConfiguration.parseTopicConfiguration(document.getDocumentElement());

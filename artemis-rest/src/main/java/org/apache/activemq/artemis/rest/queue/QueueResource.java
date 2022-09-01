@@ -29,10 +29,13 @@ import javax.ws.rs.core.UriInfo;
 
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.queue.push.PushConsumerResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class QueueResource extends DestinationResource {
+
+   private static final Logger logger = LoggerFactory.getLogger(QueueResource.class);
 
    protected ConsumersResource consumers;
    protected PushConsumerResource pushConsumers;
@@ -50,7 +53,7 @@ public class QueueResource extends DestinationResource {
    @GET
    @Produces("application/xml")
    public Response get(@Context UriInfo uriInfo, @Context HttpServletRequest requestContext) {
-      ActiveMQRestLogger.LOGGER.debug("Handling GET request for \"" + destination + "\" from " + requestContext.getRemoteAddr() + ":" + requestContext.getRemotePort());
+      logger.debug("Handling GET request for \"" + destination + "\" from " + requestContext.getRemoteAddr() + ":" + requestContext.getRemotePort());
 
       StringBuilder msg = new StringBuilder();
       msg.append("<queue>").append("<name>").append(destination).append("</name>").append("<atom:link rel=\"create\" href=\"").append(createSenderLink(uriInfo)).append("\"/>").append("<atom:link rel=\"create-with-id\" href=\"").append(createSenderWithIdLink(uriInfo)).append("\"/>").append("<atom:link rel=\"pull-consumers\" href=\"").append(createConsumersLink(uriInfo)).append("\"/>").append("<atom:link rel=\"push-consumers\" href=\"").append(createPushConsumersLink(uriInfo)).append("\"/>")
@@ -68,7 +71,7 @@ public class QueueResource extends DestinationResource {
    @HEAD
    @Produces("application/xml")
    public Response head(@Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling HEAD request for \"" + uriInfo.getRequestUri() + "\"");
+      logger.debug("Handling HEAD request for \"" + uriInfo.getRequestUri() + "\"");
 
       Response.ResponseBuilder builder = Response.ok();
       setSenderLink(builder, uriInfo);
@@ -156,7 +159,7 @@ public class QueueResource extends DestinationResource {
 
    @DELETE
    public void deleteQueue(@Context UriInfo uriInfo) throws Exception {
-      ActiveMQRestLogger.LOGGER.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling DELETE request for \"" + uriInfo.getPath() + "\"");
 
       queueDestinationsResource.getQueues().remove(destination);
       stop();

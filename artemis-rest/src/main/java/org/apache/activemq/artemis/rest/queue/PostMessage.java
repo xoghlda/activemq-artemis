@@ -38,12 +38,15 @@ import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientProducer;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.util.HttpMessageHelper;
 import org.apache.activemq.artemis.utils.UUID;
 import org.apache.activemq.artemis.utils.UUIDGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PostMessage {
+
+   private static final Logger logger = LoggerFactory.getLogger(PostMessage.class);
 
    protected ClientSessionFactory sessionFactory;
    protected String destination;
@@ -83,7 +86,7 @@ public class PostMessage {
          ClientMessage message = createActiveMQMessage(headers, body, durable, ttl, expiration, priority, pooled.session);
          message.putStringProperty(Message.HDR_DUPLICATE_DETECTION_ID.toString(), dup);
          producer.send(message);
-         ActiveMQRestLogger.LOGGER.debug("Sent message: " + message);
+         logger.debug("Sent message: " + message);
          pool.add(pooled);
       } catch (Exception ex) {
          try {
@@ -105,7 +108,7 @@ public class PostMessage {
                              @Context HttpHeaders headers,
                              @Context UriInfo uriInfo,
                              byte[] body) {
-      ActiveMQRestLogger.LOGGER.debug("Handling PUT request for \"" + uriInfo.getRequestUri() + "\"");
+      logger.debug("Handling PUT request for \"" + uriInfo.getRequestUri() + "\"");
 
       return internalPostWithId(dupId, durable, ttl, expiration, priority, headers, uriInfo, body);
    }
@@ -120,7 +123,7 @@ public class PostMessage {
                               @Context HttpHeaders headers,
                               @Context UriInfo uriInfo,
                               byte[] body) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getRequestUri() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getRequestUri() + "\"");
 
       return internalPostWithId(dupId, durable, ttl, expiration, priority, headers, uriInfo, body);
    }

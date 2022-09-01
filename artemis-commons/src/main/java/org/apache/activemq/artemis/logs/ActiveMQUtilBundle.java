@@ -17,10 +17,10 @@
 package org.apache.activemq.artemis.logs;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
-import org.jboss.logging.Messages;
-import org.jboss.logging.annotations.Cause;
-import org.jboss.logging.annotations.Message;
-import org.jboss.logging.annotations.MessageBundle;
+import org.apache.activemq.artemis.logprocessor.CodeFactory;
+import org.apache.activemq.artemis.logprocessor.annotation.Cause;
+import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
+import org.apache.activemq.artemis.logprocessor.annotation.Message;
 
 /**
  * Logger Code 20
@@ -29,23 +29,23 @@ import org.jboss.logging.annotations.MessageBundle;
  *
  * so 209000 to 209999
  */
-@MessageBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ")
 public interface ActiveMQUtilBundle {
 
-   ActiveMQUtilBundle BUNDLE = Messages.getBundle(ActiveMQUtilBundle.class);
+   ActiveMQUtilBundle BUNDLE = CodeFactory.getCodeClass(ActiveMQUtilBundle.class);
 
-   @Message(id = 209000, value = "invalid property: {0}", format = Message.Format.MESSAGE_FORMAT)
+   @Message(id = 209000, value = "invalid property: {}")
    ActiveMQIllegalStateException invalidProperty(String part);
 
-   @Message(id = 209001, value = "Invalid type: {0}", format = Message.Format.MESSAGE_FORMAT)
+   @Message(id = 209001, value = "Invalid type: {}")
    IllegalStateException invalidType(Byte type);
 
-   @Message(id = 209002, value = "the specified string is too long ({0})", format = Message.Format.MESSAGE_FORMAT)
+   @Message(id = 209002, value = "the specified string is too long ({})")
    IllegalStateException stringTooLong(Integer length);
 
-   @Message(id = 209003, value = "Error instantiating codec {0}", format = Message.Format.MESSAGE_FORMAT)
+   @Message(id = 209003, value = "Error instantiating codec {}")
    IllegalArgumentException errorCreatingCodec(@Cause Exception e, String codecClassName);
 
-   @Message(id = 209004, value = "Failed to parse long value from {0}", format = Message.Format.MESSAGE_FORMAT)
+   @Message(id = 209004, value = "Failed to parse long value from {}")
    IllegalArgumentException failedToParseLong(String value);
 }

@@ -1,0 +1,69 @@
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.activemq.artemis.logprocessor;
+
+import java.lang.reflect.Constructor;
+import java.security.PrivilegedAction;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static java.security.AccessController.doPrivileged;
+
+public class CodeFactory {
+
+   private static final Logger logger = LoggerFactory.getLogger(CodeFactory.class);
+
+   public static <T> T getCodeClass(final Class<T> type) {
+      return getCodeClass(type, type.getName());
+   }
+
+   public static <T> T getCodeClass(final Class<T> type, String category) {
+      return doPrivileged(new PrivilegedAction<T>() {
+         @Override
+         public T run() {
+            final String implClassName = type.getName() + "_impl";
+
+            logger.trace("Loading [{}]", implClassName);
+
+            final Class<? extends T> implClass;
+            try {
+               implClass = Class.forName(implClassName, true, type.getClassLoader()).asSubclass(type);
+            } catch (Exception e) {
+               throw new IllegalArgumentException("Unable to find class for log/message impl: " + implClassName, e);
+            }
+
+            final Constructor<? extends T> constructor;
+            try {
+               constructor = implClass.getConstructor(Logger.class);
+            } catch (Exception e) {
+               throw new IllegalArgumentException("Unable to find constructor for log/message impl: " + implClassName, e);
+            }
+
+            try {
+               Logger logger = LoggerFactory.getLogger(category);
+
+               return type.cast(constructor.newInstance(logger));
+            } catch (Exception e) {
+               throw new IllegalArgumentException("Unable to create instance for log/message impl: " + implClassName, e);
+            }
+         }
+      });
+   }
+
+}

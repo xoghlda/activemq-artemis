@@ -48,8 +48,12 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.specimpl.ResteasyUriBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UriStrategy implements PushStrategy {
+
+   private static final Logger logger = LoggerFactory.getLogger(UriStrategy.class);
 
    ThreadSafeClientConnManager connManager = new ThreadSafeClientConnManager();
    protected HttpClient client = new DefaultHttpClient(connManager);
@@ -115,26 +119,26 @@ public class UriStrategy implements PushStrategy {
 
    @Override
    public boolean push(ClientMessage message) {
-      ActiveMQRestLogger.LOGGER.debug("Pushing " + message);
+      logger.debug("Pushing " + message);
       String uri = createUri(message);
       for (int i = 0; i < registration.getMaxRetries(); i++) {
          long wait = registration.getRetryWaitMillis();
          System.out.println("Creating request from " + uri);
          ClientRequest request = executor.createRequest(uri);
          request.followRedirects(false);
-         ActiveMQRestLogger.LOGGER.debug("Created request " + request);
+         logger.debug("Created request " + request);
 
          for (XmlHttpHeader header : registration.getHeaders()) {
-            ActiveMQRestLogger.LOGGER.debug("Setting XmlHttpHeader: " + header.getName() + "=" + header.getValue());
+            logger.debug("Setting XmlHttpHeader: " + header.getName() + "=" + header.getValue());
             request.header(header.getName(), header.getValue());
          }
          HttpMessageHelper.buildMessage(message, request, contentType, jmsOptions);
          ClientResponse<?> res = null;
          try {
-            ActiveMQRestLogger.LOGGER.debug(method + " " + uri);
+            logger.debug(method + " " + uri);
             res = request.httpMethod(method);
             int status = res.getStatus();
-            ActiveMQRestLogger.LOGGER.debug("Status of push: " + status);
+            logger.debug("Status of push: " + status);
             if (status == 503) {
                String retryAfter = res.getStringHeaders().getFirst("Retry-After");
                if (retryAfter != null) {
@@ -144,7 +148,7 @@ public class UriStrategy implements PushStrategy {
                uri = res.getLocation().toString();
                wait = 0;
             } else if ((status >= 200 && status < 299) || status == 303 || status == 304) {
-               ActiveMQRestLogger.LOGGER.debug("Success");
+               logger.debug("Success");
                return true;
             } else if (status >= 400) {
                switch (status) {

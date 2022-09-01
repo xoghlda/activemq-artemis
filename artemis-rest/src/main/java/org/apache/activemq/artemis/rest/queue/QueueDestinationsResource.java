@@ -37,14 +37,17 @@ import org.apache.activemq.artemis.jms.client.ActiveMQDestination;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
 import org.apache.activemq.artemis.jms.server.config.JMSQueueConfiguration;
 import org.apache.activemq.artemis.jms.server.config.impl.FileJMSConfiguration;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.queue.push.PushConsumerResource;
 import org.apache.activemq.artemis.rest.queue.push.xml.PushRegistration;
 import org.apache.activemq.artemis.rest.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 @Path(Constants.PATH_FOR_QUEUES)
 public class QueueDestinationsResource {
+
+   private static final Logger logger = LoggerFactory.getLogger(QueueDestinationsResource.class);
 
    private final Map<String, QueueResource> queues = new ConcurrentHashMap<>();
    private final QueueServiceManager manager;
@@ -56,7 +59,7 @@ public class QueueDestinationsResource {
    @POST
    @Consumes("application/activemq.jms.queue+xml")
    public Response createJmsQueue(@Context UriInfo uriInfo, Document document) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       try {
          JMSQueueConfiguration queue = FileJMSConfiguration.parseQueueConfiguration(document.getDocumentElement());

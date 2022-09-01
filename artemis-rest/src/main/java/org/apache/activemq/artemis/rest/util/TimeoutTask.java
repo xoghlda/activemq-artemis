@@ -23,9 +23,12 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TimeoutTask implements Runnable {
+
+   private static final Logger logger = LoggerFactory.getLogger( TimeoutTask.class );
 
    protected boolean running = true;
    protected int interval = 10;
@@ -126,7 +129,7 @@ public class TimeoutTask implements Runnable {
                   liveConsumers += 1;
                }
             }
-            ActiveMQRestLogger.LOGGER.debug("Finished testing callbacks for timeouts in " +
+            logger.debug("Finished testing callbacks for timeouts in " +
                                                (System.currentTimeMillis() - startTime) + "ms. " +
                                                "(Live: " + liveConsumers + ", Expired: " + deadConsumers + ")");
 
@@ -134,7 +137,7 @@ public class TimeoutTask implements Runnable {
             pendingCallbacksLock.lock();
             try {
                if (pendingCallbacks.size() > 0) {
-                  ActiveMQRestLogger.LOGGER.debug("Found " + pendingCallbacks.size() + " callbacks to add.");
+                  logger.debug("Found " + pendingCallbacks.size() + " callbacks to add.");
                   callbacks.putAll(pendingCallbacks);
                   pendingCallbacks.clear();
                }

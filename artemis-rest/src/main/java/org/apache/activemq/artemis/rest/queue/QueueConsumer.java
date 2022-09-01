@@ -34,15 +34,17 @@ import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
 import org.apache.activemq.artemis.jms.client.ConnectionFactoryOptions;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.util.Constants;
 import org.apache.activemq.artemis.rest.util.LinkStrategy;
 import org.apache.activemq.artemis.utils.SelectorTranslator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Auto-acknowledged consumer
  */
 public class QueueConsumer {
+   private static final Logger logger = LoggerFactory.getLogger( QueueConsumer.class );
 
    protected ClientSessionFactory factory;
    protected ClientSession session;
@@ -113,13 +115,13 @@ public class QueueConsumer {
       previousIndex = -2;
       try {
          consumer.close();
-         ActiveMQRestLogger.LOGGER.debug("Closed consumer: " + consumer);
+         logger.debug("Closed consumer: " + consumer);
       } catch (Exception e) {
       }
 
       try {
          session.close();
-         ActiveMQRestLogger.LOGGER.debug("Closed session: " + session);
+         logger.debug("Closed session: " + session);
       } catch (Exception e) {
       }
       session = null;
@@ -131,7 +133,7 @@ public class QueueConsumer {
    public synchronized Response poll(@HeaderParam(Constants.WAIT_HEADER) @DefaultValue("0") long wait,
                                      @PathParam("index") long index,
                                      @Context UriInfo info) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + info.getRequestUri() + "\"");
+      logger.debug("Handling POST request for \"" + info.getRequestUri() + "\"");
 
       if (closed) {
          UriBuilder builder = info.getBaseUriBuilder();
@@ -191,13 +193,13 @@ public class QueueConsumer {
 
    protected void createSession() throws ActiveMQException {
       session = factory.createSession(true, true, 0);
-      ActiveMQRestLogger.LOGGER.debug("Created session: " + session);
+      logger.debug("Created session: " + session);
       if (selector == null) {
          consumer = session.createConsumer(destination);
       } else {
          consumer = session.createConsumer(destination, SelectorTranslator.convertToActiveMQFilterString(selector));
       }
-      ActiveMQRestLogger.LOGGER.debug("Created consumer: " + consumer);
+      logger.debug("Created consumer: " + consumer);
       session.start();
    }
 
@@ -209,7 +211,7 @@ public class QueueConsumer {
          m = consumer.receive(timeoutSecs * 1000);
       }
 
-      ActiveMQRestLogger.LOGGER.debug("Returning message " + m + " from consumer: " + consumer);
+      logger.debug("Returning message " + m + " from consumer: " + consumer);
 
       return m;
    }

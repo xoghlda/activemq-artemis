@@ -21,16 +21,19 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * implements reliable "create", "create-next" pattern defined by REST-* Messaging specification
  */
 public class PostMessageNoDups extends PostMessage {
 
+   private static final Logger logger = LoggerFactory.getLogger(PostMessageNoDups.class);
+
    @POST
    public Response redirectCreation(@Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       String id = generateDupId();
       Response.ResponseBuilder res = Response.status(Response.Status.TEMPORARY_REDIRECT.getStatusCode());

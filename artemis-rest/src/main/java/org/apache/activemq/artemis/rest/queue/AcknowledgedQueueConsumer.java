@@ -34,11 +34,14 @@ import org.apache.activemq.artemis.api.core.client.ClientConsumer;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
 import org.apache.activemq.artemis.rest.util.Constants;
 import org.apache.activemq.artemis.rest.util.LinkStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AcknowledgedQueueConsumer extends QueueConsumer {
+
+   private static final Logger logger = LoggerFactory.getLogger( AcknowledgedQueueConsumer.class );
 
    protected long counter;
    protected String startup = Long.toString(System.currentTimeMillis());
@@ -63,7 +66,7 @@ public class AcknowledgedQueueConsumer extends QueueConsumer {
    public synchronized Response poll(@HeaderParam(Constants.WAIT_HEADER) @DefaultValue("0") long wait,
                                      @PathParam("index") long index,
                                      @Context UriInfo info) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + info.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + info.getPath() + "\"");
 
       if (closed) {
          UriBuilder builder = info.getBaseUriBuilder();
@@ -91,7 +94,7 @@ public class AcknowledgedQueueConsumer extends QueueConsumer {
    public synchronized Response acknowledge(@PathParam("ackToken") String ackToken,
                                             @FormParam("acknowledge") boolean doAcknowledge,
                                             @Context UriInfo uriInfo) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getPath() + "\"");
 
       ping(0);
       String basePath = uriInfo.getMatchedURIs().get(1);

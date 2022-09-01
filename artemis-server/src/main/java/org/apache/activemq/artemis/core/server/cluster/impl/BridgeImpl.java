@@ -71,7 +71,8 @@ import org.apache.activemq.artemis.utils.FutureLatch;
 import org.apache.activemq.artemis.utils.ReusableLatch;
 import org.apache.activemq.artemis.utils.UUID;
 import org.apache.activemq.artemis.utils.collections.TypedProperties;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Core BridgeImpl
@@ -79,7 +80,7 @@ import org.jboss.logging.Logger;
 
 public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowledgementHandler, ReadyListener, ClientProducerFlowCallback {
 
-   private static final Logger logger = Logger.getLogger(BridgeImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(BridgeImpl.class);
 
    protected final ServerLocatorInternal serverLocator;
 
@@ -694,7 +695,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
             fail(true, true);
 
          } catch (Exception e) {
-            ActiveMQServerLogger.LOGGER.warn(e.getMessage(), e);
+            logger.warn(e.getMessage(), e);
          }
       }
    }
@@ -839,7 +840,7 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
             }
             queue.removeConsumer(this);
          } catch (Exception dontcare) {
-            logger.debug(dontcare);
+            logger.debug(dontcare.getMessage(), dontcare);
          }
       }
 

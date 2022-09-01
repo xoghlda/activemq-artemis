@@ -69,7 +69,8 @@ import org.apache.activemq.artemis.utils.FutureLatch;
 import org.apache.activemq.artemis.utils.ReusableLatch;
 import org.apache.activemq.artemis.utils.collections.LinkedListIterator;
 import org.apache.activemq.artemis.utils.collections.TypedProperties;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Concrete implementation of a ClientConsumer.
@@ -77,7 +78,7 @@ import org.jboss.logging.Logger;
 public class ServerConsumerImpl implements ServerConsumer, ReadyListener {
 
 
-   private static final Logger logger = Logger.getLogger(ServerConsumerImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(ServerConsumerImpl.class);
 
 
    private final long id;
@@ -1466,14 +1467,14 @@ public class ServerConsumerImpl implements ServerConsumer, ReadyListener {
                ref = null;
                synchronized (messageQueue) {
                   if (!iterator.hasNext()) {
-                     logger.tracef("browser finished");
+                     logger.trace("browser finished");
                      callback.browserFinished(ServerConsumerImpl.this);
                      break;
                   }
 
                   ref = iterator.next();
 
-                  logger.tracef("Receiving %s", ref.getMessage());
+                  logger.trace("Receiving {}", ref.getMessage());
 
                   status = handle(ref);
                }

@@ -14,7 +14,7 @@
    <parent>
       <groupId>org.apache.activemq</groupId>
       <artifactId>artemis-pom</artifactId>
-      <version>2.26.0-SNAPSHOT</version>
+      <version>2.25.0-SNAPSHOT</version>
    </parent>
 
    <artifactId>artemis-core-client-osgi</artifactId>
@@ -41,33 +41,15 @@
          <artifactId>artemis-core-client</artifactId>
          <version>${project.version}</version>
       </dependency>
+      <!-- logging -->
       <dependency>
-         <groupId>org.jboss.logmanager</groupId>
-         <artifactId>jboss-logmanager</artifactId>
-         <optional>true</optional>
-         <scope>provided</scope>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
       </dependency>
       <dependency>
-          <groupId>org.wildfly.common</groupId>
-          <artifactId>wildfly-common</artifactId>
-         <scope>provided</scope>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-processor</artifactId>
-         <scope>provided</scope>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging-annotations</artifactId>
-         <scope>provided</scope>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>org.jboss.logging</groupId>
-         <artifactId>jboss-logging</artifactId>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-slf4j-impl</artifactId>
+         <scope>test</scope>
       </dependency>
       <dependency>
          <groupId>org.osgi</groupId>
@@ -93,6 +75,7 @@
                   <Import-Package>
                      org.glassfish.json*;resolution:=optional,
                      io.netty.buffer;io.netty.*;version="[4.1,5)",
+                     org.apache.activemq.artemis.logprocessor.*;resolution:=optional,
                      *
                   </Import-Package>
                   <_exportcontents>org.apache.activemq.artemis.*;-noimport:=true</_exportcontents>

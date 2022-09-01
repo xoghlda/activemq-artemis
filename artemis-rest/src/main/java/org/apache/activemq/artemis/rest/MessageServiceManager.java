@@ -39,8 +39,12 @@ import org.apache.activemq.artemis.rest.util.TimeoutTask;
 import org.apache.activemq.artemis.spi.core.naming.BindingRegistry;
 import org.apache.activemq.artemis.utils.ActiveMQThreadFactory;
 import org.apache.activemq.artemis.utils.XMLUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MessageServiceManager {
+
+   private static final Logger logger = LoggerFactory.getLogger(MessageServiceManager.class);
 
    private ExecutorService threadPool;
    private QueueServiceManager queueManager;
@@ -146,10 +150,10 @@ public class MessageServiceManager {
          consumerLocator.setConsumerWindowSize(configuration.getConsumerWindowSize());
       }
 
-      ActiveMQRestLogger.LOGGER.debug("Created ServerLocator: " + consumerLocator);
+      logger.debug("Created ServerLocator: " + consumerLocator);
 
       consumerSessionFactory = consumerLocator.createSessionFactory();
-      ActiveMQRestLogger.LOGGER.debug("Created ClientSessionFactory: " + consumerSessionFactory);
+      logger.debug("Created ClientSessionFactory: " + consumerSessionFactory);
 
       ServerLocator defaultLocator = ActiveMQClient.createServerLocator(configuration.getUrl());
 

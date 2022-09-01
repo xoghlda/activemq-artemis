@@ -29,12 +29,15 @@ import java.net.URI;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientProducer;
-import org.apache.activemq.artemis.rest.ActiveMQRestLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implements simple "create" link.  Returns 201 with Location of created resource as per HTTP
  */
 public class PostMessageDupsOk extends PostMessage {
+
+   private static final Logger logger = LoggerFactory.getLogger(PostMessageDupsOk.class);
 
    public void publish(HttpHeaders headers,
                        byte[] body,
@@ -47,7 +50,7 @@ public class PostMessageDupsOk extends PostMessage {
          ClientProducer producer = pooled.producer;
          ClientMessage message = createActiveMQMessage(headers, body, durable, ttl, expiration, priority, pooled.session);
          producer.send(message);
-         ActiveMQRestLogger.LOGGER.debug("Sent message: " + message);
+         logger.debug("Sent message: " + message);
          pool.add(pooled);
       } catch (Exception ex) {
          try {
@@ -67,7 +70,7 @@ public class PostMessageDupsOk extends PostMessage {
                           @QueryParam("priority") Integer priority,
                           @Context UriInfo uriInfo,
                           byte[] body) {
-      ActiveMQRestLogger.LOGGER.debug("Handling POST request for \"" + uriInfo.getRequestUri() + "\"");
+      logger.debug("Handling POST request for \"" + uriInfo.getRequestUri() + "\"");
 
       try {
          boolean isDurable = defaultDurable;

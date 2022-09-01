@@ -41,14 +41,15 @@ import org.apache.activemq.artemis.core.server.management.Notification;
 import org.apache.activemq.artemis.utils.ConcurrentUtil;
 import org.apache.activemq.artemis.utils.ExecutorFactory;
 import org.apache.activemq.artemis.utils.collections.TypedProperties;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Local Grouping handler. All the Remote handlers will talk with us
  */
 public final class LocalGroupingHandler extends GroupHandlingAbstract {
 
-   private static final Logger logger = Logger.getLogger(LocalGroupingHandler.class);
+   private static final Logger logger = LoggerFactory.getLogger(LocalGroupingHandler.class);
 
    private final ConcurrentMap<SimpleString, GroupBinding> map = new ConcurrentHashMap<>();
 
@@ -230,7 +231,7 @@ public final class LocalGroupingHandler extends GroupHandlingAbstract {
             storageManager.commitBindings(tx);
          } catch (Exception e) {
             // nothing we can do being log
-            ActiveMQServerLogger.LOGGER.warn(e.getMessage(), e);
+            logger.warn(e.getMessage(), e);
          }
       }
    }

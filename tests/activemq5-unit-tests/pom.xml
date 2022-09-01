@@ -20,7 +20,7 @@
    <parent>
       <groupId>org.apache.activemq.tests</groupId>
       <artifactId>artemis-tests-pom</artifactId>
-      <version>2.26.0-SNAPSHOT</version>
+      <version>2.25.0-SNAPSHOT</version>
    </parent>
 
    <artifactId>activemq5-unit-tests</artifactId>
@@ -184,22 +184,6 @@
                <artifactId>testng</artifactId>
             </exclusion>
          </exclusions>
-      </dependency>
-
-       <!--
-           JBoss Logging
-       -->
-       <dependency>
-           <groupId>org.jboss.logging</groupId>
-           <artifactId>jboss-logging</artifactId>
-       </dependency>
-      <dependency>
-            <groupId>org.jboss.logmanager</groupId>
-            <artifactId>jboss-logmanager</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.wildfly.common</groupId>
-          <artifactId>wildfly-common</artifactId>
       </dependency>
 
       <!-- The johnzon-core and json-api contents are repackaged in -commons,
