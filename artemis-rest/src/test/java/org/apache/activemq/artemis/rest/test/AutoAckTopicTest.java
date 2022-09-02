@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.rest.test;
 
 import org.apache.activemq.artemis.rest.topic.TopicDeployment;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -26,7 +27,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class AutoAckTopicTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(AutoAckTopicTest.class);
+   private static final Logger log = LoggerFactory.getLogger(AutoAckTopicTest.class);
 
    @Test
    public void testSuccessFirst() throws Exception {

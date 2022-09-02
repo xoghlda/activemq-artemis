@@ -20,7 +20,8 @@ import org.apache.activemq.artemis.api.core.QueueConfiguration;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.core.server.impl.AddressInfo;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -29,7 +30,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FindDestinationTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(FindDestinationTest.class);
+   private static final Logger log = LoggerFactory.getLogger(FindDestinationTest.class);
 
    @Test
    public void testFindQueue() throws Exception {

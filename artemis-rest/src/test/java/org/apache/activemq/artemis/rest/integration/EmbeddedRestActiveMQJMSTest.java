@@ -31,7 +31,8 @@ import org.apache.activemq.artemis.rest.test.TransformTest;
 import org.apache.activemq.artemis.rest.test.Util;
 import org.apache.activemq.artemis.spi.core.security.ActiveMQJAASSecurityManager;
 import org.apache.activemq.artemis.spi.core.security.jaas.InVMLoginModule;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -45,7 +46,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class EmbeddedRestActiveMQJMSTest {
-   private static final Logger log = Logger.getLogger(EmbeddedRestActiveMQJMSTest.class);
+   private static final Logger log = LoggerFactory.getLogger(EmbeddedRestActiveMQJMSTest.class);
 
    private static EmbeddedRestActiveMQ server;
    private static ConnectionFactory factory;

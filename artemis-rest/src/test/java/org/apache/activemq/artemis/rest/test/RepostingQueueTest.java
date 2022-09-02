@@ -18,7 +18,8 @@ package org.apache.activemq.artemis.rest.test;
 
 import org.apache.activemq.artemis.rest.queue.QueueDeployment;
 import org.apache.activemq.artemis.rest.util.Constants;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -42,7 +43,7 @@ import static org.jboss.resteasy.test.TestPortProvider.generateURL;
  * ack with an old ack link
  */
 public class RepostingQueueTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(RepostingQueueTest.class);
+   private static final Logger log = LoggerFactory.getLogger(RepostingQueueTest.class);
 
    @BeforeClass
    public static void setup() throws Exception {

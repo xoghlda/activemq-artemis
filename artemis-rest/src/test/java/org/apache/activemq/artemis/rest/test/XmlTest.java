@@ -20,11 +20,12 @@ import javax.xml.bind.JAXBContext;
 import java.io.StringReader;
 
 import org.apache.activemq.artemis.rest.queue.push.xml.PushRegistration;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 public class XmlTest {
-   private static final Logger log = Logger.getLogger(XmlTest.class);
+   private static final Logger log = LoggerFactory.getLogger(XmlTest.class);
 
    @Test
    public void testPush() throws Exception {
@@ -42,6 +43,6 @@ public class XmlTest {
       JAXBContext ctx = JAXBContext.newInstance(PushRegistration.class);
       PushRegistration reg = (PushRegistration) ctx.createUnmarshaller().unmarshal(new StringReader(xml));
 
-      log.debug(reg);
+      log.debug("{}", reg);
    }
 }

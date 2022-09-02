@@ -20,7 +20,8 @@ import org.apache.activemq.artemis.rest.topic.TopicDeployment;
 import org.apache.activemq.artemis.rest.util.Constants;
 import org.apache.activemq.artemis.rest.util.CustomHeaderLinkStrategy;
 import org.apache.activemq.artemis.rest.util.LinkHeaderLinkStrategy;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -31,7 +32,7 @@ import org.junit.Test;
 
 public class ClientAckTopicTest extends MessageTestBase {
 
-   private static final Logger log = Logger.getLogger(ClientAckTopicTest.class);
+   private static final Logger log = LoggerFactory.getLogger(ClientAckTopicTest.class);
 
    @BeforeClass
    public static void setup() throws Exception {
@@ -113,8 +114,8 @@ public class ClientAckTopicTest extends MessageTestBase {
          log.debug("consumeNext: " + consumeNext);
 
          ClientResponse ackRes = ack.request().formParameter("acknowledge", "true").post();
-         if (ackRes.getStatus() != 204) {
-            log.debug(ackRes.getEntity(String.class));
+         if (ackRes.getStatus() != 204 && log.isDebugEnabled()) {
+            log.debug("Statuc is not 204, {}", ackRes.getEntity(String.class));
          }
          ackRes.releaseConnection();
          Assert.assertEquals(204, ackRes.getStatus());
@@ -166,7 +167,7 @@ public class ClientAckTopicTest extends MessageTestBase {
       res.releaseConnection();
       Assert.assertEquals(201, res.getStatus());
 
-      log.debug(consumeNext);
+      log.debug("{}", consumeNext);
       res = consumeNext.request().header(Constants.WAIT_HEADER, "10").post(String.class);
       res.releaseConnection();
       Assert.assertEquals(200, res.getStatus());
@@ -226,7 +227,7 @@ public class ClientAckTopicTest extends MessageTestBase {
       res.releaseConnection();
       Assert.assertEquals(201, res.getStatus());
 
-      log.debug(consumeNext);
+      log.debug("{}", consumeNext);
       res = consumeNext.request().header(Constants.WAIT_HEADER, "10").post(String.class);
       res.releaseConnection();
       Assert.assertEquals(200, res.getStatus());
@@ -264,7 +265,7 @@ public class ClientAckTopicTest extends MessageTestBase {
       res.releaseConnection();
       Assert.assertEquals(503, res.getStatus());
       consumeNext = getLinkByTitle(manager.getTopicManager().getLinkStrategy(), res, "acknowledge-next");
-      log.debug(consumeNext);
+      log.debug("{}", consumeNext);
       res = sender.request().body("text/plain", Integer.toString(1)).post();
       res.releaseConnection();
       Assert.assertEquals(201, res.getStatus());
@@ -310,7 +311,7 @@ public class ClientAckTopicTest extends MessageTestBase {
       res = consumeNext.request().post();
       res.releaseConnection();
       Assert.assertEquals(503, res.getStatus());
-      log.debug(sub1);
+      log.debug("{}", sub1);
       res = sub1.request().delete();
       res.releaseConnection();
       Assert.assertEquals(204, res.getStatus());

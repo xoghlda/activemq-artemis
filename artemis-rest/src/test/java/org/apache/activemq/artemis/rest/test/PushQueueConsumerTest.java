@@ -25,7 +25,8 @@ import org.apache.activemq.artemis.rest.queue.push.ActiveMQPushStrategy;
 import org.apache.activemq.artemis.rest.queue.push.xml.PushRegistration;
 import org.apache.activemq.artemis.rest.queue.push.xml.XmlLink;
 import org.apache.activemq.artemis.rest.util.Constants;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -35,7 +36,7 @@ import org.junit.Test;
 import static org.jboss.resteasy.test.TestPortProvider.generateURL;
 
 public class PushQueueConsumerTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(PushQueueConsumerTest.class);
+   private static final Logger log = LoggerFactory.getLogger(PushQueueConsumerTest.class);
 
    enum PushRegistrationType {
       CLASS, BRIDGE, URI, TEMPLATE

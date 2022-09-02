@@ -30,7 +30,8 @@ import org.apache.activemq.artemis.rest.HttpHeaderProperty;
 import org.apache.activemq.artemis.rest.integration.EmbeddedRestActiveMQ;
 import org.apache.activemq.artemis.spi.core.security.ActiveMQJAASSecurityManager;
 import org.apache.activemq.artemis.spi.core.security.jaas.InVMLoginModule;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -41,7 +42,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class EmbeddedTest {
-   private static final Logger log = Logger.getLogger(EmbeddedTest.class);
+   private static final Logger log = LoggerFactory.getLogger(EmbeddedTest.class);
 
    public static EmbeddedRestActiveMQ server;
 

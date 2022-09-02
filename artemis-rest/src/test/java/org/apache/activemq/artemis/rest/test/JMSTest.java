@@ -35,7 +35,8 @@ import org.apache.activemq.artemis.jms.client.ActiveMQJMSConnectionFactory;
 import org.apache.activemq.artemis.rest.HttpHeaderProperty;
 import org.apache.activemq.artemis.rest.Jms;
 import org.apache.activemq.artemis.rest.queue.QueueDeployment;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -46,7 +47,7 @@ import org.junit.Test;
 import static org.jboss.resteasy.test.TestPortProvider.generateURL;
 
 public class JMSTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(JMSTest.class);
+   private static final Logger log = LoggerFactory.getLogger(JMSTest.class);
 
    public static ConnectionFactory connectionFactory;
 

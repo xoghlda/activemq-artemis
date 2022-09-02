@@ -24,12 +24,13 @@ import org.apache.activemq.artemis.core.server.ActiveMQServer;
 import org.apache.activemq.artemis.core.server.ActiveMQServers;
 import org.apache.activemq.artemis.rest.MessageServiceConfiguration;
 import org.apache.activemq.artemis.rest.MessageServiceManager;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.plugins.server.tjws.TJWSEmbeddedJaxrsServer;
 import org.jboss.resteasy.test.TestPortProvider;
 
 public class Embedded {
-   private static final Logger log = Logger.getLogger(Embedded.class);
+   private static final Logger log = LoggerFactory.getLogger(Embedded.class);
 
    protected MessageServiceManager manager = new MessageServiceManager(null);
    protected MessageServiceConfiguration config = new MessageServiceConfiguration();

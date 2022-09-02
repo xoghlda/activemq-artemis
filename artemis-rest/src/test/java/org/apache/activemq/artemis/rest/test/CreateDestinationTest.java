@@ -17,7 +17,8 @@
 package org.apache.activemq.artemis.rest.test;
 
 import org.apache.activemq.artemis.rest.util.Constants;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -27,7 +28,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CreateDestinationTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(CreateDestinationTest.class);
+   private static final Logger log = LoggerFactory.getLogger(CreateDestinationTest.class);
 
    @BeforeClass
    public static void reg() {
@@ -72,7 +73,7 @@ public class CreateDestinationTest extends MessageTestBase {
       res.releaseConnection();
       Assert.assertEquals(201, res.getStatus());
 
-      log.debug(consumeNext);
+      log.debug("{}", consumeNext);
       res = consumeNext.request().header(Constants.WAIT_HEADER, "10").post(String.class);
       Assert.assertEquals(200, res.getStatus());
       Assert.assertEquals("2", res.getEntity(String.class));

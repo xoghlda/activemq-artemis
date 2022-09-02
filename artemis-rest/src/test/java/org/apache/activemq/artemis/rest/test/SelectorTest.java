@@ -34,7 +34,8 @@ import org.apache.activemq.artemis.rest.queue.push.xml.XmlLink;
 import org.apache.activemq.artemis.rest.topic.PushTopicRegistration;
 import org.apache.activemq.artemis.rest.topic.TopicDeployment;
 import org.apache.activemq.artemis.utils.Wait;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -45,7 +46,7 @@ import org.junit.Test;
 import static org.jboss.resteasy.test.TestPortProvider.generateURL;
 
 public class SelectorTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(SelectorTest.class);
+   private static final Logger log = LoggerFactory.getLogger(SelectorTest.class);
 
    public static ConnectionFactory connectionFactory;
    public static String topicName = "testTopic";

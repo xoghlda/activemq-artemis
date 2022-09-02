@@ -26,7 +26,8 @@ import org.apache.activemq.artemis.rest.MessageServiceManager;
 import org.apache.activemq.artemis.rest.queue.QueueDeployment;
 import org.apache.activemq.artemis.rest.queue.push.xml.PushRegistration;
 import org.apache.activemq.artemis.rest.queue.push.xml.XmlLink;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -42,7 +43,7 @@ import static org.jboss.resteasy.test.TestPortProvider.generateURL;
  */
 public class PersistentPushQueueConsumerTest {
 
-   private static final Logger log = Logger.getLogger(PersistentPushQueueConsumerTest.class);
+   private static final Logger log = LoggerFactory.getLogger(PersistentPushQueueConsumerTest.class);
 
    public static MessageServiceManager manager;
    protected static ResteasyDeployment deployment;

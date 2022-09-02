@@ -18,7 +18,8 @@ package org.apache.activemq.artemis.rest.test;
 
 import org.apache.activemq.artemis.rest.queue.QueueDeployment;
 import org.apache.activemq.artemis.rest.util.Constants;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -27,7 +28,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class AutoAckQueueTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(AutoAckQueueTest.class);
+   private static final Logger log = LoggerFactory.getLogger(AutoAckQueueTest.class);
 
    @Test
    public void testSuccessFirst() throws Exception {
@@ -68,9 +69,8 @@ public class AutoAckQueueTest extends MessageTestBase {
       Link session = getLinkByTitle(manager.getQueueManager().getLinkStrategy(), res, "consumer");
       log.debug("session: " + session);
       consumeNext = getLinkByTitle(manager.getQueueManager().getLinkStrategy(), res, "consume-next");
-      log.debug("consumeNext: " + consumeNext);
+      log.debug("consumeNext: {}", consumeNext);
 
-      log.debug(consumeNext);
       res = consumeNext.request().header(Constants.WAIT_HEADER, "10").post(String.class);
       Assert.assertEquals(200, res.getStatus());
       Assert.assertEquals("2", res.getEntity(String.class));

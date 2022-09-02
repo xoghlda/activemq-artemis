@@ -19,7 +19,8 @@ package org.apache.activemq.artemis.rest.test;
 import org.apache.activemq.artemis.rest.queue.QueueDeployment;
 import org.apache.activemq.artemis.rest.topic.TopicDeployment;
 import org.apache.activemq.artemis.rest.util.Constants;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.Link;
@@ -30,7 +31,7 @@ import org.junit.Test;
 import static org.jboss.resteasy.test.TestPortProvider.generateURL;
 
 public class SessionTest extends MessageTestBase {
-   private static final Logger log = Logger.getLogger(SessionTest.class);
+   private static final Logger log = LoggerFactory.getLogger(SessionTest.class);
 
    @BeforeClass
    public static void setup() throws Exception {
