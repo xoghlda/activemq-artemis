@@ -1275,14 +1275,6 @@
          </properties>
       </profile>
       <profile>
-         <!-- this will activate the property required to limit logging on the testsuite -->
-         <id>tests-CI</id>
-         <properties>
-            <!-- notice I did not intend to use retryTests on this profile, as this will be optional depending on where you run the tests -->
-            <logging.config>log4j2-tests-config-CI.properties</logging.config>
-         </properties>
-      </profile>
-      <profile>
          <!-- tests is the profile we use to run the entire testsuite
                Running this entire build could take up to 2 hours -->
          <id>tests</id>
