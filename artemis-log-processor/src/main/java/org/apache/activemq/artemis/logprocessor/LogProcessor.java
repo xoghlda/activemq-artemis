@@ -140,6 +140,12 @@ public class LogProcessor extends AbstractProcessor {
                writerOutput.println("   private final Logger logger;");
                writerOutput.println();
 
+               writerOutput.println("   private static void _copyStackTraceMinusOne(final Throwable e) {");
+               writerOutput.println("      final StackTraceElement[] st = e.getStackTrace();");
+               writerOutput.println("      e.setStackTrace(java.util.Arrays.copyOfRange(st, 1, st.length));");
+               writerOutput.println("   }");
+               writerOutput.println();
+
                writerOutput.println("   public " + simpleClassName + "(Logger logger ) {");
                writerOutput.println("      this.logger = logger;");
                writerOutput.println("   }");
@@ -288,6 +294,7 @@ public class LogProcessor extends AbstractProcessor {
          if (exceptionParameter != null) {
             writerOutput.println("         " + exceptionVariableName + ".initCause(" + exceptionParameter.getSimpleName() + ");");
          }
+         writerOutput.println("         _copyStackTraceMinusOne(" + exceptionVariableName + ");");
          writerOutput.println("         return " + exceptionVariableName + ";");
          writerOutput.println("      }");
       }

@@ -18,6 +18,8 @@
 package org.apache.activemq.artemis.logprocessor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.UUID;
 
 import org.junit.Assert;
@@ -41,6 +43,10 @@ public class SimpleBundleTest {
    public void testException() {
       Exception ex = SimpleBundle.MESSAGES.someException();
       Assert.assertEquals("TST3: EX", ex.getMessage());
+      StringWriter stringWriter = new StringWriter();
+      PrintWriter writer = new PrintWriter(stringWriter);
+      ex.printStackTrace(writer);
+      Assert.assertEquals("The method name (someException) should not be part of the stack trace", -1, stringWriter.toString().lastIndexOf("someException"));
    }
 
    @Test

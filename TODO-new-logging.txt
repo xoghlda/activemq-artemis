@@ -1,12 +1,15 @@
 TODOs not explicitly noted in the code itself already:
 
 - Remove JBL use from last remaining tests etc tests still using it
-- Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
-- Replace logging.properties files in remaining tests/examples needing their own custom config
+- Replace logging.properties files in remaining tests/examples needing their own custom config 
  -- Investigate how ./examples/common/config/logging.properties is used and what to do with it.
-- Restore the NettySecurityClientTest and figure out what needs changed to make it work.
 - Restore the Travis config file
 - Delete the old DELETE-ME-logging.properties and DELETE-ME-tests-logging.properties files once all needed comparisons during old test etc config replacements are done.
 - Update references to JBL and logging.properties in the documentation
 - Decide what if anything should be done around the removed logging config reload bits (Log4J2 enables reload itself, via its own config...or updates via management)
 - Decide if we should use the auto-detected log4j2.properties config filename instead
+
+done:
+- Fix stacktraces of generated exceptions not to include the generated 'logmessage' method creating it.
+- Restore the NettySecurityClientTest and figure out what needs changed to make it work. 
+   * Don't restore it at all.. just keep it gone
