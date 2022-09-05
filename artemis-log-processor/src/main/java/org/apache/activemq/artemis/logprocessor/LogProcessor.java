@@ -409,6 +409,10 @@ public class LogProcessor extends AbstractProcessor {
 
       String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
       if (exceptionParameter != null) {
+         // TODO: needed? Logger impl handles picking up exception arg at end itself, would only incur array overhead if needed (>2 args) rather than always as this does.
+         // ALso looks like MessageFormatter always instanceof's the last arg, whereas the Logger impl only does it if there is an unused param.
+         // Could perhaps add if<level>Enabled() guards to avoid overhead in many-arg cases.
+         // Could optimise for the 2arg message+throwable case.
          writerOutput.println("     FormattingTuple output = org.slf4j.helpers.MessageFormatter.arrayFormat(\"" + formattingString + "\",new Object[] {" + callList + "});");
          writerOutput.println("     logger." + methodName + "(output.getMessage(), " + exceptionParameter.getSimpleName() + ");");
       } else {
