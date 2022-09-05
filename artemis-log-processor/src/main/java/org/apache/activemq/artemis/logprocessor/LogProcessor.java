@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -71,32 +72,11 @@ public class LogProcessor extends AbstractProcessor {
       }
    }
 
-
-   private static void tupples(String arg, char open, char close, Consumer<String> stringConsumer) {
-      int openAt = -1;
-      for (int i = 0; i < arg.length(); i++) {
-         char charAt = arg.charAt(i);
-
-         if (charAt == open) {
-            openAt = i;
-         } else if (charAt == close) {
-            if (openAt >= 0) {
-               stringConsumer.accept(arg.substring(openAt + 1, i));
-            }
-            openAt = -1;
-         }
-
-      }
-   }
-
-
    @Override
    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
       HashMap<Integer, String> messages = new HashMap<>();
 
       try {
-
-
          for (TypeElement annotation : annotations) {
             for (Element annotatedTypeEl : roundEnv.getElementsAnnotatedWith(annotation)) {
                TypeElement annotatedType = (TypeElement) annotatedTypeEl;
@@ -153,7 +133,6 @@ public class LogProcessor extends AbstractProcessor {
 
                for (Element el : annotatedType.getEnclosedElements()) {
                   if (el.getKind() == ElementKind.METHOD) {
-
                      ExecutableElement executableMember = (ExecutableElement) el;
 
                      Message messageAnnotation = el.getAnnotation(Message.class);
@@ -192,8 +171,6 @@ public class LogProcessor extends AbstractProcessor {
                         processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Cannot use combined annotations  on " + executableMember);
                         return false;
                      }
-
-
                   }
                }
 
@@ -216,27 +193,14 @@ public class LogProcessor extends AbstractProcessor {
       return true;
    }
 
-   private void verifyLogArguments(String logMessage, Object holder) {
-      tupples(logMessage, '{', '}', (tupple) -> {
-         if (!tupple.equals("")) {
-            throw new IllegalArgumentException("Invalid log argument {" + tupple + "} on message \'" + logMessage + "\' as part of " + holder + "\nreplace it by {}");
-         }
-      });
-   }
-
-   private void generateMessage(LogBundle bundleAnnotation,
+   private static void generateMessage(LogBundle bundleAnnotation,
                                 PrintWriter writerOutput,
                                 ExecutableElement executableMember,
                                 Message messageAnnotation,
                                 HashMap<Integer, String> processedMessages) {
 
-      String previousMessage = processedMessages.get(messageAnnotation.id()); // Could move inside the if?
-
-      if (processedMessages.containsKey(messageAnnotation.id())) {
-         throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);
-      }
-
-      verifyLogArguments(messageAnnotation.value(), executableMember);
+      verifyIdNotProcessedPreviously(messageAnnotation.id(), messageAnnotation.value(), processedMessages);
+      verifyMessagePlaceholders(messageAnnotation.value(), executableMember);
 
       processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
 
@@ -250,25 +214,25 @@ public class LogProcessor extends AbstractProcessor {
 
       boolean hasParameters = false;
 
-
       VariableElement exceptionParameter = null;
+      final boolean enforceLastParam = bundleAnnotation.enforceExceptionParameterAsLast();
+
       // the one that will be used on the call
       StringBuffer callList = new StringBuffer();
       while (parameters.hasNext()) {
          hasParameters = true;
          VariableElement parameter = parameters.next();
+
+         boolean isException = verifyIfExceptionArgument(executableMember, parameter, enforceLastParam, parameters.hasNext(), exceptionParameter != null);
+         if (isException) {
+            exceptionParameter = parameter;
+         }
+
          writerOutput.write(parameter.asType() + " " + parameter.getSimpleName());
          callList.append(parameter.getSimpleName());
          if (parameters.hasNext()) {
             writerOutput.write(", ");
             callList.append(",");
-         }
-
-         if (isException(parameter.asType(), parameter)) {
-            if (exceptionParameter != null) {
-               throw new IllegalStateException("messageAnnotation " + messageAnnotation.value() + " has two exceptions defined on the method");
-            }
-            exceptionParameter = parameter;
          }
       }
 
@@ -303,7 +267,7 @@ public class LogProcessor extends AbstractProcessor {
       writerOutput.println();
    }
 
-   boolean isException(TypeMirror parameterType, VariableElement methodParameter) {
+   private static boolean isException(TypeMirror parameterType, VariableElement methodParameter) {
       if (parameterType == null) {
          // This should never happen, but my OCD can't help here, I'm adding this just in case
          return false;
@@ -351,12 +315,12 @@ public class LogProcessor extends AbstractProcessor {
       return false;
    }
 
-   private String encodeSpecialChars(String input) {
+   private static String encodeSpecialChars(String input) {
       return input.replaceAll("\n", "\\\\n").replaceAll("\"", "\\\\\"");
    }
 
 
-   private void generateGetLogger(LogBundle bundleAnnotation,
+   private static void generateGetLogger(LogBundle bundleAnnotation,
                                   PrintWriter writerOutput,
                                   ExecutableElement executableMember,
                                   GetLogger loggerAnnotation) {
@@ -369,19 +333,14 @@ public class LogProcessor extends AbstractProcessor {
    }
 
 
-   private void generateLogger(LogBundle bundleAnnotation,
+   private static void generateLogger(LogBundle bundleAnnotation,
                                PrintWriter writerOutput,
                                ExecutableElement executableMember,
                                LogMessage messageAnnotation,
                                HashMap<Integer, String> processedMessages) {
 
-      String previousMessage = processedMessages.get(messageAnnotation.id());
-
-      if (processedMessages.containsKey(messageAnnotation.id())) {
-         throw new IllegalStateException("message " + messageAnnotation.id() + " with definition = " + messageAnnotation.value() + " was previously defined as " + previousMessage);
-      }
-
-      verifyLogArguments(messageAnnotation.value(), executableMember);
+      verifyIdNotProcessedPreviously(messageAnnotation.id(), messageAnnotation.value(), processedMessages);
+      verifyMessagePlaceholders(messageAnnotation.value(), executableMember);
 
       processedMessages.put(messageAnnotation.id(), messageAnnotation.value());
 
@@ -396,42 +355,30 @@ public class LogProcessor extends AbstractProcessor {
 
       VariableElement exceptionParameter = null;
       ArrayList<VariableElement> nonExceptionParameters = new ArrayList<>();
+      final boolean enforceLastParam = bundleAnnotation.enforceExceptionParameterAsLast();
 
       Iterator<? extends VariableElement> parameters = parametersList.iterator();
       while (parameters.hasNext()) {
          hasParameters = true;
          VariableElement parameter = parameters.next();
+
+         boolean isException = verifyIfExceptionArgument(executableMember, parameter, enforceLastParam, parameters.hasNext(), exceptionParameter != null);
+         if (isException) {
+            exceptionParameter = parameter;
+         } else {
+            nonExceptionParameters.add(parameter);
+         }
+
          writerOutput.write(parameter.asType() + " " + parameter.getSimpleName());
          if (parameters.hasNext()) {
             writerOutput.write(", ");
-         }
-
-         boolean isException = isException(parameter.asType(), parameter);
-
-         if (isException) {
-            if (exceptionParameter != null) {
-               throw new IllegalArgumentException("You can only have one exception defined per log message, check:: " + executableMember);
-            }
-            exceptionParameter = parameter;
-         }
-
-         if (DEBUG) {
-            debug("Parameter " + parameter + (isException ? "is" : "is not") + " an exception");
-         }
-
-         if (bundleAnnotation.enforceExceptionParameterAsLast() && isException && parameters.hasNext()) {
-            throw new IllegalArgumentException("Exception argument " + parameter + " has to be the last argument on the list. Look at " + executableMember);
-         }
-
-         if (!isException) {
-            nonExceptionParameters.add(parameter);
          }
       }
 
       writerOutput.println(")");
       writerOutput.println("   {");
 
-      // the one that will be used on the call
+      // the one that will be used on the logger call
       StringBuffer callList = new StringBuffer();
       parameters = nonExceptionParameters.iterator();
 
@@ -444,9 +391,7 @@ public class LogProcessor extends AbstractProcessor {
          }
       }
 
-
       String methodName;
-
       switch (messageAnnotation.level()) {
          case WARN:
             methodName = "warn"; break;
@@ -475,5 +420,59 @@ public class LogProcessor extends AbstractProcessor {
       }
       writerOutput.println("   }");
       writerOutput.println();
+   }
+
+   private static void tupples(String arg, char open, char close, Consumer<String> stringConsumer) {
+      int openAt = -1;
+      for (int i = 0; i < arg.length(); i++) {
+         char charAt = arg.charAt(i);
+
+         if (charAt == open) {
+            openAt = i;
+         } else if (charAt == close) {
+            if (openAt >= 0) {
+               stringConsumer.accept(arg.substring(openAt + 1, i));
+            }
+            openAt = -1;
+         }
+      }
+   }
+
+   private static void verifyMessagePlaceholders(final String message, final ExecutableElement holder) {
+      Objects.requireNonNull(message, "message must not be null");
+
+      tupples(message, '{', '}', (tupple) -> {
+         if (!tupple.equals("")) {
+            throw new IllegalArgumentException("Invalid placeholder argument {" + tupple + "} on message \'" + message + "\' as part of " + holder + "\nreplace it by {}");
+         }
+      });
+   }
+
+   private static void verifyIdNotProcessedPreviously(final Integer id, final String message, final HashMap<Integer, String> processedMessages) {
+      Objects.requireNonNull(id, "id must not be null");
+
+      if (processedMessages.containsKey(id)) {
+         String previousMessage = processedMessages.get(id);
+         throw new IllegalStateException("message " + id + " with definition = " + message + " was previously defined as " + previousMessage);
+      }
+   }
+
+   private static boolean verifyIfExceptionArgument(final ExecutableElement executableMember, final VariableElement parameter, final boolean enforceLastParam, final boolean hasMoreParams, final boolean hasExistingException) {
+      boolean isException = isException(parameter.asType(), parameter);
+      if (DEBUG) {
+         debug("Parameter " + parameter + (isException ? "is" : "is not") + " an exception");
+      }
+
+      if (isException) {
+         if (enforceLastParam && hasMoreParams) {
+            throw new IllegalArgumentException("Exception argument " + parameter + " has to be the last argument on the list. Look at: " + executableMember);
+         }
+
+         if (hasExistingException) {
+            throw new IllegalStateException("You can only have one exception argument defined per message/annotation, Look at: " + executableMember);
+         }
+      }
+
+      return isException;
    }
 }
