@@ -3,6 +3,5 @@ TODOs not explicitly noted in the code itself already:
 - Remove JBL use from last remaining tests etc tests still using it
 - Restore the Travis config file
 - Delete the old DELETE-ME-logging.properties and DELETE-ME-tests-logging.properties files once all needed comparisons during old test etc config replacements are done.
-- Update references to JBL and logging.properties in the documentation
 - Decide what if anything should be done around the removed logging config reload bits (Log4J2 enables reload itself, via its own config...or updates via management)
-- Decide if we should use the auto-detected log4j2.properties config filename instead
+- Decide if we should use the auto-detected log4j2.properties config filename instead of -Dlog4j2.configurationFile=log4j2-config.properties specified file.
