@@ -8,6 +8,18 @@ This chapter provides the following information for each release:
   - **Note:** Follow the general upgrade procedure outlined in the [Upgrading the Broker](upgrading.md) 
     chapter in addition to any version-specific upgrade instructions outlined here.
 
+TODO: flesh out
+## 3.0.0 / TBC
+
+Highlights:
+- Move logging to SLF4J + Log4J2
+
+#### Upgrading from older versions
+
+ 1. <instance>/etc/logging.properties removal
+ 2. <instance>/etc/log4j2-config.properties creation
+ 3. Related script or profile changes
+
 ## 2.26.0
 [Full release notes](https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12352297&projectId=12315920)
 
