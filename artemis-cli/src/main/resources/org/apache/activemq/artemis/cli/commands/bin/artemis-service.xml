@@ -50,7 +50,6 @@
    <startargument>-Dartemis.instance=%ARTEMIS_INSTANCE%</startargument>
    <startargument>-Ddata.dir=%ARTEMIS_DATA_DIR%</startargument>
    <startargument>-Dartemis.instance.etc=%ARTEMIS_INSTANCE_ETC%</startargument>
-   <startargument>-Dlog4j2.configurationFile=%ARTEMIS_INSTANCE_ETC_URI%/log4j2-config.properties</startargument>
    <startargument>-Djava.security.auth.login.config=%ARTEMIS_INSTANCE_ETC%\login.config</startargument>
    <startargument>-Dhawtio.disableProxy=true</startargument>
    <startargument>-Dhawtio.realm=activemq</startargument>
@@ -78,7 +77,6 @@
    <stopargument>-Dartemis.instance=%ARTEMIS_INSTANCE%</stopargument>
    <stopargument>-Ddata.dir=%ARTEMIS_DATA_DIR%</stopargument>
    <stopargument>-Dartemis.instance.etc="%ARTEMIS_INSTANCE_ETC%"</stopargument>
-   <stopargument>-Dlog4j2.configurationFile=%ARTEMIS_INSTANCE_ETC_URI%/log4j2-config.properties</stopargument>
 
    <stopargument>org.apache.activemq.artemis.boot.Artemis</stopargument>
 

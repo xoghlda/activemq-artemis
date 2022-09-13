@@ -50,9 +50,6 @@ HAWTIO_ROLE="NO_HAWTIO_ROLE"
 ARTEMIS_INSTANCE_ETC='${artemis.instance.etc}'
 . "$ARTEMIS_INSTANCE_ETC/artemis.profile"
 
-# Set Defaults Properties
-ARTEMIS_LOGGING_CONF="$ARTEMIS_INSTANCE_ETC_URI/log4j2-config.properties"
-
 
 CLASSPATH="$ARTEMIS_HOME/lib/artemis-boot.jar"
 
@@ -115,7 +112,6 @@ exec "$JAVACMD" \
     -Djava.io.tmpdir="$ARTEMIS_INSTANCE/tmp" \
     -Ddata.dir="$ARTEMIS_DATA_DIR" \
     -Dartemis.instance.etc="$ARTEMIS_INSTANCE_ETC" \
-    -Dlog4j2.configurationFile="$ARTEMIS_LOGGING_CONF" \
     -Dartemis.default.sensitive.string.codec.key="$ARTEMIS_DEFAULT_SENSITIVE_STRING_CODEC_KEY" \
     $DEBUG_ARGS \
     org.apache.activemq.artemis.boot.Artemis "$@"

@@ -17,7 +17,7 @@ Highlights:
 #### Upgrading from older versions
 
  1. <instance>/etc/logging.properties removal
- 2. <instance>/etc/log4j2-config.properties creation
+ 2. <instance>/etc/log4j2.properties creation
  3. Related script or profile changes
 
 ## 2.26.0

@@ -2,7 +2,7 @@
 
 Apache ActiveMQ Artemis uses the [SLF4J](https://www.slf4j.org/) logging facade for logging,
 with the broker assembly providing [Log4J 2](https://logging.apache.org/log4j/2.x/manual/)
-as the logging implementation. This is configurable via the `log4j2-config.properties` file
+as the logging implementation. This is configurable via the `log4j2.properties` file
 found in the broker instance `etc` directory, which is configured by default to log to
 both the console and to a file.
 
@@ -61,7 +61,7 @@ called `log4j2.properties` which will be picked up automatically.
 Alternatively, use of a specific configuration file can be configured via system
 property `log4j2.configurationFile`, e.g.:
 ```
--Dlog4j2.configurationFile=file:///path/to/log4j2-config.properties
+-Dlog4j2.configurationFile=file:///path/to/custom-log4j2-config.properties
 ```
 
 The following is an example `log4j2.properties` for a client
@@ -112,7 +112,7 @@ different types of broker events, these are:
 > the performance impact is "too much" will depend on your use-case.
 
 These three audit loggers are disabled by default in the broker
-`log4j2-config.properties` configuration file:
+`log4j2.properties` configuration file:
 
 ```
 ...
