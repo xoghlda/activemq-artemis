@@ -4,3 +4,10 @@ TODOs not explicitly noted in the code itself already:
 - Restore the Travis config file
 - Delete the old DELETE-ME-logging.properties and DELETE-ME-tests-logging.properties files once all needed comparisons during old test etc config replacements are done.
 - Decide what if anything should be done around the removed logging config reload bits (Log4J2 enables reload itself, via its own config...or updates via management)
+- consider module name of annotation processor, currently artemis-log-processor...perhaps artemis-annotation-processor?
+- Consider names of annotations + packages and their alignment:
+ -- org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
+ -- org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
+ -- org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+ -- org.apache.activemq.artemis.logprocessor.annotation.Message;
+ -- org.apache.activemq.artemis.logs.BundleFactory;
