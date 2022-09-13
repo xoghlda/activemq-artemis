@@ -89,6 +89,7 @@ under the License.
             <module>queue-requestor</module>
             <module>queue-selector</module>
             <module>reattach-node</module>
+            <module>rest</module>
             <module>request-reply</module>
             <module>scheduled-message</module>
             <module>security</module>
@@ -165,6 +166,7 @@ under the License.
             <module>queue-requestor</module>
             <module>queue-selector</module>
             <module>reattach-node</module>
+            <module>rest</module>
             <module>request-reply</module>
             <module>scheduled-message</module>
             <module>security</module>
