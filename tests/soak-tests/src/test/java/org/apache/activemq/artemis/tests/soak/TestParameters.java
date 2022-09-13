@@ -84,11 +84,9 @@ public class TestParameters {
 
       if (value == null) {
          Assert.fail("mandatory System property '" + property + "' not defined");
-      } else {
-         logger.debug("Using " + property + "=" + value);
       }
 
-      logger.info(property + "=" + value);
+      logger.info("{}={}", property, value);
 
       return value;
    }
