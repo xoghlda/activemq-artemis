@@ -492,7 +492,9 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
       ConnectionEntry entry = connections.remove(remotingConnectionID);
 
       if (entry != null) {
-         logger.debug("RemotingServiceImpl::removing connection ID " + remotingConnectionID);
+         if (logger.isDebugEnabled()) {
+            logger.debug("RemotingServiceImpl::removing succeeded connection ID {}, we now have {} connections", remotingConnectionID, connections.size());
+         }
          connectionCountLatch.countDown();
          return entry.connection;
       } else {
@@ -582,6 +584,9 @@ public class RemotingServiceImpl implements RemotingService, ServerConnectionLif
    @Override
    public void addConnectionEntry(Connection connection, ConnectionEntry entry) {
       connections.put(connection.getID(), entry);
+      if (logger.isDebugEnabled()) {
+         logger.debug("Adding connection {}, we now have {}", connection.getID(), connections.size());
+      }
    }
 
    @Override
