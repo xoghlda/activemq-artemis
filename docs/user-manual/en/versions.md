@@ -19,8 +19,8 @@ Highlights:
  1. <instance>/etc/logging.properties removal
  2. <instance>/etc/log4j2.properties creation
  3. Related script or profile changes
- 4. The brokers ConfigurationFileRefreshPeriod no longer covers logging configuration. Log4J2 has its own
-    config reload handling, configured via the monitorInterval property in the log4j2.properties file.
+ 4. The brokers configuration-file-refresh-period no longer covers logging configuration refresh. Log4J2 has
+    its own config reload handling, configured via the monitorInterval property in the log4j2.properties file.
     The etc/log4j2.properties file has a 5 second monitorInterval set to align with the prior behaviour.
 
 ## 2.26.0

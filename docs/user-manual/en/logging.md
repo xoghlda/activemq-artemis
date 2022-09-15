@@ -34,6 +34,18 @@ logger.my_logger_ref.name=org.foo
 my_logger_ref.level=TRACE
 ```
 
+## Configuration Reload
+
+Log4J2 has its own configuration file reloading mechanism, which is itself configured via
+the same log4j2.properties configuration file. To enable reload upon configuration updates,
+set the `monitorInterval` config property to the interval in seconds that the file should
+be monitored for updates, e.g:
+
+```
+# Monitor config file every 5 seconds for updates
+monitorInterval = 5
+```
+
 ## Logging in a client application
 
 Firstly, if you want to enable logging on the client side you need to
@@ -64,10 +76,13 @@ property `log4j2.configurationFile`, e.g.:
 -Dlog4j2.configurationFile=file:///path/to/custom-log4j2-config.properties
 ```
 
-The following is an example `log4j2.properties` for a client
+The following is an example `log4j2.properties` for a client application.
 
 ```
 # Log4J 2 configuration
+
+# Monitor config file every X seconds for updates
+monitorInterval = 5
 
 rootLogger = INFO, console, log_file
 
