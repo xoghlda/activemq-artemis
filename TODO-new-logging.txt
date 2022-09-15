@@ -1,7 +1,6 @@
 TODOs not explicitly noted in the code itself already:
 
 - Restore the Travis config file
-- Decide what if anything should be done around the removed logging config reload bits (Log4J2 enables reload itself, via its own config...or updates via management)
 - consider module name of annotation processor, currently artemis-log-processor...perhaps artemis-annotation-processor?
 - Consider names of annotations + packages and their alignment:
  -- org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
