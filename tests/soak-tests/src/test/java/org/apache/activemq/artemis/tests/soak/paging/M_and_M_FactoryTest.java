@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 
 public class M_and_M_FactoryTest extends SoakTestBase {
 
-   private static final Logger logger = LoggerFactory.getLogger(MMSFactoryTest.class);
+   private static final Logger logger = LoggerFactory.getLogger(M_and_M_FactoryTest.class);
 
    public static final String SERVER_NAME_0 = "mmfactory";
    private static final String JMX_SERVER_HOSTNAME = "localhost";
