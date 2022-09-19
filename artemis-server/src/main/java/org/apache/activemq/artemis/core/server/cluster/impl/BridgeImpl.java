@@ -226,6 +226,9 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
 
    @Override
    public void onCreditsFlow(boolean blocked, ClientProducerCredits producerCredits) {
+      if (logger.isTraceEnabled()) {
+         logger.trace("Bridge {} received credits, with blocked = {}", this.getName(), blocked);
+      }
       this.blockedOnFlowControl = blocked;
       if (!blocked) {
          queue.deliverAsync();
@@ -560,27 +563,32 @@ public class BridgeImpl implements Bridge, SessionFailureListener, SendAcknowled
    @Override
    public HandleStatus handle(final MessageReference ref) throws Exception {
       if (filter != null && !filter.match(ref.getMessage())) {
+         if (logger.isTraceEnabled()) {
+            logger.trace("message reference {} is no match for bridge {}", ref, this.getName());
+         }
          return HandleStatus.NO_MATCH;
       }
 
       synchronized (this) {
          if (!active || !session.isWritable(this)) {
             if (logger.isDebugEnabled()) {
-               logger.debug(this + "::Ignoring reference on bridge as it is set to inactive ref=" + ref);
+               logger.debug(this + "::Ignoring reference on bridge as it is set to inactive ref {}, active = {}", ref, active);
             }
             return HandleStatus.BUSY;
          }
 
          if (blockedOnFlowControl) {
+            logger.debug("Bridge {} is blocked on flow control, cannot receive {}", getName(), ref);
             return HandleStatus.BUSY;
          }
 
          if (deliveringLargeMessage) {
+            logger.trace("Bridge {} is busy delivering a large message", this.getName());
             return HandleStatus.BUSY;
          }
 
          if (logger.isTraceEnabled()) {
-            logger.trace("Bridge " + this + " is handling reference=" + ref);
+            logger.trace("Bridge {} is handling reference {} ", ref);
          }
 
          ref.handled();
