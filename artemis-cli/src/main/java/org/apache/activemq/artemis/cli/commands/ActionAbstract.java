@@ -17,12 +17,16 @@
 package org.apache.activemq.artemis.cli.commands;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.URI;
 import java.util.Map;
 
 import io.airlift.airline.Option;
 import org.apache.activemq.artemis.api.core.TransportConfiguration;
+import org.apache.activemq.artemis.cli.CLIException;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.config.FileDeploymentManager;
 import org.apache.activemq.artemis.core.config.impl.FileConfiguration;
@@ -85,6 +89,21 @@ public abstract class ActionAbstract implements Action {
          }
       }
       return brokerInstance;
+   }
+
+
+   protected void verifyLoggingConfiguration() throws Exception {
+      File brokerInstanceFile = new File(getBrokerInstance());
+      File etc = new File(brokerInstanceFile, "etc");
+      File log4jConfig = new File(etc, Create.ETC_LOG4J2_PROPERTIES);
+
+      if (!log4jConfig.exists()) {
+         try (InputStream inputStream = this.getClass().getResourceAsStream("etc/" + Create.ETC_LOG4J2_PROPERTIES);
+              OutputStream outputStream = new FileOutputStream(log4jConfig)) {
+            outputStream.write(inputStream.readAllBytes());
+         }
+         throw new CLIException(Create.ETC_LOG4J2_PROPERTIES + " could not be found under " + etc.getAbsolutePath() + ". A new file default file was just created. Please retry the execution now after the configuration been placed");
+      }
    }
 
    public String getBrokerURLInstance(String acceptor) {
@@ -187,6 +206,10 @@ public abstract class ActionAbstract implements Action {
    public Object execute(ActionContext context) throws Exception {
       this.actionContext = context;
       ActionContext.setSystem(context);
+
+      if (getBrokerInstance() != null) {
+         verifyLoggingConfiguration();
+      }
 
       return null;
    }
