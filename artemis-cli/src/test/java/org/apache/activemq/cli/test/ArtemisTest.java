@@ -183,25 +183,6 @@ public class ArtemisTest extends CliTestBase {
       Artemis.main("create", instance1.getAbsolutePath(), "--silent", "--no-fsync", "--no-autotune");
    }
 
-   @Test
-   public void testVerifySystemLog() throws Exception {
-      File instance1 = new File(temporaryFolder.getRoot(), "instance1");
-      Artemis.main("create", instance1.getAbsolutePath(), "--silent", "--no-fsync", "--no-autotune");
-      File etc = new File(instance1, "etc");
-      File log4jLogging = new File(etc, Create.ETC_LOG4J2_PROPERTIES);
-      Assert.assertTrue(log4jLogging.exists());
-      log4jLogging.delete();
-      Assert.assertFalse(log4jLogging.exists());
-      System.setProperty("artemis.instance", instance1.getAbsolutePath());
-      try {
-         Artemis.internalExecute("run");
-         Assert.fail("expected failure");
-      } catch (CLIException expected) {
-         // I expect the system to not start with an error, however the file will be recreated
-      }
-      Assert.assertTrue(log4jLogging.exists());
-   }
-
 
    @Test
    public void testCreateDB() throws Exception {
