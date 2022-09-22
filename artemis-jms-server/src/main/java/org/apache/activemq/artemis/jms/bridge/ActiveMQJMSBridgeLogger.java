@@ -25,7 +25,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 /**
  * Logger Code 34
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "34[0-9]{4}")
 public interface ActiveMQJMSBridgeLogger {
 
    ActiveMQJMSBridgeLogger LOGGER = BundleFactory.newBundle(ActiveMQJMSBridgeLogger.class, ActiveMQJMSBridgeLogger.class.getPackage().getName());

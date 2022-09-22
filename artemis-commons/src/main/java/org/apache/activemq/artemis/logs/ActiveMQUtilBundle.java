@@ -22,12 +22,8 @@ import org.apache.activemq.artemis.logs.annotation.Message;
 
 /**
  * Logger Code 20
- *
- * each message id must be 6 digits long starting with 20, the 3rd digit should be 9
- *
- * so 209000 to 209999
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "20[0-9]{4}")
 public interface ActiveMQUtilBundle {
 
    ActiveMQUtilBundle BUNDLE = BundleFactory.newBundle(ActiveMQUtilBundle.class);

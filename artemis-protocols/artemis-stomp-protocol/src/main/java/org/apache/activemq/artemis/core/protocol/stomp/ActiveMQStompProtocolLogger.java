@@ -23,19 +23,9 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 /**
  * Logger Code 33
  *
- * each message id must be 6 digits long starting with 33, the 3rd digit donates the level so
- *
- * INF0  1
- * WARN  2
- * DEBUG 3
- * ERROR 4
- * TRACE 5
- * FATAL 6
- *
- * so an INFO message would be 331000 to 331999
  */
 
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "33[0-9]{4}")
 public interface ActiveMQStompProtocolLogger {
 
    ActiveMQStompProtocolLogger LOGGER = BundleFactory.newBundle(ActiveMQStompProtocolLogger.class, ActiveMQStompProtocolLogger.class.getPackage().getName());
@@ -46,6 +36,6 @@ public interface ActiveMQStompProtocolLogger {
    @LogMessage(id = 332069, value = "Sent ERROR frame to STOMP client {}: {}", level = LogMessage.Level.WARN)
    void sentErrorToClient(String address, String message);
 
-   @LogMessage(id = 334023, value = "Unable to send frame {}", level = LogMessage.Level.ERROR)
+   @LogMessage(id = 332070, value = "Unable to send frame {}", level = LogMessage.Level.ERROR)
    void errorSendingFrame(StompFrame frame, Exception e);
 }

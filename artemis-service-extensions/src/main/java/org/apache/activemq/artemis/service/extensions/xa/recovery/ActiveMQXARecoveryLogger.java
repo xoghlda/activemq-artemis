@@ -25,7 +25,7 @@ import org.w3c.dom.Node;
 /**
  * Logger Code 17
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "17[0-9]{4}")
 public interface ActiveMQXARecoveryLogger {
 
    ActiveMQXARecoveryLogger LOGGER = BundleFactory.newBundle(ActiveMQXARecoveryLogger.class, ActiveMQXARecoveryLogger.class.getPackage().getName());

@@ -30,7 +30,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
  * articles. Unused methods should be marked as deprecated.
  */
 
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "33[0-9]{4}")
 public interface ActiveMQStompProtocolMessageBundle {
 
    ActiveMQStompProtocolMessageBundle BUNDLE = BundleFactory.newBundle(ActiveMQStompProtocolMessageBundle.class);

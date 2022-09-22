@@ -28,7 +28,7 @@ import org.w3c.dom.Node;
 /**
  * Logger Code 21
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "21[0-9]{4}")
 public interface ActiveMQClientLogger {
 
    ActiveMQClientLogger LOGGER = BundleFactory.newBundle(ActiveMQClientLogger.class, ActiveMQClientLogger.class.getPackage().getName());

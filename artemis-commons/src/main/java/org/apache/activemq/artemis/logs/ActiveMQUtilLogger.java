@@ -22,7 +22,7 @@ import org.apache.activemq.artemis.logs.annotation.LogMessage;
 /**
  * Logger Code 20
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "20[0-9]{4}")
 public interface ActiveMQUtilLogger {
 
    ActiveMQUtilLogger LOGGER = BundleFactory.newBundle(ActiveMQUtilLogger.class, ActiveMQUtilLogger.class.getPackage().getName());

@@ -22,19 +22,8 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 10
- *
- * each message id must be 6 digits long starting with 10, the 3rd digit donates the level so
- *
- * INF0  1
- * WARN  2
- * DEBUG 3
- * ERROR 4
- * TRACE 5
- * FATAL 6
- *
- * so an INFO message would be 101000 to 101999
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "10[0-9]{4}")
 public interface ActiveMQBootstrapLogger {
 
    ActiveMQBootstrapLogger LOGGER = BundleFactory.newBundle(ActiveMQBootstrapLogger.class, ActiveMQBootstrapLogger.class.getPackage().getName());

@@ -27,5 +27,9 @@ public @interface LogBundle {
 
    String projectCode();
 
+   /** if set, every code generated must match this regular expression.
+    *  this is useful to validate ranges.*/
+   String regexID() default "";
+
    boolean enforceExceptionParameterAsLast() default true;
 }

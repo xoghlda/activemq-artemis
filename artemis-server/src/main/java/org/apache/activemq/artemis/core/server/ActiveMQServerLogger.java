@@ -59,17 +59,10 @@ import org.w3c.dom.Node;
  *
  * each message id must be 6 digits long starting with 22, the 3rd digit donates the level so
  *
- * INF0  1
- * WARN  2
- * DEBUG 3
- * ERROR 4
- * TRACE 5
- * FATAL 6
- *
  * so an INFO message would be 221000 to 221999
  */
 
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "22[0-9]{4}")
 public interface ActiveMQServerLogger {
 
    ActiveMQServerLogger LOGGER = BundleFactory.newBundle(ActiveMQServerLogger.class, ActiveMQServerLogger.class.getPackage().getName());
@@ -550,7 +543,7 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222072, value = "Timed out flushing channel on InVMConnection", level = LogMessage.Level.WARN)
    void timedOutFlushingInvmChannel();
 
-   @LogMessage(id = 212074, value = "channel group did not completely close", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222074, value = "channel group did not completely close", level = LogMessage.Level.WARN)
    void nettyChannelGroupError();
 
    @LogMessage(id = 222075, value = "{} is still connected to {}", level = LogMessage.Level.WARN)
@@ -1130,10 +1123,10 @@ public interface ActiveMQServerLogger {
    @LogMessage(id = 222270, value = "Unable to create management notification address: {}", level = LogMessage.Level.WARN)
    void unableToCreateManagementNotificationAddress(SimpleString addressName, Exception e);
 
-   @LogMessage(id = 22272, value = "Message ack in prepared tx for queue {} which does not exist. This ack will be ignored.", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222702, value = "Message ack in prepared tx for queue {} which does not exist. This ack will be ignored.", level = LogMessage.Level.WARN)
    void journalMessageAckMissingQueueInPreparedTX(Long queueID);
 
-   @LogMessage(id = 22273,  value = "Address \"{}\" is full. Bridge {} will disconnect", level = LogMessage.Level.WARN)
+   @LogMessage(id = 222703,  value = "Address \"{}\" is full. Bridge {} will disconnect", level = LogMessage.Level.WARN)
    void bridgeAddressFull(String addressName, String bridgeName);
 
    @LogMessage(id = 222274, value = "Failed to deploy address {}: {}", level = LogMessage.Level.WARN)
@@ -1141,14 +1134,6 @@ public interface ActiveMQServerLogger {
 
    @LogMessage(id = 222275, value = "Failed to deploy queue {}: {}", level = LogMessage.Level.WARN)
    void problemDeployingQueue(String queueName, String message);
-
-   //TODO: deprecate or remove? This is part of the logging config itself now
-   @LogMessage(id = 222276, value = "Failed to process changes to the logging configuration file: {}", level = LogMessage.Level.WARN)
-   void loggingReloadFailed(String configFile, Exception e);
-
-   //TODO: deprecate or remove? This is part of the logging config itself now
-   @LogMessage(id = 222277, value = "Problem initializing automatic logging configuration reload for {}", level = LogMessage.Level.WARN)
-   void problemAddingConfigReloadCallback(String propertyName, Exception e);
 
    @LogMessage(id = 222278, value = "Unable to extract GroupSequence from message", level = LogMessage.Level.WARN)
    void unableToExtractGroupSequence(Throwable e);

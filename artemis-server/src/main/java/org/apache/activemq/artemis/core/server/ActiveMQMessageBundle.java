@@ -67,7 +67,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
  * Once released, methods should not be deleted as they may be referenced by knowledge base
  * articles. Unused methods should be marked as deprecated.
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "22[0-9]{4}")
 public interface ActiveMQMessageBundle {
 
    ActiveMQMessageBundle BUNDLE = BundleFactory.newBundle(ActiveMQMessageBundle.class);
@@ -447,7 +447,7 @@ public interface ActiveMQMessageBundle {
    @Message(id = 229216, value = "Invalid queue name: {}")
    ActiveMQIllegalStateException invalidQueueName(SimpleString queueName);
 
-   @Message(id = 119217, value = "Cannot write to closed file: {}")
+   @Message(id = 229217, value = "Cannot write to closed file: {}")
    ActiveMQIOErrorException cannotWriteToClosedFile(SequentialFile file);
 
    @Message(id = 229218, value = "Failed to locate broker configuration URL")

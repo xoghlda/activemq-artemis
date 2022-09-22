@@ -41,11 +41,8 @@ import org.w3c.dom.Node;
 /**
  * Logger Code 21
  *
- * each message id must be 6 digits long starting with 21, the 3rd digit should be 9
- *
- * so 219000 to 219999
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "21[0-9]{4}")
 public interface ActiveMQClientMessageBundle {
 
    ActiveMQClientMessageBundle BUNDLE = BundleFactory.newBundle(ActiveMQClientMessageBundle.class);

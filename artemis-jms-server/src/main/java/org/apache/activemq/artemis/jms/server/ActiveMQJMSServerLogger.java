@@ -25,7 +25,7 @@ import org.w3c.dom.Node;
 /**
  * Logger Code 12
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "12[0-9]{4}")
 public interface ActiveMQJMSServerLogger {
 
    /**

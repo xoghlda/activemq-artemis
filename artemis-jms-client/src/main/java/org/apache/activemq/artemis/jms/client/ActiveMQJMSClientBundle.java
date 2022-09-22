@@ -39,7 +39,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
  *
  * so 139000 to 139999
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "13[0-9]{4}")
 public interface ActiveMQJMSClientBundle {
 
    ActiveMQJMSClientBundle BUNDLE = BundleFactory.newBundle(ActiveMQJMSClientBundle.class);

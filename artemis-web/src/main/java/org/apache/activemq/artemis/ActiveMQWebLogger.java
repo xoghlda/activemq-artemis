@@ -26,7 +26,7 @@ import java.io.File;
  * Logger Code 24
  *
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "24[0-9]{4}")
 public interface ActiveMQWebLogger  {
 
    ActiveMQWebLogger LOGGER = BundleFactory.newBundle(ActiveMQWebLogger.class, ActiveMQWebLogger.class.getPackage().getName());

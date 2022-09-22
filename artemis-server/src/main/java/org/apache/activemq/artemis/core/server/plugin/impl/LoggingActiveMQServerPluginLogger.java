@@ -39,7 +39,7 @@ import org.apache.activemq.artemis.utils.critical.CriticalComponent;
 /**
  * Logger Code 84
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "84[0-9]{4}")
 public interface LoggingActiveMQServerPluginLogger {
 
    /**

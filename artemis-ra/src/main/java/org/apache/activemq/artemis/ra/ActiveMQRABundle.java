@@ -28,7 +28,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 /**
  * Logger Code 15
  */
-@LogBundle(projectCode = "AMQ")
+@LogBundle(projectCode = "AMQ", regexID = "15[0-9]{4}")
 public interface ActiveMQRABundle {
 
    /**
