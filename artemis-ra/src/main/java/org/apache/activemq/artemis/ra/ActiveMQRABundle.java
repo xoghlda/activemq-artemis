@@ -21,8 +21,8 @@ import javax.jms.JMSRuntimeException;
 import javax.resource.NotSupportedException;
 
 import org.apache.activemq.artemis.api.core.ActiveMQIllegalStateException;
-import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.annotation.LogBundle;
+import org.apache.activemq.artemis.logs.annotation.Message;
 import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**

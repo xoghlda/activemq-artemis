@@ -16,8 +16,8 @@
  */
 package org.apache.activemq.artemis.logs;
 
-import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.annotation.LogBundle;
+import org.apache.activemq.artemis.logs.annotation.LogMessage;
 
 /**
  * Logger Code 20

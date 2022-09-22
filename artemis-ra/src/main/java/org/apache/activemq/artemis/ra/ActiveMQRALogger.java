@@ -16,9 +16,9 @@
  */
 package org.apache.activemq.artemis.ra;
 
-import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
-import org.apache.activemq.artemis.logprocessor.annotation.Message;
+import org.apache.activemq.artemis.logs.annotation.LogBundle;
+import org.apache.activemq.artemis.logs.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.annotation.Message;
 import org.apache.activemq.artemis.logs.BundleFactory;
 import org.apache.activemq.artemis.ra.inflow.ActiveMQActivationSpec;
 

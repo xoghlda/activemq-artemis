@@ -16,9 +16,9 @@
  */
 package org.apache.activemq.artemis.logs;
 
-import org.apache.activemq.artemis.logprocessor.annotation.LogBundle;
-import org.apache.activemq.artemis.logprocessor.annotation.GetLogger;
-import org.apache.activemq.artemis.logprocessor.annotation.LogMessage;
+import org.apache.activemq.artemis.logs.annotation.LogBundle;
+import org.apache.activemq.artemis.logs.annotation.GetLogger;
+import org.apache.activemq.artemis.logs.annotation.LogMessage;
 import org.slf4j.Logger;
 
 import javax.management.ObjectName;

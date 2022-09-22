@@ -14,16 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.activemq.artemis.logprocessor.annotation;
+package org.apache.activemq.artemis.logs.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/** This tells the processor this method should return the Logger used by the instance */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
-public @interface GetLogger {
+public @interface Message {
+
+   int id();
+
+   String value();
 
 }

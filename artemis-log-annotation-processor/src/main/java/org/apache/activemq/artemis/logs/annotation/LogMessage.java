@@ -14,18 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.activemq.artemis.logprocessor.annotation;
+package org.apache.activemq.artemis.logs.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
-public @interface LogBundle {
+public @interface LogMessage {
 
-   String projectCode();
+   int id();
 
-   boolean enforceExceptionParameterAsLast() default true;
+   String value();
+
+   Level level();
+
+   enum Level {
+      ERROR, WARN, INFO,
+      // TODO DEBUG and TRACE will be removed.
+        @Deprecated DEBUG, @Deprecated TRACE;
+
+      Level() {
+      }
+   }
+
+
 }
