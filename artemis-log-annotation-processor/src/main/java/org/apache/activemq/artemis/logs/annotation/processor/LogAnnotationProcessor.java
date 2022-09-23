@@ -265,9 +265,7 @@ public class LogAnnotationProcessor extends AbstractProcessor {
       Iterator<? extends VariableElement> parameters = executableMember.getParameters().iterator();
 
       boolean hasParameters = false;
-
       VariableElement exceptionParameter = null;
-      final boolean enforceLastParam = bundleAnnotation.enforceExceptionParameterAsLast();
 
       // the one that will be used on the call
       StringBuffer callList = new StringBuffer();
@@ -275,7 +273,7 @@ public class LogAnnotationProcessor extends AbstractProcessor {
          hasParameters = true;
          VariableElement parameter = parameters.next();
 
-         boolean isException = verifyIfExceptionArgument(executableMember, parameter, enforceLastParam, parameters.hasNext(), exceptionParameter != null);
+         boolean isException = verifyIfExceptionArgument(executableMember, parameter, parameters.hasNext(), exceptionParameter != null);
          if (isException) {
             exceptionParameter = parameter;
          }
@@ -407,14 +405,13 @@ public class LogAnnotationProcessor extends AbstractProcessor {
 
       VariableElement exceptionParameter = null;
       ArrayList<VariableElement> nonExceptionParameters = new ArrayList<>();
-      final boolean enforceLastParam = bundleAnnotation.enforceExceptionParameterAsLast();
 
       Iterator<? extends VariableElement> parameters = parametersList.iterator();
       while (parameters.hasNext()) {
          hasParameters = true;
          VariableElement parameter = parameters.next();
 
-         boolean isException = verifyIfExceptionArgument(executableMember, parameter, enforceLastParam, parameters.hasNext(), exceptionParameter != null);
+         boolean isException = verifyIfExceptionArgument(executableMember, parameter, parameters.hasNext(), exceptionParameter != null);
          if (isException) {
             exceptionParameter = parameter;
          } else {
@@ -519,14 +516,14 @@ public class LogAnnotationProcessor extends AbstractProcessor {
       }
    }
 
-   private static boolean verifyIfExceptionArgument(final ExecutableElement executableMember, final VariableElement parameter, final boolean enforceLastParam, final boolean hasMoreParams, final boolean hasExistingException) {
+   private static boolean verifyIfExceptionArgument(final ExecutableElement executableMember, final VariableElement parameter, final boolean hasMoreParams, final boolean hasExistingException) {
       boolean isException = isException(parameter.asType(), parameter);
       if (DEBUG) {
          debug("Parameter " + parameter + (isException ? "is" : "is not") + " an exception");
       }
 
       if (isException) {
-         if (enforceLastParam && hasMoreParams) {
+         if (hasMoreParams) {
             throw new IllegalArgumentException("Exception argument " + parameter + " has to be the last argument on the list. Look at: " + executableMember);
          }
 

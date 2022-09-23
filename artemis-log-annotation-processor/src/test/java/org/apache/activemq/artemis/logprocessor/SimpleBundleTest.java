@@ -98,46 +98,6 @@ public class SimpleBundleTest {
    }
 
    @Test
-   public void outOfOrderException() {
-      AssertionLoggerHandler.startCapture(false, true);
-      try {
-         SimpleBundle.MESSAGES.outOfOrder(createMyException("NotHere"), "2");
-         Assert.assertTrue("parameter2 was not on the output", AssertionLoggerHandler.findText("p2"));
-         Assert.assertFalse(AssertionLoggerHandler.findText("pNotHere"));
-         Assert.assertTrue("Stack trace was not printed", AssertionLoggerHandler.findText("createMyException"));
-         Assert.assertFalse("logging not working", AssertionLoggerHandler.findText("{}"));
-      } finally {
-         AssertionLoggerHandler.stopCapture();
-      }
-   }
-
-   @Test
-   public void outOfOrderExceptionLongParameter() {
-      try {
-         AssertionLoggerHandler.startCapture(false, false);
-         SimpleBundle.MESSAGES.outOfOrder(new MyException("ex1"), "2", "3", "4");
-         Assert.assertFalse("Exception should not be on the output", AssertionLoggerHandler.findText("pex1"));
-         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p2"));
-         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
-         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
-         Assert.assertFalse("formatting not working", AssertionLoggerHandler.findText("{}"));
-
-         AssertionLoggerHandler.clear();
-         AssertionLoggerHandler.startCapture(false, true);
-
-         SimpleBundle.MESSAGES.outOfOrder(createMyException("ex1"), "2", "3", "4");
-         Assert.assertFalse("Exception should not be on the output", AssertionLoggerHandler.findText("pex1"));
-         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p3"));
-         Assert.assertTrue("parameter not found", AssertionLoggerHandler.findText("p4"));
-         Assert.assertTrue("stack not found", AssertionLoggerHandler.findText("createMyException"));
-         Assert.assertFalse("formatting not working", AssertionLoggerHandler.findText("{}"));
-
-      } finally {
-         AssertionLoggerHandler.stopCapture();
-      }
-   }
-
-   @Test
    public void longList() {
       AssertionLoggerHandler.startCapture(false, true);
       try {
@@ -159,18 +119,18 @@ public class SimpleBundleTest {
       try {
          AssertionLoggerHandler.startCapture(false, false);
 
-         SimpleBundle.MESSAGES.onlyException(createMyException("MSG7777"));
+         SimpleBundle.MESSAGES.onlyException(createMyExceptionBreadcrumbMethod("MSG7777"));
 
-         Assert.assertTrue(AssertionLoggerHandler.findText("TST16"));
+         Assert.assertTrue(AssertionLoggerHandler.findText("TST14"));
          Assert.assertFalse(AssertionLoggerHandler.findText("MSG7777"));
 
          AssertionLoggerHandler.clear();
 
          AssertionLoggerHandler.startCapture(false, true);
-         SimpleBundle.MESSAGES.onlyException(createMyException("MSG7777"));
-         Assert.assertTrue(AssertionLoggerHandler.findText("TST16"));
+         SimpleBundle.MESSAGES.onlyException(createMyExceptionBreadcrumbMethod("MSG7777"));
+         Assert.assertTrue(AssertionLoggerHandler.findText("TST14"));
          Assert.assertTrue(AssertionLoggerHandler.findText("MSG7777"));
-         Assert.assertTrue(AssertionLoggerHandler.findText("createMyException"));
+         Assert.assertTrue(AssertionLoggerHandler.findText("createMyExceptionBreadcrumbMethod"));
       } finally {
          AssertionLoggerHandler.stopCapture();
       }
@@ -178,7 +138,7 @@ public class SimpleBundleTest {
 
 
    // I'm doing it on a method just to assert if this method will appear on the stack trace
-   private MyException createMyException(String message) {
+   private MyException createMyExceptionBreadcrumbMethod(String message) {
       return new MyException(message);
    }
 
