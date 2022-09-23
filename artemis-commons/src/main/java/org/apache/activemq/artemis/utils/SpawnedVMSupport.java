@@ -206,8 +206,7 @@ public class SpawnedVMSupport {
 
       String loggingConfigFile = System.getProperty("log4j2.configurationFile");
       if (loggingConfigFile != null) {
-         // TODO: why does it add the trailing space here but not other places?
-         commandList.add("-Dlog4j2.configurationFile=" + loggingConfigFile + " ");
+         commandList.add("-Dlog4j2.configurationFile=" + loggingConfigFile);
       }
 
       String jacocoAgent = System.getProperty("jacoco.agent");
