@@ -287,18 +287,17 @@ public class LogAnnotationProcessor extends AbstractProcessor {
       }
 
       // the real implementation
-      writerOutput.println(")");
-      writerOutput.println("   {");
+      writerOutput.println(") {");
 
       String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
       if (!hasParameters) {
-         writerOutput.println("     String returnString = \"" + formattingString + "\";");
+         writerOutput.println("      String returnString = \"" + formattingString + "\";");
       } else {
-         writerOutput.println("     String returnString = MessageFormatter.arrayFormat(\"" + formattingString + "\", new Object[]{" + callList + "}).getMessage();");
+         writerOutput.println("      String returnString = MessageFormatter.arrayFormat(\"" + formattingString + "\", new Object[]{" + callList + "}).getMessage();");
       }
 
       if (executableMember.getReturnType().toString().equals(String.class.getName())) {
-         writerOutput.println("     return returnString;");
+         writerOutput.println("      return returnString;");
       } else {
          writerOutput.println();
          writerOutput.println("      {");
@@ -378,7 +377,9 @@ public class LogAnnotationProcessor extends AbstractProcessor {
       // This is really a debug output
       writerOutput.println("   // " + loggerAnnotation.toString());
       writerOutput.println("   @Override");
-      writerOutput.println("   public Logger " + executableMember.getSimpleName() + "() { return logger; }");
+      writerOutput.println("   public Logger " + executableMember.getSimpleName() + "() {");
+      writerOutput.println("      return logger;");
+      writerOutput.println("   }");
       writerOutput.println();
    }
 
@@ -424,8 +425,7 @@ public class LogAnnotationProcessor extends AbstractProcessor {
          }
       }
 
-      writerOutput.println(")");
-      writerOutput.println("   {");
+      writerOutput.println(") {");
 
       // the one that will be used on the logger call
       StringBuffer callList = new StringBuffer();
