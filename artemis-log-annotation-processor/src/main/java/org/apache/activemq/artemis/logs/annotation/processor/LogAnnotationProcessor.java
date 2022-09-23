@@ -65,7 +65,7 @@ public class LogAnnotationProcessor extends AbstractProcessor {
    }
 
    /**
-    * define a system variable ARTEMIS_LOG_ANNOTATION_PROCESSOR_DEBUG=true in order to see debug output
+    * define environment variable ARTEMIS_LOG_ANNOTATION_PROCESSOR_DEBUG=true in order to see debug output
     */
    protected static void debug(String debugMessage) {
       if (DEBUG) {
@@ -443,23 +443,9 @@ public class LogAnnotationProcessor extends AbstractProcessor {
          }
       }
 
-      String methodName;
-      switch (messageAnnotation.level()) {
-         case WARN:
-            methodName = "warn"; break;
-         case INFO:
-            methodName = "info"; break;
-         case ERROR:
-            methodName = "error"; break;
-         case DEBUG: // TODO remove this
-            methodName = "debug"; break;
-         case TRACE: // TODO remove this
-            methodName = "trace"; break;
-         default:
-            throw new IllegalStateException("illegal method level " + messageAnnotation.level());
-      }
+      final String methodName = getLogOutputMethodName(messageAnnotation);
 
-      String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
+      final String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
       if (exceptionParameter != null) {
          // TODO: needed? Logger impl handles picking up exception arg at end itself, would only incur array overhead if needed (>2 args) rather than always as this does.
          // ALso looks like MessageFormatter always instanceof's the last arg, whereas the Logger impl only does it if there is an unused param.
@@ -476,6 +462,26 @@ public class LogAnnotationProcessor extends AbstractProcessor {
       }
       writerOutput.println("   }");
       writerOutput.println();
+   }
+
+   private static String getLogOutputMethodName(LogMessage messageAnnotation) {
+      final String methodName;
+      switch (messageAnnotation.level()) {
+         case WARN:
+            methodName = "warn"; break;
+         case INFO:
+            methodName = "info"; break;
+         case ERROR:
+            methodName = "error"; break;
+         case DEBUG: // TODO remove this
+            methodName = "debug"; break;
+         case TRACE: // TODO remove this
+            methodName = "trace"; break;
+         default:
+            throw new IllegalStateException("Illegal method level: " + messageAnnotation.level());
+      }
+
+      return methodName;
    }
 
    private static void tupples(String arg, char open, char close, Consumer<String> stringConsumer) {
