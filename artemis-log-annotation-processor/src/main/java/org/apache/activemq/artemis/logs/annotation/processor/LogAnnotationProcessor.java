@@ -31,7 +31,6 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -282,7 +281,7 @@ public class LogAnnotationProcessor extends AbstractProcessor {
          callList.append(parameter.getSimpleName());
          if (parameters.hasNext()) {
             writerOutput.write(", ");
-            callList.append(",");
+            callList.append(", ");
          }
       }
 
@@ -403,9 +402,7 @@ public class LogAnnotationProcessor extends AbstractProcessor {
       List<? extends VariableElement> parametersList = executableMember.getParameters();
 
       boolean hasParameters = false;
-
       VariableElement exceptionParameter = null;
-      ArrayList<VariableElement> nonExceptionParameters = new ArrayList<>();
 
       Iterator<? extends VariableElement> parameters = parametersList.iterator();
       while (parameters.hasNext()) {
@@ -415,8 +412,6 @@ public class LogAnnotationProcessor extends AbstractProcessor {
          boolean isException = verifyIfExceptionArgument(executableMember, parameter, parameters.hasNext(), exceptionParameter != null);
          if (isException) {
             exceptionParameter = parameter;
-         } else {
-            nonExceptionParameters.add(parameter);
          }
 
          writerOutput.write(parameter.asType() + " " + parameter.getSimpleName());
@@ -427,58 +422,71 @@ public class LogAnnotationProcessor extends AbstractProcessor {
 
       writerOutput.println(") {");
 
-      // the one that will be used on the logger call
-      StringBuffer callList = new StringBuffer();
-      parameters = nonExceptionParameters.iterator();
+      StringBuffer callList = null;
+      if (hasParameters) {
+         // the one that will be used on the logger call
+         callList = new StringBuffer();
 
-      while (parameters.hasNext()) {
-         hasParameters = true;
-         VariableElement parameter = parameters.next();
-         callList.append(parameter.getSimpleName());
-         if (parameters.hasNext()) {
-            callList.append(",");
+         parameters = parametersList.iterator();
+         while (parameters.hasNext()) {
+            VariableElement parameter = parameters.next();
+            callList.append(parameter.getSimpleName());
+            if (parameters.hasNext()) {
+               callList.append(", ");
+            }
          }
       }
 
-      final String methodName = getLogOutputMethodName(messageAnnotation);
-
+      final String isEnabledMethodName = getLoggerIsEnabledMethodName(messageAnnotation);
+      final String methodName = getLoggerOutputMethodName(messageAnnotation);
       final String formattingString = encodeSpecialChars(bundleAnnotation.projectCode() + messageAnnotation.id() + ": " + messageAnnotation.value());
-      if (exceptionParameter != null) {
-         // TODO: needed? Logger impl handles picking up exception arg at end itself, would only incur array overhead if needed (>2 args) rather than always as this does.
-         // ALso looks like MessageFormatter always instanceof's the last arg, whereas the Logger impl only does it if there is an unused param.
-         // Could perhaps add if<level>Enabled() guards to avoid overhead in many-arg cases.
-         // Could optimise for the 2arg message+throwable case.
-         writerOutput.println("     FormattingTuple output = org.slf4j.helpers.MessageFormatter.arrayFormat(\"" + formattingString + "\",new Object[] {" + callList + "});");
-         writerOutput.println("     logger." + methodName + "(output.getMessage(), " + exceptionParameter.getSimpleName() + ");");
+
+      writerOutput.println("      if (logger." + isEnabledMethodName + "()) {");
+
+      if (hasParameters) {
+         writerOutput.println("         logger." + methodName + "(\"" + formattingString + "\", " + callList + ");");
       } else {
-         if (!hasParameters) {
-            writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\");");
-         } else {
-            writerOutput.println("      logger." + methodName + "(\"" + formattingString + "\", " + callList + ");");
-         }
+         writerOutput.println("         logger." + methodName + "(\"" + formattingString + "\");");
       }
+
+      writerOutput.println("      }");
+
       writerOutput.println("   }");
       writerOutput.println();
    }
 
-   private static String getLogOutputMethodName(LogMessage messageAnnotation) {
-      final String methodName;
+   private static String getLoggerOutputMethodName(LogMessage messageAnnotation) {
       switch (messageAnnotation.level()) {
          case WARN:
-            methodName = "warn"; break;
+            return "warn";
          case INFO:
-            methodName = "info"; break;
+            return "info";
          case ERROR:
-            methodName = "error"; break;
+            return "error";
          case DEBUG: // TODO remove this
-            methodName = "debug"; break;
+            return "debug";
          case TRACE: // TODO remove this
-            methodName = "trace"; break;
+            return  "trace";
          default:
-            throw new IllegalStateException("Illegal method level: " + messageAnnotation.level());
+            throw new IllegalStateException("Illegal log level: " + messageAnnotation.level());
       }
+   }
 
-      return methodName;
+   private static String getLoggerIsEnabledMethodName(LogMessage messageAnnotation) {
+      switch (messageAnnotation.level()) {
+         case WARN:
+            return "isWarnEnabled";
+         case INFO:
+            return "isInfoEnabled";
+         case ERROR:
+            return "isErrorEnabled";
+         case DEBUG: // TODO remove this
+            return "isDebugEnabled";
+         case TRACE: // TODO remove this
+            return "isTraceEnabled";
+         default:
+            throw new IllegalStateException("Illegal log level: " + messageAnnotation.level());
+      }
    }
 
    private static void tupples(String arg, char open, char close, Consumer<String> stringConsumer) {
