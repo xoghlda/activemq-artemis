@@ -72,7 +72,6 @@ public class AssertionLoggerHandler extends AbstractAppender {
    @Override
    public void append(LogEvent event) {
       if (capture) {
-         //TODO: see getFormattedMessage() around handling StringBuilderFormattable interface as well, check it out
          String formattedMessage = event.getMessage().getFormattedMessage();
 
          if (captureStackTrace && event.getThrown() != null) {
