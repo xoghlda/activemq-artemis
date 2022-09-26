@@ -23,10 +23,6 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 14
- *
- * each message id must be 6 digits long starting with 14, the 3rd digit should be 9
- *
- * so 149000 to 149999
  */
 @LogBundle(projectCode = "AMQ", regexID = "14[0-9]{4}")
 public interface ActiveMQJournalBundle {

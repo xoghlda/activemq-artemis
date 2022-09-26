@@ -22,9 +22,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 33
- *
  */
-
 @LogBundle(projectCode = "AMQ", regexID = "33[0-9]{4}")
 public interface ActiveMQStompProtocolLogger {
 

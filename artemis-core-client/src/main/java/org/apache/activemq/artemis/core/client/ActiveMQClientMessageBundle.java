@@ -40,7 +40,6 @@ import org.w3c.dom.Node;
 
 /**
  * Logger Code 21
- *
  */
 @LogBundle(projectCode = "AMQ", regexID = "21[0-9]{4}")
 public interface ActiveMQClientMessageBundle {

@@ -22,14 +22,7 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger Code 33
- * <p>
- * Each message id must be 6 digits long starting with 33, the 3rd digit should be 9. So the range
- * is from 339000 to 339999.
- * <p>
- * Once released, methods should not be deleted as they may be referenced by knowledge base
- * articles. Unused methods should be marked as deprecated.
  */
-
 @LogBundle(projectCode = "AMQ", regexID = "33[0-9]{4}")
 public interface ActiveMQStompProtocolMessageBundle {
 

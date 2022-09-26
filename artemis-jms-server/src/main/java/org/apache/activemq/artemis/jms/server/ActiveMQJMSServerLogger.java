@@ -28,9 +28,6 @@ import org.w3c.dom.Node;
 @LogBundle(projectCode = "AMQ", regexID = "12[0-9]{4}")
 public interface ActiveMQJMSServerLogger {
 
-   /**
-    * The default logger.
-    */
    ActiveMQJMSServerLogger LOGGER = BundleFactory.newBundle(ActiveMQJMSServerLogger.class, ActiveMQJMSServerLogger.class.getPackage().getName());
 
    @LogMessage(id = 121004, value = "JMS Server Manager Caching command for {} since the JMS Server is not active.",

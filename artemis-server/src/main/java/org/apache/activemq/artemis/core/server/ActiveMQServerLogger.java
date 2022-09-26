@@ -56,12 +56,7 @@ import org.w3c.dom.Node;
 
 /**
  * Logger Code 22
- *
- * each message id must be 6 digits long starting with 22, the 3rd digit donates the level so
- *
- * so an INFO message would be 221000 to 221999
  */
-
 @LogBundle(projectCode = "AMQ", regexID = "22[0-9]{4}")
 public interface ActiveMQServerLogger {
 

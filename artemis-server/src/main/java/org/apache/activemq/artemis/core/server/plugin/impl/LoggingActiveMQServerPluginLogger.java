@@ -42,9 +42,6 @@ import org.apache.activemq.artemis.utils.critical.CriticalComponent;
 @LogBundle(projectCode = "AMQ", regexID = "84[0-9]{4}")
 public interface LoggingActiveMQServerPluginLogger {
 
-   /**
-    * The LoggingPlugin logger.
-    */
    LoggingActiveMQServerPluginLogger LOGGER = BundleFactory.newBundle(LoggingActiveMQServerPluginLogger.class, LoggingActiveMQServerPluginLogger.class.getPackage().getName());
 
    @LogMessage(id = 841000, value = "created connection: {}", level = LogMessage.Level.INFO)

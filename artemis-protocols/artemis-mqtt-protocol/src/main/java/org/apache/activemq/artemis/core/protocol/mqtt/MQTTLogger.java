@@ -25,7 +25,6 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 /**
  * Logger Code 83
  */
-
 @LogBundle(projectCode = "AMQ", regexID = "83[0-9]{4}")
 public interface MQTTLogger {
 

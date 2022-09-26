@@ -22,9 +22,6 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 
 /**
  * Logger code 58
- *
- *
- * so an INFO message would be 581000 to 581999
  */
 @LogBundle(projectCode = "AMQ", regexID = "58[0-9]{4}")
 public interface ActiveMQOsgiLogger {

@@ -27,9 +27,6 @@ import org.apache.activemq.artemis.logs.BundleFactory;
 @LogBundle(projectCode = "AMQ", regexID = "14[0-9]{4}")
 public interface ActiveMQJournalLogger {
 
-   /**
-    * The journal logger.
-    */
    ActiveMQJournalLogger LOGGER = BundleFactory.newBundle(ActiveMQJournalLogger.class, ActiveMQJournalLogger.class.getPackage().getName());
 
    @LogMessage(id = 141000, value = "*** running direct journal blast: {}", level = LogMessage.Level.INFO)
