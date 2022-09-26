@@ -253,6 +253,7 @@ public class AssertionLoggerHandler extends AbstractAppender {
 
    public enum LogLevel {
       OFF(Level.OFF),
+      FATAL(Level.FATAL),
       ERROR(Level.ERROR),
       WARN(Level.WARN),
       INFO(Level.INFO),
@@ -270,7 +271,9 @@ public class AssertionLoggerHandler extends AbstractAppender {
       }
 
       private static LogLevel fromImplLevel(Level implLevel) {
-         if (Level.ERROR.equals(implLevel)) {
+         if (Level.FATAL.equals(implLevel)) {
+            return FATAL;
+         } else if (Level.ERROR.equals(implLevel)) {
             return ERROR;
          } else if (Level.WARN.equals(implLevel)) {
             return WARN;
