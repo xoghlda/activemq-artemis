@@ -195,7 +195,9 @@ public class LogAnnotationProcessor extends AbstractProcessor {
 
                      if (getLogger != null) {
                         generatedPaths++;
-                        debug("... annotated with " + getLogger);
+                        if (DEBUG) {
+                           debug("... annotated with " + getLogger);
+                        }
                         generateGetLogger(bundleAnnotation, writerOutput, executableMember, getLogger);
                      }
 
