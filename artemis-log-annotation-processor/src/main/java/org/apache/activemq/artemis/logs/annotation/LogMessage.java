@@ -32,12 +32,25 @@ public @interface LogMessage {
    Level level();
 
    enum Level {
-      ERROR, WARN, INFO,
-      // TODO DEBUG and TRACE will be removed.
-        @Deprecated DEBUG, @Deprecated TRACE;
+      ERROR,
+      WARN,
+      INFO,
 
-      Level() {
-      }
+      /**
+       * @deprecated Typically debug/trace logging will use class-level loggers
+       *             rather than generated loggers with codes. This mostly exists
+       *             for existing historic uses and any unexpected level down-grades.
+       */
+      @Deprecated
+      DEBUG,
+
+      /**
+       * @deprecated Typically debug/trace logging will use class-level loggers
+       *             rather than generated loggers with codes. This mostly exists
+       *             for existing historic uses and any unexpected level down-grades.
+       */
+      @Deprecated
+      TRACE;
    }
 
 

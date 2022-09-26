@@ -465,9 +465,9 @@ public class LogAnnotationProcessor extends AbstractProcessor {
             return "info";
          case ERROR:
             return "error";
-         case DEBUG: // TODO remove this
+         case DEBUG:
             return "debug";
-         case TRACE: // TODO remove this
+         case TRACE:
             return  "trace";
          default:
             throw new IllegalStateException("Illegal log level: " + messageAnnotation.level());
@@ -482,9 +482,9 @@ public class LogAnnotationProcessor extends AbstractProcessor {
             return "isInfoEnabled";
          case ERROR:
             return "isErrorEnabled";
-         case DEBUG: // TODO remove this
+         case DEBUG:
             return "isDebugEnabled";
-         case TRACE: // TODO remove this
+         case TRACE:
             return "isTraceEnabled";
          default:
             throw new IllegalStateException("Illegal log level: " + messageAnnotation.level());
