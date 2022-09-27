@@ -49,9 +49,9 @@ monitorInterval = 5
 ## Logging in a client application
 
 Firstly, if you want to enable logging on the client side you need to
-include a logging implement in your application which supports the
-the SLF4J facade. Using Log4J2 as an example logging implementation, as
-it used by the broker, if you are using Maven your client and logging
+include a logging implementation in your application which supports the
+the SLF4J facade. Taking Log4J2 as an example logging implementation,
+since it used by the broker, when using Maven your client and logging
 dependencies might be e.g.:
 
 ```xml
@@ -67,8 +67,8 @@ dependencies might be e.g.:
 </dependency>
 ```
 
-The Log4J2 configuration can then be supplied via file on the classpath
-called `log4j2.properties` which will be picked up automatically.
+The Log4J2 configuration can then be supplied via file called `log4j2.properties`
+on the classpath which will then be picked up automatically.
 
 Alternatively, use of a specific configuration file can be configured via system
 property `log4j2.configurationFile`, e.g.:
@@ -76,7 +76,8 @@ property `log4j2.configurationFile`, e.g.:
 -Dlog4j2.configurationFile=file:///path/to/custom-log4j2-config.properties
 ```
 
-The following is an example `log4j2.properties` for a client application.
+The following is an example `log4j2.properties` for a client application,
+logging at INFO level to the console and a daily rolling file.
 
 ```
 # Log4J 2 configuration
