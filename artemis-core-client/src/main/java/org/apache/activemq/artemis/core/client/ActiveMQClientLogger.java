@@ -330,7 +330,7 @@ public interface ActiveMQClientLogger {
    @LogMessage(id = 214025, value = "Invalid type {}, Using default connection factory at {}", level = LogMessage.Level.ERROR)
    void invalidCFType(String type, String uri);
 
-   @LogMessage(id = 214029, value = "Unexpected response from HTTP server: %s", level = LogMessage.Level.ERROR)
+   @LogMessage(id = 214029, value = "Unexpected response from HTTP server: {}", level = LogMessage.Level.ERROR)
    void unexpectedResponseFromHttpServer(Object response);
 
    @LogMessage(id = 214030, value = "Failed to bind {}={}", level = LogMessage.Level.ERROR)
