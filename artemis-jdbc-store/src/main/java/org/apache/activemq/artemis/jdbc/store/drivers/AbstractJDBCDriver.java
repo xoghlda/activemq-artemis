@@ -116,11 +116,11 @@ public abstract class AbstractJDBCDriver {
                   logger.trace("Validation of the existing table {} initialization is started", tableName);
                   int rows;
                   if (cntRs.next() && (rows = cntRs.getInt(1)) > 0) {
-                     logger.trace("Table {} did exist but is not empty. Skipping initialization. Found %d rows.", tableName, rows);
+                     logger.trace("Table {} did exist but is not empty. Skipping initialization. Found {} rows.", tableName, rows);
                      if (logger.isDebugEnabled()) {
                         final long expectedRows = Stream.of(sqls).map(String::toUpperCase).filter(sql -> sql.contains("INSERT INTO")).count();
                         if (rows < expectedRows) {
-                           logger.debug("Table " + tableName + " was expected to contain " + expectedRows + " rows while it has " + rows + " rows.");
+                           logger.debug("Table {} was expected to contain {} rows while it has {} rows.", tableName, expectedRows, rows);
                         }
                      }
                      connection.commit();
