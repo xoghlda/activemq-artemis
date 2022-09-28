@@ -31,7 +31,7 @@ e.g.:
 
 ```
 logger.my_logger_ref.name=org.foo
-my_logger_ref.level=TRACE
+logger.my_logger_ref.level=TRACE
 ```
 
 ## Configuration Reload
